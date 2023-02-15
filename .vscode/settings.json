@@ -1,0 +1,5 @@
+{
+  // Lint, code format evenry time you save.
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
