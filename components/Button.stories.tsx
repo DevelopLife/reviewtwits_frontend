@@ -17,11 +17,11 @@ export default {
 */
 export const Basic: ComponentStory<typeof Button> = () => (
   <Button
-    left="왼쪽"
+    left="왼쪽아니야"
     center="가운데"
     right="오른쪽"
     styleProps={{
-      color: 'green',
+      color: 'red',
     }}
   />
 );
