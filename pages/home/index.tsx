@@ -1,3 +1,5 @@
+import { GoogleOauth } from '@/components/common/Oauth/GoogleOauth';
+
 import styled from '@emotion/styled';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
@@ -8,6 +10,8 @@ const HomePage = () => {
   return (
     <section>
       <S.Box isLoading>{mockQuery.data?.content}</S.Box>
+
+      <GoogleOauth />
     </section>
   );
 };
