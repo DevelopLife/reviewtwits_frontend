@@ -4,6 +4,8 @@ import { googleOauth } from '@/api/oauth';
 import Image from 'next/image';
 import theme from '@/styles/theme';
 
+import GoogleIconSVG from '@/public/google_icon.svg';
+
 export const GoogleOauth = () => {
   return (
     <GoogleOAuthProvider
@@ -34,12 +36,7 @@ interface CustomGoogleLoginButtonProps {
 const GoogleLoginButtonView = ({ onClick }: CustomGoogleLoginButtonProps) => {
   return (
     <S.Button onClick={onClick}>
-      <Image
-        width={35}
-        height={35}
-        src={'/google_icon.svg'}
-        alt={'google_icon'}
-      />
+      <Image width={35} height={35} src={GoogleIconSVG} alt={'google_icon'} />
     </S.Button>
   );
 };
