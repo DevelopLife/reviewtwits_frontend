@@ -20,6 +20,6 @@ const theme = {
     gray_8: '#363a3c',
     gray_9: '#292a2b',
   },
-};
+} as const;
 
 export default theme;
