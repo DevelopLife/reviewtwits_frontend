@@ -1,13 +1,10 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 
-import { naverOauthAPI } from '@/api/oauth';
-import { GoogleOauth } from '@/components/common/Oauth/GoogleOauth';
-import {
-  NaverOauth,
-  NaverSDKScript,
-} from '@/components/common/Oauth/NaverOauth';
-import { KakaoOauth } from '@components/common/Oauth/kakaoOauth';
+import { naverOauthAPI } from 'api/oauth';
+import { GoogleOauth } from 'components/common/Oauth/GoogleOauth';
+import { NaverOauth, NaverSDKScript } from 'components/common/Oauth/NaverOauth';
+import { KakaoOauth } from 'components/common/Oauth/KakaoOauth';
 
 const TestPage = () => {
   // TODO: hooks로 빼는 것도 고려중

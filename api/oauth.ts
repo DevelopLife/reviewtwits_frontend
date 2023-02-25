@@ -1,6 +1,6 @@
-import { oauthApi } from '@api/instance';
+import { oauthApi } from 'api/instance';
 
-const kakaoOauth = {
+const kakaoOauthAPI = {
   getToken: async (code: string) => {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -53,4 +53,4 @@ const naverOauthAPI = {
   },
 };
 
-export { kakaoOauth, googleOauthAPI, naverOauthAPI };
+export { kakaoOauthAPI, googleOauthAPI, naverOauthAPI };

@@ -1,5 +1,5 @@
-import { googleOauthAPI } from '@/api/oauth';
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { googleOauthAPI } from 'api/oauth';
 
 export default async function handler(
   req: NextApiRequest,
