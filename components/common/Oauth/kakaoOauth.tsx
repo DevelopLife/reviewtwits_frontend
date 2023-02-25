@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
-import KakaoIcon from '@public/images/kakao_icon.svg';
+import KakaoIcon from 'public/images/kakao_icon.svg';
 
 export const KakaoOauth = () => {
   return <KakaoLoginButton />;

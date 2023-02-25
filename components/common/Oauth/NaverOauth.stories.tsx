@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
-import { NaverOauth } from '@/components/common/Oauth/NaverOauth';
+import { NaverOauth } from 'components/common/Oauth/@index';
 
 export default {
   title: 'Components/Oauth/NaverOauth',

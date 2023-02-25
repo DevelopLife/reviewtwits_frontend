@@ -2,9 +2,9 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 
-import theme from '@/styles/theme';
-import GoogleIconSVG from '@/public/google_icon.svg';
-import { googleOauthAPI } from '@/api/oauth';
+import GoogleIconSVG from 'public/google_icon.svg';
+import { googleOauthAPI } from 'api/oauth';
+import theme from 'styles/theme';
 
 export const GoogleOauth = () => {
   return (
