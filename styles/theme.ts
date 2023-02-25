@@ -18,7 +18,7 @@ const colors = {
   gray_7: '#4d5256',
   gray_8: '#363a3c',
   gray_9: '#292a2b',
-};
+} as const;
 
 const theme = {
   colors,
