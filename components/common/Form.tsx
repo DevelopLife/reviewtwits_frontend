@@ -22,7 +22,7 @@ const StyledForm = styled.form`
   background: #f7f7f7;
   box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.09);
   border-radius: 30px;
-  padding: 46px;
+  padding: 68px;
 `;
 
 const Title = styled.h2`

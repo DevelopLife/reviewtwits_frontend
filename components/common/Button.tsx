@@ -55,6 +55,10 @@ const StyledButton = styled.button<ButtonStyleProps>`
         return css`
           color: white;
         `;
+      case 'black':
+        return css`
+          color: white;
+        `;
       default:
         return css`
           border: 1px solid black;
