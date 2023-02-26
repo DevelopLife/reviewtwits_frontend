@@ -8,11 +8,10 @@ import { Global, ThemeProvider } from '@emotion/react';
 // only development
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
-
-import '@/styles/globals.css';
 import { useState } from 'react';
-import reset from '@/styles/reset';
-import theme from '@/styles/theme';
+
+import reset from 'styles/reset';
+import theme from 'styles/theme';
 
 export default function App({ Component, pageProps }: AppProps) {
   // TODO: consider setting defaultOptions
