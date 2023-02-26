@@ -1,49 +1,86 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  border: 1px solid black;
-  height: 50vh;
+  width: ${({ theme }) => theme.devices.desktop};
+  height: 651px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background-color: #181818;
+
+  position: relative;
 `;
 
 const Navbar = styled.div`
   display: flex;
-  width: 80%;
+  width: 1156px;
   justify-content: space-between;
-  margin-top: 15vh;
+
+  margin-top: 113px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 36px;
+
+  color: #ffffff;
 `;
 
 const LeftLists = styled.ul`
   display: flex;
   padding: 0;
-  margin: 0;
+  width: 300px;
+  justify-content: space-between;
 `;
 
 const RightLists = styled.ul`
   display: flex;
   padding: 0;
-  margin: 0;
-`;
-
-const AppName = styled.h3`
-  margin: 0;
-  font-size: 50px;
-  font-weight: bold;
+  width: 300px;
+  justify-content: space-between;
 `;
 
 const List = styled.li`
-  list-style: none;
-  margin: 30px 60px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
   font-size: 30px;
+  line-height: 36px;
+
+  color: #ffffff;
+`;
+
+const AppName = styled.h3`
+  position: absolute;
+  top: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 61px;
+
+  color: #ffffff;
+`;
+
+const Line = styled.div`
+  margin-top: 73px;
+  width: 1440px;
+  border: 1px solid #ffffff;
 `;
 
 const BoxContainer = styled.ul`
   display: flex;
-  width: 30%;
-  margin: 2rem;
+  width: 601px;
   justify-content: space-between;
+
+  margin-top: 35px;
+  margin-bottom: 34px;
 `;
 
 const Box = styled.li`
@@ -53,13 +90,16 @@ const Box = styled.li`
 `;
 
 const RightInfo = styled.p`
-  margin-top: 1rem;
-`;
+  width: 629px;
+  height: 36px;
 
-const Line = styled.div`
-  width: 80%;
-  height: 1px;
-  background-color: black;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 36px;
+
+  color: #ffffff;
 `;
 
 export {
