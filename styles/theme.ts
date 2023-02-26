@@ -20,8 +20,13 @@ const colors = {
   gray_9: '#292a2b',
 } as const;
 
+const devices = {
+  desktop: '1920px',
+};
+
 const theme = {
   colors,
+  devices,
 };
 
 export default theme;
