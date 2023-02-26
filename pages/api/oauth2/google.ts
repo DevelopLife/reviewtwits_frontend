@@ -1,4 +1,4 @@
-import { oauthApi } from '@/api/instance';
+import { oauthApi } from 'api/instance';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const getGoogleUserProfile = (accessToken: string) =>

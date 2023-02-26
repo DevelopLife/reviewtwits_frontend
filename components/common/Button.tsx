@@ -2,8 +2,8 @@ import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-import type { Colors } from '@styles/theme';
-import theme from '@styles/theme';
+import type { Colors } from 'styles/theme';
+import theme from 'styles/theme';
 
 interface ButtonProps {
   color?: Colors;

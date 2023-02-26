@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import theme from '@styles/theme';
+import theme from 'styles/theme';
 
-import Form from '@components/common/Form';
-import TextInput from '@components/common/TextInput';
-import Button from '@components/common/Button';
+import Form from 'components/common/Form';
+import TextInput from 'components/common/TextInput';
+import Button from 'components/common/Button';
 
 const DivideBox = styled.div`
   display: flex;
