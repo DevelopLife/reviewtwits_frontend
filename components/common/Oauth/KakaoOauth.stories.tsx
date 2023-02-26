@@ -1,5 +1,5 @@
 import { StoryFn, Meta } from '@storybook/react';
-import { KakaoOauth } from './kakaoOauth';
+import { KakaoOauth } from './KakaoOauth';
 
 export default {
   title: 'Components/Oauth/KakaoOauth',
