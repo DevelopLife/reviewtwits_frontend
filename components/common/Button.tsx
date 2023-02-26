@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, MouseEvent } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
@@ -6,16 +6,43 @@ import type { Colors } from 'styles/theme';
 import theme from 'styles/theme';
 
 interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset';
   color?: Colors;
   large?: boolean;
+  name?: string;
+  value?: string;
+  isActive?: boolean;
+  disabled?: boolean;
   children: ReactNode;
+  handleClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button = ({ children, ...rest }: ButtonProps) => {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+const Button = ({
+  type = 'button',
+  children,
+  isActive,
+  handleClick,
+  ...rest
+}: ButtonProps) => {
+  return (
+    <StyledButton
+      type={type}
+      isActive={isActive}
+      onClick={handleClick}
+      {...rest}
+    >
+      {children}
+    </StyledButton>
+  );
 };
 
-const StyledButton = styled.button<ButtonProps>`
+interface ButtonStyleProps {
+  color?: Colors;
+  large?: boolean;
+  isActive?: boolean;
+}
+
+const StyledButton = styled.button<ButtonStyleProps>`
   border: none;
   border-radius: 30px;
   padding: 8px 33px;
@@ -42,9 +69,22 @@ const StyledButton = styled.button<ButtonProps>`
       padding: 18px;
     `}
 
-  &:focus {
-    background: ${theme.colors.black};
-    color: white;
+
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      background: ${theme.colors.black};
+      color: white;
+    `}
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    background: ${theme.colors.gray_4};
   }
 `;
 

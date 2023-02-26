@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import theme from 'styles/theme';
 
+import theme from 'styles/theme';
 import Form from 'components/common/Form';
-import TextInput from 'components/common/TextInput';
+import Input from 'components/common/Input';
 import Button from 'components/common/Button';
 
 const DivideBox = styled.div`
@@ -24,6 +24,13 @@ const FormItem = styled.div`
   display: flex;
   flex-direction: column;
   color: black;
+`;
+
+const WarnText = styled.small`
+  font-size: 14px;
+  color: ${theme.colors.red_0};
+  font-weight: 500;
+  margin-top: 10px;
 `;
 
 const InputLabel = styled.label`
@@ -95,8 +102,9 @@ export {
   DivideBox,
   FormContent,
   FormItem,
+  WarnText,
   InputLabel,
-  TextInput,
+  Input,
   DateInput,
   // Select,
   // Option,
