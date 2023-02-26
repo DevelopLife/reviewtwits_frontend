@@ -1,43 +1,105 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
+  width: ${({ theme }) => theme.devices.desktop};
+
   position: absolute;
-  top: 0;
-  left: 0;
+
+  background-color: #ffffff;
+`;
+
+const Header = styled.header`
+  width: 1692px;
+  height: 69px;
+
   display: flex;
-  width: 100%;
+  margin: auto;
+
   justify-content: space-between;
-  border: 1px solid black;
+  align-items: center;
 `;
 
 const Title = styled.h3`
-  font-weight: bold;
-  font-stretch: 50px;
-`;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 43px;
 
-const HeaderRight = styled.div`
-  border: 1px solid black;
-  font-stretch: 48px;
-  display: flex;
-  width: auto;
+  color: #000000;
 `;
 
 const Navbar = styled.div`
   display: flex;
   list-style: none;
-  width: 50vw;
+  width: 307px;
+  justify-content: space-between;
 `;
 
 const NavLink = styled.li`
-  border: 1px solid pink;
-  padding: 13px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #000000;
 `;
 
 const Profile = styled.div`
-  margin-left: 10px;
-  margin-right: 10px;
-  border: 1px solid black;
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  img {
+    border-radius: 50%;
+  }
 `;
 
-export { Container, Title, HeaderRight, Navbar, NavLink, Profile };
+const AuthButtons = styled.div`
+  width: 210px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+`;
+
+const Login = styled.button`
+  width: 99px;
+  height: 38px;
+  border: 1px solid #000000;
+  border-radius: 60px;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #181818;
+`;
+const Signup = styled.button`
+  width: 99px;
+  height: 38px;
+  border-radius: 60px;
+
+  background: #181818;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #ffffff;
+`;
+
+export {
+  Container,
+  Header,
+  Title,
+  Navbar,
+  NavLink,
+  Profile,
+  AuthButtons,
+  Login,
+  Signup,
+};
