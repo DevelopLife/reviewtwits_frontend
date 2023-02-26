@@ -1,4 +1,5 @@
 const colors = {
+  primary: '#FC4A55',
   blue_light: '#87b1f3',
   blue_0: '#4c80f1',
   blue_dark: '#2c5ae9',
@@ -18,6 +19,7 @@ const colors = {
   gray_7: '#4d5256',
   gray_8: '#363a3c',
   gray_9: '#292a2b',
+  black: '#181818',
 } as const;
 
 const theme = {
