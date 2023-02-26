@@ -1582,6 +1582,11 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
+"@react-oauth/google@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.8.0.tgz#e95c9e2ef28f0da6d5de223e48c391a12eb4f821"
+  integrity sha512-xmIhYvvaBSblOzo3Fqv762lqub92SOFR8eRR7QpPyFPZEXZcOymaMuEkRSUKUrbu+9wfB8qtOaGMRJzrN7U2PA==
+
 "@rushstack/eslint-patch@^1.1.3":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz#8be36a1f66f3265389e90b5f9c9962146758f728"
@@ -2670,6 +2675,11 @@
   dependencies:
     "@types/minimatch" "^5.1.2"
     "@types/node" "*"
+
+"@types/google.accounts@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@types/google.accounts/-/google.accounts-0.0.6.tgz#f4b8571f93d9086f420b976de0fcb1b28307956e"
+  integrity sha512-6+SAci9zmUjZFdKVghK0oeBOnf+uVT2Actd+SMC7AjUsejp+VuAw6OkTwasZrEo6I1By/Hlt+mKhuXvfLrcYMQ==
 
 "@types/graceful-fs@^4.1.3":
   version "4.1.6"
