@@ -22,6 +22,8 @@ const colors = {
   black: '#181818',
 } as const;
 
+export type Colors = keyof typeof theme.colors;
+
 const theme = {
   colors,
 };
