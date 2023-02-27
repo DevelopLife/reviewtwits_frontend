@@ -2,8 +2,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
 
 import * as S from './SignUpForm.styles';
 import useForm from 'hooks/useForm';
-import type { ErrorType } from 'constants/account';
-import { UserFormType } from 'typings/account';
+import type { UserFormType } from 'typings/account';
 import { signUpValidate } from 'utils/validate';
 
 const SignUpForm = () => {
@@ -47,7 +46,7 @@ const SignUpForm = () => {
 
 interface SignUpFormViewProps {
   values: UserFormType;
-  errors?: ErrorType;
+  errors?: UserFormType;
   disabled: boolean;
   onValid: () => void;
   handleChange: (
