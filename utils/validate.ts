@@ -24,11 +24,12 @@ export function signUpValidate(values: UserFormType) {
     gender: '',
   };
 
-  if (!isEmailValid(email)) errors.email = ERROR_MESSAGE.email;
-  if (tel && !isTelValid(tel)) errors.tel = ERROR_MESSAGE.tel;
-  if (!isPasswordValid(password)) errors.password = ERROR_MESSAGE.password;
+  if (!isEmailValid(email)) errors.email = ERROR_MESSAGE.SIGN_UP.EMAIL;
+  if (tel && !isTelValid(tel)) errors.tel = ERROR_MESSAGE.SIGN_UP.TEL;
+  if (!isPasswordValid(password))
+    errors.password = ERROR_MESSAGE.SIGN_UP.PASSWORD;
   if (passwordCheck && !isPasswordCheckValid(password, passwordCheck))
-    errors.passwordCheck = ERROR_MESSAGE.passwordCheck;
+    errors.passwordCheck = ERROR_MESSAGE.SIGN_UP.PASSWORDCHECK;
 
   return errors;
 }
