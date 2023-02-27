@@ -8,11 +8,10 @@ import {
 } from 'react';
 
 import type { UserFormType } from 'typings/account';
-import type { ErrorType } from 'constants/account';
 
 const useForm = (initialValues: UserFormType) => {
   const [values, setValues] = useState<UserFormType>(initialValues);
-  const [errors, setErrors] = useState<ErrorType>();
+  const [errors, setErrors] = useState<UserFormType>();
   const [isSubmitable, setIsSubmitable] = useState(false);
 
   const checkFormFilled = useCallback(() => {
@@ -25,7 +24,7 @@ const useForm = (initialValues: UserFormType) => {
 
   const checkFormValid = useCallback(() => {
     if (!errors) return false;
-    const keys = Object.keys(errors) as (keyof ErrorType)[];
+    const keys = Object.keys(errors) as (keyof UserFormType)[];
     const invalidValues = keys.filter((name) => errors[name] !== '');
     const isFormValid = !invalidValues.length;
 

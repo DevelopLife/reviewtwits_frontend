@@ -8,8 +8,12 @@ const SIGN_UP = {
   // gender: '성별을 선택해주세요.',
 };
 
+const SIGN_IN =
+  '등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.';
+
 export const ERROR_MESSAGE = {
   SIGN_UP,
+  SIGN_IN,
 };
 
 export type ErrorType = typeof ERROR_MESSAGE;

@@ -33,3 +33,14 @@ export function signUpValidate(values: UserFormType) {
 
   return errors;
 }
+
+export function signInValidate(values: UserFormType) {
+  const { email, password } = values;
+
+  const errors = { email: '', password: '' };
+
+  if (!isEmailValid(email)) errors.email = ERROR_MESSAGE.SIGN_IN;
+  if (!isPasswordValid(password)) errors.password = ERROR_MESSAGE.SIGN_IN;
+
+  return errors;
+}
