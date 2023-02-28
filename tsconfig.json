@@ -2,15 +2,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["./components/*"],
-      "@public/*": ["./public/*"],
-      "@constants/*": ["./constants/*"],
-      "@states/*": ["./states/*"],
-      "@styles/*": ["./styles/*"],
-      "@types/*": ["./types/*"],
-      "@utils/*": ["./utils/*"],
-      "@api/*": ["./api/*"]
+      // "@/*": ["./*"],
+      // "@components/*": ["./components/*"],
+      // "@public/*": ["./public/*"],
+      // "@constants/*": ["./constants/*"],
+      // "@states/*": ["./states/*"],
+      // "@styles/*": ["./styles/*"],
+      // "@types/*": ["./types/*"],
+      // "@utils/*": ["./utils/*"],
+      // "@api/*": ["./api/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
