@@ -1,10 +1,10 @@
-import { APP_NAME } from '@/constants';
+import { APP_NAME } from 'constants/index';
 import Image from 'next/image';
 import { useState } from 'react';
 import * as S from './Header.styles';
 
 const Header = () => {
-  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(true);
+  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
   return (
     <S.Container>
       <S.Header>

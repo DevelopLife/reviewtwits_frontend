@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  width: ${({ theme }) => theme.devices.desktop};
+  width: ${({ theme }) => theme.devices.desktop}px;
 
   position: absolute;
+  z-index: 1;
 
   background-color: #ffffff;
 `;
