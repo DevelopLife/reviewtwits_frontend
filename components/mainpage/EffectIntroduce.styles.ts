@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  width: ${({ theme }) => theme.devices.desktop};
+  width: ${({ theme }) => theme.devices.desktop}px;
   height: 1266px;
   display: flex;
   flex-direction: column;

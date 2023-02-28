@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { SelectedButton } from './FunctionIntroduce';
 
 const Container = styled.div`
-  width: ${({ theme }) => theme.devices.desktop};
+  width: ${({ theme }) => theme.devices.desktop}px;
   height: ${1011 + 69}px;
   display: flex;
   flex-direction: column;
@@ -31,12 +31,7 @@ const Lists = styled.ul`
   gap: 50px;
 `;
 
-type ButtonProps = {
-  selected: boolean;
-  // id: SelectedButton;
-};
-
-const Button = styled.button<ButtonProps>`
+const Button = styled.button<{ selected: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: flex-start;

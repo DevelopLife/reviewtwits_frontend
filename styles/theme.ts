@@ -21,7 +21,7 @@ const colors = {
 } as const;
 
 const devices = {
-  desktop: '1920px',
+  desktop: 1920,
 };
 
 const theme = {
