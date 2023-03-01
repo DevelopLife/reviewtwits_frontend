@@ -15,8 +15,8 @@ interface ProjectCardProps {
 interface ProjectCardViewProps {
   project: ProjectDto;
   isHover: boolean;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
   styles: Styles;
 }
 
