@@ -1,3 +1,5 @@
+import { UserFormType } from 'typings/account';
+
 const SIGN_UP = {
   EMAIL: '이메일 형식에 맞지 않습니다. 다시 입력해주세요.',
   TEL: '전화번호는 숫자만 입력해주세요.',
@@ -14,6 +16,15 @@ const SIGN_IN =
 export const ERROR_MESSAGE = {
   SIGN_UP,
   SIGN_IN,
+};
+
+export const DEFAULT_SIGN_UP_FORM: UserFormType = {
+  accountId: '',
+  phoneNumber: '',
+  accountPw: '',
+  accountPwCheck: '',
+  birthday: '',
+  gender: '',
 };
 
 export type ErrorType = typeof ERROR_MESSAGE;
