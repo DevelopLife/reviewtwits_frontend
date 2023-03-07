@@ -5,7 +5,7 @@ import {
   ProjectCardCommon,
   Styles,
 } from 'components/common/ProjectCard/ProjectCardCommon';
-import { ProjectDto } from 'types/project';
+import { ProjectDto } from 'typings/project';
 
 interface ProjectCardProps {
   project: ProjectDto;

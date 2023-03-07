@@ -1,4 +1,4 @@
-import { CreateProjectCard } from 'components/ProjectManagement/CreateProjectCard';
+import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
 
 export default {
   title: 'CreateProjectCard',

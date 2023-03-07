@@ -2,9 +2,9 @@ import { ComponentMeta } from '@storybook/react';
 import {
   ProjectCard,
   ProjectCardView,
-} from 'components/ProjectManagement/ProjectCard';
+} from 'components/Project/Management/ProjectCard';
 import theme from 'styles/theme';
-import { ProjectDto } from 'types/project';
+import { ProjectDto } from 'typings/project';
 
 export default {
   title: 'ProjectCard',

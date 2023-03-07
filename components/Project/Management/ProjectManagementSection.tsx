@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 import type { ReactNode } from 'react';
 
-import { ProjectCard } from 'components/ProjectManagement/ProjectCard';
-import type { ProjectDto } from 'types/project';
+import { ProjectCard } from 'components/Project/Management/ProjectCard';
+import type { ProjectDto } from 'typings/project';
 import { Styles } from 'components/common/ProjectCard/ProjectCardCommon';
-import { CreateProjectCard } from 'components/ProjectManagement/CreateProjectCard';
+import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
+import { useRouter } from 'next/router';
 
 interface ProjectManagementSectionViewProps {
   children?: ReactNode;
@@ -88,11 +89,16 @@ export const ProjectManagementSection = () => {
 export const ProjectManagementSectionView = ({
   projects,
 }: ProjectManagementSectionViewProps) => {
+  const router = useRouter();
+  const changeRoutingCreate = () => router.push('./create');
   //
   return (
     <S.Section>
       <S.SectionGrid>
-        <CreateProjectCard styles={CREATE_PROJECT_STYLES} />
+        <CreateProjectCard
+          styles={CREATE_PROJECT_STYLES}
+          onClick={changeRoutingCreate}
+        />
         {projects.map(({ project, styles }) => (
           <ProjectCard key={project.id} project={project} styles={styles} />
         ))}

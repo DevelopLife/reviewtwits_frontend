@@ -1,5 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { ProjectManagementSection } from 'components/ProjectManagement/ProjectManagementSection';
+import { ProjectManagementSection } from 'components/Project/Management/ProjectManagementSection';
 
 export default {
   title: 'ProjectManagementSection',
