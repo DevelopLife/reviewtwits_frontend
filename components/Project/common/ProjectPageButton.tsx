@@ -1,12 +1,19 @@
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
-interface ProjectPageButtonProps {
+interface ProjectPageButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-export const ProjectPageButton = ({ children }: ProjectPageButtonProps) => {
-  return <S.Button type="button">{children}</S.Button>;
+export const ProjectPageButton = ({
+  children,
+  ...rest
+}: ProjectPageButtonProps) => {
+  return (
+    <S.Button type="button" {...rest}>
+      {children}
+    </S.Button>
+  );
 };
 
 const S = {
