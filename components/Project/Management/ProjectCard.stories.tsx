@@ -3,7 +3,6 @@ import {
   ProjectCard,
   ProjectCardView,
 } from 'components/Project/Management/ProjectCard';
-import theme from 'styles/theme';
 import { ProjectDto } from 'typings/project';
 
 export default {

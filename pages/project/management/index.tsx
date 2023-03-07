@@ -1,4 +1,4 @@
-import { ProjectManagementSection } from 'components/ProjectManagement/ProjectManagementSection';
+import { ProjectManagementSection } from 'components/Project/Management/ProjectManagementSection';
 
 const ProjectManagementPage = () => {
   return <ProjectManagementSection />;
