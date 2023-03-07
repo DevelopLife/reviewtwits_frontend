@@ -19,7 +19,7 @@ export const ProjectCreateLayout = ({
   buttonText,
   children,
 }: ProjectCreateLayoutProps) => {
-  const { currentPageNumber } = useCreateProject();
+  const { currentPageNumber, nextStep } = useCreateProject();
 
   return (
     <S.Layout>
@@ -37,7 +37,7 @@ export const ProjectCreateLayout = ({
         <ProjectCreateContent>{children}</ProjectCreateContent>
       </S.ProjectCreateContainer>
       <S.NextStepButtonWrap>
-        <ProjectPageButton>{buttonText}</ProjectPageButton>
+        <ProjectPageButton onClick={nextStep}>{buttonText}</ProjectPageButton>
       </S.NextStepButtonWrap>
     </S.Layout>
   );
