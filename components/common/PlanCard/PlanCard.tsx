@@ -3,21 +3,46 @@ import Image from 'next/image';
 
 import CheckedIconSVG from 'public/images/checked_icon.svg';
 
-interface PlanCardProps {
+interface IsSelected {
+  isSelected: boolean;
+}
+interface PlanCardProps extends IsSelected {
   title: string;
   price: number;
   options: string[];
+  onClick: () => void;
 }
 
-export const PlanCard = ({ title, price, options }: PlanCardProps) => {
-  return <PlanCardView title={title} price={price} options={options} />;
+export const PlanCard = ({
+  title,
+  price,
+  options,
+  isSelected,
+  onClick,
+}: PlanCardProps) => {
+  return (
+    <PlanCardView
+      title={title}
+      price={price}
+      options={options}
+      isSelected={isSelected}
+      onClick={onClick}
+    />
+  );
 };
 
-export const PlanCardView = ({ title, price, options }: PlanCardProps) => {
+export const PlanCardView = ({
+  title,
+  price,
+  options,
+  isSelected,
+  onClick,
+}: PlanCardProps) => {
   const planPrice = price === -1 ? 'custom pricing' : `$${price} per month`;
+
   return (
-    <S.PlanCardContainer>
-      <S.Title>{title}</S.Title>
+    <S.PlanCardContainer isSelected={isSelected} onClick={onClick}>
+      <S.Title isSelected={isSelected}>{title}</S.Title>
       <S.Price>{planPrice}</S.Price>
       <S.Plans>
         {options.map((option) => (
@@ -28,7 +53,7 @@ export const PlanCardView = ({ title, price, options }: PlanCardProps) => {
               width={25}
               height={25}
             />
-            <S.Plan>{option}</S.Plan>
+            <S.Plan isSelected={isSelected}>{option}</S.Plan>
           </S.PlanWrap>
         ))}
       </S.Plans>
@@ -37,7 +62,7 @@ export const PlanCardView = ({ title, price, options }: PlanCardProps) => {
 };
 
 const S = {
-  PlanCardContainer: styled.div`
+  PlanCardContainer: styled.div<IsSelected>`
     width: 273px;
     height: 369px;
     border-radius: 15px;
@@ -49,14 +74,18 @@ const S = {
     }
 
     border: ${() => `1px solid ${Colors.border}`};
-    background-color: ${() => Colors.backgroundColor.selected};
+    background-color: ${({ isSelected }) =>
+      isSelected
+        ? Colors.backgroundColor.selected
+        : Colors.backgroundColor.primary};
   `,
-  Title: styled.h2`
+  Title: styled.h2<IsSelected>`
     font-weight: 700;
     font-size: 28px;
     line-height: 34px;
 
-    color: ${() => Colors.color.selected};
+    color: ${({ isSelected }) =>
+      isSelected ? Colors.optionsColor.selected : Colors.optionsColor.primary};
   `,
   Price: styled.p`
     font-weight: 500;
@@ -76,11 +105,12 @@ const S = {
     align-items: flex-end;
     gap: 2px;
   `,
-  Plan: styled.span`
+  Plan: styled.span<IsSelected>`
     font-weight: 500;
     font-size: 16px;
     vertical-align: bottom;
-    color: ${() => Colors.optionsColor.selected};
+    color: ${({ isSelected }) =>
+      isSelected ? Colors.optionsColor.selected : Colors.optionsColor.primary};
   `,
 };
 

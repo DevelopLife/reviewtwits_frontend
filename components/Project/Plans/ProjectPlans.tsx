@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { useCallback, useState } from 'react';
+
 import { PlanCard } from 'components/common/PlanCard/PlanCard';
 
 const PLAN_DATAS = {
@@ -40,15 +42,42 @@ const PLAN_DATAS = {
   },
 };
 
+interface ProjectPlansProps {
+  isSelectedCardIndex: number | null;
+  selectPlan: (index: number) => void;
+}
+
 export const ProjectPlans = () => {
+  const [isSelectedCardIndex, setIsSelectedCardIndex] = useState<null | number>(
+    null
+  );
+  const selectPlan = useCallback(
+    (index: number) => setIsSelectedCardIndex(index),
+    []
+  );
+
+  return (
+    <ProjectPlansView
+      isSelectedCardIndex={isSelectedCardIndex}
+      selectPlan={selectPlan}
+    />
+  );
+};
+
+export const ProjectPlansView = ({
+  isSelectedCardIndex,
+  selectPlan,
+}: ProjectPlansProps) => {
   return (
     <S.ProjectPlansContainer>
-      {Object.values(PLAN_DATAS).map(({ title, price, options }) => (
+      {Object.values(PLAN_DATAS).map(({ title, price, options }, index) => (
         <PlanCard
+          isSelected={isSelectedCardIndex === index}
           key={title}
           title={`${title} Plan`}
           price={price}
           options={options}
+          onClick={() => selectPlan(index)}
         />
       ))}
     </S.ProjectPlansContainer>
