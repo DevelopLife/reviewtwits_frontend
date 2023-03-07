@@ -4,16 +4,19 @@ import type { ReactNode } from 'react';
 import { ProjectCreateContent } from 'components/Project/Create/ProjectCreateContent';
 import { ProjectCreateTabItem } from 'components/Project/Create/ProjectCreateTapItem';
 import { useCreateProject } from 'hooks/useCreateProject';
+import { ProjectPageButton } from 'components/Project/common/ProjectPageButton';
 
 const SIDEBAR_MENUS = ['등록정보 입력', '플랜선택', '설치 플랫폼 선택'];
 
 interface ProjectCreateLayoutProps {
   title: string;
+  buttonText: string;
   children: ReactNode;
 }
 
 export const ProjectCreateLayout = ({
   title,
+  buttonText,
   children,
 }: ProjectCreateLayoutProps) => {
   const { currentPageNumber } = useCreateProject();
@@ -33,12 +36,16 @@ export const ProjectCreateLayout = ({
         </S.ProejectCreateSidebar>
         <ProjectCreateContent>{children}</ProjectCreateContent>
       </S.ProjectCreateContainer>
+      <S.NextStepButtonWrap>
+        <ProjectPageButton>{buttonText}</ProjectPageButton>
+      </S.NextStepButtonWrap>
     </S.Layout>
   );
 };
 
 const S = {
   Layout: styled.div`
+    position: relative;
     width: 1440px;
     padding-top: 90px;
     display: flex;
@@ -69,5 +76,12 @@ const S = {
     max-height: 696px;
     overflow: hidden;
     border-radius: 30px 0 0 30px;
+  `,
+
+  NextStepButtonWrap: styled.div`
+    position: absolute;
+
+    right: 54px;
+    bottom: 40px;
   `,
 };
