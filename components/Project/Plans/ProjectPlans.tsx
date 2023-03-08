@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 
 import { PlanCard } from 'components/common/PlanCard/PlanCard';
 
-const PLAN_DATAS = {
+export const PLAN_DATAS = {
   free: {
     title: 'Free',
     price: 0,
