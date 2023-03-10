@@ -14,12 +14,12 @@ const SignInForm = () => {
     handleChange,
     handleSubmit,
   } = useForm({
-    email: '',
-    password: '',
+    accountId: '',
+    accountPw: '',
   });
 
   const doSignIn = () => {
-    if (!isValid) return alert(errors?.email || errors?.password);
+    if (!isValid) return alert(errors?.accountId || errors?.accountPw);
 
     // sign in code
     console.log('success');
