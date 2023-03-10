@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - develop
+      - feature/ci-cd-test
 
 env:
   S3_BUCKET_NAME: reviewtwitsbucket
