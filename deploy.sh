@@ -22,4 +22,4 @@ echo "> 새 애플리케이션 배포"
 
 yarn install
 
-nohup yarn start >> $REPOSITORY/nohup.out 2>&1 &
+yarn start >> $REPOSITORY/nohup.out 2>&1 &
