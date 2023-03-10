@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 
 import { ProjectCreateContent } from 'components/Project/Create/ProjectCreateContent';
 import { ProjectCreateTabItem } from 'components/Project/Create/ProjectCreateTapItem';
-import { useCreateProject } from 'hooks/useCreateProject';
 import { ProjectPageButton } from 'components/Project/common/ProjectPageButton';
 
 const SIDEBAR_MENUS = ['등록정보 입력', '플랜선택', '설치 플랫폼 선택'];
@@ -12,32 +11,30 @@ interface ProjectCreateLayoutProps {
   title: string;
   buttonText: string;
   children: ReactNode;
+  onClickButton: () => void;
 }
 
 export const ProjectCreateLayout = ({
   title,
   buttonText,
   children,
+  onClickButton,
 }: ProjectCreateLayoutProps) => {
-  const { currentPageNumber, nextStep } = useCreateProject();
-
   return (
     <S.Layout>
       <S.PageTitle>{title}</S.PageTitle>
       <S.ProjectCreateContainer>
         <S.ProejectCreateSidebar>
-          {SIDEBAR_MENUS.map((menu, index) => (
-            <ProjectCreateTabItem
-              key={menu}
-              isCurrent={currentPageNumber === index}
-              menu={menu}
-            />
+          {SIDEBAR_MENUS.map((menu) => (
+            <ProjectCreateTabItem key={menu} isCurrent={false} menu={menu} />
           ))}
         </S.ProejectCreateSidebar>
         <ProjectCreateContent>{children}</ProjectCreateContent>
       </S.ProjectCreateContainer>
       <S.NextStepButtonWrap>
-        <ProjectPageButton onClick={nextStep}>{buttonText}</ProjectPageButton>
+        <ProjectPageButton onClick={onClickButton}>
+          {buttonText}
+        </ProjectPageButton>
       </S.NextStepButtonWrap>
     </S.Layout>
   );
