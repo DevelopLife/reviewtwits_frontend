@@ -1,32 +1,12 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
-import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 
 import GoogleIconSVG from 'public/google_icon.svg';
 import { googleOauthAPI } from 'api/oauth';
 import theme from 'styles/theme';
 
 export const GoogleOauth = () => {
-  return (
-    <GoogleOAuthProvider
-      clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
-    >
-      <GoogleLoginButton />
-    </GoogleOAuthProvider>
-  );
-};
-
-export const GoogleLoginButton = () => {
-  const googleLogin = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      const accessToken = tokenResponse.access_token;
-      if (accessToken) {
-        await googleOauthAPI.getProfileNextAPI(accessToken);
-      }
-    },
-  });
-
-  return <GoogleLoginButtonView onClick={() => googleLogin()} />;
+  return <div></div>;
 };
 
 interface CustomGoogleLoginButtonProps {

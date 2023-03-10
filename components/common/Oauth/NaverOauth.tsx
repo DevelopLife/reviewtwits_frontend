@@ -15,11 +15,6 @@ const initializeNaverLogin = (naver: any) => {
 };
 
 export const NaverOauth = () => {
-  useEffect(() => {
-    if (!window.naver) return;
-    initializeNaverLogin(window.naver);
-  }, []);
-
   return <NaverLoginButtonView />;
 };
 
