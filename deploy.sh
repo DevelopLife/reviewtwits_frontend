@@ -20,6 +20,8 @@ fi
 
 echo "> 새 애플리케이션 배포"
 
+export PATH = /home/ubuntu/.yarn/bin
+
 yarn install
 
 yarn start >> $REPOSITORY/nohup.out 2>&1 &
