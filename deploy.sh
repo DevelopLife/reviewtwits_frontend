@@ -4,7 +4,7 @@ REPOSITORY=/home/ubuntu/app
 
 cd $REPOSITORY
 
-date
+date  >> $REPOSITORY/nohup.out 2>&1 &
 
 echo "> 현재 구동 중인 애플리케이션 pid 확인"
 
