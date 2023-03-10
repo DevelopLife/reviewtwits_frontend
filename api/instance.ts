@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  withCredentials: true,
 });
 
 export const oauthApi = axios.create();

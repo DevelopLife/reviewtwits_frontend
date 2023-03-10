@@ -1,8 +1,25 @@
 export interface UserFormType {
-  email: string;
-  tel?: string;
-  password: string;
-  passwordCheck?: string;
-  birthDate?: string;
-  gender?: string;
+  accountId: string;
+  accountPw: string;
+  phoneNumber?: string;
+  birthday?: Date | '';
+  gender?: Gender | '';
+  accountPwCheck?: string;
 }
+
+export interface SignUpParams {
+  accountId: string;
+  accountPw: string;
+  phoneNumber?: string;
+  birthday?: Date | '';
+  gender?: Gender | '';
+  nickname?: string;
+  authenticationCode?: string;
+}
+
+export interface SighInParams {
+  email: string;
+  password: string;
+}
+
+export type Gender = '남자' | '여자';

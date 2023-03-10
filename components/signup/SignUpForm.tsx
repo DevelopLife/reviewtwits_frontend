@@ -1,9 +1,14 @@
 import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
 
-import * as S from './SignUpForm.styles';
 import useForm from 'hooks/useForm';
-import type { UserFormType } from 'typings/account';
+import {
+  DEFAULT_SIGN_UP_FORM,
+  GENDER,
+  SIGN_UP_FORM_NAMES,
+} from 'constants/account';
+import { UserFormType } from 'typings/account';
 import { signUpValidate } from 'utils/validate';
+import * as S from './SignUpForm.styles';
 
 const SignUpForm = () => {
   const {
@@ -13,14 +18,7 @@ const SignUpForm = () => {
     setErrors,
     handleChange,
     handleSubmit,
-  } = useForm({
-    email: '',
-    tel: '',
-    password: '',
-    passwordCheck: '',
-    birthDate: '',
-    gender: '',
-  });
+  } = useForm({ ...DEFAULT_SIGN_UP_FORM });
 
   const doSignUp = () => {
     console.log('success');
@@ -67,11 +65,11 @@ const SignUpFormView = ({
       <S.FormItem>
         <S.InputLabel>아이디</S.InputLabel>
         <S.Input
-          name="email"
+          name={SIGN_UP_FORM_NAMES.ACCOUND_ID}
           placeholder="이메일"
           handleChange={handleChange}
         />
-        {values?.email && <S.WarnText>{errors?.email}</S.WarnText>}
+        {values?.accountId && <S.WarnText>{errors?.accountId}</S.WarnText>}
         {/* <S.EmailInputBox>
           <S.Input placeholder="이메일" />
           <S.At>@</S.At>
@@ -83,54 +81,58 @@ const SignUpFormView = ({
       <S.FormItem>
         <S.InputLabel>휴대폰 번호</S.InputLabel>
         <S.Input
-          name="tel"
+          name={SIGN_UP_FORM_NAMES.PHONE_NUMBER}
           placeholder="숫자만 입력 ('-' 제외)"
           handleChange={handleChange}
         />
-        {values?.tel && <S.WarnText>{errors?.tel}</S.WarnText>}
+        {values?.phoneNumber && <S.WarnText>{errors?.phoneNumber}</S.WarnText>}
       </S.FormItem>
       <S.FormItem>
         <S.InputLabel>비밀번호</S.InputLabel>
         <S.Input
-          name="password"
+          name={SIGN_UP_FORM_NAMES.ACCOUNT_PW}
           type="password"
           placeholder="영문, 숫자, 특수문자 조합 6자리 이상"
           handleChange={handleChange}
         />
-        {values?.password && <S.WarnText>{errors?.password}</S.WarnText>}
+        {values?.accountPw && <S.WarnText>{errors?.accountPw}</S.WarnText>}
         <S.Input
-          name="passwordCheck"
+          name={SIGN_UP_FORM_NAMES.ACCOUNT_PW_CHECK}
           type="password"
           placeholder="비밀번호 재입력"
           handleChange={handleChange}
         />
-        {values?.passwordCheck && (
-          <S.WarnText>{errors?.passwordCheck}</S.WarnText>
+        {values?.accountPwCheck && (
+          <S.WarnText>{errors?.accountPwCheck}</S.WarnText>
         )}
       </S.FormItem>
       <S.DivideBox>
         <S.FormItem>
           <S.InputLabel>생년월일</S.InputLabel>
-          <S.DateInput name="birthDate" type="date" onChange={handleChange} />
+          <S.DateInput
+            name={SIGN_UP_FORM_NAMES.BIRTHDAY}
+            type="date"
+            onChange={handleChange}
+          />
         </S.FormItem>
         <S.FormItem>
           <S.InputLabel>성별</S.InputLabel>
           <S.ButtonBox>
             <S.Button
-              name="gender"
-              value="남성"
-              isActive={values.gender === '남성'}
+              name={SIGN_UP_FORM_NAMES.GENDER}
+              value={GENDER.MALE}
+              isActive={values.gender === GENDER.MALE}
               handleClick={handleChange}
             >
-              남성
+              {GENDER.MALE}
             </S.Button>
             <S.Button
-              name="gender"
-              value="여성"
-              isActive={values.gender === '여성'}
+              name={SIGN_UP_FORM_NAMES.GENDER}
+              value={GENDER.FEMALE}
+              isActive={values.gender === GENDER.FEMALE}
               handleClick={handleChange}
             >
-              여성
+              {GENDER.FEMALE}
             </S.Button>
           </S.ButtonBox>
         </S.FormItem>

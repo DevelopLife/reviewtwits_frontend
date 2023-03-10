@@ -1,5 +1,5 @@
 import { UserFormType } from 'typings/account';
-import { ERROR_MESSAGE } from 'constants/account';
+import { DEFAULT_SIGN_UP_FORM, ERROR_MESSAGE } from 'constants/account';
 
 const regExp = {
   email:
@@ -14,33 +14,27 @@ const isPasswordCheckValid = (password: string, passwordCheck: string) =>
   password === passwordCheck;
 
 export function signUpValidate(values: UserFormType) {
-  const { email, tel, password, passwordCheck } = values;
-  const errors = {
-    email: '',
-    tel: '',
-    password: '',
-    passwordCheck: '',
-    birthDate: '',
-    gender: '',
-  };
+  const { accountId, accountPw, phoneNumber, accountPwCheck } = values;
+  const errors = { ...DEFAULT_SIGN_UP_FORM };
 
-  if (!isEmailValid(email)) errors.email = ERROR_MESSAGE.SIGN_UP.EMAIL;
-  if (tel && !isTelValid(tel)) errors.tel = ERROR_MESSAGE.SIGN_UP.TEL;
-  if (!isPasswordValid(password))
-    errors.password = ERROR_MESSAGE.SIGN_UP.PASSWORD;
-  if (passwordCheck && !isPasswordCheckValid(password, passwordCheck))
-    errors.passwordCheck = ERROR_MESSAGE.SIGN_UP.PASSWORDCHECK;
+  if (!isEmailValid(accountId)) errors.accountId = ERROR_MESSAGE.SIGN_UP.EMAIL;
+  if (phoneNumber && !isTelValid(phoneNumber))
+    errors.phoneNumber = ERROR_MESSAGE.SIGN_UP.TEL;
+  if (!isPasswordValid(accountPw))
+    errors.accountPw = ERROR_MESSAGE.SIGN_UP.PASSWORD;
+  if (accountPwCheck && !isPasswordCheckValid(accountPw, accountPwCheck))
+    errors.accountPwCheck = ERROR_MESSAGE.SIGN_UP.PASSWORDCHECK;
 
   return errors;
 }
 
 export function signInValidate(values: UserFormType) {
-  const { email, password } = values;
+  const { accountId, accountPw } = values;
 
-  const errors = { email: '', password: '' };
+  const errors = { accountId: '', accountPw: '' };
 
-  if (!isEmailValid(email)) errors.email = ERROR_MESSAGE.SIGN_IN;
-  if (!isPasswordValid(password)) errors.password = ERROR_MESSAGE.SIGN_IN;
+  if (!isEmailValid(accountId)) errors.accountId = ERROR_MESSAGE.SIGN_IN;
+  if (!isPasswordValid(accountPw)) errors.accountPw = ERROR_MESSAGE.SIGN_IN;
 
   return errors;
 }
