@@ -24,7 +24,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <RecoilRoot>
-            <Component {...pageProps} />
+            <Component {...pageProps}>
+              <div>안녕~</div>
+            </Component>
           </RecoilRoot>
         </ThemeProvider>
       </Hydrate>
