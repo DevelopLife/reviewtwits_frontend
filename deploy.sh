@@ -20,7 +20,9 @@ fi
 
 echo "> 새 애플리케이션 배포"
 
-export PATH = /home/ubuntu/.nvm/versions/node/v18.15.0/bin/yarn
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 yarn install
 
