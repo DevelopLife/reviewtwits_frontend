@@ -4,6 +4,8 @@ REPOSITORY=/home/ubuntu/app
 
 cd $REPOSITORY
 
+date
+
 echo "> 현재 구동 중인 애플리케이션 pid 확인"
 
 CURRENT_PID=$(lsof -i :3000 | grep node | awk '{print $2}')
