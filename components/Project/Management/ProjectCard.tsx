@@ -6,17 +6,10 @@ import {
   Styles,
 } from 'components/common/ProjectCard/ProjectCardCommon';
 import { ProjectDto } from 'typings/project';
+import { GetProjectsResponseData } from 'api/projects';
 
 interface ProjectCardProps {
-  project: ProjectDto;
-  styles: Styles;
-}
-
-interface ProjectCardViewProps {
-  project: ProjectDto;
-  isHover: boolean;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
+  project: GetProjectsResponseData;
   styles: Styles;
 }
 
@@ -26,11 +19,14 @@ export const ProjectCard = ({ project, styles, ...rest }: ProjectCardProps) => {
   const handleMouseEnter = () => setIshover(true);
   const handleMouseLeave = () => setIshover(false);
 
-  // const handleRouteOnClick = () => router;
-
   return (
     <ProjectCardView
-      project={project}
+      project={{
+        id: project.projectId,
+        name: project.projectName,
+        description: project.projectDescription,
+        review: project.reviewCount,
+      }}
       isHover={isHover}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -39,6 +35,14 @@ export const ProjectCard = ({ project, styles, ...rest }: ProjectCardProps) => {
     />
   );
 };
+
+interface ProjectCardViewProps {
+  project: ProjectDto;
+  isHover: boolean;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  styles: Styles;
+}
 
 export const ProjectCardView = ({
   project,

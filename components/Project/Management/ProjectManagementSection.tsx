@@ -2,78 +2,16 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 
-import type { ProjectDto } from 'typings/project';
 import { ProjectCard } from 'components/Project/Management/ProjectCard';
 import { Styles } from 'components/common/ProjectCard/ProjectCardCommon';
 import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
+import { useQuery } from '@tanstack/react-query';
+import { GetProjectsResponseData, projectsAPI } from 'api/projects';
 
 interface ProjectManagementSectionViewProps {
   children?: ReactNode;
-  projects: { project: ProjectDto; styles: Styles }[];
+  projects: GetProjectsResponseData[] | undefined;
 }
-
-const projects: { project: ProjectDto; styles: Styles }[] = [
-  {
-    project: {
-      id: '1',
-      name: 'mockProject',
-      description: 'mockProject입니다.',
-      review: 'review 입니다.',
-    },
-    styles: {
-      backgroundColor: 'blue_0',
-      color: 'gray_0',
-    },
-  },
-  {
-    project: {
-      id: '2',
-      name: 'mockProject',
-      description: 'mockProject입니다.',
-      review: 'review 입니다.',
-    },
-    styles: {
-      backgroundColor: 'blue_dark',
-      color: 'gray_0',
-    },
-  },
-  {
-    project: {
-      id: '3',
-      name: 'mockProject',
-      description: 'mockProject입니다.',
-      review: 'review 입니다.',
-    },
-    styles: {
-      backgroundColor: 'blue_light',
-      color: 'gray_0',
-    },
-  },
-  {
-    project: {
-      id: '4',
-      name: 'mockProject',
-      description: 'mockProject입니다.',
-      review: 'review 입니다.',
-    },
-    styles: {
-      backgroundColor: 'blue_light',
-      color: 'gray_0',
-    },
-  },
-  {
-    project: {
-      id: '5',
-      name: 'mockProject',
-      description: 'mockProject입니다.',
-      review: 'review 입니다.',
-    },
-    styles: {
-      backgroundColor: 'blue_light',
-      color: 'gray_0',
-    },
-  },
-];
 
 const CREATE_PROJECT_STYLES: Styles = {
   color: 'gray_9',
@@ -83,7 +21,9 @@ const CREATE_PROJECT_STYLES: Styles = {
 export const ProjectManagementSection = () => {
   // TODO: react query를 내부적으로 사용하는 custhom hook을 호출해줘야 합니다.
 
-  return <ProjectManagementSectionView projects={projects} />;
+  const { data } = useQuery(['projectManagement'], projectsAPI.get);
+
+  return <ProjectManagementSectionView projects={data?.data} />;
 };
 
 export const ProjectManagementSectionView = ({
@@ -99,8 +39,12 @@ export const ProjectManagementSectionView = ({
           styles={CREATE_PROJECT_STYLES}
           onClick={changeRoutingCreate}
         />
-        {projects.map(({ project, styles }) => (
-          <ProjectCard key={project.id} project={project} styles={styles} />
+        {projects?.map((project) => (
+          <ProjectCard
+            key={project.projectId}
+            project={project}
+            styles={{ backgroundColor: project.projectColor, color: 'gray_0' }}
+          />
         ))}
       </S.SectionGrid>
     </S.Section>

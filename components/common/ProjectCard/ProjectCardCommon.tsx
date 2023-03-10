@@ -39,10 +39,16 @@ const S = {
     border-radius: 30px;
 
     background-color: ${({ styles, theme }) =>
-      styles?.backgroundColor && theme?.colors[styles.backgroundColor]};
+      styles?.backgroundColor && styles.backgroundColor};
+    // styles?.backgroundColor && theme?.colors[styles.backgroundColor]};
+
     & * {
       color: ${({ styles, theme }) =>
         styles?.color && theme?.colors[styles.color]};
+    }
+
+    :hover {
+      cursor: pointer;
     }
   `,
 };
