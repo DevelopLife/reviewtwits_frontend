@@ -23,4 +23,4 @@ export interface SighInParams {
   password: string;
 }
 
-export type Gender = '남성' | '여성';
+export type Gender = '남자' | '여자';

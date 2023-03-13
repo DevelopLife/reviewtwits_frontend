@@ -25,6 +25,7 @@ export const DEFAULT_SIGN_UP_FORM: UserFormType = {
   accountPwCheck: '',
   birthDate: '',
   gender: '',
+  verifyCode: '',
 };
 
 export const SIGN_UP_FORM_NAMES = {
@@ -38,8 +39,8 @@ export const SIGN_UP_FORM_NAMES = {
 };
 
 export const GENDER = {
-  MALE: '남성',
-  FEMALE: '여성',
+  MALE: '남자',
+  FEMALE: '여자',
 };
 
 export type ErrorType = typeof ERROR_MESSAGE;
