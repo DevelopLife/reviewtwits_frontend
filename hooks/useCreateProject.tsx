@@ -16,6 +16,7 @@ export const useCreateProject = () => {
   };
 
   const changeCreateProjectFormBySelect = (name: string, value: string) => {
+    if (createProjectForm[name] === value) return;
     setCreateProjectForm((pre) => ({ ...pre, ...{ [name]: value } }));
   };
 

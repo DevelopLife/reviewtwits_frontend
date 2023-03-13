@@ -16,6 +16,7 @@ type ResponseType<T> = Promise<AxiosResponse<T>>;
 export type PricePlan = 'Free' | 'Plus' | 'Pro' | 'Business';
 
 export interface CreateProjectRequestBody {
+  [key: string]: unknown;
   projectName: string;
   uriPattern: string;
   projectDescription?: string;

@@ -1,11 +1,18 @@
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 
 import { ProjectCreateContent } from 'components/Project/Create/ProjectCreateContent';
 import { ProjectCreateTabItem } from 'components/Project/Create/ProjectCreateTapItem';
 import { ProjectPageButton } from 'components/Project/common/ProjectPageButton';
 
-const SIDEBAR_MENUS = ['등록정보 입력', '플랜선택', '설치 플랫폼 선택'];
+type ProjectPathnames = 'create' | 'plans' | 'platform';
+
+const SIDEBAR_MENUS: Record<ProjectPathnames, string> = {
+  create: '등록정보 입력',
+  plans: '플랜선택',
+  platform: '설치 플랫폼 선택',
+};
 
 interface ProjectCreateLayoutProps {
   title: string;
@@ -20,13 +27,20 @@ export const ProjectCreateLayout = ({
   children,
   onClickButton,
 }: ProjectCreateLayoutProps) => {
+  const router = useRouter();
+  const isCurrentPathname = router.pathname.split('/')[2];
+
   return (
     <S.Layout>
       <S.PageTitle>{title}</S.PageTitle>
       <S.ProjectCreateContainer>
         <S.ProejectCreateSidebar>
-          {SIDEBAR_MENUS.map((menu) => (
-            <ProjectCreateTabItem key={menu} isCurrent={false} menu={menu} />
+          {Object.entries(SIDEBAR_MENUS).map(([key, menu]) => (
+            <ProjectCreateTabItem
+              key={key}
+              isCurrent={isCurrentPathname === key}
+              menu={menu}
+            />
           ))}
         </S.ProejectCreateSidebar>
         <ProjectCreateContent>{children}</ProjectCreateContent>

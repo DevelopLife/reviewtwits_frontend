@@ -1,7 +1,10 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { ReactNode } from 'react';
+import Image from 'next/image';
 
 import { useCreateProject } from 'hooks/useCreateProject';
+import DownTriangleSVG from 'public/images/down_triangle.svg';
+import { useSelect } from 'hooks/useSelect';
 
 interface ProjectCreateSelectProps {
   formKey: 'category' | 'language';
@@ -14,23 +17,25 @@ export const ProjectCreateSelect = ({
 }: ProjectCreateSelectProps) => {
   const { createProjectForm, changeCreateProjectFormBySelect } =
     useCreateProject();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onClickTrigger = () => setIsOpen((pre) => !pre);
-  const onClickOption = (option: string) => {
-    if (createProjectForm[formKey] === option) {
-      return setIsOpen(false);
-    }
-
-    changeCreateProjectFormBySelect(formKey, option);
-    setIsOpen(false);
+  const changeForm = (value: string) => {
+    changeCreateProjectFormBySelect(formKey, value);
   };
+
+  const { isOpen, onClickOption, onClickTrigger } = useSelect(changeForm);
 
   return (
     <ProjectCreateSelectView
       options={options}
       value={createProjectForm[formKey]}
       isOpen={isOpen}
+      icon={
+        <Image
+          src={DownTriangleSVG}
+          alt="down_triangle_icon"
+          width={26}
+          height={26}
+        />
+      }
       onClickTrigger={onClickTrigger}
       onClickOption={onClickOption}
     />
@@ -40,6 +45,7 @@ export const ProjectCreateSelect = ({
 interface ProjectCreateSelectViewProps {
   options: string[];
   value: string;
+  icon: ReactNode;
   isOpen: boolean;
   onClickTrigger: () => void;
   onClickOption: (value: string) => void;
@@ -48,13 +54,17 @@ interface ProjectCreateSelectViewProps {
 export const ProjectCreateSelectView = ({
   options,
   value,
+  icon,
   isOpen,
   onClickTrigger,
   onClickOption,
 }: ProjectCreateSelectViewProps) => {
   return (
     <S.SelectContainer>
-      <S.Trigger onClick={onClickTrigger}>{value}</S.Trigger>
+      <S.Trigger onClick={onClickTrigger}>
+        {value}
+        <S.Icon>{icon}</S.Icon>
+      </S.Trigger>
       {isOpen && (
         <S.OptionsContainer>
           <S.Options>
@@ -79,15 +89,21 @@ const S = {
     gap: 5px;
   `,
   Trigger: styled.div`
+    position: relative;
     display: flex;
     align-items: center;
     height: 40px;
     border: 1px solid green;
-    padding: 8px 18px;
+    padding: 8px 45px 8px 18px;
+    z-index: 0;
 
     :hover {
       cursor: pointer;
     }
+  `,
+  Icon: styled.span`
+    position: absolute;
+    right: 15px;
   `,
   OptionsContainer: styled.div`
     position: relative;
@@ -101,6 +117,8 @@ const S = {
     border: 1px solid #d0d0d0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background-color: #ffffff;
+
+    z-index: 1;
 
     :hover {
       cursor: pointer;
