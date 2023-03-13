@@ -45,7 +45,7 @@ interface ButtonStyleProps {
 const StyledButton = styled.button<ButtonStyleProps>`
   border: none;
   border-radius: 30px;
-  padding: 8px 33px;
+  padding: 8px 25px;
   font-size: 16px;
   background: ${({ color }) => (color ? theme.colors[color] : 'white')};
 

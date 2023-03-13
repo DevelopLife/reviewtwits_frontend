@@ -18,9 +18,6 @@ const Form = ({ title, children, onValid, handleSubmit }: FormProps) => (
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 562px;
-  background: #f7f7f7;
-  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.09);
   border-radius: 30px;
   padding: 68px;
 `;
