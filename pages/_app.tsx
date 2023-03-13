@@ -5,6 +5,7 @@ import {
   Hydrate,
 } from '@tanstack/react-query';
 import { Global, ThemeProvider } from '@emotion/react';
+import { SessionProvider } from 'next-auth/react';
 // only development
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
@@ -22,11 +23,13 @@ export default function App({ Component, pageProps }: AppProps) {
       <Global styles={reset} />
       <ReactQueryDevtools initialIsOpen={false} />
       <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <RecoilRoot>
-            <Component {...pageProps} />
-          </RecoilRoot>
-        </ThemeProvider>
+        <SessionProvider session={pageProps.session}>
+          <ThemeProvider theme={theme}>
+            <RecoilRoot>
+              <Component {...pageProps} />
+            </RecoilRoot>
+          </ThemeProvider>
+        </SessionProvider>
       </Hydrate>
     </QueryClientProvider>
   );
