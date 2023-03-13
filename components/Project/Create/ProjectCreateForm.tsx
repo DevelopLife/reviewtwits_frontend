@@ -5,14 +5,20 @@ import { CreateProjectRequestBody } from 'api/projects';
 import { useCreateProject } from 'hooks/useCreateProject';
 import { ProjectCreateSelect } from 'components/Project/Create/ProjectCreateSelect';
 
+import { ColorPickerTrigger } from 'components/common/ColorPicker/ColorPickerTrigger';
+
 export const ProjectCreateForm = () => {
-  const { createProjectForm, changeCreateProjectFormByInput } =
-    useCreateProject();
+  const {
+    createProjectForm,
+    changeCreateProjectFormByInput,
+    changeProjectColor,
+  } = useCreateProject();
 
   return (
     <ProjectCreateFormView
       form={createProjectForm}
       onChangeByInput={changeCreateProjectFormByInput}
+      onChangeColor={changeProjectColor}
     />
   );
 };
@@ -20,10 +26,12 @@ export const ProjectCreateForm = () => {
 interface ProjectCreateFormViewProps {
   form: CreateProjectRequestBody;
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeColor: (color: string) => void;
 }
 
 export const ProjectCreateFormView = ({
   form,
+  onChangeColor,
   onChangeByInput,
 }: ProjectCreateFormViewProps) => {
   return (
@@ -83,7 +91,7 @@ export const ProjectCreateFormView = ({
           />
         </ProjectCreateItem>
         <ProjectCreateItem label="프로젝트 색깔">
-          <div>컬러 팔레트</div>
+          <ColorPickerTrigger onChangeColor={onChangeColor} />
         </ProjectCreateItem>
       </S.CreateProjectForm>
     </S.CreateProjectFormContainer>
@@ -142,4 +150,5 @@ const S = {
     font-size: 14px;
     line-height: 20px;
   `,
+  ColorPickerTrigger: styled.div``,
 };

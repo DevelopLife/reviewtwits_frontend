@@ -29,10 +29,19 @@ export const useCreateProject = () => {
     }));
   };
 
+  const changeProjectColor = (color: string) => {
+    if (createProjectForm.projectColor === color) return;
+    setCreateProjectForm((pre) => ({
+      ...pre,
+      ...{ projectColor: color },
+    }));
+  };
+
   return {
     createProjectForm,
     changeCreateProjectFormByInput,
     changeCreateProjectFormBySelect,
     changeProjectPlan,
+    changeProjectColor,
   };
 };
