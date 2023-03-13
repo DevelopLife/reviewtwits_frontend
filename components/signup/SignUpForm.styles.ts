@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import theme from 'styles/theme';
+import Card from 'components/common/Card';
 import Form from 'components/common/Form';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
@@ -12,6 +13,10 @@ const DivideBox = styled.div`
   > div {
     width: 50%;
   }
+`;
+
+const FormWrap = styled.div`
+  margin: 0 200px;
 `;
 
 const FormContent = styled.div`
@@ -52,6 +57,16 @@ const DateInput = styled.input`
   &::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
+`;
+
+const EmailBox = styled.div`
+  position: relative;
+`;
+
+const VerifyButtonWrap = styled.div`
+  position: absolute;
+  right: -160px;
+  top: 10px;
 `;
 
 // const Select = styled.select`
@@ -98,6 +113,8 @@ const EmailInputBox = styled.div`
 // `;
 
 export {
+  Card,
+  FormWrap,
   Form,
   DivideBox,
   FormContent,
@@ -112,5 +129,7 @@ export {
   ButtonBox,
   Button,
   EmailInputBox,
+  EmailBox,
+  VerifyButtonWrap,
   // At,
 };

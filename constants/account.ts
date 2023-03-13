@@ -6,8 +6,6 @@ const SIGN_UP = {
   PASSWORD:
     '영문자, 숫자, 특수문자가 조합된 6자리 이상의 비밀번호를 입력해주세요.',
   PASSWORDCHECK: '비밀번호가 일치하지 않습니다. 다시 입력해주세요.',
-  // birthDate: '생년월일을 선택해주세요.',
-  // gender: '성별을 선택해주세요.',
 };
 
 const SIGN_IN =
