@@ -9,6 +9,7 @@ export const DEFAULT_CREATE_PROJECT_FORM: CreateProjectRequestBody = {
   category: '',
   language: '',
   projectColor: 'red',
+  pricePlan: '',
 };
 
 export const createProjectFormState = atom<CreateProjectRequestBody>({

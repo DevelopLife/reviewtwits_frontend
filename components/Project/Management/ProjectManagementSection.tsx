@@ -30,15 +30,12 @@ export const ProjectManagementSectionView = ({
   projects,
 }: ProjectManagementSectionViewProps) => {
   const router = useRouter();
-  const changeRoutingCreate = () => router.push('./create');
-  //
+  const navigate = () => router.push('./create');
+
   return (
     <S.Section>
       <S.SectionGrid>
-        <CreateProjectCard
-          styles={CREATE_PROJECT_STYLES}
-          onClick={changeRoutingCreate}
-        />
+        <CreateProjectCard styles={CREATE_PROJECT_STYLES} onClick={navigate} />
         {projects?.map((project) => (
           <ProjectCard
             key={project.projectId}

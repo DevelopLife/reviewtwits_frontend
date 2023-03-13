@@ -13,6 +13,8 @@ export const projectsAPI = {
 
 type ResponseType<T> = Promise<AxiosResponse<T>>;
 
+export type PricePlan = 'Free' | 'Plus' | 'Pro' | 'Business';
+
 export interface CreateProjectRequestBody {
   projectName: string;
   uriPattern: string;
@@ -20,6 +22,7 @@ export interface CreateProjectRequestBody {
   category: string;
   language: string;
   projectColor: string;
+  pricePlan?: `${Uppercase<PricePlan>}_PLAN` | '';
 }
 
 export interface GetProjectsResponseData {

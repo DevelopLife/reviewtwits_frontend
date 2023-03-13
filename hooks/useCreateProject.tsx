@@ -1,3 +1,4 @@
+import { PricePlan } from 'api/projects';
 import { ChangeEvent } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -18,9 +19,19 @@ export const useCreateProject = () => {
     setCreateProjectForm((pre) => ({ ...pre, ...{ [name]: value } }));
   };
 
+  const changeProjectPlan = (plan: PricePlan) => {
+    const upperCasePlan = plan.toUpperCase() as Uppercase<PricePlan>;
+
+    setCreateProjectForm((pre) => ({
+      ...pre,
+      ...{ pricePlan: `${upperCasePlan}_PLAN` },
+    }));
+  };
+
   return {
     createProjectForm,
     changeCreateProjectFormByInput,
     changeCreateProjectFormBySelect,
+    changeProjectPlan,
   };
 };

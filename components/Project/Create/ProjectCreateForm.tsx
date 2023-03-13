@@ -76,7 +76,7 @@ export const ProjectCreateFormView = ({
   );
 };
 
-const PROJECT_CATEGORIES = ['쇼핑몰', '영화', '게임'];
+const PROJECT_CATEGORIES = ['쇼핑', '영화', '게임'];
 const PROJECT_LANGUAGES = ['한국어', '영어'];
 
 interface ProjectCreateItemProps {
