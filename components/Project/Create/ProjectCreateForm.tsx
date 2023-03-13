@@ -102,7 +102,7 @@ export const ProjectCreateFormView = ({
 };
 
 const PROJECT_CATEGORIES = ['쇼핑', '영화', '게임'];
-const PROJECT_LANGUAGES = ['한국어', '영어'];
+const PROJECT_LANGUAGES = ['한국어', 'ENGLISH'];
 
 interface ProjectCreateItemProps {
   label: string;
