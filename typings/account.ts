@@ -2,19 +2,20 @@ export interface UserFormType {
   accountId: string;
   accountPw: string;
   phoneNumber?: string;
-  birthday?: Date | '';
+  birthDate?: string | '';
   gender?: Gender | '';
   accountPwCheck?: string;
+  verifyCode?: string;
 }
 
 export interface SignUpParams {
   accountId: string;
   accountPw: string;
   phoneNumber?: string;
-  birthday?: Date | '';
+  birthDate?: string | '';
   gender?: Gender | '';
   nickname?: string;
-  authenticationCode?: string;
+  verifyCode?: string;
 }
 
 export interface SighInParams {
@@ -22,4 +23,4 @@ export interface SighInParams {
   password: string;
 }
 
-export type Gender = '남자' | '여자';
+export type Gender = '남성' | '여성';

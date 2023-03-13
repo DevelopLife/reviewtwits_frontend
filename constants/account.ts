@@ -23,7 +23,7 @@ export const DEFAULT_SIGN_UP_FORM: UserFormType = {
   phoneNumber: '',
   accountPw: '',
   accountPwCheck: '',
-  birthday: '',
+  birthDate: '',
   gender: '',
 };
 
@@ -31,13 +31,15 @@ export const SIGN_UP_FORM_NAMES = {
   ACCOUND_ID: 'accountId',
   ACCOUNT_PW: 'accountPw',
   ACCOUNT_PW_CHECK: 'accountPwCheck',
-  BIRTHDAY: 'birthday',
+  BIRTHDATE: 'birthDate',
   GENDER: 'gender',
   PHONE_NUMBER: 'phoneNumber',
+  VERIFY_CODE: 'verifyCode',
 };
+
 export const GENDER = {
-  MALE: '남자',
-  FEMALE: '여자',
+  MALE: '남성',
+  FEMALE: '여성',
 };
 
 export type ErrorType = typeof ERROR_MESSAGE;
