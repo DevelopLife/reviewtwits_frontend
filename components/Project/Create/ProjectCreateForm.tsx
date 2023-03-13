@@ -33,28 +33,42 @@ export const ProjectCreateFormView = ({
           <div>이미지</div>
         </ProjectCreateItem>
         <ProjectCreateItem label="프로젝트 이름">
-          <S.Input
-            type="string"
-            name="projectName"
-            value={form.projectName}
-            onChange={onChangeByInput}
-          />
+          <S.ItemWrap>
+            <S.Input
+              type="string"
+              name="projectName"
+              value={form.projectName}
+              onChange={onChangeByInput}
+            />
+            <S.GuideMessage>
+              당신의 서비스 URL은 {form.projectName}.reviewtwits.com 입니다.
+            </S.GuideMessage>
+          </S.ItemWrap>
         </ProjectCreateItem>
         <ProjectCreateItem label="프로젝트 설명">
-          <S.Input
-            type="string"
-            name="projectDescription"
-            value={form.projectDescription}
-            onChange={onChangeByInput}
-          />
+          <S.ItemWrap>
+            <S.Input
+              type="string"
+              name="projectDescription"
+              value={form.projectDescription}
+              onChange={onChangeByInput}
+            />
+            <S.GuideMessage></S.GuideMessage>
+          </S.ItemWrap>
         </ProjectCreateItem>
         <ProjectCreateItem label="URL Pattern">
-          <S.Input
-            type="string"
-            name="uriPattern"
-            value={form.uriPattern}
-            onChange={onChangeByInput}
-          />
+          <S.ItemWrap>
+            <S.Input
+              type="string"
+              name="uriPattern"
+              value={form.uriPattern}
+              onChange={onChangeByInput}
+            />
+            <S.GuideMessage>
+              {`서비스가 작동되게 될 범위를 지정합니다. (ex: /project)
+              미입력시 전체 범위로 지정됩니다.`}
+            </S.GuideMessage>
+          </S.ItemWrap>
         </ProjectCreateItem>
         <ProjectCreateItem label="카테고리">
           <ProjectCreateSelect
@@ -107,14 +121,25 @@ const S = {
   Label: styled.label`
     display: inline-block;
     width: 195px;
-    margin-bottom: 80px;
+    margin-bottom: 70px;
 
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
   `,
+  ItemWrap: styled.div``,
   Input: styled.input`
     width: 400px;
     height: 40px;
+    padding: 10px;
+  `,
+  GuideMessage: styled.div`
+    margin-top: 5px;
+    width: 400px;
+    white-space: pre-line;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
   `,
 };
