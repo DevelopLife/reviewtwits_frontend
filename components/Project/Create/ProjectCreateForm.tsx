@@ -45,6 +45,7 @@ export const ProjectCreateFormView = ({
             <S.Input
               type="string"
               name="projectName"
+              autoComplete="off"
               value={form.projectName}
               onChange={onChangeByInput}
             />
@@ -58,6 +59,7 @@ export const ProjectCreateFormView = ({
             <S.Input
               type="string"
               name="projectDescription"
+              autoComplete="off"
               value={form.projectDescription}
               onChange={onChangeByInput}
             />
@@ -69,6 +71,7 @@ export const ProjectCreateFormView = ({
             <S.Input
               type="string"
               name="uriPattern"
+              autoComplete="off"
               value={form.uriPattern}
               onChange={onChangeByInput}
             />
