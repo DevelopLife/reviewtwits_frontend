@@ -93,7 +93,7 @@ const S = {
     display: flex;
     align-items: center;
     height: 40px;
-    border: 1px solid green;
+    border: 1px solid #969696;
     padding: 8px 45px 8px 18px;
     z-index: 0;
 
