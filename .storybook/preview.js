@@ -12,7 +12,7 @@ Object.defineProperty(NextImage, 'default', {
   value: (props) => (
     <OriginalNextImage {...props} unoptimized blurDataURL={props.src} />
   ),
-
+});
 
 export const decorators = [
   (Story) => (
