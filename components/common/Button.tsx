@@ -48,6 +48,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
   padding: 8px 25px;
   font-size: 16px;
   background: ${({ color }) => (color ? theme.colors[color] : 'white')};
+  width: 100%;
 
   ${({ color }) => {
     switch (color) {

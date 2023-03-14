@@ -1,5 +1,8 @@
 import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
+import { getSession, signIn } from 'next-auth/react';
+import Cookies from 'universal-cookie';
 import useForm from 'hooks/useForm';
 import {
   DEFAULT_SIGN_UP_FORM,
@@ -8,6 +11,7 @@ import {
   SIGN_UP_FORM_NAMES,
 } from 'constants/account';
 import { UserFormType } from 'typings/account';
+import { usersAPI } from 'api/users';
 import { emailsAPI } from 'api/emails';
 import { signUpValidate } from 'utils/validate';
 import * as S from './SignUpForm.styles';
@@ -21,6 +25,8 @@ const SignUpForm = () => {
     handleChange,
     handleSubmit,
   } = useForm({ ...DEFAULT_SIGN_UP_FORM });
+  const cookies = new Cookies();
+  const router = useRouter();
 
   const sendEmailVerifyCode = () => {
     if (errors?.accountId) return alert(ERROR_MESSAGE.SIGN_UP.EMAIL);
@@ -28,7 +34,30 @@ const SignUpForm = () => {
   };
 
   const doSignUp = async () => {
-    console.log('success');
+    const session = await getSession();
+    const provider = cookies.get('provider');
+
+    // sign up code
+    const signUpResult = await usersAPI.signUp(values);
+
+    if (!signUpResult) return;
+
+    // sign in code
+    if (!provider) {
+      await signIn('credentials', {
+        id: values.accountId,
+        password: values.accountPw,
+        redirect: false,
+      });
+    }
+
+    if (!session) return;
+
+    const { user } = session;
+
+    user.token = signUpResult?.accessToken;
+    cookies.remove('provider');
+    router.replace('/');
   };
 
   useEffect(() => {
@@ -168,7 +197,7 @@ const SignUpFormView = ({
           입력하신 개인정보는 리뷰추천 성능 향상 목적 외에 사용되지 않습니다.
         </S.Notice>
         <S.Button type="submit" large color="primary" disabled={disabled}>
-          로그인 페이지로 이동
+          입력 완료
         </S.Button>
       </S.Form>
     </S.FormWrap>
