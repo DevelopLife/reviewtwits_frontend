@@ -10,10 +10,18 @@ import * as S from './ShoppingMallReview.styles';
 const ShoppingMallReview = () => {
   return (
     <S.Layout>
-      <ComprehensiveRates />
-      <KeywordRates />
-      <ReviewHeader />
-      <Reviews />
+      <S.ComprehensiveRatesLayout>
+        <ComprehensiveRates />
+      </S.ComprehensiveRatesLayout>
+      <S.KeywordRatesLayout>
+        <KeywordRates />
+      </S.KeywordRatesLayout>
+      <S.ReviewHeaderLayout>
+        <ReviewHeader />
+      </S.ReviewHeaderLayout>
+      <S.ReviewsLayout>
+        <Reviews />
+      </S.ReviewsLayout>
     </S.Layout>
   );
 };
