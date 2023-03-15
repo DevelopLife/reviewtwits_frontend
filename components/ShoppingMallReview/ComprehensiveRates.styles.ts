@@ -30,10 +30,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
   gap: 69px;
-
-  margin: auto;
 `;
 
 const OverallReviewNumber = styled.div`
@@ -56,6 +53,19 @@ const NumberInfos = styled.div`
     height: 40px;
     background: #e1f9e6;
     border-radius: 30px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    div {
+      width: 78px;
+      margin: auto;
+
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+    }
   }
 `;
 
@@ -74,10 +84,14 @@ const StarInfos = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  div {
+  ul {
     width: 175px;
     height: 30px;
     line-height: 30px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
@@ -92,6 +106,9 @@ const OverallRatingDetail = styled.ul`
   li {
     height: 17px;
     display: flex;
+    img {
+      margin-right: 3px;
+    }
   }
 `;
 
