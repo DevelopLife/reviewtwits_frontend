@@ -4,7 +4,7 @@ import { scrollIntoTarget } from 'utils/scrollIntoTarget';
 
 import * as S from './Footer.styles';
 
-interface FooterProps {
+export interface FooterProps {
   mainHomeRef: RefObject<HTMLDivElement>;
   serviceIntroduceRef: RefObject<HTMLDivElement>;
   functoinIntroduceRef: RefObject<HTMLDivElement>;
