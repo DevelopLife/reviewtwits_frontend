@@ -1,4 +1,7 @@
+import Image from 'next/image';
 import React from 'react';
+import risingArray from 'public/images/rising_array.png';
+import grayStar from 'public/images/gray_star.png';
 import * as S from './ComprehensiveRates.styles';
 
 const ComprehensiveRates = () => {
@@ -8,7 +11,17 @@ const ComprehensiveRates = () => {
         <S.Strong>전체 리뷰수</S.Strong>
         <S.NumberInfos>
           <S.H4>10.3k</S.H4>
-          <div>103</div>
+          <div>
+            <div>
+              103
+              <Image
+                src={risingArray}
+                alt="arrow image"
+                width={30}
+                height={30}
+              />
+            </div>
+          </div>
         </S.NumberInfos>
         <S.Desc>이번달에 작성된 리뷰 수</S.Desc>
       </S.OverallReviewNumber>
@@ -17,26 +30,47 @@ const ComprehensiveRates = () => {
         <S.Strong>평점</S.Strong>
         <S.StarInfos>
           <S.H4>4.0</S.H4>
-          <div>⭐⭐⭐⭐🟢</div>
+          <ul>
+            <li>
+              <Image src={grayStar} alt="" />
+            </li>
+            <li>
+              <Image src={grayStar} alt="" />
+            </li>
+            <li>
+              <Image src={grayStar} alt="" />
+            </li>
+            <li>
+              <Image src={grayStar} alt="" />
+            </li>
+            <li>
+              <Image src={grayStar} alt="" />
+            </li>
+          </ul>
         </S.StarInfos>
         <S.Desc>이번달 평균 평가</S.Desc>
       </S.OverallRating>
 
       <S.OverallRatingDetail>
         <li>
-          ⭐5 <S.PrograssBar prograssRange={'150'} />
+          <Image src={grayStar} alt="" width={15} height={15} />
+          5 <S.PrograssBar prograssRange={'150'} />
         </li>
         <li>
-          ⭐4 <S.PrograssBar prograssRange={'75'} />
+          <Image src={grayStar} alt="" width={15} height={15} />4
+          <S.PrograssBar prograssRange={'75'} />
         </li>
         <li>
-          ⭐3 <S.PrograssBar prograssRange={'30'} />
+          <Image src={grayStar} alt="" width={15} height={15} />3
+          <S.PrograssBar prograssRange={'30'} />
         </li>
         <li>
-          ⭐2 <S.PrograssBar prograssRange={'15'} />
+          <Image src={grayStar} alt="" width={15} height={15} />2
+          <S.PrograssBar prograssRange={'15'} />
         </li>
         <li>
-          ⭐1 <S.PrograssBar prograssRange={'12'} />
+          <Image src={grayStar} alt="" width={15} height={15} />1
+          <S.PrograssBar prograssRange={'12'} />
         </li>
       </S.OverallRatingDetail>
     </S.Container>
