@@ -1,3 +1,4 @@
+import { StoryFn } from '@storybook/react';
 import Footer, { FooterProps } from './Footer';
 
 export default {
@@ -5,13 +6,4 @@ export default {
   component: Footer,
 };
 
-export const Basic = (args: FooterProps) => ({
-  props: args,
-  template: `<Footer />`,
-});
-Basic.args = {
-  mainHomeRef: null,
-  serviceIntroduceRef: null,
-  functoinIntroduceRef: null,
-  effectIntroduceRef: null,
-};
+export const Basic: StoryFn<typeof Footer> = (args) => <Footer {...args} />;
