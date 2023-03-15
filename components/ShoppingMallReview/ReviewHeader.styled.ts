@@ -31,8 +31,6 @@ const SortReviewOptions = styled.div`
   line-height: 19px;
 
   color: #ffffff;
-
-  border: 1px solid white;
 `;
 
 const BestReview = styled.div``;
