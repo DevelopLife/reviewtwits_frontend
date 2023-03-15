@@ -17,13 +17,13 @@ const KeywordBox = styled.div`
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    margin-bottom: 8px;
   }
 `;
 
 const Line = styled.div`
   width: 320px;
   height: 2px;
+  margin-top: 8px;
 
   background: #d9d9d9;
 `;
@@ -49,7 +49,13 @@ const Rate = styled.div`
 
 const Keyword = styled.p`
   width: 33%;
-  margin-right: 26px;
+  margin-right: 24px;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 `;
 
 const PrograssWidth = styled.div`
