@@ -1,0 +1,57 @@
+name: AWS EC2 deploy CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+env:
+  S3_BUCKET_NAME: reviewtwitsbucket
+  CODE_DEPLOY_APPLICATION_NAME: reviewtwits_codedeploy
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: reviewtwits
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - name: Check Node v
+        run: node -v
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build next app
+        run: yarn build
+
+      - name: Make zip file
+        run: zip -qq -r ./$GITHUB_SHA.zip . -x "node_modules/*"
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_FRONTEND }} 
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_FRONTEND }} 
+          aws-region: ${{ secrets.AWS_REGION_FRONTEND }}
+
+      - name: Upload to S3
+        env:
+          AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID_FRONTEND }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_FRONTEND }}
+        run: aws s3 cp --region ${{ secrets.AWS_REGION_FRONTEND }} ./$GITHUB_SHA.zip s3://${{ env.S3_BUCKET_NAME }}/$GITHUB_SHA.zip
+
+      - name: Code Deploy
+        run: |
+          aws deploy create-deployment \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+          --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+          --s3-location bucket=${{ env.S3_BUCKET_NAME }},bundleType=zip,key=$GITHUB_SHA.zip

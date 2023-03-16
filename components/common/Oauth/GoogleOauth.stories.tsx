@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { GoogleOauth } from '@/components/common/Oauth/GoogleOauth';
+import { GoogleOauth } from 'components/common/Oauth/@index';
 
 export default {
   title: 'Components/Oauth/GooglaOauth',
