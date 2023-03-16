@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import theme from 'styles/theme';
+import Card from 'components/common/Card';
 import Form from 'components/common/Form';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
@@ -9,6 +10,7 @@ const FormContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 387px;
 `;
 
 const FormItem = styled.div`
@@ -73,6 +75,7 @@ const FindId = styled(FindButton)`
 const FindPassword = styled(FindButton)``;
 
 export {
+  Card,
   Form,
   FormContent,
   FormItem,
