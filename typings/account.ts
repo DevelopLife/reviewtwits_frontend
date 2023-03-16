@@ -19,8 +19,8 @@ export interface SignUpParams {
 }
 
 export interface SighInParams {
-  email: string;
-  password: string;
+  accountId: string;
+  accountPw: string;
 }
 
 export type Gender = '남자' | '여자';

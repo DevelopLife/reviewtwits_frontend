@@ -12,7 +12,7 @@ const SocialLoginBox = () => {
       </S.TitleBox>
 
       <S.ButtonBox>
-        {/* <GoogleOauth /> */}
+        <GoogleOauth />
         <KakaoOauth />
         <NaverOauth />
       </S.ButtonBox>
