@@ -31,6 +31,6 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update
 sudo apt install yarn -y
 
-yarn install
+# yarn install
 
 nohup yarn start >> $REPOSITORY/nohup.out 2>&1 &
