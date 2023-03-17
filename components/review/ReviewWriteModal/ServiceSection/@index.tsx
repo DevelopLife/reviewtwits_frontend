@@ -1,7 +1,7 @@
 import * as S from '../ReviewWriteModal.styles';
 
 import ServiceQuestionBox from './ServiceQuestionBox';
-import { SatisfactionBox } from './SatisfactionBox.styles';
+import SatisfactionBox from './SatisfactionBox';
 
 const ServiceSection = () => {
   return (
