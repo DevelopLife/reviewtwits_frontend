@@ -23,4 +23,51 @@ const ReviewContent = styled.div`
   padding: 0 24px;
 `;
 
-export { Container, Title, TitleLine, ReviewContent };
+/// common
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+`;
+
+const QuestionBox = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const SectionTitle = styled.h3`
+  font-size: 22px;
+  font-weight: 500;
+`;
+
+const Question = styled.p`
+  font-size: 14px;
+  color: ${theme.colors.gray_6};
+`;
+
+const SectionLine = styled.hr`
+  margin: 0;
+  height: 1px;
+  background: ${theme.colors.gray_5};
+  border: none;
+`;
+
+export {
+  Container,
+  Title,
+  TitleLine,
+  ReviewContent,
+  Section,
+  QuestionBox,
+  TextBox,
+  SectionTitle,
+  Question,
+  SectionLine,
+};
