@@ -3,6 +3,7 @@ import QualityQuestionBox from './QualityQuestionBox';
 import RatingBox from './RatingBox';
 import DetailReviewBox from '../QualitySection/DetailReviewBox';
 import ImageUploadBox from './ImageUploadBox';
+import SurveyBox from './SurveyBox';
 
 const QualitySection = () => {
   return (
@@ -11,6 +12,7 @@ const QualitySection = () => {
       <RatingBox />
       <DetailReviewBox />
       <ImageUploadBox />
+      <SurveyBox />
     </S.Section>
   );
 };

@@ -65,6 +65,7 @@ const ReviewFor = styled.label`
   margin-right: 14px;
   white-space: pre;
   font-size: 16px;
+  font-weight: 500;
 `;
 
 const Button = styled.button`
