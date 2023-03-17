@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import type { ReactNode } from 'react';
+import { AxiosError } from 'axios';
 
 import { ProjectCard } from 'components/Project/Management/ProjectCard';
 import { Styles } from 'components/common/ProjectCard/ProjectCardCommon';
@@ -21,16 +22,19 @@ const CREATE_PROJECT_STYLES: Styles = {
 };
 
 export const ProjectManagementSection = () => {
-  const { data } = useQuery(['projectManagement'], projectsAPI.get);
-  // const router = useRouter();
-  // const navigate = useCallback(() => router.push('../login'), [router]);
+  const router = useRouter();
+  const navigateLogin = useCallback(() => router.push('../login'), [router]);
 
-  // useEffect(() => {
-  //   if (!data?.data) {
-  //     alert('로그인페이지로 이동합니다.');
-  //     navigate();
-  //   }
-  // }, [data?.data, navigate]);
+  const { data } = useQuery(['projectManagement'], projectsAPI.get, {
+    onError: (err: AxiosError) => {
+      const statusCode = err?.response?.status;
+
+      if (statusCode === 403) {
+        alert(`${statusCode} 로그인 페이지로 이동합니다.`);
+        navigateLogin();
+      }
+    },
+  });
 
   return <ProjectManagementSectionView projects={data?.data} />;
 };
