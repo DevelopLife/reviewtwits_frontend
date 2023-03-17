@@ -60,6 +60,13 @@ const SectionLine = styled.hr`
   border: none;
 `;
 
+const ReviewFor = styled.label`
+  color: black;
+  margin-right: 14px;
+  white-space: pre;
+  font-size: 16px;
+`;
+
 export {
   Container,
   Title,
@@ -71,4 +78,5 @@ export {
   SectionTitle,
   Question,
   SectionLine,
+  ReviewFor,
 };

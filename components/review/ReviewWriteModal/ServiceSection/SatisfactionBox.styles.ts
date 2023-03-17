@@ -1,19 +1,16 @@
 import styled from '@emotion/styled';
 import theme from 'styles/theme';
 
+import * as S from '../ReviewWriteModal.styles';
+
+const ReviewFor = S.ReviewFor;
+
 const SatisfactionBox = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
 
-  padding: 24px 10px 0 10px;
-`;
-
-const ReviewFor = styled.label`
-  color: black;
-  margin-right: 14px;
-  white-space: pre;
-  font-size: 16px;
+  padding: 0 10px;
 `;
 
 const ThumbButtonBox = styled.div`
