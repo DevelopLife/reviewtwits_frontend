@@ -1,7 +1,12 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import theme from 'styles/theme';
 
 import * as S from '../ReviewWriteModal.styles';
+
+interface ThumbButtonStyleProps {
+  isActive: boolean;
+}
 
 const ReviewFor = S.ReviewFor;
 
@@ -18,7 +23,7 @@ const ThumbButtonBox = styled.div`
   gap: 20px;
 `;
 
-const ThumbButton = styled.button`
+const ThumbButton = styled.button<ThumbButtonStyleProps>`
   border-radius: 50%;
   background: white;
   padding: 10px 12px;
@@ -28,18 +33,16 @@ const ThumbButton = styled.button`
   &:hover {
     opacity: 0.8;
   }
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      background: ${theme.colors.blue_0};
+
+      > img {
+        filter: invert();
+      }
+    `};
 `;
 
-const ThumbsUpButton = styled(ThumbButton)``;
-
-const ThumbsDownButton = styled(ThumbButton)`
-  rotate: 180deg;
-`;
-
-export {
-  SatisfactionBox,
-  ReviewFor,
-  ThumbButtonBox,
-  ThumbsUpButton,
-  ThumbsDownButton,
-};
+export { SatisfactionBox, ReviewFor, ThumbButtonBox, ThumbButton };
