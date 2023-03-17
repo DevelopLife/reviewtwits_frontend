@@ -1,5 +1,5 @@
 import * as S from './ReviewWriteModal.styles';
-import SatisfactionSection from './ServiceSection';
+import ServiceSection from './ServiceSection/@index';
 
 const ReviewWriteModal = () => {
   return (
@@ -7,7 +7,7 @@ const ReviewWriteModal = () => {
       <S.Title>리뷰 관리</S.Title>
       <S.TitleLine />
       <S.ReviewContent>
-        <SatisfactionSection />
+        <ServiceSection />
         <S.SectionLine />
       </S.ReviewContent>
     </S.Container>
