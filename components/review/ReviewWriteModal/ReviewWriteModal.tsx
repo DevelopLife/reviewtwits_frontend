@@ -1,5 +1,5 @@
 import * as S from './ReviewWriteModal.styles';
-import SatisfactionSection from './SatisfactionSection';
+import SatisfactionSection from './ServiceSection';
 
 const ReviewWriteModal = () => {
   return (

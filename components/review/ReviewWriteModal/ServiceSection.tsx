@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import * as S from './SatisfactionSection.styles';
+import * as S from './ServiceSection.styles';
 import ThumbIcon from 'public/images/thumb_icon.svg';
 
 const SatisfactionSection = () => {
