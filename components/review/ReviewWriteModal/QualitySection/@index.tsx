@@ -2,6 +2,7 @@ import * as S from '../ReviewWriteModal.styles';
 import QualityQuestionBox from './QualityQuestionBox';
 import RatingBox from './RatingBox';
 import DetailReviewBox from '../QualitySection/DetailReviewBox';
+import ImageUploadBox from './ImageUploadBox';
 
 const QualitySection = () => {
   return (
@@ -9,6 +10,7 @@ const QualitySection = () => {
       <QualityQuestionBox />
       <RatingBox />
       <DetailReviewBox />
+      <ImageUploadBox />
     </S.Section>
   );
 };

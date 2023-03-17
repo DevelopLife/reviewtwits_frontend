@@ -67,6 +67,21 @@ const ReviewFor = styled.label`
   font-size: 16px;
 `;
 
+const Button = styled.button`
+  background: ${theme.colors.blue_0};
+  color: white;
+
+  outline: none;
+  border: none;
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 export {
   Container,
   Title,
@@ -79,4 +94,5 @@ export {
   Question,
   SectionLine,
   ReviewFor,
+  Button,
 };
