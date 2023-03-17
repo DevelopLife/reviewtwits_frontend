@@ -9,7 +9,7 @@ export const Primary = () => (
   <CreateProjectCard
     styles={{
       color: 'gray_9',
-      backgroundColor: 'gray_2',
+      backgroundColor: '#D9D9D9',
     }}
   />
 );
@@ -17,7 +17,7 @@ export const Hover = () => (
   <CreateProjectCard
     styles={{
       color: 'gray_9',
-      backgroundColor: 'gray_2',
+      backgroundColor: '#D9D9D9',
     }}
   />
 );

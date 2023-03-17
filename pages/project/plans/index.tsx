@@ -6,8 +6,11 @@ import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayo
 import { ProjectPlans } from 'components/Project/Plans/ProjectPlans';
 import { BUTTON_TEXTS, PROJECT_TITLE } from 'constants/project';
 import { useCreateProject } from 'hooks/useCreateProject';
+import { useRouter } from 'next/router';
 
 const ProjectPlansPage = () => {
+  const router = useRouter();
+  const navigateLogin = () => router.push('../login');
   const { createProjectForm } = useCreateProject();
   const { mutate } = useMutation(() => projectsAPI.create(createProjectForm), {
     onSuccess: () => alert('성공'),
@@ -16,6 +19,7 @@ const ProjectPlansPage = () => {
 
       if (statusCode === 403) {
         alert(`${statusCode} 로그인 페이지로 이동합니다.`);
+        navigateLogin();
       }
     },
   });

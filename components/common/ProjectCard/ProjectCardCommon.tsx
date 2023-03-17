@@ -38,16 +38,16 @@ const S = {
     height: 287px;
     border-radius: 30px;
 
-    background-color: ${({ styles }) => 'blue'};
-    /* styles?.backgroundColor && styles.backgroundColor}; */
+    background-color: ${({ styles }) =>
+      styles?.backgroundColor ? styles.backgroundColor : '#D9D9D9'};
 
     & * {
       color: ${({ styles, theme }) => 'white'};
-      // styles?.color && theme?.colors[styles.color]};
     }
 
     :hover {
       cursor: pointer;
+      opacity: 0.8;
     }
   `,
 };

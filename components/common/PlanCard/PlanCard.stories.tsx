@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { PlanCard } from 'components/common/PlanCard/PlanCard';
-import { PLAN_DATAS } from 'components/Project/Plans/ProjectPlans';
+import { PLAN_DATAS } from 'constants/planDatas';
 
 export default {
   title: 'PlanCard',

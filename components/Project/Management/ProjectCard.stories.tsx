@@ -25,7 +25,7 @@ export const Primary = () => (
     isHover={false}
     styles={{
       color: 'gray_0',
-      backgroundColor: 'blue_dark',
+      backgroundColor: 'blue',
     }}
   />
 );
@@ -35,7 +35,7 @@ export const IsHover = () => (
     isHover
     styles={{
       color: 'gray_0',
-      backgroundColor: 'blue_dark',
+      backgroundColor: 'blue',
     }}
   />
 );

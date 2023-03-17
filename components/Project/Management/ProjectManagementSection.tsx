@@ -17,7 +17,7 @@ interface ProjectManagementSectionViewProps {
 
 const CREATE_PROJECT_STYLES: Styles = {
   color: 'gray_9',
-  backgroundColor: 'gray_3',
+  backgroundColor: '#D9D9D9',
 };
 
 export const ProjectManagementSection = () => {

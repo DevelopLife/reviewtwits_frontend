@@ -3,4 +3,5 @@ export interface ProjectDto {
   name: string;
   description: string;
   review: number;
+  category: string;
 }
