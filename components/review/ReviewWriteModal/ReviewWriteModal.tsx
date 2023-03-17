@@ -1,5 +1,9 @@
 import Image from 'next/image';
 
+import CartIcon from 'public/images/cart_icon.svg';
+import CameraIcon from 'public/images/camera_icon.svg';
+import ThumbIcon from 'public/images/thumb_icon.svg';
+
 const ReviewWriteModal = () => {
   return (
     <div>
@@ -22,19 +26,17 @@ const ReviewWriteModal = () => {
         <div>
           <span>만족도</span>
           <div>
-            <button>b</button>
-            <button>q</button>
+            <button>
+              <Image width={30} height={30} src={ThumbIcon} alt="" />
+            </button>
+            <button>
+              <Image width={30} height={30} src={ThumbIcon} alt="" />
+            </button>
           </div>
         </div>
       </div>
       <hr />
-      <Image
-        width={50}
-        height={50}
-        src=""
-        alt=""
-        style={{ background: 'gray' }}
-      />
+      <Image width={50} height={50} src={CartIcon} alt="" />
       <div>
         <h3>상품 품질 리뷰</h3>
         <p>이 상품에 대해 얼마나 만족하시나요?</p>
@@ -72,13 +74,7 @@ const ReviewWriteModal = () => {
       <br />
       <div>
         <button>
-          <Image
-            width={30}
-            height={30}
-            src=""
-            alt=""
-            style={{ background: 'gray' }}
-          />
+          <Image width={30} height={30} src={CameraIcon} alt="" />
           사진 올리기
         </button>
         <input type="file" accept="image/*" />
