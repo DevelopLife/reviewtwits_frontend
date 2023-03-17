@@ -26,6 +26,7 @@ export const ProjectCard = ({ project, styles, ...rest }: ProjectCardProps) => {
         name: project.projectName,
         description: project.projectDescription,
         review: project.reviewCount,
+        category: project.category,
       }}
       isHover={isHover}
       onMouseEnter={handleMouseEnter}
@@ -52,7 +53,7 @@ export const ProjectCardView = ({
   styles,
   ...rest
 }: ProjectCardViewProps) => {
-  const { id, name, description, review } = project;
+  const { id, name, description, review, category } = project;
 
   return (
     <ProjectCardCommon
@@ -61,44 +62,71 @@ export const ProjectCardView = ({
       onMouseLeave={onMouseLeave}
       {...rest}
     >
-      {isHover ? (
-        <S.BehindContent>
-          <S.Title>{name}</S.Title>
+      <S.BehindContent>
+        <S.Top>
+          <S.Category>{category}</S.Category>
+        </S.Top>
+        <S.Title>{name}</S.Title>
+        {isHover && (
           <S.ContentWrap>
-            <S.Content>{id}</S.Content>
-            <S.Content>{description}</S.Content>
-            <S.Content>{review}</S.Content>
+            <S.SubTitle>
+              <S.ContentItem>{id}</S.ContentItem>
+              <S.ContentItem>리뷰 : {review}</S.ContentItem>
+            </S.SubTitle>
+            <S.Description>{description}</S.Description>
           </S.ContentWrap>
-        </S.BehindContent>
-      ) : (
-        <S.CardPreview>
-          <h3>Preview</h3>
-        </S.CardPreview>
-      )}
+        )}
+      </S.BehindContent>
     </ProjectCardCommon>
   );
 };
 
 const S = {
-  CardPreview: styled.div`
+  BehindContent: styled.div`
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+  `,
+  Top: styled.div`
+    margin-bottom: 20px;
+  `,
+  Category: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
 
-    height: 100%;
-    width: 100%;
+    width: 85px;
+    height: 43px;
+    border-radius: 30px;
+
+    font-weight: 400;
+    font-size: 16px;
     background-color: black;
-    color: white;
   `,
-  BehindContent: styled.div``,
   Title: styled.h2`
     font-weight: 700;
     font-size: 43px;
-    margin: 0;
+    margin: 0 0 12px 0;
   `,
-
   ContentWrap: styled.div`
     text-align: center;
   `,
-  Content: styled.div``,
+  SubTitle: styled.div`
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin-bottom: 32px;
+  `,
+  ContentItem: styled.div``,
+  Description: styled.p`
+    height: 63px;
+
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  `,
 };

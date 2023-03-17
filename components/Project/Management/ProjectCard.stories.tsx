@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import {
   ProjectCard,
   ProjectCardView,
@@ -8,13 +8,15 @@ import { ProjectDto } from 'typings/project';
 export default {
   title: 'ProjectCard',
   component: ProjectCard,
-} as ComponentMeta<typeof ProjectCardView>;
+} as Meta<typeof ProjectCardView>;
 
 const mockProject: ProjectDto = {
   id: '1',
-  name: '프로젝트',
-  description: 'mockDescription',
-  review: 'mockReview',
+  name: '프로젝트명',
+  description:
+    'mockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescriptionmockDescription',
+  review: 330,
+  category: '쇼핑몰',
 };
 
 export const Primary = () => (

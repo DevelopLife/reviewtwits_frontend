@@ -38,12 +38,12 @@ const S = {
     height: 287px;
     border-radius: 30px;
 
-    background-color: ${({ styles }) =>
-      styles?.backgroundColor && styles.backgroundColor};
+    background-color: ${({ styles }) => 'blue'};
+    /* styles?.backgroundColor && styles.backgroundColor}; */
 
     & * {
-      color: ${({ styles, theme }) =>
-        styles?.color && theme?.colors[styles.color]};
+      color: ${({ styles, theme }) => 'white'};
+      // styles?.color && theme?.colors[styles.color]};
     }
 
     :hover {
