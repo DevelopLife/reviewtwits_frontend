@@ -28,7 +28,7 @@ const ReviewContent = styled.div`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 35px;
   padding: 30px 0;
 `;
 

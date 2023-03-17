@@ -14,7 +14,7 @@ const SatisfactionBox = styled.div`
   align-items: center;
   gap: 20px;
 
-  padding: 24px 10px 0 10px;
+  padding: 0 10px;
 `;
 
 const ReviewFor = styled.label`
