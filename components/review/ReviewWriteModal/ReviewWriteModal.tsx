@@ -1,5 +1,6 @@
 import * as S from './ReviewWriteModal.styles';
 import ServiceSection from './ServiceSection/@index';
+import QualitySection from './QualitySection/@index';
 
 const ReviewWriteModal = () => {
   return (
@@ -9,6 +10,7 @@ const ReviewWriteModal = () => {
       <S.ReviewContent>
         <ServiceSection />
         <S.SectionLine />
+        <QualitySection />
       </S.ReviewContent>
     </S.Container>
   );
