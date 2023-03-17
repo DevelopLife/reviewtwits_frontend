@@ -9,18 +9,18 @@ const Container = styled.div`
 const Title = styled.h1`
   font-weight: 500;
   font-size: 36px;
-  margin: 13px 24px;
+  margin: 20px 24px;
 `;
 
 const TitleLine = styled.hr`
   height: 2px;
-  background: ${theme.colors.gray_7};
+  background: ${theme.colors.gray_8};
   border: none;
   margin: 0;
 `;
 
 const ReviewContent = styled.div`
-  padding: 0 24px;
+  padding: 0;
 `;
 
 /// common
@@ -55,7 +55,7 @@ const Question = styled.p`
 
 const SectionLine = styled.hr`
   margin: 0;
-  height: 1px;
+  height: 2px;
   background: ${theme.colors.gray_5};
   border: none;
 `;
@@ -83,6 +83,13 @@ const Button = styled.button`
   }
 `;
 
+const BoxLine = styled.hr`
+  margin: 0;
+  height: 1px;
+  background: ${theme.colors.gray_4};
+  border: none;
+`;
+
 export {
   Container,
   Title,
@@ -96,4 +103,5 @@ export {
   SectionLine,
   ReviewFor,
   Button,
+  BoxLine,
 };
