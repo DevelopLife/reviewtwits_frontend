@@ -5,7 +5,7 @@ import theme from 'styles/theme';
 
 export type Styles = {
   color: keyof typeof theme.colors;
-  backgroundColor: keyof typeof theme.colors;
+  backgroundColor: `${string}`;
 };
 
 export interface ProjectCardCommonProps extends HTMLAttributes<HTMLDivElement> {
@@ -38,9 +38,8 @@ const S = {
     height: 287px;
     border-radius: 30px;
 
-    background-color: ${({ styles, theme }) =>
+    background-color: ${({ styles }) =>
       styles?.backgroundColor && styles.backgroundColor};
-    // styles?.backgroundColor && theme?.colors[styles.backgroundColor]};
 
     & * {
       color: ${({ styles, theme }) =>

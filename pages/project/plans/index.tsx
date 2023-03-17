@@ -1,3 +1,4 @@
+import type { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
 
 import { projectsAPI } from 'api/projects';
@@ -8,15 +9,16 @@ import { useCreateProject } from 'hooks/useCreateProject';
 
 const ProjectPlansPage = () => {
   const { createProjectForm } = useCreateProject();
-  const { mutate } = useMutation(
-    () => {
-      return projectsAPI.create(createProjectForm);
+  const { mutate } = useMutation(() => projectsAPI.create(createProjectForm), {
+    onSuccess: () => alert('성공'),
+    onError: (err: AxiosError) => {
+      const statusCode = err?.response?.status;
+
+      if (statusCode === 403) {
+        alert(`${statusCode} 로그인 페이지로 이동합니다.`);
+      }
     },
-    {
-      onSuccess: () => alert('성공'),
-      onError: () => alert('실패'),
-    }
-  );
+  });
 
   return (
     <ProjectCreateLayout

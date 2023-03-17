@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { useCallback, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
 import { ProjectCard } from 'components/Project/Management/ProjectCard';
 import { Styles } from 'components/common/ProjectCard/ProjectCardCommon';
 import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
-import { useQuery } from '@tanstack/react-query';
+
 import { GetProjectsResponseData, projectsAPI } from 'api/projects';
 
 interface ProjectManagementSectionViewProps {
@@ -19,9 +21,16 @@ const CREATE_PROJECT_STYLES: Styles = {
 };
 
 export const ProjectManagementSection = () => {
-  // TODO: react query를 내부적으로 사용하는 custhom hook을 호출해줘야 합니다.
-
   const { data } = useQuery(['projectManagement'], projectsAPI.get);
+  // const router = useRouter();
+  // const navigate = useCallback(() => router.push('../login'), [router]);
+
+  // useEffect(() => {
+  //   if (!data?.data) {
+  //     alert('로그인페이지로 이동합니다.');
+  //     navigate();
+  //   }
+  // }, [data?.data, navigate]);
 
   return <ProjectManagementSectionView projects={data?.data} />;
 };
