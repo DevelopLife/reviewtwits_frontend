@@ -1,14 +1,7 @@
-import { Meta } from '@storybook/react';
-import {
-  ProjectCard,
-  ProjectCardView,
-} from 'components/Project/Management/ProjectCard';
-import { ProjectDto } from 'typings/project';
+import type { Meta, StoryFn } from '@storybook/react';
 
-export default {
-  title: 'ProjectCard',
-  component: ProjectCard,
-} as Meta<typeof ProjectCardView>;
+import type { ProjectDto } from 'typings/project';
+import { ProjectCardView } from 'components/Project/Management/ProjectCard';
 
 const mockProject: ProjectDto = {
   id: '1',
@@ -19,13 +12,18 @@ const mockProject: ProjectDto = {
   category: '쇼핑몰',
 };
 
-export const Primary = () => (
+export default {
+  title: 'SignIn/SignInForm',
+  component: ProjectCardView,
+} as Meta<typeof ProjectCardView>;
+
+export const Primary: StoryFn<typeof ProjectCardView> = () => (
   <ProjectCardView
     project={mockProject}
     isHover={false}
     styles={{
       color: 'gray_0',
-      backgroundColor: 'blue',
+      backgroundColor: 'green',
     }}
   />
 );
@@ -35,7 +33,7 @@ export const IsHover = () => (
     isHover
     styles={{
       color: 'gray_0',
-      backgroundColor: 'blue',
+      backgroundColor: 'green',
     }}
   />
 );
