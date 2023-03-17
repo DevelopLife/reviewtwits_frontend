@@ -3,6 +3,12 @@ import styled from '@emotion/styled';
 
 import KakaoIcon from 'public/images/kakao_icon.svg';
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 export const KakaoOauth = () => {
   return <KakaoLoginButton />;
 };
