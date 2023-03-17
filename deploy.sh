@@ -28,4 +28,4 @@ export NVM_DIR="$HOME/.nvm"
 
 yarn install
 
-nohup yarn start >> $REPOSITORY/nohup.out 2>&1 &
+yarn start >> $REPOSITORY/nohup.out 2>&1 &
