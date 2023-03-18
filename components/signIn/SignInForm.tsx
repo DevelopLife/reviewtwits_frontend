@@ -9,6 +9,7 @@ import { SIGN_UP_FORM_NAMES } from 'constants/account';
 import * as S from './SignInForm.styles';
 import SocialLoginBox from './SocialLoginBox';
 import { usersAPI } from 'api/users';
+import { doSignIn } from 'utils/auth';
 
 const SignInForm = () => {
   const {
@@ -27,9 +28,12 @@ const SignInForm = () => {
   const onValid = async () => {
     if (!isValid) return alert(errors?.accountId || errors?.accountPw);
 
-    await usersAPI.signIn(values).then(() => {
-      router.replace('/');
-    });
+    const signInResult = await usersAPI.signIn(values);
+
+    if (signInResult) {
+      doSignIn();
+      // router.replace('/');
+    }
   };
 
   useEffect(() => {
@@ -87,7 +91,9 @@ const SignInFormView = ({ handleChange, ...rest }: SignInFormViewProps) => (
         </S.ButtonBox>
       </S.FormContent>
       <S.FindBox>
-        <S.FindId>아이디 찾기</S.FindId>
+        <Link href="/test">
+          <S.FindId>아이디 찾기</S.FindId>
+        </Link>
         <S.FindPassword>비밀번호 찾기</S.FindPassword>
       </S.FindBox>
       <SocialLoginBox />
