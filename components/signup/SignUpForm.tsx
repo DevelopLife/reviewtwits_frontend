@@ -29,9 +29,6 @@ const SignUpForm = () => {
 
   const doSignUp = async () => {
     // sign up code
-    // const signUpResult = await usersAPI.signUp(values);
-    // if (!signUpResult) return;
-    // router.replace('/');
   };
 
   useEffect(() => {
