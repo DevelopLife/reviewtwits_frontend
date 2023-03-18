@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import useForm from 'hooks/useForm';
@@ -7,6 +8,7 @@ import { SIGN_UP_FORM_NAMES } from 'constants/account';
 
 import * as S from './SignInForm.styles';
 import SocialLoginBox from './SocialLoginBox';
+import { usersAPI } from 'api/users';
 
 const SignInForm = () => {
   const {
@@ -20,12 +22,14 @@ const SignInForm = () => {
     accountId: '',
     accountPw: '',
   });
+  const router = useRouter();
 
-  const doSignIn = () => {
+  const onValid = async () => {
     if (!isValid) return alert(errors?.accountId || errors?.accountPw);
 
-    // sign in code
-    console.log('success');
+    await usersAPI.signIn(values).then(() => {
+      router.replace('/');
+    });
   };
 
   useEffect(() => {
@@ -34,7 +38,7 @@ const SignInForm = () => {
   }, [values, setErrors]);
 
   const props = {
-    onValid: doSignIn,
+    onValid,
     handleChange,
     handleSubmit,
   };

@@ -5,6 +5,20 @@ import { SighInParams, SignUpParams, UserFormType } from 'typings/account';
 const url = '/users';
 
 export const usersAPI = {
+  signIn: async (values: UserFormType) => {
+    const body: SighInParams = values;
+
+    return await api
+      .post(`${url}/login`, body)
+      .then((res) => res.data)
+      .catch(({ response }) => {
+        switch (response?.status) {
+          case 401:
+            alert(ERROR_MESSAGE.SIGN_IN);
+            break;
+        }
+      });
+  },
   signUp: async (values: UserFormType) => {
     const body: SignUpParams = {
       nickname: 'test1',
