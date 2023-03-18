@@ -1,5 +1,12 @@
 import { api } from 'api/instance';
-import { setCookie } from './cookies';
+import { getCookie, setCookie } from './cookies';
+
+function validateToken() {
+  const now = new Date();
+  const expiredAt = getCookie('expireAt');
+  const expireAtDate = new Date(expiredAt);
+  return expiredAt && now < expireAtDate;
+}
 
 export function setAuthorizationToken(token?: string) {
   if (token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
