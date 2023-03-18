@@ -31,7 +31,7 @@ const SignInForm = () => {
     const signInResult = await usersAPI.signIn(values);
 
     if (signInResult) {
-      doSignIn();
+      doSignIn(signInResult.accessToken);
       // router.replace('/');
     }
   };
