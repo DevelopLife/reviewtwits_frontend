@@ -1,4 +1,4 @@
-import { api } from 'api/instance';
+import { authApi } from 'api/instance';
 import { ERROR_MESSAGE } from 'constants/account';
 import { SighInParams, SignUpParams, UserFormType } from 'typings/account';
 
@@ -8,7 +8,7 @@ export const usersAPI = {
   signIn: async (values: UserFormType) => {
     const body: SighInParams = values;
 
-    return await api
+    return await authApi
       .post(`${url}/login`, body)
       .then((res) => res.data)
       .catch(({ response }) => {
@@ -30,7 +30,7 @@ export const usersAPI = {
       verifyCode: values.verifyCode,
     };
 
-    return await api
+    return await authApi
       .post(`${url}/register`, body)
       .then((res) => res.data)
       .catch(({ response }) => {
@@ -42,6 +42,6 @@ export const usersAPI = {
       });
   },
   findUser: async (userId: string) => {
-    return await api.get(`${url}/${userId}`).then((res) => res.data);
+    return await authApi.get(`${url}/${userId}`).then((res) => res.data);
   },
 };
