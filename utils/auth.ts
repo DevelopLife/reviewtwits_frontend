@@ -14,7 +14,7 @@ export async function verifyToken(config: InternalAxiosRequestConfig<any>) {
   const { Authorization } = api.defaults.headers.common;
   const isValid = validateToken();
 
-  if (!Authorization || isValid) {
+  if (!Authorization || !isValid) {
     // refresh
   }
 
