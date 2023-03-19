@@ -25,7 +25,7 @@ export async function verifyToken(config: InternalAxiosRequestConfig<any>) {
 }
 
 export function verifyTokenErrorHandler() {
-  // signOut
+  doSignOut();
 }
 
 export function setAuthorizationToken(token?: string) {
