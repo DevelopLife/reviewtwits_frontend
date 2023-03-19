@@ -5,7 +5,7 @@ import * as S from './SatisfactionBox.styles';
 import ThumbIcon from 'public/images/thumb_icon.svg';
 
 const SatisfactionBox = () => {
-  const [isSatisfied, setIsSatisfied] = useState<boolean>();
+  const [isSatisfied, setIsSatisfied] = useState<boolean | null>(null);
 
   const changeSatisfaction = (e: MouseEvent<HTMLButtonElement>) => {
     const selectedButton = e.currentTarget.id;
