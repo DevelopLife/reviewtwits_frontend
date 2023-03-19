@@ -44,4 +44,13 @@ export const usersAPI = {
   findUser: async (userId: string) => {
     return await authApi.get(`${url}/${userId}`).then((res) => res.data);
   },
+  reissueToken: async () => {
+    return await authApi
+      .post(`${url}/issue/access-token`, {
+        headers: {
+          withCredentials: true,
+        },
+      })
+      .then((res) => res.data);
+  },
 };

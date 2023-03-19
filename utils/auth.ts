@@ -2,6 +2,7 @@ import { InternalAxiosRequestConfig } from 'axios';
 
 import { api } from 'api/instance';
 import { getCookie, setCookie } from './cookies';
+import { usersAPI } from 'api/users';
 
 function validateToken() {
   const now = new Date();
@@ -15,7 +16,9 @@ export async function verifyToken(config: InternalAxiosRequestConfig<any>) {
   const isValid = validateToken();
 
   if (!Authorization || !isValid) {
-    // refresh
+    const result = await usersAPI.reissueToken();
+
+    if (result) doSignIn(result.accessToken);
   }
 
   return config;
