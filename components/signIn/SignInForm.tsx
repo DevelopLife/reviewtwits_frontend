@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import useForm from 'hooks/useForm';
@@ -23,7 +22,6 @@ const SignInForm = () => {
     accountId: '',
     accountPw: '',
   });
-  const router = useRouter();
 
   const onValid = async () => {
     if (!isValid) return alert(errors?.accountId || errors?.accountPw);
@@ -32,7 +30,7 @@ const SignInForm = () => {
 
     if (signInResult) {
       doSignIn(signInResult.accessToken);
-      router.replace('/');
+      window.location.replace('/');
     }
   };
 
