@@ -8,7 +8,6 @@ import {
   SIGN_UP_FORM_NAMES,
 } from 'constants/account';
 import { UserFormType } from 'typings/account';
-
 import { emailsAPI } from 'api/emails';
 import { signUpValidate } from 'utils/validate';
 import * as S from './SignUpForm.styles';
