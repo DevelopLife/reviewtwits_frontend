@@ -1,4 +1,4 @@
-import { authApi } from 'api/instance';
+import { api, authApi } from 'api/instance';
 import { ERROR_MESSAGE } from 'constants/account';
 import { SighInParams, SignUpParams, UserFormType } from 'typings/account';
 
@@ -52,5 +52,8 @@ export const usersAPI = {
         },
       })
       .then((res) => res.data);
+  },
+  signOut: async () => {
+    return await api.post(`${url}/logout`);
   },
 };

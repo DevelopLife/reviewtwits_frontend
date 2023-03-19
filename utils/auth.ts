@@ -1,7 +1,7 @@
 import { InternalAxiosRequestConfig } from 'axios';
 
 import { api } from 'api/instance';
-import { getCookie, setCookie } from './cookies';
+import { getCookie, removeCookie, setCookie } from './cookies';
 import { usersAPI } from 'api/users';
 
 function validateToken() {
@@ -39,4 +39,10 @@ export function doSignIn(token: string) {
 
   setCookie('expireAt', expireAt.toString());
   setAuthorizationToken(token);
+}
+
+export function doSignOut() {
+  usersAPI.signOut();
+  removeCookie('expireAt');
+  setAuthorizationToken();
 }
