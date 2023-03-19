@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
+import { expand } from 'styles/animation';
+
 interface StarStyleProps {
   isActive: boolean;
 }
@@ -41,17 +43,8 @@ const Star = styled.button<StarStyleProps>`
   ${({ isActive }) =>
     isActive &&
     css`
-      @keyframes expand {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-      }
-
-      animation: expand 0.3s reverse;
-    `}
+      animation: ${expand} 0.3s reverse;
+    `};
 `;
 
 export { Box, ProductName, StarRating, Star };
