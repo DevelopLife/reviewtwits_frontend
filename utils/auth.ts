@@ -12,10 +12,10 @@ function validateToken() {
 }
 
 export async function verifyToken(config: InternalAxiosRequestConfig<any>) {
-  const { Authorization } = api.defaults.headers.common;
+  const headers = api.defaults.headers.common;
   const isValid = validateToken();
 
-  if (!Authorization || !isValid) {
+  if (!headers['x-auth-token'] || !isValid) {
     const result = await usersAPI.reissueToken();
 
     if (result) doSignIn(result.accessToken);
@@ -29,8 +29,8 @@ export function verifyTokenErrorHandler() {
 }
 
 export function setAuthorizationToken(token?: string) {
-  if (token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  else delete api.defaults.headers.common['Authorization'];
+  if (token) api.defaults.headers.common['x-auth-token'] = token;
+  else delete api.defaults.headers.common['x-auth-token'];
 }
 
 export function doSignIn(token: string) {
