@@ -32,7 +32,7 @@ const SignInForm = () => {
 
     if (signInResult) {
       doSignIn(signInResult.accessToken);
-      // router.replace('/');
+      router.replace('/');
     }
   };
 
