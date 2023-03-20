@@ -92,6 +92,8 @@ const ReviewContent = styled.div`
   padding: 0;
 `;
 
+const Form = styled.form``;
+
 const ButtonWrap = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -107,6 +109,7 @@ export {
   Container,
   Title,
   TitleLine,
+  Form,
   ReviewContent,
   Section,
   QuestionBox,

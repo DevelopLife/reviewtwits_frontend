@@ -49,7 +49,7 @@ const ImageUploadBox = ({ setValue }: ImageUploadBox) => {
   };
 
   useEffect(() => {
-    setValue('multipartImageFiles', files);
+    setValue('imageFiles', files);
   }, [files, setValue]);
 
   return (

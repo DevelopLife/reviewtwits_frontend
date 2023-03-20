@@ -2,5 +2,5 @@ export interface ReviewType {
   productURL: string;
   content: string;
   score: number;
-  multipartImageFiles?: File[];
+  imageFiles?: File[];
 }
