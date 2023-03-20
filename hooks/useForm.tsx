@@ -41,7 +41,9 @@ const useForm = <T extends object>(initialValues: T) => {
 
   const handleChange = ({
     currentTarget,
-  }: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>) => {
+  }:
+    | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    | MouseEvent<HTMLButtonElement>) => {
     const { name, value } = currentTarget;
 
     setValue(name, value);
