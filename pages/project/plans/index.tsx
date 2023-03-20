@@ -11,18 +11,22 @@ import { BUTTON_TEXTS, PROJECT_TITLE } from 'constants/project';
 
 const ProjectPlansPage = () => {
   const router = useRouter();
-  const navigateLogin = () => router.push('../login');
+
+  const navigate = {
+    login: () => router.replace('../login'),
+    projectManagement: () => router.replace('./management'),
+  };
   const { createProjectForm, projectPlan } = useCreateProject();
   const { mutate } = useMutation(
     () => projectsAPI.create({ ...createProjectForm, pricePlan: projectPlan }),
     {
-      onSuccess: () => alert('성공'),
+      onSuccess: () => navigate.projectManagement(),
       onError: (err: AxiosError) => {
         const statusCode = err?.response?.status;
 
         if (statusCode === 403) {
           alert(`${statusCode} 로그인 페이지로 이동합니다.`);
-          navigateLogin();
+          navigate.login();
         }
       },
     }
