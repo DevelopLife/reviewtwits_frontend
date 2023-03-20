@@ -42,7 +42,7 @@ const S = {
       styles?.backgroundColor ? styles.backgroundColor : '#D9D9D9'};
 
     & * {
-      color: ${({ styles, theme }) => 'white'};
+      color: ${() => 'white'};
     }
 
     :hover {
