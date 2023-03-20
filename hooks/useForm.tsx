@@ -6,15 +6,14 @@ import {
   useEffect,
   useState,
 } from 'react';
-import type { UserFormType } from 'typings/account';
 
-const useForm = (initialValues: UserFormType) => {
-  const [values, setValues] = useState<UserFormType>(initialValues);
-  const [errors, setErrors] = useState<UserFormType>();
+const useForm = <T extends object>(initialValues: T) => {
+  const [values, setValues] = useState<T>(initialValues);
+  const [errors, setErrors] = useState<T>();
   const [isSubmitable, setIsSubmitable] = useState(false);
 
   const checkFormFilled = useCallback(() => {
-    const keys = Object.keys(values) as (keyof UserFormType)[];
+    const keys = Object.keys(values) as (keyof T)[];
     const emptyValues = keys.filter((name) => values[name] === '');
     const isFormFilled = !emptyValues.length;
 
@@ -23,7 +22,7 @@ const useForm = (initialValues: UserFormType) => {
 
   const checkFormValid = useCallback(() => {
     if (!errors) return false;
-    const keys = Object.keys(errors) as (keyof UserFormType)[];
+    const keys = Object.keys(errors) as (keyof T)[];
     const invalidValues = keys.filter((name) => errors[name] !== '');
     const isFormValid = !invalidValues.length;
 
