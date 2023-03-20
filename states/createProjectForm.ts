@@ -11,6 +11,8 @@ export interface CreateProjectForm {
   projectColor: string;
 }
 
+export const DEFAULT_PROJECT_COLOR = '#aabbcc';
+
 export const DEFAULT_CREATE_PROJECT_FORM: CreateProjectRequestBody = {
   // siteAdmin: '',
   projectName: '',
@@ -18,7 +20,7 @@ export const DEFAULT_CREATE_PROJECT_FORM: CreateProjectRequestBody = {
   uriPattern: '',
   category: '',
   language: '',
-  projectColor: 'red',
+  projectColor: DEFAULT_PROJECT_COLOR,
 };
 
 export const createProjectFormState = atom<CreateProjectForm>({

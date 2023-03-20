@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { ColorPicker } from 'components/common/ColorPicker/ColorPicker';
 import { useBoolean } from 'hooks/useBoolean';
 import { useState } from 'react';
+import { DEFAULT_PROJECT_COLOR } from 'states/createProjectForm';
 
 interface ColorPickerTriggerProps {
   onChangeColor: (color: string) => void;
@@ -11,7 +12,7 @@ export const ColorPickerTrigger = ({
   onChangeColor,
 }: ColorPickerTriggerProps) => {
   const { isOpen, setToggle } = useBoolean(false);
-  const [color, setColor] = useState('#aabbcc');
+  const [color, setColor] = useState(DEFAULT_PROJECT_COLOR);
 
   const onMouseUp = () => onChangeColor(color);
 
