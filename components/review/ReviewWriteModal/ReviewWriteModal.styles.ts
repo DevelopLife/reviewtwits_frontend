@@ -1,28 +1,6 @@
 import styled from '@emotion/styled';
 import theme from 'styles/theme';
 
-const Container = styled.div`
-  width: 1000px;
-  padding: 60px;
-`;
-
-const Title = styled.h1`
-  font-weight: 500;
-  font-size: 36px;
-  margin: 20px 24px;
-`;
-
-const TitleLine = styled.hr`
-  height: 2px;
-  background: ${theme.colors.gray_8};
-  border: none;
-  margin: 0;
-`;
-
-const ReviewContent = styled.div`
-  padding: 0;
-`;
-
 /// common
 
 const Section = styled.section`
@@ -90,6 +68,41 @@ const BoxLine = styled.hr`
   border: none;
 `;
 
+///
+
+const Container = styled.div`
+  width: 1000px;
+  padding: 60px;
+`;
+
+const Title = styled.h1`
+  font-weight: 500;
+  font-size: 36px;
+  margin: 20px 24px;
+`;
+
+const TitleLine = styled.hr`
+  height: 2px;
+  background: ${theme.colors.gray_8};
+  border: none;
+  margin: 0;
+`;
+
+const ReviewContent = styled.div`
+  padding: 0;
+`;
+
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 100px;
+`;
+
+const CreateButton = styled(Button)`
+  font-size: 20px;
+  padding: 15px 70px;
+`;
+
 export {
   Container,
   Title,
@@ -104,4 +117,6 @@ export {
   ReviewFor,
   Button,
   BoxLine,
+  ButtonWrap,
+  CreateButton,
 };

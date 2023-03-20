@@ -21,6 +21,9 @@ const ReviewWriteModal = () => {
         <S.SectionLine />
         <QualitySection setValue={setValue} handleChange={handleChange} />
       </S.ReviewContent>
+      <S.ButtonWrap>
+        <S.CreateButton>작성 완료</S.CreateButton>
+      </S.ButtonWrap>
     </S.Container>
   );
 };
