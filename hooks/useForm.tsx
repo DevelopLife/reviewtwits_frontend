@@ -12,8 +12,11 @@ const useForm = <T extends object>(initialValues: T) => {
   const [errors, setErrors] = useState<T>();
   const [isSubmitable, setIsSubmitable] = useState(false);
 
-  const setValue = (name: string, value: any) =>
-    setValues((prev) => ({ ...prev, [name]: value }));
+  const setValue = useCallback(
+    (name: string, value: any) =>
+      setValues((prev) => ({ ...prev, [name]: value })),
+    []
+  );
 
   const checkFormFilled = useCallback(() => {
     const keys = Object.keys(values) as (keyof T)[];

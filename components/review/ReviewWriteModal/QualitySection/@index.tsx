@@ -9,7 +9,7 @@ import ImageUploadBox from './ImageUploadBox';
 import SurveyBox from './SurveyBox';
 
 interface QualitySectionProps {
-  setValue: (name: string, value: number) => void;
+  setValue: (name: string, value: number | File[]) => void;
   handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -22,7 +22,7 @@ const QualitySection = ({ setValue, handleChange }: QualitySectionProps) => {
       <S.BoxLine />
       <DetailReviewBox handleChange={handleChange} />
       <S.BoxLine />
-      <ImageUploadBox />
+      <ImageUploadBox setValue={setValue} />
       <S.BoxLine />
       <SurveyBox />
     </S.Section>
