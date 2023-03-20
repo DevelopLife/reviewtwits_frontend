@@ -12,6 +12,9 @@ const useForm = <T extends object>(initialValues: T) => {
   const [errors, setErrors] = useState<T>();
   const [isSubmitable, setIsSubmitable] = useState(false);
 
+  const setValue = (name: string, value: any) =>
+    setValues((prev) => ({ ...prev, [name]: value }));
+
   const checkFormFilled = useCallback(() => {
     const keys = Object.keys(values) as (keyof T)[];
     const emptyValues = keys.filter((name) => values[name] === '');
@@ -41,8 +44,7 @@ const useForm = <T extends object>(initialValues: T) => {
   }: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>) => {
     const { name, value } = currentTarget;
 
-    const newValues = { ...values, [name]: value };
-    setValues(newValues);
+    setValue(name, value);
   };
 
   const handleSubmit = async (
@@ -62,6 +64,7 @@ const useForm = <T extends object>(initialValues: T) => {
     values,
     errors,
     isSubmitable,
+    setValue,
     setErrors,
     handleChange,
     handleSubmit,
