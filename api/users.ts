@@ -21,7 +21,7 @@ export const usersAPI = {
   },
   signUp: async (values: UserFormType) => {
     const body: SignUpParams = {
-      nickname: 'test1',
+      nickname: 'test1234',
       accountId: values.accountId,
       accountPw: values.accountPw,
       birthDate: values.birthDate,

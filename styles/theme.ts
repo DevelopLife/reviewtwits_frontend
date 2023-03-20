@@ -31,4 +31,6 @@ const theme = {
   devices,
 };
 
+export type Colors = keyof typeof theme.colors;
+
 export default theme;
