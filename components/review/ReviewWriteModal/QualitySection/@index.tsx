@@ -10,17 +10,17 @@ import SurveyBox from './SurveyBox';
 
 interface QualitySectionProps {
   setValue: (name: string, value: number) => void;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const QualitySection = ({ setValue }: QualitySectionProps) => {
+const QualitySection = ({ setValue, handleChange }: QualitySectionProps) => {
   return (
     <S.Section>
       <QualityQuestionBox />
       <S.BoxLine />
       <RatingBox setValue={setValue} />
       <S.BoxLine />
-      <DetailReviewBox />
+      <DetailReviewBox handleChange={handleChange} />
       <S.BoxLine />
       <ImageUploadBox />
       <S.BoxLine />
