@@ -1,8 +1,9 @@
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent, MouseEvent } from 'react';
 import Image from 'next/image';
 
 import * as S from './ImageUploadBox.styles';
 import CameraIcon from 'public/images/camera_icon.svg';
+import CloseIcon from 'public/images/close_icon.svg';
 
 const ImageUploadBox = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,6 +26,16 @@ const ImageUploadBox = () => {
         reader.readAsDataURL(file);
       }
     }
+
+    e.currentTarget.value = '';
+  };
+
+  const removeImagePreview = (e: MouseEvent<HTMLButtonElement>) => {
+    const selectedImageId = Number(e.currentTarget.id);
+    const newPreviews = [...previews];
+
+    newPreviews.splice(selectedImageId, 1);
+    setPreviews(newPreviews);
   };
 
   return (
@@ -42,14 +53,18 @@ const ImageUploadBox = () => {
       />
       <S.ImageList>
         {previews.map((url, i) => (
-          <Image
-            key={i}
-            width={120}
-            height={80}
-            src={url}
-            alt=""
-            style={{ objectFit: 'cover' }}
-          />
+          <S.ImageBox key={i}>
+            <S.CloseButton id={i.toString()} onClick={removeImagePreview}>
+              <Image width={12} height={12} src={CloseIcon} alt="closeIcon" />
+            </S.CloseButton>
+            <Image
+              width={120}
+              height={80}
+              src={url}
+              alt="reviewImg"
+              style={{ objectFit: 'cover' }}
+            />
+          </S.ImageBox>
         ))}
       </S.ImageList>
     </S.ImageUploadBox>
