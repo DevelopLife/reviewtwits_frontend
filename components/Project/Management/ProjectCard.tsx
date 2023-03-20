@@ -4,7 +4,7 @@ import { useState } from 'react';
 import {
   ProjectCardCommon,
   Styles,
-} from 'components/common/ProjectCard/ProjectCardCommon';
+} from 'components/Project/Management/ProjectCardCommon';
 import { ProjectDto } from 'typings/project';
 import { GetProjectsResponseData } from 'api/projects';
 

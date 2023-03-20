@@ -13,7 +13,7 @@ const mockProject: ProjectDto = {
 };
 
 export default {
-  title: 'SignIn/SignInForm',
+  title: 'project/management/ProjectCardView',
   component: ProjectCardView,
 } as Meta<typeof ProjectCardView>;
 

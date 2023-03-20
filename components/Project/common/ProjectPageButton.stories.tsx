@@ -1,9 +1,11 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { ProjectPageButton } from 'components/Project/common/ProjectPageButton';
 
 export default {
-  title: 'ProjectPageButton',
+  title: 'project/common/ProjectPageButton',
   component: ProjectPageButton,
 } as Meta;
 
-export const primary = () => <ProjectPageButton>텍스트</ProjectPageButton>;
+export const primary: StoryFn<typeof ProjectPageButton> = () => (
+  <ProjectPageButton>텍스트</ProjectPageButton>
+);

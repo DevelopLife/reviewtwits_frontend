@@ -3,7 +3,7 @@ import Image from 'next/image';
 import {
   ProjectCardCommon,
   ProjectCardCommonProps,
-} from 'components/common/ProjectCard/ProjectCardCommon';
+} from 'components/Project/Management/ProjectCardCommon';
 import PluseIconSVG from 'public/images/plus_icon.svg';
 
 export const CreateProjectCard = (props: ProjectCardCommonProps) => {

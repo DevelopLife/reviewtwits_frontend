@@ -1,11 +1,12 @@
+import { StoryFn } from '@storybook/react';
 import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
 
 export default {
-  title: 'CreateProjectCard',
+  title: 'project/management/CreateProjectCard',
   component: CreateProjectCard,
 };
 
-export const Primary = () => (
+export const Primary: StoryFn<typeof CreateProjectCard> = () => (
   <CreateProjectCard
     styles={{
       color: 'gray_9',
@@ -13,7 +14,7 @@ export const Primary = () => (
     }}
   />
 );
-export const Hover = () => (
+export const Hover: StoryFn<typeof CreateProjectCard> = () => (
   <CreateProjectCard
     styles={{
       color: 'gray_9',

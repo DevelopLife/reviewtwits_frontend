@@ -1,11 +1,11 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { ProjectCreateContent } from 'components/Project/Create/ProjectCreateContent';
 
 export default {
-  title: 'ProjectCreateContent',
+  title: 'project/create/ProjectCreateContent',
   component: ProjectCreateContent,
 } as Meta;
 
-export const primary = () => (
-  <ProjectCreateContent>텍스트</ProjectCreateContent>
+export const primary: StoryFn<typeof ProjectCreateContent> = () => (
+  <ProjectCreateContent>children으로 넣어주세요</ProjectCreateContent>
 );

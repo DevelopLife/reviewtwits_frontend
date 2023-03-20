@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { PlanCard } from 'components/common/PlanCard/PlanCard';
+import { PlanCard } from 'components/Project/Plans/PlanCard';
 import { PLAN_DATAS } from 'constants/planDatas';
 import {
   ChangeCreateProjectPlan,

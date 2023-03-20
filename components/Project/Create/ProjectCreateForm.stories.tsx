@@ -1,9 +1,14 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { ProjectCreateForm } from 'components/Project/Create/ProjectCreateForm';
+import { RecoilRoot } from 'recoil';
 
 export default {
-  title: 'ProjectCreateForm',
+  title: 'project/create/ProjectCreateForm',
   component: ProjectCreateForm,
 } as Meta;
 
-export const primary = () => <ProjectCreateForm />;
+export const primary: StoryFn<typeof ProjectCreateForm> = () => (
+  <RecoilRoot>
+    <ProjectCreateForm />
+  </RecoilRoot>
+);

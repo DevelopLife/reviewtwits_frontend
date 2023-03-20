@@ -4,7 +4,7 @@ import { ProjectCreateSelect } from 'components/Project/Create/ProjectCreateSele
 import { RecoilRoot } from 'recoil';
 
 export default {
-  title: 'components/ProjectCreateSelect',
+  title: 'project/create/ProjectCreateSelect',
   component: ProjectCreateSelect,
 } as Meta<typeof ProjectCreateSelect>;
 

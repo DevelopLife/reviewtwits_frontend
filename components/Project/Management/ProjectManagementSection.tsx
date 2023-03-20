@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 import { AxiosError } from 'axios';
 
 import { ProjectCard } from 'components/Project/Management/ProjectCard';
-import { Styles } from 'components/common/ProjectCard/ProjectCardCommon';
+import { Styles } from 'components/Project/Management/ProjectCardCommon';
 import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
 
 import { GetProjectsResponseData, projectsAPI } from 'api/projects';
