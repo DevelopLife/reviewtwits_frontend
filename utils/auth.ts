@@ -18,7 +18,10 @@ export async function verifyToken(config: InternalAxiosRequestConfig<any>) {
   if (!headers['x-auth-token'] || !isValid) {
     const result = await usersAPI.reissueToken();
 
-    if (result) doSignIn(result.accessToken);
+    if (result) {
+      config.headers['x-auth-token'] = result.accessToken;
+      doSignIn(result.accessToken);
+    }
   }
 
   return config;
