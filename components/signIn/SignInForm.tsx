@@ -1,12 +1,20 @@
-import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEvent,
+  useEffect,
+  useCallback,
+} from 'react';
 import Link from 'next/link';
 
 import useForm from 'hooks/useForm';
-import { signInValidate } from 'utils/validate';
-import { SIGN_UP_FORM_NAMES } from 'constants/account';
+import { ERROR_MESSAGE, SIGN_UP_FORM_NAMES } from 'constants/account';
+import { validateEmail, validatePassword } from 'utils/validate';
 
 import * as S from './SignInForm.styles';
 import SocialLoginBox from './SocialLoginBox';
+import { usersAPI } from 'api/users';
+import { doSignIn } from 'utils/auth';
 
 const SignInForm = () => {
   const {
@@ -21,20 +29,34 @@ const SignInForm = () => {
     accountPw: '',
   });
 
-  const doSignIn = () => {
+  const onValid = async () => {
     if (!isValid) return alert(errors?.accountId || errors?.accountPw);
 
-    // sign in code
-    console.log('success');
+    const signInResult = await usersAPI.signIn(values);
+
+    if (signInResult) {
+      doSignIn(signInResult.accessToken);
+      window.location.replace('/');
+    }
   };
 
+  const signInValidate = useCallback(() => {
+    const { accountId, accountPw } = values;
+    const errors = { accountId: '', accountPw: '' };
+
+    if (!validateEmail(accountId)) errors.accountId = ERROR_MESSAGE.SIGN_IN;
+    if (!validatePassword(accountPw)) errors.accountPw = ERROR_MESSAGE.SIGN_IN;
+
+    return errors;
+  }, [values]);
+
   useEffect(() => {
-    const newErrors = signInValidate(values);
+    const newErrors = signInValidate();
     setErrors(newErrors);
-  }, [values, setErrors]);
+  }, [values, setErrors, signInValidate]);
 
   const props = {
-    onValid: doSignIn,
+    onValid,
     handleChange,
     handleSubmit,
   };
@@ -83,7 +105,9 @@ const SignInFormView = ({ handleChange, ...rest }: SignInFormViewProps) => (
         </S.ButtonBox>
       </S.FormContent>
       <S.FindBox>
-        <S.FindId>아이디 찾기</S.FindId>
+        <Link href="/test">
+          <S.FindId>아이디 찾기</S.FindId>
+        </Link>
         <S.FindPassword>비밀번호 찾기</S.FindPassword>
       </S.FindBox>
       <SocialLoginBox />

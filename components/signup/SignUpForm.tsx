@@ -9,8 +9,13 @@ import {
 } from 'constants/account';
 import { UserFormType } from 'typings/account';
 import { emailsAPI } from 'api/emails';
-import { signUpValidate } from 'utils/validate';
 import * as S from './SignUpForm.styles';
+import {
+  validateEmail,
+  validatePassword,
+  validatePasswordCheck,
+  validatePhoneNumber,
+} from 'utils/validate';
 
 const SignUpForm = () => {
   const {
@@ -27,11 +32,27 @@ const SignUpForm = () => {
     emailsAPI.verifyEmail(values.accountId);
   };
 
+  const signUpValidate = (values: UserFormType) => {
+    const { accountId, accountPw, phoneNumber, accountPwCheck } = values;
+    const errors = { ...DEFAULT_SIGN_UP_FORM };
+
+    const isValidEmail = validateEmail(accountId);
+    const isValidPhoneNumber = phoneNumber && validatePhoneNumber(phoneNumber);
+    const isValidPassword = validatePassword(accountPw);
+    const isValidPasswordCheck =
+      accountPwCheck && validatePasswordCheck(accountPw, accountPwCheck);
+
+    if (!isValidEmail) errors.accountId = ERROR_MESSAGE.SIGN_UP.EMAIL;
+    if (!isValidPhoneNumber) errors.phoneNumber = ERROR_MESSAGE.SIGN_UP.TEL;
+    if (!isValidPassword) errors.accountPw = ERROR_MESSAGE.SIGN_UP.PASSWORD;
+    if (!isValidPasswordCheck)
+      errors.accountPwCheck = ERROR_MESSAGE.SIGN_UP.PASSWORDCHECK;
+
+    return errors;
+  };
+
   const doSignUp = async () => {
     // sign up code
-    // const signUpResult = await usersAPI.signUp(values);
-    // if (!signUpResult) return;
-    // router.replace('/');
   };
 
   useEffect(() => {
