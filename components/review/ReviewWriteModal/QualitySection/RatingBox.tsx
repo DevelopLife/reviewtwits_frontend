@@ -43,6 +43,7 @@ const RatingBox = ({ setValue }: RatingBoxProps) => {
           {Array.from({ length: 5 }).map((_, i) => (
             <S.Star
               key={i}
+              type="button"
               value={i + 1}
               isActive={score > i}
               onClick={changeScore}

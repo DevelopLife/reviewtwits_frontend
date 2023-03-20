@@ -40,7 +40,7 @@ const ImageUploadBox = () => {
 
   return (
     <S.ImageUploadBox>
-      <S.ImageUploadButton onClick={handleClickImageUpload}>
+      <S.ImageUploadButton type="button" onClick={handleClickImageUpload}>
         <Image width={24} height={24} src={CameraIcon} alt="" />
         사진 올리기
       </S.ImageUploadButton>
