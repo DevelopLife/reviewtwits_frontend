@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 import * as S from '../ReviewWriteModal.styles';
 
 import QualityQuestionBox from './QualityQuestionBox';
@@ -6,12 +8,17 @@ import DetailReviewBox from '../QualitySection/DetailReviewBox';
 import ImageUploadBox from './ImageUploadBox';
 import SurveyBox from './SurveyBox';
 
-const QualitySection = () => {
+interface QualitySectionProps {
+  setValue: (name: string, value: number) => void;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const QualitySection = ({ setValue }: QualitySectionProps) => {
   return (
     <S.Section>
       <QualityQuestionBox />
       <S.BoxLine />
-      <RatingBox />
+      <RatingBox setValue={setValue} />
       <S.BoxLine />
       <DetailReviewBox />
       <S.BoxLine />
