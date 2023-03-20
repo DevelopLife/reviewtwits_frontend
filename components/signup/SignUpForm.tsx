@@ -1,21 +1,24 @@
 import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
 
 import useForm from 'hooks/useForm';
-import {
-  DEFAULT_SIGN_UP_FORM,
-  ERROR_MESSAGE,
-  GENDER,
-  SIGN_UP_FORM_NAMES,
-} from 'constants/account';
-import { UserFormType } from 'typings/account';
+import { usersAPI } from 'api/users';
 import { emailsAPI } from 'api/emails';
-import * as S from './SignUpForm.styles';
+import { UserFormType } from 'typings/account';
 import {
   validateEmail,
   validatePassword,
   validatePasswordCheck,
   validatePhoneNumber,
 } from 'utils/validate';
+import {
+  DEFAULT_SIGN_UP_FORM,
+  ERROR_MESSAGE,
+  GENDER,
+  SIGN_UP_FORM_NAMES,
+} from 'constants/account';
+
+import * as S from './SignUpForm.styles';
+import { doSignIn } from 'utils/auth';
 
 const SignUpForm = () => {
   const {
@@ -51,8 +54,13 @@ const SignUpForm = () => {
     return errors;
   };
 
-  const doSignUp = async () => {
-    // sign up code
+  const onValid = async () => {
+    const signUpResult = await usersAPI.signUp(values);
+
+    if (signUpResult) {
+      doSignIn(signUpResult.accessToken);
+      window.location.replace('/');
+    }
   };
 
   useEffect(() => {
@@ -64,7 +72,7 @@ const SignUpForm = () => {
     values,
     errors,
     disabled: !isSubmitable,
-    onValid: doSignUp,
+    onValid,
     handleChange,
     handleSubmit,
     sendEmailVerifyCode,
