@@ -1,6 +1,7 @@
 import { api, authApi } from 'api/instance';
 import { ERROR_MESSAGE } from 'constants/account';
 import { SighInParams, SignUpParams, UserFormType } from 'typings/account';
+import { UserProfile } from 'typings/user';
 
 const url = '/users';
 
@@ -43,6 +44,9 @@ export const usersAPI = {
   },
   findUser: async (userId: string) => {
     return await authApi.get(`${url}/${userId}`).then((res) => res.data);
+  },
+  viewMyProile: async (): Promise<UserProfile> => {
+    return await api.get(`${url}/me`).then((res) => res.data);
   },
   reissueToken: async () => {
     return await authApi

@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import { ChangeEvent, ReactNode } from 'react';
+import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
 
 import { CreateProjectRequestBody } from 'api/projects';
 import { useCreateProject } from 'hooks/useCreateProject';
 import { ProjectCreateSelect } from 'components/Project/Create/ProjectCreateSelect';
-
 import { ColorPickerTrigger } from 'components/common/ColorPicker/ColorPickerTrigger';
+import { UserProfile } from 'typings/user';
 
 export const ProjectCreateForm = () => {
   const {
@@ -13,9 +15,11 @@ export const ProjectCreateForm = () => {
     changeCreateProjectFormByInput,
     changeProjectColor,
   } = useCreateProject();
+  const { data } = useQuery<UserProfile>(['userProfile']);
 
   return (
     <ProjectCreateFormView
+      userProfile={data}
       form={createProjectForm}
       onChangeByInput={changeCreateProjectFormByInput}
       onChangeColor={changeProjectColor}
@@ -24,12 +28,14 @@ export const ProjectCreateForm = () => {
 };
 
 interface ProjectCreateFormViewProps {
+  userProfile?: UserProfile;
   form: CreateProjectRequestBody;
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeColor: (color: string) => void;
 }
 
 export const ProjectCreateFormView = ({
+  userProfile,
   form,
   onChangeColor,
   onChangeByInput,
@@ -38,7 +44,15 @@ export const ProjectCreateFormView = ({
     <S.CreateProjectFormContainer>
       <S.CreateProjectForm>
         <ProjectCreateItem label="사이트 소유주">
-          <div>이미지</div>
+          <S.ProfileImageWrap>
+            <Image
+              src={userProfile?.profileImageUrl || ''}
+              width={30}
+              height={30}
+              alt="user_profile_img"
+            />
+          </S.ProfileImageWrap>
+          <S.UserNickName>{userProfile?.nickname}</S.UserNickName>
         </ProjectCreateItem>
         <ProjectCreateItem label="프로젝트 이름">
           <S.ItemWrap>
@@ -139,6 +153,17 @@ const S = {
     line-height: 22px;
   `,
   ItemWrap: styled.div``,
+  ProfileImageWrap: styled.div`
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 50%;
+  `,
+  UserNickName: styled.div`
+    margin-left: 10px;
+    font-weight: 400;
+    font-size: 18px;
+  `,
   Input: styled.input`
     width: 400px;
     height: 40px;
