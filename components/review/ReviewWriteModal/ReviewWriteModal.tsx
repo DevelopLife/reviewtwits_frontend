@@ -55,7 +55,9 @@ const ReviewWriteModal = () => {
     if (!values || !isSubmitable) return;
 
     const formData = setDataInToFormData();
-    await shoppingAPI.createReview(formData);
+    const result = await shoppingAPI.createReview(formData);
+
+    if (result && result.ok) window.location.href = '/review';
   };
 
   useEffect(() => {
