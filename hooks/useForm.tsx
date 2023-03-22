@@ -7,9 +7,13 @@ import {
   useState,
 } from 'react';
 
+interface ErrorType {
+  [errorName: string]: string;
+}
+
 const useForm = <T extends object>(initialValues: T) => {
   const [values, setValues] = useState<T>(initialValues);
-  const [errors, setErrors] = useState<T>();
+  const [errors, setErrors] = useState<ErrorType>();
   const [isSubmitable, setIsSubmitable] = useState(false);
 
   const setValue = useCallback(
@@ -28,7 +32,7 @@ const useForm = <T extends object>(initialValues: T) => {
 
   const checkFormValid = useCallback(() => {
     if (!errors) return false;
-    const keys = Object.keys(errors) as (keyof T)[];
+    const keys = Object.keys(errors) as (keyof ErrorType)[];
     const invalidValues = keys.filter((name) => errors[name] !== '');
     const isFormValid = !invalidValues.length;
 

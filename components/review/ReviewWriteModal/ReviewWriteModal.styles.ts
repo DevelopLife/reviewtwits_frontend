@@ -103,6 +103,15 @@ const ButtonWrap = styled.div`
 const CreateButton = styled(Button)`
   font-size: 20px;
   padding: 15px 70px;
+
+  &:disabled {
+    background: ${({ theme }) => theme.colors.gray_5};
+    cursor: default;
+
+    :hover {
+      opacity: 1;
+    }
+  }
 `;
 
 export {
