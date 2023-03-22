@@ -27,6 +27,7 @@ const ReviewWriteModal = () => {
     handleSubmit,
   } = useForm<ReviewType>(DEFAULT_REVIEW_WRITE_FORM);
   const router = useRouter();
+  const isEditPage = router?.query?.id;
   const { mutate } = useMutation(
     (formData: FormData) => shoppingAPI.createReview(formData),
     {
@@ -99,7 +100,7 @@ const ReviewWriteModal = () => {
         </S.ReviewContent>
         <S.ButtonWrap>
           <S.CreateButton type="submit" disabled={!isSubmitable}>
-            작성 완료
+            {isEditPage ? '수정 완료' : '작성 완료'}
           </S.CreateButton>
         </S.ButtonWrap>
       </S.Form>
