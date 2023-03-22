@@ -26,6 +26,9 @@ const ImageUploadButton = styled(S.Button)`
 const ImageList = styled.div`
   display: flex;
   gap: 14px;
+  overflow-x: scroll;
+  width: 680px;
+  padding: 10px 0;
 `;
 
 const ImageBox = styled.div`
