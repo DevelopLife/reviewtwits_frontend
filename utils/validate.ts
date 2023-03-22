@@ -8,3 +8,6 @@ export const validatePasswordCheck = (
   password: string,
   passwordCheck: string
 ) => password === passwordCheck;
+
+export const validateReviewScore = (score: number) => score > 0 && score <= 5;
+export const validateReviewContent = (content: string) => content.length >= 10;

@@ -26,6 +26,27 @@ const ImageUploadButton = styled(S.Button)`
 const ImageList = styled.div`
   display: flex;
   gap: 14px;
+  overflow-x: scroll;
+  width: 680px;
+  padding: 10px 0;
 `;
 
-export { ImageUploadBox, ImageUploadButton, ImageList };
+const ImageBox = styled.div`
+  position: relative;
+  > img {
+    box-shadow: 0 0 5px 1px #d9d6d6;
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: -8px;
+  right: -12px;
+
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+`;
+
+export { ImageUploadBox, ImageUploadButton, ImageList, ImageBox, CloseButton };
