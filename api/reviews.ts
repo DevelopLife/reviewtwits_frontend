@@ -21,6 +21,15 @@ const shoppingAPI = {
         }
 
         return { ok: true };
+      })
+      .catch((err) => {
+        const { response } = err;
+
+        switch (response.status) {
+          case 400:
+            alert(response.data[0].message);
+            break;
+        }
       });
   },
 };
