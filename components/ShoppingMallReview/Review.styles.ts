@@ -28,17 +28,18 @@ const WriterDesc = styled.div`
   color: #000000;
   font-style: normal;
   font-weight: 500;
+`;
 
-  p:first-child {
-    font-family: 'Inter';
-    font-size: 18px;
-    line-height: 22px;
-  }
-  p:last-child {
-    font-family: 'Pretendard';
-    font-size: 12px;
-    line-height: 14px;
-  }
+const WriterName = styled.p`
+  font-family: 'Inter';
+  font-size: 18px;
+  line-height: 22px;
+`;
+
+const SellerName = styled.p`
+  font-family: 'Pretendard';
+  font-size: 12px;
+  line-height: 14px;
 `;
 
 const StarRateWithDate = styled.div`
@@ -47,16 +48,16 @@ const StarRateWithDate = styled.div`
   align-items: center;
   margin-top: 4px;
   margin-bottom: 4px;
+`;
 
-  p {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 12px;
+const WriteDate = styled.p`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
 
-    color: #828282;
-  }
+  color: #828282;
 `;
 
 const Stars = styled.ul`
@@ -191,8 +192,11 @@ export {
   WriterInfo,
   WriterImage,
   WriterDesc,
+  WriterName,
+  SellerName,
   StarRateWithDate,
   Stars,
+  WriteDate,
   ProductImageBox,
   ProductImages,
   ProductDesc,
