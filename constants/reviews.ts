@@ -1,9 +1,3 @@
-export const DEFAULT_REVIEW_WRITE_FORM = {
-  productURL: 'http://www.example.com/123',
-  content: '',
-  score: 0,
-};
-
 export const DEFAULT_REVIEW_WRITE_ERRORS = {
   productURL: '',
   content: '',

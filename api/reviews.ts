@@ -12,6 +12,9 @@ const shoppingAPI = {
       },
     });
   },
+  getReviewDetail: async (reviewId: number) => {
+    return await api.get(`${SHOPPING_URL}/${reviewId}`).then((res) => res.data);
+  },
 };
 
 export { shoppingAPI };

@@ -6,13 +6,14 @@ import CameraIcon from 'public/images/camera_icon.svg';
 import CloseIcon from 'public/images/close_icon.svg';
 
 interface ImageUploadBox {
+  imageNameList?: string[];
   setValue: (name: string, value: File[]) => void;
 }
 
-const ImageUploadBox = ({ setValue }: ImageUploadBox) => {
+const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<File[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
+  const [previews, setPreviews] = useState<string[]>(imageNameList || []);
 
   const handleClickImageUpload = () =>
     inputRef.current && inputRef.current.click();
@@ -78,7 +79,11 @@ const ImageUploadBox = ({ setValue }: ImageUploadBox) => {
             <Image
               width={120}
               height={80}
-              src={url}
+              src={
+                url.includes('data:image')
+                  ? url
+                  : `https://reviewtwits.mcv.kr/request-images/${url}`
+              }
               alt="reviewImg"
               style={{ objectFit: 'cover' }}
             />

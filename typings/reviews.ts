@@ -4,3 +4,13 @@ export interface ReviewType {
   score: number;
   imageFiles?: File[];
 }
+
+export interface ReviewResponseType {
+  reviewId: number;
+  projectId: number;
+  productUrl: string;
+  starScore: number;
+  score: number;
+  content: string;
+  reviewImageNameList: string[];
+}
