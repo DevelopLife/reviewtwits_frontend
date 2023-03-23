@@ -3,7 +3,7 @@ import React from 'react';
 
 import grayStar from 'public/images/gray_star.png';
 import thumbsUp from 'public/images/thumbs_up.png';
-import * as S from './Review.styled';
+import * as S from './Review.styles';
 
 const Review = () => {
   return (
