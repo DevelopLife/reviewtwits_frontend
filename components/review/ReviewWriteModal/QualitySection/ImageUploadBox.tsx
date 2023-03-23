@@ -1,6 +1,7 @@
 import { useState, useRef, ChangeEvent, MouseEvent, useEffect } from 'react';
 import Image from 'next/image';
 
+import { formattedImageUrl } from 'utils/format';
 import * as S from './ImageUploadBox.styles';
 import CameraIcon from 'public/images/camera_icon.svg';
 import CloseIcon from 'public/images/close_icon.svg';
@@ -79,11 +80,7 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
             <Image
               width={120}
               height={80}
-              src={
-                url.includes('data:image')
-                  ? url
-                  : `https://reviewtwits.mcv.kr/request-images/${url}`
-              }
+              src={url.includes('data:image') ? url : formattedImageUrl(url)}
               alt="reviewImg"
               style={{ objectFit: 'cover' }}
             />
