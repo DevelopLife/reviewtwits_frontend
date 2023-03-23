@@ -1,7 +1,7 @@
 import ShoppingMallReview from './ShoppingMallReview';
 
 export default {
-  title: 'ShoppingMallReview',
+  title: 'Components/ShoppingMallReview',
   component: ShoppingMallReview,
 };
 
