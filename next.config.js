@@ -5,6 +5,7 @@ const nextConfig = {
 
   // figma의 image.png 사용을 위해서 임시적으로 작성
   images: {
+    domains: ['reviewtwits.mcv.kr'],
     remotePatterns: [
       {
         protocol: 'https',
