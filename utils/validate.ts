@@ -10,4 +10,4 @@ export const validatePasswordCheck = (
 ) => password === passwordCheck;
 
 export const validateReviewScore = (score: number) => score > 0 && score <= 5;
-export const validateReviewContent = (content: string) => content.length >= 10;
+export const validateReviewContent = (content: string) => content?.length >= 10;
