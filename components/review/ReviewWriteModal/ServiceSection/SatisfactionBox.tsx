@@ -20,6 +20,7 @@ const SatisfactionBox = () => {
       <S.ThumbButtonBox>
         <S.ThumbButton
           id="thumbsUp"
+          type="button"
           isActive={isSatisfied === true}
           onClick={changeSatisfaction}
         >
@@ -27,6 +28,7 @@ const SatisfactionBox = () => {
         </S.ThumbButton>
         <S.ThumbButton
           id="thumbsDown"
+          type="button"
           isActive={isSatisfied === false}
           onClick={changeSatisfaction}
         >
