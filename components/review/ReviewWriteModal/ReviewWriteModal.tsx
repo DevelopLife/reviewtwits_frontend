@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 
 import useForm from 'hooks/useForm';
 import { ReviewType } from 'typings/reviews';
@@ -12,6 +14,7 @@ import {
   DEFAULT_REVIEW_WRITE_FORM,
   DEFAULT_REVIEW_WRITE_ERRORS,
   ERROR_MESSAGE,
+  SUCCESS_MESSAGE,
 } from 'constants/reviews';
 
 const ReviewWriteModal = () => {
@@ -23,6 +26,27 @@ const ReviewWriteModal = () => {
     handleChange,
     handleSubmit,
   } = useForm<ReviewType>(DEFAULT_REVIEW_WRITE_FORM);
+  const router = useRouter();
+  const { mutate } = useMutation(
+    (formData: FormData) => shoppingAPI.createReview(formData),
+    {
+      onSuccess: ({ status }) => {
+        switch (status) {
+          case 200:
+            alert(SUCCESS_MESSAGE.CREATE);
+            router.push('/review');
+            break;
+        }
+      },
+      onError: ({ response }) => {
+        switch (response?.status) {
+          case 400:
+            alert(response.data[0].message);
+            break;
+        }
+      },
+    }
+  );
 
   const setDataInToFormData = () => {
     const formData = new FormData();
@@ -55,9 +79,7 @@ const ReviewWriteModal = () => {
     if (!values || !isSubmitable) return;
 
     const formData = setDataInToFormData();
-    const result = await shoppingAPI.createReview(formData);
-
-    if (result && result.ok) window.location.href = '/review';
+    mutate(formData);
   };
 
   useEffect(() => {
