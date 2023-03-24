@@ -11,7 +11,7 @@ import { BUTTON_TEXTS, PROJECT_TITLE } from 'constants/project';
 
 const ProjectPlansPage = () => {
   const router = useRouter();
-  const navigateLogin = () => router.push('../login');
+  const navigateLogin = () => router.push('../sign-in');
   const { createProjectForm, projectPlan } = useCreateProject();
   const { mutate } = useMutation(
     () => projectsAPI.create({ ...createProjectForm, pricePlan: projectPlan }),
