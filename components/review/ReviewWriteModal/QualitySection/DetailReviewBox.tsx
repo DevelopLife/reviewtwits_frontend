@@ -9,7 +9,7 @@ interface DetailReviewBox {
 const DetailReviewBox = ({ content, handleChange }: DetailReviewBox) => {
   return (
     <S.Box>
-      <S.ReviewFor>상세리뷰</S.ReviewFor>
+      <S.SectionTitle>상세리뷰</S.SectionTitle>
       <S.TextArea
         name="content"
         value={content}

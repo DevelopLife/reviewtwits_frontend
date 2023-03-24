@@ -76,17 +76,6 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
 
   return (
     <S.ImageUploadBox>
-      <S.ImageUploadButton type="button" onClick={handleClickImageUpload}>
-        <Image width={24} height={24} src={CameraIcon} alt="" />
-        사진 올리기
-      </S.ImageUploadButton>
-      <input
-        ref={inputRef}
-        type="file"
-        multiple
-        accept="image/*"
-        onChange={loadFile}
-      />
       <S.ImageList>
         {previews.map((url, i) => (
           <S.ImageBox key={i}>
@@ -95,7 +84,7 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
               type="button"
               onClick={removeImagePreview}
             >
-              <Image width={12} height={12} src={CloseIcon} alt="closeIcon" />
+              <Image width={16} height={16} src={CloseIcon} alt="closeIcon" />
             </S.CloseButton>
             <Image
               width={120}
@@ -107,6 +96,17 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
           </S.ImageBox>
         ))}
       </S.ImageList>
+      <S.ImageUploadButton type="button" onClick={handleClickImageUpload}>
+        <Image width={24} height={24} src={CameraIcon} alt="" />
+        사진 올리기
+      </S.ImageUploadButton>
+      <input
+        ref={inputRef}
+        type="file"
+        multiple
+        accept="image/*"
+        onChange={loadFile}
+      />
     </S.ImageUploadBox>
   );
 };
