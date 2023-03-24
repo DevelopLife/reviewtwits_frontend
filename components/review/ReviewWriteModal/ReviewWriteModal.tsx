@@ -82,6 +82,13 @@ const ReviewWriteModal = () => {
             break;
         }
       },
+      onError: ({ response }) => {
+        switch (response?.status) {
+          case 400:
+            alert(response.data[0].message);
+            break;
+        }
+      },
     }
   );
 
