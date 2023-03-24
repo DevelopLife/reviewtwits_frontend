@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import useForm from 'hooks/useForm';
@@ -17,12 +17,15 @@ import {
   SUCCESS_MESSAGE,
 } from 'constants/reviews';
 
+const REVIEW_QUERY_KEY = 'reviews';
+
 const ReviewWriteModal = () => {
   const router = useRouter();
   const reviewId = Number(router?.query?.id);
   const isEditPage = router?.query?.id;
+  const queryClient = useQueryClient();
   const { data: reviewData, isLoading } = useQuery<ReviewResponseType>(
-    ['review', reviewId],
+    ['REVIEW_QUERY_KEY', reviewId],
     () => shoppingAPI.getReviewDetail(reviewId),
     {
       enabled: !!reviewId,
@@ -61,16 +64,40 @@ const ReviewWriteModal = () => {
       },
     }
   );
+  const { mutate: mutateEdit } = useMutation(
+    (formData: FormData) => shoppingAPI.editReview(reviewId, formData),
+    {
+      onMutate: () => {
+        const oldData = queryClient.getQueriesData([REVIEW_QUERY_KEY]);
+        queryClient.cancelQueries([REVIEW_QUERY_KEY]);
+        queryClient.setQueryData([REVIEW_QUERY_KEY], values);
+
+        return () => queryClient.setQueryData([REVIEW_QUERY_KEY], oldData);
+      },
+      onSuccess: ({ status }) => {
+        switch (status) {
+          case 200:
+            alert(SUCCESS_MESSAGE.EDIT);
+            router.push('/review');
+            break;
+        }
+      },
+    }
+  );
 
   const setDataInToFormData = () => {
     const formData = new FormData();
-    const { productURL, content, score, imageFiles } = values;
+    const { productURL, content, score, newImageFiles, deleteImageList } =
+      values;
 
     formData.append('score', score.toString());
     formData.append('content', content);
     formData.append('productURL', productURL);
-    imageFiles?.forEach((image) =>
+    newImageFiles?.forEach((image) =>
       formData.append('multipartImageFiles', image)
+    );
+    deleteImageList?.forEach((fileName) =>
+      formData.append('deleteFileList', fileName)
     );
 
     return formData;
@@ -93,7 +120,7 @@ const ReviewWriteModal = () => {
     if (!values || !isSubmitable) return;
 
     const formData = setDataInToFormData();
-    mutateCreate(formData);
+    isEditPage ? mutateEdit(formData) : mutateCreate(formData);
   };
 
   useEffect(() => {
@@ -113,7 +140,7 @@ const ReviewWriteModal = () => {
     }
   }, [reviewData, initializeForm]);
 
-  if (isLoading) return null;
+  if (isEditPage && isLoading) return null;
   return (
     <S.Container>
       <S.Title>리뷰 관리</S.Title>

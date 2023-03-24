@@ -8,13 +8,17 @@ import CloseIcon from 'public/images/close_icon.svg';
 
 interface ImageUploadBox {
   imageNameList?: string[];
-  setValue: (name: string, value: File[]) => void;
+  setValue: (name: string, value: File[] | string[]) => void;
 }
 
 const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [files, setFiles] = useState<File[]>([]);
+  const existImageCnt = useRef<number>(imageNameList?.length || 0);
+  const [newFiles, setNewFiles] = useState<File[]>([]);
+  const [deleteFileNameList, setDeleteFileNameList] = useState<string[]>([]);
   const [previews, setPreviews] = useState<string[]>(imageNameList || []);
+
+  const validateExistImage = (url: string) => !url.includes('data:image');
 
   const handleClickImageUpload = () =>
     inputRef.current && inputRef.current.click();
@@ -32,7 +36,7 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
           setPreviews((prev) => [...prev, reader.result as string]);
         reader.readAsDataURL(file);
 
-        setFiles((prev) => prev && [...prev, file]);
+        setNewFiles((prev) => prev && [...prev, file]);
       }
     }
 
@@ -41,18 +45,34 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
 
   const removeImagePreview = (e: MouseEvent<HTMLButtonElement>) => {
     const selectedImageId = Number(e.currentTarget.id);
-    const newFiles = [...files];
+    const imageElement = e.currentTarget.parentElement
+      ?.childNodes[1] as HTMLImageElement;
+    const imageUrl = decodeURIComponent(imageElement.src);
+    const isExistImage = validateExistImage(imageUrl);
+
+    if (isExistImage) {
+      const fileName = imageUrl.split('request-images/')[1].split('&')[0];
+      const newDeleteFileNameList = [...deleteFileNameList, fileName];
+
+      setDeleteFileNameList(newDeleteFileNameList);
+      setValue('deleteImageList', newDeleteFileNameList);
+      existImageCnt.current--;
+    } else {
+      const files = [...newFiles];
+
+      files.splice(selectedImageId - existImageCnt.current, 1);
+      setNewFiles(files);
+    }
+
     const newPreviews = [...previews];
 
-    newFiles.splice(selectedImageId, 1);
     newPreviews.splice(selectedImageId, 1);
-    setFiles(newFiles);
     setPreviews(newPreviews);
   };
 
   useEffect(() => {
-    setValue('imageFiles', files);
-  }, [files, setValue]);
+    setValue('newImageFiles', newFiles);
+  }, [newFiles, setValue]);
 
   return (
     <S.ImageUploadBox>
@@ -80,7 +100,7 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
             <Image
               width={120}
               height={80}
-              src={url.includes('data:image') ? url : formattedImageUrl(url)}
+              src={validateExistImage(url) ? formattedImageUrl(url) : url}
               alt="reviewImg"
               style={{ objectFit: 'cover' }}
             />

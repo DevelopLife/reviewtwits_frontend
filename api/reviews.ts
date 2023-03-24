@@ -15,6 +15,10 @@ const shoppingAPI = {
   getReviewDetail: async (reviewId: number) => {
     return await api.get(`${SHOPPING_URL}/${reviewId}`).then((res) => res.data);
   },
+  editReview: async (reviewId: number, values: FormData) => {
+    const body = values;
+    return await api.patch(`${SHOPPING_URL}/${reviewId}`, body);
+  },
 };
 
 export { shoppingAPI };
