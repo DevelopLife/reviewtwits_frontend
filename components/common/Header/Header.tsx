@@ -5,6 +5,12 @@ import * as S from './Header.styles';
 
 const Header = () => {
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
+
+  const s = () => {
+    setUserLoggedIn((prev) => !prev);
+  };
+
+  s();
   return (
     <S.Container>
       <S.Header>
