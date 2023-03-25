@@ -1,9 +1,3 @@
-export const DEFAULT_REVIEW_WRITE_FORM = {
-  productURL: 'http://www.example.com/123',
-  content: '',
-  score: 0,
-};
-
 export const DEFAULT_REVIEW_WRITE_ERRORS = {
   productURL: '',
   content: '',
@@ -12,6 +6,7 @@ export const DEFAULT_REVIEW_WRITE_ERRORS = {
 
 export const SUCCESS_MESSAGE = {
   CREATE: '리뷰 등록이 완료되었습니다.',
+  EDIT: '리뷰 수정이 완료되었습니다.',
 };
 
 export const ERROR_MESSAGE = {
