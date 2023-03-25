@@ -1,6 +1,6 @@
 import { APP_NAME } from 'constants/index';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './Header.styles';
 
 const Header = () => {
@@ -10,7 +10,10 @@ const Header = () => {
     setUserLoggedIn((prev) => !prev);
   };
 
-  s();
+  useEffect(() => {
+    s();
+  }, []);
+
   return (
     <S.Container>
       <S.Header>
