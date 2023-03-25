@@ -12,7 +12,7 @@ import SurveyBox from './SurveyBox';
 interface QualitySectionProps {
   values: ReviewType;
   data?: ReviewResponseType;
-  setValue: (name: string, value: number | File[]) => void;
+  setValue: (name: string, value: number | string[] | File[]) => void;
   handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
