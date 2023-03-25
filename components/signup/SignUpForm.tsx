@@ -77,8 +77,6 @@ const SignUpForm = () => {
     handleSubmit,
     sendEmailVerifyCode,
   };
-
-  return <SignUpFormView {...props} />;
 };
 
 interface SignUpFormViewProps {
