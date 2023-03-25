@@ -5,6 +5,7 @@ import { formattedImageUrl } from 'utils/format';
 import * as S from './ImageUploadBox.styles';
 import CameraIcon from 'public/images/camera_icon.svg';
 import CloseIcon from 'public/images/close_icon.svg';
+import useHorizontalScroll from 'hooks/useHorizontalScroll';
 
 interface ImageUploadBox {
   imageNameList?: string[];
@@ -13,6 +14,7 @@ interface ImageUploadBox {
 
 const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useHorizontalScroll();
   const existImageCnt = useRef<number>(imageNameList?.length || 0);
   const [newFiles, setNewFiles] = useState<File[]>([]);
   const [deleteFileNameList, setDeleteFileNameList] = useState<string[]>([]);
@@ -76,7 +78,7 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
 
   return (
     <S.ImageUploadBox>
-      <S.ImageList>
+      <S.ImageList ref={scrollRef}>
         {previews.map((url, i) => (
           <S.ImageBox key={i}>
             <S.CloseButton
