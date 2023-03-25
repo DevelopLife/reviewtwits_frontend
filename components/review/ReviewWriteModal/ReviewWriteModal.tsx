@@ -151,11 +151,9 @@ const ReviewWriteModal = () => {
   return (
     <S.Container>
       <S.Title>리뷰 관리</S.Title>
-      <S.TitleLine />
       <S.Form onSubmit={(e) => handleSubmit(e, onValid)}>
         <S.ReviewContent>
           <ServiceSection />
-          <S.SectionLine />
           <QualitySection
             data={reviewData}
             values={values}
