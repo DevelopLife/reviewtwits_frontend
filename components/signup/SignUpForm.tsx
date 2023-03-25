@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
 
-import useForm from 'hooks/useForm';
+import useForm, { ErrorType } from 'hooks/useForm';
 import { usersAPI } from 'api/users';
 import { emailsAPI } from 'api/emails';
 import { UserFormType } from 'typings/account';
@@ -83,7 +83,7 @@ const SignUpForm = () => {
 
 interface SignUpFormViewProps {
   values: UserFormType;
-  errors?: UserFormType;
+  errors?: ErrorType;
   disabled: boolean;
   onValid: () => void;
   sendEmailVerifyCode: () => void;

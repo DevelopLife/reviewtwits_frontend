@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 
-interface ErrorType {
+export interface ErrorType {
   [errorName: string]: string;
 }
 
