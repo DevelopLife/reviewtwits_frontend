@@ -1,4 +1,5 @@
 const colors = {
+  primary: '#FC4A55',
   blue_light: '#87b1f3',
   blue_0: '#4c80f1',
   blue_dark: '#2c5ae9',
@@ -22,8 +23,15 @@ const colors = {
   yellow: '#F8BB2B',
 } as const;
 
+const devices = {
+  desktop: 1920,
+};
+
 const theme = {
   colors,
+  devices,
 };
+
+export type Colors = keyof typeof theme.colors;
 
 export default theme;

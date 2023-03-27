@@ -3,6 +3,12 @@ import styled from '@emotion/styled';
 
 import KakaoIcon from 'public/images/kakao_icon.svg';
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 export const KakaoOauth = () => {
   return <KakaoLoginButton />;
 };
@@ -25,8 +31,19 @@ interface KakaoLoginButtonViewProps {
 const KakaoLoginButtonView = ({ handleClick }: KakaoLoginButtonViewProps) => {
   return (
     <S.Button id="kakao-login-btn" onClick={handleClick}>
-      <Image src={KakaoIcon} width={60} height={60} alt="kakao_icon" />
+      <Image src={KakaoIcon} width={80} height={80} alt="kakao_icon" />
     </S.Button>
+  );
+};
+
+export const KakaoSDKScript = () => {
+  return (
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+      integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx"
+      crossOrigin="anonymous"
+      async
+    />
   );
 };
 
