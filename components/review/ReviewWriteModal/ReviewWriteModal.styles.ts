@@ -1,28 +1,6 @@
 import styled from '@emotion/styled';
 import theme from 'styles/theme';
 
-const Container = styled.div`
-  width: 1000px;
-  padding: 60px;
-`;
-
-const Title = styled.h1`
-  font-weight: 500;
-  font-size: 36px;
-  margin: 20px 24px;
-`;
-
-const TitleLine = styled.hr`
-  height: 2px;
-  background: ${theme.colors.gray_8};
-  border: none;
-  margin: 0;
-`;
-
-const ReviewContent = styled.div`
-  padding: 0;
-`;
-
 /// common
 
 const Section = styled.section`
@@ -45,7 +23,7 @@ const TextBox = styled.div`
 
 const SectionTitle = styled.h3`
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const Question = styled.p`
@@ -53,23 +31,15 @@ const Question = styled.p`
   color: ${theme.colors.gray_6};
 `;
 
-const SectionLine = styled.hr`
-  margin: 0;
-  height: 2px;
-  background: ${theme.colors.gray_5};
-  border: none;
-`;
-
 const ReviewFor = styled.label`
   color: black;
-  margin-right: 14px;
   white-space: pre;
   font-size: 16px;
   font-weight: 500;
 `;
 
 const Button = styled.button`
-  background: ${theme.colors.blue_0};
+  background: ${theme.colors.primary};
   color: white;
 
   outline: none;
@@ -83,25 +53,59 @@ const Button = styled.button`
   }
 `;
 
-const BoxLine = styled.hr`
-  margin: 0;
-  height: 1px;
-  background: ${theme.colors.gray_4};
-  border: none;
+///
+
+const Container = styled.div`
+  width: 1000px;
+  padding: 60px;
+`;
+
+const Title = styled.h1`
+  font-weight: 500;
+  font-size: 36px;
+  margin: 10px 0;
+`;
+
+const ReviewContent = styled.div`
+  padding: 0;
+`;
+
+const Form = styled.form``;
+
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 100px;
+`;
+
+const CreateButton = styled(Button)`
+  font-size: 18px;
+  font-weight: 600;
+  padding: 17px 37px;
+  border-radius: 15px;
+
+  &:disabled {
+    background: ${({ theme }) => theme.colors.gray_5};
+    cursor: default;
+
+    :hover {
+      opacity: 1;
+    }
+  }
 `;
 
 export {
   Container,
   Title,
-  TitleLine,
+  Form,
   ReviewContent,
   Section,
   QuestionBox,
   TextBox,
   SectionTitle,
   Question,
-  SectionLine,
   ReviewFor,
   Button,
-  BoxLine,
+  ButtonWrap,
+  CreateButton,
 };

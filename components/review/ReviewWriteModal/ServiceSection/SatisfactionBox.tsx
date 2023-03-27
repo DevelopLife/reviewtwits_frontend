@@ -20,20 +20,22 @@ const SatisfactionBox = () => {
       <S.ThumbButtonBox>
         <S.ThumbButton
           id="thumbsUp"
+          type="button"
           isActive={isSatisfied === true}
           onClick={changeSatisfaction}
         >
-          <Image width={30} height={30} src={ThumbIcon} alt="" />
+          <Image width={14} height={14} src={ThumbIcon} alt="" />
         </S.ThumbButton>
         <S.ThumbButton
           id="thumbsDown"
+          type="button"
           isActive={isSatisfied === false}
           onClick={changeSatisfaction}
         >
           <Image
             color="white"
-            width={30}
-            height={30}
+            width={14}
+            height={14}
             src={ThumbIcon}
             alt=""
             style={{ rotate: '180deg' }}

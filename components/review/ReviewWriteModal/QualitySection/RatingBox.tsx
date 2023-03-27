@@ -5,18 +5,24 @@ import * as S from './RatingBox.styles';
 import FullStarImg from 'public/images/full_star_img.png';
 import EmptyStarImg from 'public/images/empty_star_img.png';
 
-const RatingBox = () => {
-  const [score, setScore] = useState(0);
-  const [hoverScore, setHoverScore] = useState(0);
+interface RatingBoxProps {
+  score?: number;
+  setValue: (name: string, value: number) => void;
+}
+
+const RatingBox = ({ score: initialScore, setValue }: RatingBoxProps) => {
+  const [score, setScore] = useState(initialScore || 0);
+  const [hoverScore, setHoverScore] = useState(initialScore || 0);
 
   const changeScore = (e: MouseEvent<HTMLButtonElement>) => {
-    const selectedStarNumber = Number(e.currentTarget.id);
+    const selectedStarNumber = Number(e.currentTarget.value);
 
     setScore(selectedStarNumber);
+    setValue('score', selectedStarNumber);
   };
 
   const handleHoverStar = (e: MouseEvent<HTMLButtonElement>) => {
-    const selectedStarNumber = Number(e.currentTarget.id);
+    const selectedStarNumber = Number(e.currentTarget.value);
 
     setHoverScore(selectedStarNumber);
   };
@@ -37,8 +43,9 @@ const RatingBox = () => {
         <S.StarRating onMouseLeave={handleLeaveStar}>
           {Array.from({ length: 5 }).map((_, i) => (
             <S.Star
-              id={(i + 1).toString()}
               key={i}
+              type="button"
+              value={i + 1}
               isActive={score > i}
               onClick={changeScore}
               onMouseEnter={handleHoverStar}
