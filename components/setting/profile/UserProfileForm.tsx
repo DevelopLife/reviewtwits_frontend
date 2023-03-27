@@ -1,12 +1,18 @@
 import { useRef, useState, MouseEvent, RefObject, ChangeEvent } from 'react';
 import Image from 'next/image';
 
+import useForm from 'hooks/useForm';
+import { UserProfileType } from 'typings/account';
+
 import * as S from './UserProfileForm.styles';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 
 const UserProfileForm = () => {
+  const { setValue, handleChange } = useForm<UserProfileType>({
+    nickname: '',
+    intro: '',
+  });
   const inputRef = useRef<HTMLInputElement>(null);
-  const [file, setFile] = useState<File>();
   const [preview, setPreview] = useState<string>('');
 
   const handleUploadImageButtonClick = () =>
@@ -20,7 +26,7 @@ const UserProfileForm = () => {
 
     reader.onload = () => setPreview(reader.result as string);
     reader.readAsDataURL(file);
-    setFile(file);
+    setValue('userImg', file);
 
     e.currentTarget.value = '';
   };
@@ -29,6 +35,7 @@ const UserProfileForm = () => {
     preview,
     inputRef,
     loadFile,
+    handleChange,
     handleUploadImageButtonClick,
   };
 
@@ -39,6 +46,7 @@ interface UserProfileFormViewProps {
   preview: string;
   inputRef: RefObject<HTMLInputElement>;
   loadFile: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleUploadImageButtonClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -46,6 +54,7 @@ const UserProfileFormView = ({
   preview,
   inputRef,
   loadFile,
+  handleChange,
   handleUploadImageButtonClick,
 }: UserProfileFormViewProps) => {
   return (
@@ -83,7 +92,9 @@ const UserProfileFormView = ({
           <S.FormItem>
             <S.IntroductionInput
               type="text"
+              name="intro"
               placeholder="한 줄로 소개해 볼까요?"
+              onChange={handleChange}
             />
           </S.FormItem>
           <S.FormItem>
@@ -92,9 +103,7 @@ const UserProfileFormView = ({
               type="text"
               name="nickname"
               placeholder="나를 표현할 수 있는 이름이 있을까요?"
-              handleChange={(e) => {
-                return;
-              }}
+              handleChange={handleChange}
             />
           </S.FormItem>
           <S.ButtonBox>
