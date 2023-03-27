@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
 import { ReactNode } from 'react';
-import { Colors } from 'styles/theme';
 
+import { Colors } from 'styles/theme';
 import * as S from './Button.styles';
 
 export type CommonButtonStyleAttributes = {
