@@ -24,8 +24,13 @@ const FormItem = styled.div`
 const UserImageBox = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
 
   margin-bottom: 12px;
+
+  > img {
+    border-radius: 50%;
+  }
 `;
 
 const ImageUploadButton = styled.button`
