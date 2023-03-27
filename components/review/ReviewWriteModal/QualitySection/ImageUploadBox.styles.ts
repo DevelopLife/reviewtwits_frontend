@@ -4,10 +4,8 @@ import * as S from '../ReviewWriteModal.styles';
 
 const ImageUploadBox = styled.div`
   display: flex;
-  align-items: center;
-  gap: 24px;
-
-  padding: 12px;
+  flex-direction: column;
+  gap: 12px;
 
   & > input {
     display: none;
@@ -19,16 +17,24 @@ const ImageUploadButton = styled(S.Button)`
   align-items: center;
   gap: 10px;
 
+  width: fit-content;
   font-size: 16px;
   padding: 10px 20px;
 `;
 
 const ImageList = styled.div`
   display: flex;
-  gap: 14px;
+  gap: 10px;
   overflow-x: scroll;
-  width: 680px;
-  padding: 10px 0;
+  width: 790px;
+  height: 85px;
+
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+
+  &::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  }
 `;
 
 const ImageBox = styled.div`
@@ -40,8 +46,8 @@ const ImageBox = styled.div`
 
 const CloseButton = styled.button`
   position: absolute;
-  top: -8px;
-  right: -12px;
+  top: 2px;
+  right: -4px;
 
   background: none;
   border: none;

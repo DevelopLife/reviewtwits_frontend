@@ -5,6 +5,7 @@ import { formattedImageUrl } from 'utils/format';
 import * as S from './ImageUploadBox.styles';
 import CameraIcon from 'public/images/camera_icon.svg';
 import CloseIcon from 'public/images/close_icon.svg';
+import useHorizontalScroll from 'hooks/useHorizontalScroll';
 
 interface ImageUploadBox {
   imageNameList?: string[];
@@ -13,6 +14,7 @@ interface ImageUploadBox {
 
 const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useHorizontalScroll();
   const existImageCnt = useRef<number>(imageNameList?.length || 0);
   const [newFiles, setNewFiles] = useState<File[]>([]);
   const [deleteFileNameList, setDeleteFileNameList] = useState<string[]>([]);
@@ -76,18 +78,7 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
 
   return (
     <S.ImageUploadBox>
-      <S.ImageUploadButton type="button" onClick={handleClickImageUpload}>
-        <Image width={24} height={24} src={CameraIcon} alt="" />
-        사진 올리기
-      </S.ImageUploadButton>
-      <input
-        ref={inputRef}
-        type="file"
-        multiple
-        accept="image/*"
-        onChange={loadFile}
-      />
-      <S.ImageList>
+      <S.ImageList ref={scrollRef}>
         {previews.map((url, i) => (
           <S.ImageBox key={i}>
             <S.CloseButton
@@ -95,7 +86,7 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
               type="button"
               onClick={removeImagePreview}
             >
-              <Image width={12} height={12} src={CloseIcon} alt="closeIcon" />
+              <Image width={16} height={16} src={CloseIcon} alt="closeIcon" />
             </S.CloseButton>
             <Image
               width={120}
@@ -107,6 +98,17 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
           </S.ImageBox>
         ))}
       </S.ImageList>
+      <S.ImageUploadButton type="button" onClick={handleClickImageUpload}>
+        <Image width={24} height={24} src={CameraIcon} alt="" />
+        사진 올리기
+      </S.ImageUploadButton>
+      <input
+        ref={inputRef}
+        type="file"
+        multiple
+        accept="image/*"
+        onChange={loadFile}
+      />
     </S.ImageUploadBox>
   );
 };

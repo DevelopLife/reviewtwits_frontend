@@ -12,7 +12,7 @@ import SurveyBox from './SurveyBox';
 interface QualitySectionProps {
   values: ReviewType;
   data?: ReviewResponseType;
-  setValue: (name: string, value: number | File[]) => void;
+  setValue: (name: string, value: number | File[] | string[]) => void;
   handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -25,16 +25,12 @@ const QualitySection = ({
   return (
     <S.Section>
       <QualityQuestionBox />
-      <S.BoxLine />
       <RatingBox score={data?.score} setValue={setValue} />
-      <S.BoxLine />
       <DetailReviewBox content={values?.content} handleChange={handleChange} />
-      <S.BoxLine />
       <ImageUploadBox
         imageNameList={data?.reviewImageNameList}
         setValue={setValue}
       />
-      <S.BoxLine />
       <SurveyBox />
     </S.Section>
   );

@@ -11,14 +11,15 @@ const Box = styled.div`
   display: flex;
   gap: 20px;
 
-  padding: 12px;
+  padding: 12px 0;
 
   & > div {
     display: flex;
     flex-direction: column;
     gap: 12px;
 
-    padding: 14px 0;
+    font-weight: 500;
+    padding: 5px 0;
   }
 `;
 
