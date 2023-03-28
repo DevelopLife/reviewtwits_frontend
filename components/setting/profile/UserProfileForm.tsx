@@ -5,19 +5,22 @@ import {
   RefObject,
   ChangeEvent,
   FormEvent,
+  useEffect,
 } from 'react';
 import Image from 'next/image';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import useForm from 'hooks/useForm';
-import { UserProfileType } from 'typings/account';
 import { usersAPI } from 'api/users';
+import { UserProfileType } from 'typings/account';
+import { formattedImageUrl } from 'utils/format';
 
 import * as S from './UserProfileForm.styles';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 
 const UserProfileForm = () => {
-  const { values, setValue, handleChange, handleSubmit } =
+  const { data: userData } = useQuery(['userProfile'], usersAPI.getUserProfile);
+  const { values, setValue, initializeForm, handleChange, handleSubmit } =
     useForm<UserProfileType>({
       nickname: '',
       intro: '',
@@ -61,7 +64,21 @@ const UserProfileForm = () => {
     mutate(userProfileData);
   };
 
+  useEffect(() => {
+    if (!userData) return;
+
+    const formattedUserImage = formattedImageUrl(userData.profileImage);
+    const initialData = {
+      nickname: userData.nickname,
+      intro: userData.introduceText,
+    };
+
+    setPreview(formattedUserImage);
+    initializeForm(initialData);
+  }, [initializeForm, userData]);
+
   const props = {
+    values,
     preview,
     inputRef,
     loadFile,
@@ -75,6 +92,7 @@ const UserProfileForm = () => {
 };
 
 interface UserProfileFormViewProps {
+  values: UserProfileType;
   preview: string;
   inputRef: RefObject<HTMLInputElement>;
   loadFile: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -85,6 +103,7 @@ interface UserProfileFormViewProps {
 }
 
 const UserProfileFormView = ({
+  values,
   preview,
   inputRef,
   loadFile,
@@ -99,7 +118,7 @@ const UserProfileFormView = ({
         <S.FormContent>
           <S.UserImageBox>
             <Image
-              src={preview || DefaultUserProfileImg}
+              src={preview !== '' ? preview : DefaultUserProfileImg}
               width={145}
               height={145}
               alt="userProfileImg"
@@ -121,6 +140,7 @@ const UserProfileFormView = ({
             <S.IntroductionInput
               type="text"
               name="intro"
+              value={values?.intro}
               placeholder="한 줄로 소개해 볼까요?"
               onChange={handleChange}
             />
@@ -130,6 +150,7 @@ const UserProfileFormView = ({
             <S.Input
               type="text"
               name="nickname"
+              value={values?.nickname}
               placeholder="나를 표현할 수 있는 이름이 있을까요?"
               handleChange={handleChange}
             />

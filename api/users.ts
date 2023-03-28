@@ -47,4 +47,7 @@ export const usersAPI = {
   setUserProfile: async (data: FormData) => {
     return await api.post(`${USERS_URL}/register-addition`, data);
   },
+  getUserProfile: async () => {
+    return await api.get(`${USERS_URL}/me`).then((res) => res.data);
+  },
 };
