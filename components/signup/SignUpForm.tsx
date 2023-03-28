@@ -25,6 +25,7 @@ const SignUpForm = () => {
     values,
     errors,
     isSubmitable,
+    setValue,
     setErrors,
     handleChange,
     handleSubmit,
@@ -76,7 +77,10 @@ const SignUpForm = () => {
     setErrors(newErrors);
   }, [values, setErrors]);
 
-  useEffect(() => setCodeIssuanceStatus('NOT_ISSUED'), [accountId]);
+  useEffect(() => {
+    setCodeIssuanceStatus('NOT_ISSUED');
+    setValue('verifyCode', '');
+  }, [accountId, setValue]);
 
   const props = {
     values,
