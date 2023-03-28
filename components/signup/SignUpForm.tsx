@@ -1,9 +1,9 @@
-import { ChangeEvent, FormEvent, MouseEvent, useEffect } from 'react';
+import { ChangeEvent, FormEvent, MouseEvent, useState, useEffect } from 'react';
 
 import useForm, { ErrorType } from 'hooks/useForm';
 import { usersAPI } from 'api/users';
 import { emailsAPI } from 'api/emails';
-import { UserFormType } from 'typings/account';
+import { UserFormType, CodeIssuanceType } from 'typings/account';
 import {
   validateEmail,
   validatePassword,
@@ -25,14 +25,23 @@ const SignUpForm = () => {
     values,
     errors,
     isSubmitable,
+    setValue,
     setErrors,
     handleChange,
     handleSubmit,
   } = useForm({ ...DEFAULT_SIGN_UP_FORM });
+  const { accountId } = values;
+  const [codeIssuanceStatus, setCodeIssuanceStatus] =
+    useState<CodeIssuanceType>('NOT_ISSUED');
 
-  const sendEmailVerifyCode = () => {
+  const sendEmailVerifyCode = async () => {
     if (errors?.accountId) return alert(ERROR_MESSAGE.SIGN_UP.EMAIL);
-    emailsAPI.verifyEmail(values.accountId);
+    setCodeIssuanceStatus('IN_PROGRESS');
+    const result = await emailsAPI.verifyEmail(values.accountId);
+
+    result.ok
+      ? setCodeIssuanceStatus('COMPLETE')
+      : setCodeIssuanceStatus('NOT_ISSUED');
   };
 
   const signUpValidate = (values: UserFormType) => {
@@ -59,8 +68,10 @@ const SignUpForm = () => {
 
     if (signUpResult) {
       doSignIn(signUpResult.accessToken);
-      window.location.replace('/');
+      return window.location.replace('/');
     }
+
+    setCodeIssuanceStatus('NOT_ISSUED');
   };
 
   useEffect(() => {
@@ -68,10 +79,17 @@ const SignUpForm = () => {
     setErrors(newErrors);
   }, [values, setErrors]);
 
+  useEffect(() => {
+    setCodeIssuanceStatus('NOT_ISSUED');
+    setValue('verifyCode', '');
+  }, [accountId, setValue]);
+
   const props = {
     values,
     errors,
     disabled: !isSubmitable,
+    isCodeIssuable: codeIssuanceStatus === 'NOT_ISSUED',
+    isCodeIssued: codeIssuanceStatus === 'COMPLETE',
     onValid,
     handleChange,
     handleSubmit,
@@ -85,6 +103,8 @@ interface SignUpFormViewProps {
   values: UserFormType;
   errors?: ErrorType;
   disabled: boolean;
+  isCodeIssuable: boolean;
+  isCodeIssued: boolean;
   onValid: () => void;
   sendEmailVerifyCode: () => void;
   handleChange: (
@@ -97,6 +117,8 @@ const SignUpFormView = ({
   values,
   errors,
   disabled,
+  isCodeIssuable,
+  isCodeIssued,
   sendEmailVerifyCode,
   handleChange,
   ...rest
@@ -114,17 +136,22 @@ const SignUpFormView = ({
                 handleChange={handleChange}
               />
               <S.VerifyButtonWrap>
-                <S.Button color="black" handleClick={sendEmailVerifyCode}>
+                <S.Button
+                  disabled={!isCodeIssuable}
+                  color="black"
+                  handleClick={sendEmailVerifyCode}
+                >
                   인증번호 받기
                 </S.Button>
               </S.VerifyButtonWrap>
             </S.EmailBox>
-
-            <S.Input
-              name={SIGN_UP_FORM_NAMES.VERIFY_CODE}
-              placeholder="인증번호 입력"
-              handleChange={handleChange}
-            />
+            {isCodeIssued && (
+              <S.Input
+                name={SIGN_UP_FORM_NAMES.VERIFY_CODE}
+                placeholder="인증번호 입력"
+                handleChange={handleChange}
+              />
+            )}
             {values?.accountId && <S.WarnText>{errors?.accountId}</S.WarnText>}
             {/* <S.EmailInputBox>
           <S.Input placeholder="이메일" />

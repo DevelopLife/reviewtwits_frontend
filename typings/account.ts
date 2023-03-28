@@ -8,6 +8,8 @@ export interface UserFormType {
   verifyCode?: string;
 }
 
+export type CodeIssuanceType = 'NOT_ISSUED' | 'IN_PROGRESS' | 'COMPLETE';
+
 export interface SignUpParams {
   accountId: string;
   accountPw: string;
