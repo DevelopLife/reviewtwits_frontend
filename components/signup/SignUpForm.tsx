@@ -68,8 +68,10 @@ const SignUpForm = () => {
 
     if (signUpResult) {
       doSignIn(signUpResult.accessToken);
-      window.location.replace('/');
+      return window.location.replace('/');
     }
+
+    setCodeIssuanceStatus('NOT_ISSUED');
   };
 
   useEffect(() => {
