@@ -68,7 +68,7 @@ const SignUpForm = () => {
 
     if (signUpResult) {
       doSignIn(signUpResult.accessToken);
-      return window.location.replace('/');
+      return window.location.replace('/setting/profile');
     }
 
     setCodeIssuanceStatus('NOT_ISSUED');

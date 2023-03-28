@@ -26,11 +26,7 @@ export const usersAPI = {
       .post(`${USERS_URL}/register`, body)
       .then((res) => res.data)
       .catch(({ response }) => {
-        switch (response?.status) {
-          case 401:
-            alert(response?.data[0]?.message);
-            break;
-        }
+        alert(response?.data[0]?.message);
       });
   },
   findUser: async (userId: string) => {
