@@ -21,7 +21,6 @@ export const usersAPI = {
   },
   signUp: async (values: UserFormType) => {
     const body: SignUpParams = {
-      nickname: 'test1234',
       accountId: values.accountId,
       accountPw: values.accountPw,
       birthDate: values.birthDate,
@@ -34,9 +33,9 @@ export const usersAPI = {
       .post(`${url}/register`, body)
       .then((res) => res.data)
       .catch(({ response }) => {
-        switch (response.status) {
+        switch (response?.status) {
           case 401:
-            alert(response.data[0].message);
+            alert(response?.data[0]?.message);
             break;
         }
       });
