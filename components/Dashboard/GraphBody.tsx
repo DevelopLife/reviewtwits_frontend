@@ -1,13 +1,10 @@
 import styled from '@emotion/styled';
-import SimpleLineChart from 'components/common/Charts/SimpleLineChart';
-import mockDateData from 'constants/mockDate';
+import React from 'react';
 
 const GraphBody = () => {
-  const dataKeys: Array<keyof (typeof mockDateData)[0]> = ['값'];
-
   return (
     <S.Container>
-      <SimpleLineChart data={mockDateData} dataKeys={dataKeys} />
+      <h1>그래프 들어갈 자리</h1>
     </S.Container>
   );
 };
@@ -16,6 +13,7 @@ const S = {
   Container: styled.div`
     width: 100%;
     height: 448px;
+    border: 1px solid black;
   `,
 };
 
