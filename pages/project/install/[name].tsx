@@ -55,7 +55,7 @@ const InstallDetailPage = () => {
               width: 171,
               height: 55,
               color: 'gray_0',
-              backgroundColor: 'Secondary',
+              backgroundColor: 'secondary',
             }}
             onClick={() => {
               console.log('click');
