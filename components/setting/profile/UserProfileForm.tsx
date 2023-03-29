@@ -76,6 +76,11 @@ const UserProfileForm = () => {
     mutate(userProfileData);
   };
 
+  const setProfileLater = () => {
+    window.sessionStorage.clear();
+    pathFrom === 'sign-up' ? router.push('/') : router.back();
+  };
+
   useEffect(() => {
     const pathFrom = window.sessionStorage.getItem('pathFrom');
 
@@ -104,6 +109,7 @@ const UserProfileForm = () => {
     handleChange,
     handleSubmit,
     handleUploadImageButtonClick,
+    setProfileLater,
   };
 
   return <UserProfileFormView {...props} />;
@@ -118,6 +124,7 @@ interface UserProfileFormViewProps {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: FormEvent<HTMLFormElement>, onValid: () => void) => void;
   handleUploadImageButtonClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  setProfileLater: () => void;
 }
 
 const UserProfileFormView = ({
@@ -129,6 +136,7 @@ const UserProfileFormView = ({
   handleChange,
   handleSubmit,
   handleUploadImageButtonClick,
+  setProfileLater,
 }: UserProfileFormViewProps) => {
   return (
     <S.Card>
@@ -177,7 +185,7 @@ const UserProfileFormView = ({
             <S.Button large type="submit" color="primary">
               설정 완료
             </S.Button>
-            <S.Button large color="black">
+            <S.Button large color="black" handleClick={setProfileLater}>
               나중에 하기
             </S.Button>
           </S.ButtonBox>
