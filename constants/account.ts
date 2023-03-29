@@ -15,6 +15,9 @@ export const ERROR_MESSAGE = {
 
 export const SUCCESS_MESSAGE = {
   SIGN_UP: { VERIFY_CODE: '인증 번호를 전송하였습니다.' },
+  SETTING: {
+    PROFILE: '프로필 설정을 완료하였습니다.',
+  },
 };
 
 export const DEFAULT_SIGN_UP_FORM: UserFormType = {
