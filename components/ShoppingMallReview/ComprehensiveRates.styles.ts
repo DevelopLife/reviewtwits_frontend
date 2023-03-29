@@ -84,14 +84,31 @@ const StarInfos = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  ul {
-    width: 175px;
-    height: 30px;
-    line-height: 30px;
+`;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+const Stars = styled.ul`
+  width: 175px;
+  height: 30px;
+  line-height: 30px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const Star = styled.li`
+  fill: #f8bb2b;
+
+  svg {
+    fill: #f8bb2b;
+    width: 30px;
+    height: 30px;
+
+    path {
+      fill: #f8bb2b;
+      stroke: #f8bb2b;
+      background-color: #f8bb2b;
+    }
   }
 `;
 
@@ -130,6 +147,8 @@ export {
   NumberInfos,
   OverallRating,
   StarInfos,
+  Stars,
+  Star,
   OverallRatingDetail,
   PrograssBar,
 };
