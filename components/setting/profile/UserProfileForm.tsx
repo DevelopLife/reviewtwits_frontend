@@ -8,6 +8,7 @@ import {
   useEffect,
 } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import useForm from 'hooks/useForm';
@@ -17,16 +18,27 @@ import { formattedImageUrl } from 'utils/format';
 
 import * as S from './UserProfileForm.styles';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
+import { SUCCESS_MESSAGE } from 'constants/account';
 
 const UserProfileForm = () => {
+  const router = useRouter();
+  const [pathFrom, setPathFrom] = useState<string | null>('');
   const { data: userData } = useQuery(['userProfile'], usersAPI.getUserProfile);
   const { values, setValue, initializeForm, handleChange, handleSubmit } =
     useForm<UserProfileType>({
       nickname: '',
       intro: '',
     });
-  const { mutate } = useMutation((data: FormData) =>
-    usersAPI.setUserProfile(data)
+  const { mutate } = useMutation(
+    (data: FormData) => usersAPI.setUserProfile(data),
+    {
+      onSuccess: () => {
+        window.sessionStorage.clear();
+        alert(SUCCESS_MESSAGE.SETTING.PROFILE);
+
+        if (pathFrom === 'sign-up') router.push('/');
+      },
+    }
   );
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string>('');
@@ -65,15 +77,21 @@ const UserProfileForm = () => {
   };
 
   useEffect(() => {
+    const pathFrom = window.sessionStorage.getItem('pathFrom');
+
+    setPathFrom(pathFrom);
+  }, []);
+
+  useEffect(() => {
     if (!userData) return;
 
-    const formattedUserImage = formattedImageUrl(userData.profileImage);
+    const formattedUserImage = formattedImageUrl(userData.profileImage || null);
     const initialData = {
       nickname: userData.nickname,
       intro: userData.introduceText,
     };
 
-    setPreview(formattedUserImage);
+    if (formattedUserImage) setPreview(formattedUserImage);
     initializeForm(initialData);
   }, [initializeForm, userData]);
 

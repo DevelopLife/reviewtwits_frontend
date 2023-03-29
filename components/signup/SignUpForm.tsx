@@ -68,6 +68,8 @@ const SignUpForm = () => {
 
     if (signUpResult) {
       doSignIn(signUpResult.accessToken);
+      window.sessionStorage.setItem('pathFrom', 'sign-up');
+
       return window.location.replace('/setting/profile');
     }
 
