@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 interface LayoutProps {
-  color?: string;
+  color?: 'gray';
   children: ReactNode;
 }
 
