@@ -17,7 +17,7 @@ const SignInPage = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout color="gray">
       <Head>
         <KakaoSDKScript />
         <NaverSDKScript />
