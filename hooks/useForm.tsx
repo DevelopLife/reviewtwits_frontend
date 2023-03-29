@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 
-interface ErrorType {
+export interface ErrorType {
   [errorName: string]: string;
 }
 
@@ -65,6 +65,10 @@ const useForm = <T extends object>(initialValues: T) => {
     onValid();
   };
 
+  const initializeForm = useCallback((initialValues: T) => {
+    setValues(initialValues);
+  }, []);
+
   useEffect(() => {
     checkSubmitable();
   }, [values, checkSubmitable]);
@@ -73,6 +77,7 @@ const useForm = <T extends object>(initialValues: T) => {
     values,
     errors,
     isSubmitable,
+    initializeForm,
     setValue,
     setErrors,
     handleChange,

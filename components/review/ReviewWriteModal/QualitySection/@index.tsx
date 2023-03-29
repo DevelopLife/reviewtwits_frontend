@@ -4,26 +4,33 @@ import * as S from '../ReviewWriteModal.styles';
 
 import QualityQuestionBox from './QualityQuestionBox';
 import RatingBox from './RatingBox';
+import { ReviewResponseType, ReviewType } from 'typings/reviews';
 import DetailReviewBox from '../QualitySection/DetailReviewBox';
 import ImageUploadBox from './ImageUploadBox';
 import SurveyBox from './SurveyBox';
 
 interface QualitySectionProps {
-  setValue: (name: string, value: number | File[]) => void;
+  values: ReviewType;
+  data?: ReviewResponseType;
+  setValue: (name: string, value: number | File[] | string[]) => void;
   handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const QualitySection = ({ setValue, handleChange }: QualitySectionProps) => {
+const QualitySection = ({
+  values,
+  data,
+  setValue,
+  handleChange,
+}: QualitySectionProps) => {
   return (
     <S.Section>
       <QualityQuestionBox />
-      <S.BoxLine />
-      <RatingBox setValue={setValue} />
-      <S.BoxLine />
-      <DetailReviewBox handleChange={handleChange} />
-      <S.BoxLine />
-      <ImageUploadBox setValue={setValue} />
-      <S.BoxLine />
+      <RatingBox score={data?.score} setValue={setValue} />
+      <DetailReviewBox content={values?.content} handleChange={handleChange} />
+      <ImageUploadBox
+        imageNameList={data?.reviewImageNameList}
+        setValue={setValue}
+      />
       <SurveyBox />
     </S.Section>
   );

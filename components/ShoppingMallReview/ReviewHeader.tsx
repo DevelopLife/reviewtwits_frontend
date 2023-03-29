@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './ReviewHeader.styled';
+import * as S from './ReviewHeader.styles';
 
 const ReviewHeader = () => {
   return (

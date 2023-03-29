@@ -14,19 +14,19 @@ const SatisfactionBox = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-
-  padding: 0 10px;
 `;
 
 const ThumbButtonBox = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 10px;
+  height: fit-content;
 `;
 
 const ThumbButton = styled.button<ThumbButtonStyleProps>`
   border-radius: 50%;
   background: white;
-  padding: 10px 12px;
+  padding: 7px 7px 4px 7px;
+
   border: 1px solid ${theme.colors.gray_2};
   cursor: pointer;
 

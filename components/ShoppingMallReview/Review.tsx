@@ -3,7 +3,7 @@ import React from 'react';
 
 import grayStar from 'public/images/gray_star.png';
 import thumbsUp from 'public/images/thumbs_up.png';
-import * as S from './Review.styled';
+import * as S from './Review.styles';
 
 const Review = () => {
   return (
@@ -13,7 +13,7 @@ const Review = () => {
           <Image src="" alt="" />
         </S.WriterImage>
         <S.WriterDesc>
-          <p>인생마린</p>
+          <S.WriterName>인생마린</S.WriterName>
           <S.StarRateWithDate>
             <S.Stars>
               <li>
@@ -36,9 +36,9 @@ const Review = () => {
                 <Image src={grayStar} alt="" />
               </li>
             </S.Stars>
-            <p>2023.03.01</p>
+            <S.WriteDate>2023.03.01</S.WriteDate>
           </S.StarRateWithDate>
-          <p>판매자: 마린 컴퍼니(주)</p>
+          <S.SellerName>판매자: 마린 컴퍼니(주)</S.SellerName>
         </S.WriterDesc>
       </S.WriterInfo>
 
