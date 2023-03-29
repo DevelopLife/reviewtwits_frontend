@@ -9,9 +9,10 @@ import {
 } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import useForm from 'hooks/useForm';
+import useUserProfile from 'hooks/useUserProfile';
 import { usersAPI } from 'api/users';
 import { UserProfileType } from 'typings/account';
 import { formattedImageUrl } from 'utils/format';
@@ -20,15 +21,10 @@ import * as S from './UserProfileForm.styles';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 import { SUCCESS_MESSAGE } from 'constants/account';
 
-const USER_PROFILE_QUERY = 'userProfile';
-
 const UserProfileForm = () => {
   const router = useRouter();
   const [pathFrom, setPathFrom] = useState<string | null>('');
-  const { data: userData } = useQuery(
-    [USER_PROFILE_QUERY],
-    usersAPI.getUserProfile
-  );
+  const userData = useUserProfile();
   const { values, setValue, initializeForm, handleChange, handleSubmit } =
     useForm<UserProfileType>({
       nickname: '',
@@ -48,6 +44,7 @@ const UserProfileForm = () => {
       },
     }
   );
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string>('');
 
