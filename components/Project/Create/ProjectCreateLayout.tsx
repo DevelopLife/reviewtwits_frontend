@@ -16,9 +16,9 @@ const SIDEBAR_MENUS: Record<ProjectPathnames, string> = {
 
 interface ProjectCreateLayoutProps {
   title: string;
-  buttonText: string;
+  buttonText?: string;
   children: ReactNode;
-  onClickButton: () => void;
+  onClickButton?: () => void;
 }
 
 export const ProjectCreateLayout = ({
@@ -45,11 +45,13 @@ export const ProjectCreateLayout = ({
         </S.ProejectCreateSidebar>
         <ProjectCreateContent>{children}</ProjectCreateContent>
       </S.ProjectCreateContainer>
-      <S.NextStepButtonWrap>
-        <ProjectPageButton onClick={onClickButton}>
-          {buttonText}
-        </ProjectPageButton>
-      </S.NextStepButtonWrap>
+      {buttonText && (
+        <S.NextStepButtonWrap>
+          <ProjectPageButton onClick={onClickButton}>
+            {buttonText}
+          </ProjectPageButton>
+        </S.NextStepButtonWrap>
+      )}
     </S.Layout>
   );
 };
