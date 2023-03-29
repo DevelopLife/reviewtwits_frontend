@@ -3,7 +3,7 @@ import { SignUpForm } from 'components/signup/@index';
 
 const SignUpPage = () => {
   return (
-    <Layout>
+    <Layout color="gray">
       <SignUpForm />
     </Layout>
   );
