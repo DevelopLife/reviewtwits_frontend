@@ -20,10 +20,15 @@ import * as S from './UserProfileForm.styles';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 import { SUCCESS_MESSAGE } from 'constants/account';
 
+const USER_PROFILE_QUERY = 'userProfile';
+
 const UserProfileForm = () => {
   const router = useRouter();
   const [pathFrom, setPathFrom] = useState<string | null>('');
-  const { data: userData } = useQuery(['userProfile'], usersAPI.getUserProfile);
+  const { data: userData } = useQuery(
+    [USER_PROFILE_QUERY],
+    usersAPI.getUserProfile
+  );
   const { values, setValue, initializeForm, handleChange, handleSubmit } =
     useForm<UserProfileType>({
       nickname: '',
@@ -37,6 +42,9 @@ const UserProfileForm = () => {
         alert(SUCCESS_MESSAGE.SETTING.PROFILE);
 
         if (pathFrom === 'sign-up') router.push('/');
+      },
+      onError: ({ response }) => {
+        alert(response?.data[0]?.message);
       },
     }
   );
