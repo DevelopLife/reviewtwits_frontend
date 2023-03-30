@@ -28,9 +28,16 @@ const devices = {
   desktop: 1920,
 };
 
+const width = {
+  socialSidebar: {
+    desktop: '345px',
+  },
+};
+
 const theme = {
   colors,
   devices,
+  width,
 };
 
 export type Colors = keyof typeof theme.colors;
