@@ -1,5 +1,5 @@
 import { WrapProps } from 'typings/wrapperProps';
-import * as S from './SnsLayout.styles';
+import * as S from './SocialTitleSection.styles';
 
 interface SocialTitleSectionProps extends WrapProps {
   title?: string;

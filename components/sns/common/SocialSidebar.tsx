@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 
-import SnsMenuItem from 'components/sns/common/SnsMenuItem';
-import SnsMenus from 'components/sns/common/SnsMenus';
+import SocialMenuItem from 'components/sns/common/SocialMenuItem';
+import SocialMenus from 'components/sns/common/SocialMenus';
+import SidebarTitle from 'components/sns/common/SidebarTitle';
+import SearchBar from 'components/sns/common/SearchBar';
 
 import HomeIcon from 'public/icons/home.svg';
 import BellIcon from 'public/icons/bell.svg';
@@ -10,10 +12,8 @@ import FolderIcon from 'public/icons/folder.svg';
 import FullHeartIcon from 'public/icons/full-heart.svg';
 import UserIcon from 'public/icons/user.svg';
 
-import * as S from './SnsLayout.styles';
-import Image from 'next/image';
-import SidebarTitle from 'components/sns/common/SidebarTitle';
 import theme from 'styles/theme';
+import * as S from './SocialSidebar.styles';
 
 const SERVICE_TITLE = 'ReviewTwits';
 
@@ -32,9 +32,10 @@ const SnsSidebar = () => {
   const lastPathName = pathNames[pathNames.length - 1];
 
   return (
-    <S.SnsSidebarLayout>
+    <S.SidebarLayout>
       <SidebarTitle href={'home'}>{SERVICE_TITLE}</SidebarTitle>
-      <SnsMenus>
+      <SearchBar />
+      <SocialMenus>
         {MENUS.map(({ text, Icon }) => {
           const href = text.toLowerCase();
           const isCurrent = href === lastPathName;
@@ -43,18 +44,18 @@ const SnsSidebar = () => {
             : theme.colors.gray_4;
 
           return (
-            <SnsMenuItem key={text} isCurrent={isCurrent} href={href}>
+            <SocialMenuItem key={text} isCurrent={isCurrent} href={href}>
               {
                 <>
                   <Icon fill={iconColor} />
                   {text}
                 </>
               }
-            </SnsMenuItem>
+            </SocialMenuItem>
           );
         })}
-      </SnsMenus>
-    </S.SnsSidebarLayout>
+      </SocialMenus>
+    </S.SidebarLayout>
   );
 };
 

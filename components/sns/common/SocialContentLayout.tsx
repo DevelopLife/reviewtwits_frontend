@@ -1,5 +1,5 @@
-import { WrapProps } from 'typings/wrapperProps';
-import * as S from './SnsLayout.styles';
+import type { WrapProps } from 'typings/wrapperProps';
+import * as S from './SocialContentLayout.styles';
 
 const SocialContentLayout = ({ children }: WrapProps) => {
   return <S.SocialContentLayout>{children}</S.SocialContentLayout>;

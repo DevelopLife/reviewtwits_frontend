@@ -13,6 +13,7 @@ const SearchBar = () => {
   const onClick = () => {
     value && console.log('click');
   };
+
   return (
     <SearchBarView
       value={value}

@@ -1,10 +1,10 @@
-import SnsLayout from 'components/sns/common/SnsLayout';
+import SocialLayout from 'components/sns/common/SocialLayout';
 
 const SNSExplorePgae = () => {
   return (
-    <SnsLayout>
+    <SocialLayout>
       <div>exlore</div>
-    </SnsLayout>
+    </SocialLayout>
   );
 };
 
