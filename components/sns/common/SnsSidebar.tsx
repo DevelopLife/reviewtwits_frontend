@@ -13,16 +13,17 @@ import UserIcon from 'public/icons/user.svg';
 import * as S from './SnsLayout.styles';
 import Image from 'next/image';
 import SidebarTitle from 'components/sns/common/SidebarTitle';
+import theme from 'styles/theme';
 
 const SERVICE_TITLE = 'ReviewTwits';
 
 const MENUS = [
-  { text: 'Home', icon: HomeIcon },
-  { text: 'Notifications', icon: BellIcon },
-  { text: 'Explore', icon: CompassIcon },
-  { text: 'Create', icon: FolderIcon },
-  { text: 'Follower', icon: FullHeartIcon },
-  { text: 'Profile', icon: UserIcon },
+  { text: 'Home', Icon: HomeIcon },
+  { text: 'Notifications', Icon: BellIcon },
+  { text: 'Explore', Icon: CompassIcon },
+  { text: 'Create', Icon: FolderIcon },
+  { text: 'Follower', Icon: FullHeartIcon },
+  { text: 'Profile', Icon: UserIcon },
 ];
 
 const SnsSidebar = () => {
@@ -34,17 +35,18 @@ const SnsSidebar = () => {
     <S.SnsSidebarLayout>
       <SidebarTitle href={'home'}>{SERVICE_TITLE}</SidebarTitle>
       <SnsMenus>
-        {MENUS.map(({ text, icon }) => {
+        {MENUS.map(({ text, Icon }) => {
           const href = text.toLowerCase();
+          const isCurrent = href === lastPathName;
+          const iconColor = isCurrent
+            ? theme.colors.black
+            : theme.colors.gray_4;
+
           return (
-            <SnsMenuItem
-              key={text}
-              isCurrent={href === lastPathName}
-              href={href}
-            >
+            <SnsMenuItem key={text} isCurrent={isCurrent} href={href}>
               {
                 <>
-                  <Image src={icon} width={22} height={22} alt={'icon'} />
+                  <Icon fill={iconColor} />
                   {text}
                 </>
               }
