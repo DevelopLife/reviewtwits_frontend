@@ -1,5 +1,5 @@
 import { StoryFn } from '@storybook/react';
-import Footer, { FooterProps } from './Footer';
+import Footer from './Footer';
 
 export default {
   title: 'Component/Footer',

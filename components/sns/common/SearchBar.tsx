@@ -11,7 +11,7 @@ const SearchBar = () => {
     setValue(e.target.value);
 
   const onClick = () => {
-    value && console.log('click');
+    true;
   };
 
   return (
