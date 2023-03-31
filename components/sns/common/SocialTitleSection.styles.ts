@@ -9,4 +9,10 @@ const SocialContentTitle = styled.h1`
   font-size: 36px;
 `;
 
-export { SocialTitleSection, SocialContentTitle };
+const SocialContentFlex = styled.span`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+export { SocialTitleSection, SocialContentTitle, SocialContentFlex };

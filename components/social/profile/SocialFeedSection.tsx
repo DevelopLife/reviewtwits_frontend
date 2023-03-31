@@ -42,10 +42,10 @@ export default SocialFeedSection;
 const S = {
   FeedSection: styled.section<{ columnWidth: number }>`
     width: 100%;
+    /* max-width: 1050px; */
     display: grid;
     grid-template-columns: ${({ columnWidth }) =>
       `repeat(auto-fill, minmax(${columnWidth}px, ${columnWidth}px))`};
     gap: 16px 24px;
-    justify-content: center;
   `,
 };
