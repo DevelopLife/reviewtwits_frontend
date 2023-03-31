@@ -95,13 +95,15 @@ const UserProfileForm = () => {
   useEffect(() => {
     if (!userData) return;
 
-    const formattedUserImage = formattedImageUrl(userData.profileImage || null);
     const initialData = {
       nickname: userData.nickname,
       intro: userData.introduceText,
     };
 
-    if (formattedUserImage) setPreview(formattedUserImage);
+    if (userData.profileImage) {
+      const formattedUserImage = formattedImageUrl(userData.profileImage);
+      setPreview(formattedUserImage);
+    }
     initializeForm(initialData);
   }, [initializeForm, userData]);
 
