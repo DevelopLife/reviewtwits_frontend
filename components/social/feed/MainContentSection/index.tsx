@@ -3,12 +3,16 @@ import Image from 'next/image';
 import BookmarkOutlineIcon from 'public/icons/bookmark_outline.svg';
 import FullStarImg from 'public/images/full_star_img.png';
 import EmptyStarImg from 'public/images/empty_star_img.png';
+import PleadingFaceIcon from 'public/icons/pleading_face.svg';
+import SunglassesIcon from 'public/icons/sunglasses.svg';
+import AngryIcon from 'public/icons/angry.svg';
+import KissingHeartIcon from 'public/icons/kissing_heart.svg';
 
 const MainContentSection = () => {
   return (
     <section>
       <button>
-        <Image width={32} height={32} src={BookmarkOutlineIcon} alt="scrap" />
+        <BookmarkOutlineIcon />
       </button>
       <div>
         <div>
@@ -51,10 +55,19 @@ const MainContentSection = () => {
           ))}
         </div>
         <div>
-          <button>2 🥺</button>
-          <button>9 😎</button>
-          <button>8 😠</button>
-          <button>13 😘</button>
+          <button>
+            2
+            <PleadingFaceIcon />
+          </button>
+          <button>
+            9 <SunglassesIcon />
+          </button>
+          <button>
+            8 <AngryIcon />
+          </button>
+          <button>
+            13 <KissingHeartIcon />
+          </button>
         </div>
         <button>24개의 댓글이 달림</button>
         <div>
