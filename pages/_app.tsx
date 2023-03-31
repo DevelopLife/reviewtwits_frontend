@@ -5,7 +5,6 @@ import {
   Hydrate,
 } from '@tanstack/react-query';
 import { Global, ThemeProvider } from '@emotion/react';
-// only development
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
 import { useState } from 'react';

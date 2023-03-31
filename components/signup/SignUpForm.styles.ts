@@ -69,18 +69,6 @@ const VerifyButtonWrap = styled.div`
   top: 10px;
 `;
 
-// const Select = styled.select`
-//   outline: none;
-//   border: none;
-//   background: transparent;
-//   border-bottom: 1px solid #9b9b9b;
-//   color: #9b9b9b;
-//   font-size: 18px;
-//   padding: 16px 20px;
-// `;
-
-// const Option = styled.option``;
-
 const Notice = styled.p`
   font-size: 14px;
   font-weight: 500;
@@ -107,11 +95,6 @@ const EmailInputBox = styled.div`
   }
 `;
 
-// const At = styled.span`
-//   display: inline-block;
-//   font-size: 18px;
-// `;
-
 export {
   Card,
   FormWrap,
@@ -123,13 +106,10 @@ export {
   InputLabel,
   Input,
   DateInput,
-  // Select,
-  // Option,
   Notice,
   ButtonBox,
   Button,
   EmailInputBox,
   EmailBox,
   VerifyButtonWrap,
-  // At,
 };
