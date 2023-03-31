@@ -57,9 +57,7 @@ const InstallDetailPage = () => {
               color: 'gray_0',
               backgroundColor: 'secondary',
             }}
-            onClick={() => {
-              console.log('click');
-            }}
+            onClick={() => true}
           >
             프로젝트 설정
           </CommonButton>

@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Image from 'next/image';
 
 import CheckedIconSVG from 'public/images/checked_icon.svg';
 

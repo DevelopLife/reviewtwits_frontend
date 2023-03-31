@@ -1,4 +1,5 @@
-import React from 'react';
+import Image from 'next/image';
+
 import Button from './common/Button';
 import * as S from './GraphHeader.styles';
 
@@ -21,7 +22,7 @@ const PageData = () => {
       </S.Datas>
       <Button>
         방문 통계
-        <img src="" alt="" />
+        <Image width={30} height={30} src="mock" alt="mock" />
       </Button>
     </S.Container>
   );

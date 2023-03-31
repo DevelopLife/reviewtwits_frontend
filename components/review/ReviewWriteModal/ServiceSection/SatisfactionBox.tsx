@@ -1,5 +1,4 @@
 import { useState, MouseEvent } from 'react';
-import Image from 'next/image';
 
 import * as S from './SatisfactionBox.styles';
 import ThumbIcon from 'public/images/thumb_icon.svg';

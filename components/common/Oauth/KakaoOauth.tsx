@@ -1,4 +1,4 @@
-import Image from 'next/image';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled';
 
 import KakaoIcon from 'public/images/kakao_icon.svg';
