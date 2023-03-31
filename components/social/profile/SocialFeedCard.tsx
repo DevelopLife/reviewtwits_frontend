@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { useBoolean } from 'hooks/useBoolean';
 import { WrapProps } from 'typings/wrapperProps';
 
@@ -72,22 +73,21 @@ const S = {
     position: relative;
     background: none;
     overflow: hidden;
+    cursor: pointer;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.16);
 
     width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;
     border-radius: ${({ borderRadius }) => borderRadius}px;
-
-    & > img {
-      border: none;
-    }
   `,
   VirtualFeedCard: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+
     opacity: 0.7;
+    cursor: pointer;
 
     background-color: ${({ theme }) => theme.colors.gray_2};
   `,
