@@ -1,6 +1,6 @@
 import SocialLayout from 'components/sns/common/SocialLayout';
 
-const SNSExplorePgae = () => {
+const SNSExplorePage = () => {
   return (
     <SocialLayout>
       <div>home</div>
@@ -8,4 +8,4 @@ const SNSExplorePgae = () => {
   );
 };
 
-export default SNSExplorePgae;
+export default SNSExplorePage;
