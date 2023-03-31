@@ -16,7 +16,7 @@ export const CreateProjectCardView = ({
 }: ProjectCardCommonProps) => {
   return (
     <ProjectCardCommon styles={styles} {...rest}>
-      <Image src={PluseIconSVG} alt={'plus_icon'} />
+      <PluseIconSVG />
     </ProjectCardCommon>
   );
 };

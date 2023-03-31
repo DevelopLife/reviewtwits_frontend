@@ -31,7 +31,7 @@ interface KakaoLoginButtonViewProps {
 const KakaoLoginButtonView = ({ handleClick }: KakaoLoginButtonViewProps) => {
   return (
     <S.Button id="kakao-login-btn" onClick={handleClick}>
-      <Image src={KakaoIcon} width={80} height={80} alt="kakao_icon" />
+      <KakaoIcon />
     </S.Button>
   );
 };
