@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import ReactIcon from 'public/images/react_icon.svg';
@@ -10,19 +9,19 @@ import ReactIcon from 'public/images/react_icon.svg';
 const PLATFORMS = [
   {
     name: 'React',
-    src: ReactIcon,
+    Icon: ReactIcon,
   },
   {
     name: 'Jekyll',
-    src: ReactIcon,
+    Icon: ReactIcon,
   },
   {
     name: 'Wordpress',
-    src: ReactIcon,
+    Icon: ReactIcon,
   },
   {
     name: 'Blogger',
-    src: ReactIcon,
+    Icon: ReactIcon,
   },
 ];
 
@@ -32,19 +31,14 @@ const InstallPage = () => {
       <ProjectCreateLayout title={PROJECT_TITLE}>
         <S.ProjectSelectPlatform>
           <S.ProjectSelectPlatformList>
-            {PLATFORMS.map(({ name, src }) => (
+            {PLATFORMS.map(({ name, Icon }) => (
               <Link
                 href={{ pathname: `install/${name}` }}
                 key={name}
                 style={{ textDecoration: 'none', color: '#3D3D3D' }}
               >
                 <S.PlatformItem>
-                  <Image
-                    src={src}
-                    alt={`${name}Icon`}
-                    width={132}
-                    height={116}
-                  ></Image>
+                  <Icon />
                   <S.PlatformName marginTop={28}>{name}</S.PlatformName>
                 </S.PlatformItem>
               </Link>
