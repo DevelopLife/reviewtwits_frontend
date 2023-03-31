@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
+
 import risingArray from 'public/images/rising_array.png';
 import grayStar from 'public/images/gray_star.png';
-import emptyStar from 'public/images/empty_star.png';
-import * as S from './ComprehensiveRates.styles';
 import { state } from 'states/shoppingMall';
+import * as S from './ComprehensiveRates.styles';
 
 const ComprehensiveRates = () => {
   // 임시 데이터로 출력

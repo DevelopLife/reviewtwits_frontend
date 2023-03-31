@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Image from 'next/image';
 
 import CheckedIconSVG from 'public/images/checked_icon.svg';
 
@@ -47,12 +46,8 @@ export const PlanCardView = ({
       <S.Plans>
         {options.map((option) => (
           <S.PlanWrap key={option}>
-            <Image
-              src={CheckedIconSVG}
-              alt={'checkedIcon'}
-              width={25}
-              height={25}
-            />
+            <CheckedIconSVG />
+
             <S.Plan isSelected={isSelected}>{option}</S.Plan>
           </S.PlanWrap>
         ))}

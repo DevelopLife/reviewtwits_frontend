@@ -4,7 +4,7 @@ import { useState } from 'react';
 import * as S from './Header.styles';
 
 const Header = () => {
-  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
+  const [userLoggedIn] = useState<boolean>(false);
   return (
     <S.Container>
       <S.Header>

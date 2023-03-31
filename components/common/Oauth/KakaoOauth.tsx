@@ -1,4 +1,4 @@
-import Image from 'next/image';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled';
 
 import KakaoIcon from 'public/images/kakao_icon.svg';
@@ -31,7 +31,7 @@ interface KakaoLoginButtonViewProps {
 const KakaoLoginButtonView = ({ handleClick }: KakaoLoginButtonViewProps) => {
   return (
     <S.Button id="kakao-login-btn" onClick={handleClick}>
-      <Image src={KakaoIcon} width={80} height={80} alt="kakao_icon" />
+      <KakaoIcon />
     </S.Button>
   );
 };
