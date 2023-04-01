@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { formattedImageUrl } from 'utils/format';
 import * as S from './ImageUploadBox.styles';
-import CameraIcon from 'public/images/camera_icon.svg';
+import CameraIcon from 'public/icons/camera.svg';
 import CloseIcon from 'public/images/close_icon.svg';
 import useHorizontalScroll from 'hooks/useHorizontalScroll';
 
@@ -100,7 +100,6 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
       </S.ImageList>
       <S.ImageUploadButton type="button" onClick={handleClickImageUpload}>
         <CameraIcon />
-        {/* <Image width={24} height={24} src={CameraIcon} alt="" /> */}
         사진 올리기
       </S.ImageUploadButton>
       <input

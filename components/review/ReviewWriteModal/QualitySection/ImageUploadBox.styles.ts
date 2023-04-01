@@ -19,7 +19,7 @@ const ImageUploadButton = styled(S.Button)`
 
   width: fit-content;
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 7px 15px;
 `;
 
 const ImageList = styled.div`
