@@ -28,6 +28,7 @@ const QualitySection = ({
       <RatingBox score={data?.score} setValue={setValue} />
       <DetailReviewBox content={values?.content} handleChange={handleChange} />
       <ImageUploadBox
+        buttonColor="primary"
         imageNameList={data?.reviewImageNameList}
         setValue={setValue}
       />

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import * as S from '../ReviewWriteModal/ReviewWriteModal.styles';
+import { Colors } from 'styles/theme';
 
 const ImageUploadBox = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const ImageUploadBox = styled.div`
   }
 `;
 
-const ImageUploadButton = styled(S.Button)`
+const ImageUploadButton = styled(S.Button)<{ color: Colors }>`
   display: flex;
   align-items: center;
   gap: 10px;
@@ -20,6 +21,8 @@ const ImageUploadButton = styled(S.Button)`
   width: fit-content;
   font-size: 16px;
   padding: 7px 15px;
+
+  background: ${({ theme, color }) => theme.colors[color]};
 `;
 
 const ImageList = styled.div`
@@ -29,11 +32,11 @@ const ImageList = styled.div`
   width: 790px;
   height: 85px;
 
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
-    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+    display: none;
   }
 `;
 
