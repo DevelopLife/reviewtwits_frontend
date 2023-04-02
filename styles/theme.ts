@@ -22,6 +22,7 @@ const colors = {
   gray_9: '#292a2b',
   black: '#181818',
   yellow: '#F8BB2B',
+  white: '#ffffff',
 } as const;
 
 const devices = {
