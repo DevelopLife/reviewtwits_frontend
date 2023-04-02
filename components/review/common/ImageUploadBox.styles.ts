@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import * as S from '../ReviewWriteModal.styles';
+import * as S from '../ReviewWriteModal/ReviewWriteModal.styles';
 
 const ImageUploadBox = styled.div`
   display: flex;
