@@ -2,6 +2,7 @@ const colors = {
   primary: '#FC4A55',
   blue_light: '#87b1f3',
   blue_0: '#4c80f1',
+  blue_1: '#2D87FF',
   blue_dark: '#2c5ae9',
   green_light: '#76e8ad',
   green_0: '#35d48d',
