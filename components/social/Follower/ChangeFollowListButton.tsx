@@ -4,32 +4,30 @@ import React, { useState } from 'react';
 
 type FollowButton = (typeof FOLLOW_BUTTON)[keyof typeof FOLLOW_BUTTON];
 
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  value?: FollowButton;
-}
-
 const ChangeFollowListButton = () => {
   const [targettedButton, setTargettedButton] = useState<FollowButton>(
     FOLLOW_BUTTON.FOLLOWER
   );
-  console.log('안녕');
   const onFollowButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.currentTarget.innerText);
-    console.log(e.currentTarget.value);
-    const { innerText, value } = e.currentTarget;
-    setTargettedButton(value);
+    const { value } = e.currentTarget;
+    value === FOLLOW_BUTTON.FOLLOWER
+      ? setTargettedButton(FOLLOW_BUTTON.FOLLOWER)
+      : setTargettedButton(FOLLOW_BUTTON.FOLLOWING);
   };
 
   return (
     <S.Buttons>
       <S.Button
-        isActive={true}
+        isActive={FOLLOW_BUTTON.FOLLOWER === targettedButton}
         onClick={onFollowButtonClick}
         value={FOLLOW_BUTTON.FOLLOWER}
       >
         {FOLLOW_BUTTON.FOLLOWER}
       </S.Button>
-      <S.Button isActive={false} onClick={onFollowButtonClick}>
+      <S.Button
+        isActive={FOLLOW_BUTTON.FOLLOWING === targettedButton}
+        onClick={onFollowButtonClick}
+      >
         {FOLLOW_BUTTON.FOLLOWING}
       </S.Button>
     </S.Buttons>
