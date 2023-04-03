@@ -10,7 +10,6 @@ const Container = styled.div`
   padding: 32px;
   gap: 159px;
 
-  position: absolute;
   width: 457px;
   height: 136px;
   left: 904px;
