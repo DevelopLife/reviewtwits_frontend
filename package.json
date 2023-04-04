@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build --no-scripts",
+    "test": "echo 'No tests specified'",
+    "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
