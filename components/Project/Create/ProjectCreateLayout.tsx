@@ -87,7 +87,6 @@ const S = {
     width: 250px;
     height: fit-content;
     max-height: 696px;
-    overflow: hidden;
     border-radius: 30px 0 0 30px;
   `,
 
