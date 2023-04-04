@@ -1,7 +1,9 @@
 export const formattedImageUrl = (url: string) =>
   `${process.env.NEXT_PUBLIC_SERVER_URL}/request-images/${url}`;
 
-export const formattedLastTime = (pastTimeArr: number[]) => {
+export const formattedLastTime = (pastTimeArr?: number[]): string => {
+  if (!pastTimeArr) return '';
+
   const [year, month, day, hour, min, sec] = pastTimeArr;
   const now = new Date();
   const pastDate = new Date(year, month - 1, day, hour, min, sec);
