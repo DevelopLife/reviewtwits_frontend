@@ -5,6 +5,7 @@ import {
   useEffect,
   useCallback,
 } from 'react';
+import { useSetRecoilState } from 'recoil';
 import Link from 'next/link';
 
 import useForm from 'hooks/useForm';
@@ -15,6 +16,7 @@ import * as S from './SignInForm.styles';
 import SocialLoginBox from './SocialLoginBox';
 import { usersAPI } from 'api/users';
 import { doSignIn } from 'utils/auth';
+import { isLoginState } from 'states/isLogin';
 
 const SignInForm = () => {
   const {
@@ -28,6 +30,7 @@ const SignInForm = () => {
     accountId: '',
     accountPw: '',
   });
+  const setIsLogined = useSetRecoilState(isLoginState);
 
   const onValid = async () => {
     if (!isValid) return alert(errors?.accountId || errors?.accountPw);
@@ -36,6 +39,8 @@ const SignInForm = () => {
 
     if (signInResult) {
       doSignIn(signInResult.accessToken);
+      setIsLogined(true);
+
       window.location.replace('/');
     }
   };

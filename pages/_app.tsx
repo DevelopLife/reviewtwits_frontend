@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 import reset from 'styles/reset';
 import theme from 'styles/theme';
+import PrivateRoute from 'components/common/PrivateRoute';
 
 export default function App({ Component, pageProps }: AppProps) {
   // TODO: consider setting defaultOptions
@@ -24,7 +25,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <RecoilRoot>
-            <Component {...pageProps} />
+            <PrivateRoute>
+              <Component {...pageProps} />
+            </PrivateRoute>
           </RecoilRoot>
         </ThemeProvider>
       </Hydrate>

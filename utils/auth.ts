@@ -3,6 +3,7 @@ import { InternalAxiosRequestConfig } from 'axios';
 import { api } from 'api/instance';
 import { getCookie, removeCookie, setCookie } from './cookies';
 import { usersAPI } from 'api/users';
+import { LOCAL_STORAGE_KEYS } from 'constants/localStorage';
 
 function validateToken() {
   const now = new Date();
@@ -41,7 +42,24 @@ export function doSignIn(token: string) {
   expireAt.setHours(expireAt.getHours() + 1);
 
   setCookie('expireAt', expireAt.toString());
+
+  setLocalStorageExpireAt(1);
   setAuthorizationToken(token);
+}
+
+export function setLocalStorageExpireAt(hour: number) {
+  const currentDate = Date.now();
+  const milliseconds = hour * 60 * 60 * 1000;
+
+  const data = {
+    isLogin: true,
+    expireAt: currentDate + milliseconds,
+  };
+
+  localStorage.setItem(
+    LOCAL_STORAGE_KEYS.LOGIN_EXPIRE_AT,
+    JSON.stringify(data)
+  );
 }
 
 export function doSignOut() {
