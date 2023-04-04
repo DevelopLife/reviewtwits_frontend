@@ -5,6 +5,7 @@ const nextConfig = {
 
   // figma의 image.png 사용을 위해서 임시적으로 작성
   images: {
+    domains: ['reviewtwits.mcv.kr'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,4 +17,14 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+
+    return config;
+  },
+  nextConfig,
+};

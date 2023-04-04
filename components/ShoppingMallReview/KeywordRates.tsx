@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './KeywordRates.styled';
+import * as S from './KeywordRates.styles';
 
 const KeywordRates = () => {
   return (

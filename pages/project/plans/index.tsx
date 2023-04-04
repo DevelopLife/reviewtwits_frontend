@@ -11,11 +11,11 @@ import { BUTTON_TEXTS, PROJECT_TITLE } from 'constants/project';
 
 const ProjectPlansPage = () => {
   const router = useRouter();
-
   const navigate = {
-    login: () => router.replace('../login'),
+    login: () => router.replace('../sign-in'),
     projectManagement: () => router.replace('./management'),
   };
+
   const { createProjectForm, projectPlan } = useCreateProject();
   const { mutate } = useMutation(
     () => projectsAPI.create({ ...createProjectForm, pricePlan: projectPlan }),

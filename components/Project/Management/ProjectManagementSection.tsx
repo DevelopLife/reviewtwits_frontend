@@ -23,17 +23,18 @@ const CREATE_PROJECT_STYLES: Styles = {
 
 export const ProjectManagementSection = () => {
   const router = useRouter();
-  const navigateLogin = useCallback(() => router.push('../login'), [router]);
+  const navigateLogin = useCallback(() => router.push('../sign-in'), [router]);
 
   const { data } = useQuery(['projectManagement'], projectsAPI.get, {
     onError: (err: AxiosError) => {
       const statusCode = err?.response?.status;
 
       if (statusCode === 403) {
-        alert(`${statusCode} 로그인 페이지로 이동합니다.`);
+        alert(`${statusCode} error 로그인 페이지로 이동합니다.`);
         navigateLogin();
       }
     },
+    retry: false,
   });
 
   return <ProjectManagementSectionView projects={data?.data} />;

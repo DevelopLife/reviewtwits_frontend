@@ -1,5 +1,4 @@
 import { useState, MouseEvent } from 'react';
-import Image from 'next/image';
 
 import * as S from './SatisfactionBox.styles';
 import ThumbIcon from 'public/images/thumb_icon.svg';
@@ -20,24 +19,19 @@ const SatisfactionBox = () => {
       <S.ThumbButtonBox>
         <S.ThumbButton
           id="thumbsUp"
+          type="button"
           isActive={isSatisfied === true}
           onClick={changeSatisfaction}
         >
-          <Image width={30} height={30} src={ThumbIcon} alt="" />
+          <ThumbIcon />
         </S.ThumbButton>
         <S.ThumbButton
           id="thumbsDown"
+          type="button"
           isActive={isSatisfied === false}
           onClick={changeSatisfaction}
         >
-          <Image
-            color="white"
-            width={30}
-            height={30}
-            src={ThumbIcon}
-            alt=""
-            style={{ rotate: '180deg' }}
-          />
+          <ThumbIcon style={{ rotate: '180deg' }} />
         </S.ThumbButton>
       </S.ThumbButtonBox>
     </S.SatisfactionBox>

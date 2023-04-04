@@ -2,11 +2,12 @@ import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 interface LayoutProps {
+  color?: 'gray';
   children: ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => (
-  <StyledLayout>{children}</StyledLayout>
+const Layout = ({ children, color }: LayoutProps) => (
+  <StyledLayout color={color}>{children}</StyledLayout>
 );
 
 const StyledLayout = styled.div`
@@ -14,7 +15,15 @@ const StyledLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f8f8f8;
+
+  background: ${({ color }) => {
+    switch (color) {
+      case 'gray':
+        return '#f8f8f8';
+      default:
+        return '#fffff';
+    }
+  }};
 `;
 
 export default Layout;

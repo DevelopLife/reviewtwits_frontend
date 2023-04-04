@@ -8,6 +8,8 @@ export interface UserFormType {
   verifyCode?: string;
 }
 
+export type CodeIssuanceType = 'NOT_ISSUED' | 'IN_PROGRESS' | 'COMPLETE';
+
 export interface SignUpParams {
   accountId: string;
   accountPw: string;
@@ -21,6 +23,12 @@ export interface SignUpParams {
 export interface SighInParams {
   accountId: string;
   accountPw: string;
+}
+
+export interface UserProfileType {
+  nickname?: string;
+  intro?: string;
+  userImg?: File;
 }
 
 export type Gender = '남자' | '여자';

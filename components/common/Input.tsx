@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 interface TextInputProps {
   type?: string;
   name: string;
+  value?: string;
   placeholder: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
-import Image from 'next/image';
 
 import { useCreateProject } from 'hooks/useCreateProject';
 import DownTriangleSVG from 'public/images/down_triangle.svg';
@@ -28,14 +27,7 @@ export const ProjectCreateSelect = ({
       options={options}
       value={createProjectForm[formKey]}
       isOpen={isOpen}
-      icon={
-        <Image
-          src={DownTriangleSVG}
-          alt="down_triangle_icon"
-          width={26}
-          height={26}
-        />
-      }
+      icon={<DownTriangleSVG />}
       onClickTrigger={onClickTrigger}
       onClickOption={onClickOption}
     />

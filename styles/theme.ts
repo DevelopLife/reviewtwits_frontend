@@ -1,7 +1,9 @@
 const colors = {
   primary: '#FC4A55',
+  secondary: '#2D87FF',
   blue_light: '#87b1f3',
   blue_0: '#4c80f1',
+  blue_1: '#2D87FF',
   blue_dark: '#2c5ae9',
   green_light: '#76e8ad',
   green_0: '#35d48d',
@@ -20,15 +22,23 @@ const colors = {
   gray_8: '#363a3c',
   gray_9: '#292a2b',
   black: '#181818',
+  yellow: '#F8BB2B',
 } as const;
 
 const devices = {
   desktop: 1920,
 };
 
+const width = {
+  socialSidebar: {
+    desktop: '345px',
+  },
+};
+
 const theme = {
   colors,
   devices,
+  width,
 };
 
 export type Colors = keyof typeof theme.colors;

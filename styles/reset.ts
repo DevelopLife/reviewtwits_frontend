@@ -149,6 +149,17 @@ const reset = css`
     color: ${theme.colors.gray_7};
     border-color: ${theme.colors.gray_4};
   }
+
+  button {
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 `;
 
 export default reset;
