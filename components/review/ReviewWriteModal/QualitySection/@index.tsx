@@ -3,10 +3,10 @@ import { ChangeEvent } from 'react';
 import * as S from '../ReviewWriteModal.styles';
 
 import QualityQuestionBox from './QualityQuestionBox';
-import RatingBox from './RatingBox';
+import RatingBox from 'components/review/common/RatingBox';
 import { ReviewResponseType, ReviewType } from 'typings/reviews';
 import DetailReviewBox from '../QualitySection/DetailReviewBox';
-import ImageUploadBox from './ImageUploadBox';
+import ImageUploadBox from 'components/review/common/ImageUploadBox';
 import SurveyBox from './SurveyBox';
 
 interface QualitySectionProps {
@@ -28,6 +28,7 @@ const QualitySection = ({
       <RatingBox score={data?.score} setValue={setValue} />
       <DetailReviewBox content={values?.content} handleChange={handleChange} />
       <ImageUploadBox
+        buttonColor="primary"
         imageNameList={data?.reviewImageNameList}
         setValue={setValue}
       />
