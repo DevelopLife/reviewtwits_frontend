@@ -10,6 +10,7 @@ import { Styles } from 'components/Project/Management/ProjectCardCommon';
 import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
 
 import { GetProjectsResponseData, projectsAPI } from 'api/projects';
+import ResponseArror from 'typings/error';
 
 interface ProjectManagementSectionViewProps {
   children?: ReactNode;
@@ -29,8 +30,9 @@ export const ProjectManagementSection = () => {
     onError: (err: AxiosError) => {
       const statusCode = err?.response?.status;
 
-      if (statusCode === 403) {
-        alert(`${statusCode} error 로그인 페이지로 이동합니다.`);
+      if (statusCode === 401) {
+        const data = err?.response?.data as ResponseArror[];
+        alert(`$code: {statusCode} ${data[0].message}`);
         navigateLogin();
       }
     },
