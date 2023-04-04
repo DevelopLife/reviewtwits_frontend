@@ -25,7 +25,7 @@ export interface SighInParams {
   accountPw: string;
 }
 
-export interface UserProfileType {
+export interface UserProfileFormType {
   nickname?: string;
   intro?: string;
   userImg?: File;
