@@ -19,6 +19,7 @@ export function errorHandler(err: AxiosError<any, any>) {
     return windowNavigate(SIGH_IN);
   }
   if (status === 415) {
-    return console.warn('header의 content-type을 확인해주세요');
+    console.warn('header의 content-type을 확인해주세요');
+    return alert('개발자에게 문의해 주세요. reviewTwit@google.com');
   }
 }
