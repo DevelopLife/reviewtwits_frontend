@@ -72,8 +72,6 @@ const ReviewWriteForm = () => {
   };
 
   const onValid = () => {
-    if (!values || !isSubmitable) return;
-
     const formData = setDataInToFormData();
     mutateCreate(formData);
   };
