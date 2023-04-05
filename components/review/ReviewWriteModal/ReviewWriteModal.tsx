@@ -125,8 +125,6 @@ const ReviewWriteModal = () => {
   };
 
   const onValid = async () => {
-    if (!values || !isSubmitable) return;
-
     const formData = setDataInToFormData();
     isEditPage ? mutateEdit(formData) : mutateCreate(formData);
   };
