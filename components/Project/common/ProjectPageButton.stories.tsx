@@ -7,5 +7,5 @@ export default {
 } as Meta;
 
 export const primary: StoryFn<typeof ProjectPageButton> = () => (
-  <ProjectPageButton>텍스트</ProjectPageButton>
+  <ProjectPageButton>텍스트변경</ProjectPageButton>
 );
