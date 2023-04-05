@@ -45,7 +45,12 @@ const ReviewView = ({ data }: ReviewViewProps) => {
         </S.ReviewInfoBox>
         <S.ReviewText>{data?.content}</S.ReviewText>
         <ImageList imageNameList={data?.reviewImageNameList} />
-        <ReactionBox reactions={data?.reactionResponseList} />
+        {data?.reviewId && (
+          <ReactionBox
+            reviewId={data?.reviewId}
+            reactions={data?.reactionResponses}
+          />
+        )}
         <S.CommentOpenButton>
           {data?.commentCount}개의 댓글이 달림
         </S.CommentOpenButton>

@@ -13,9 +13,10 @@ export type ReactionType =
   | 'NOTICING';
 
 export interface ReactionResponseType {
-  reactionType: ReactionType;
-  isReacted: boolean;
-  count: number;
+  [reaction: string]: {
+    isReacted: boolean;
+    count: number;
+  };
 }
 
 export interface ReviewType {
@@ -38,5 +39,5 @@ export interface ReviewResponseType {
   reviewImageNameList: string[];
   userInfo: UserProfileResponseType;
   commentCount?: number;
-  reactionResponseList?: ReactionResponseType[];
+  reactionResponses?: ReactionResponseType;
 }

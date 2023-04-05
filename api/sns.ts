@@ -1,5 +1,7 @@
 import { api } from 'api/instance';
 
+import { ReactionType } from 'typings/reviews';
+
 const SNS_URL = '/sns';
 
 export const snsAPI = {
@@ -13,5 +15,12 @@ export const snsAPI = {
         },
       })
       .then((res) => res.data);
+  },
+  addReaction: async (reviewId: number, reaction: ReactionType) => {
+    const params = { reaction };
+
+    return await api.post(`${SNS_URL}/review-reaction/${reviewId}`, null, {
+      params,
+    });
   },
 };

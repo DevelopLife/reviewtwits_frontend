@@ -1,32 +1,62 @@
+import { MouseEvent } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
-import { ReactionResponseType } from 'typings/reviews';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { ReactionResponseType, ReactionType } from 'typings/reviews';
+import { snsAPI } from 'api/sns';
 
 interface ReactionBoxProps {
-  reactions?: ReactionResponseType[];
+  reviewId: number;
+  reactions?: ReactionResponseType;
 }
 
-const ReactionBox = ({ reactions }: ReactionBoxProps) => {
+const ReactionBox = ({ reviewId, reactions }: ReactionBoxProps) => {
+  const queryClient = useQueryClient();
+  const { mutate: addReactionMutate } = useMutation(
+    (reaction: ReactionType) => snsAPI.addReaction(reviewId, reaction),
+    {
+      onSuccess: () => {
+        return queryClient.invalidateQueries(['feed']); //
+      },
+    }
+  );
+
+  const doReact = (e: MouseEvent<HTMLButtonElement>) => {
+    const reactionType = e.currentTarget.id as ReactionType;
+
+    addReactionMutate(reactionType);
+  };
+
   const props = {
     reactions,
+    doReact,
   };
 
   return <ReactionBoxView {...props} />;
 };
 
 interface ReactionBoxViewProps {
-  reactions?: ReactionResponseType[];
+  reactions?: ReactionResponseType;
+  doReact: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const ReactionBoxView = ({ reactions }: ReactionBoxViewProps) => {
+const ReactionBoxView = ({ reactions, doReact }: ReactionBoxViewProps) => {
+  if (!reactions) return null;
   return (
     <S.Box>
-      {reactions?.map((reaction: ReactionResponseType, i) => (
-        <S.ReactionButton key={i}>
-          <S.ReactionCnt>{reaction.count}</S.ReactionCnt>
+      {Object.keys(reactions)?.map((name, i) => (
+        <S.ReactionButton
+          key={i}
+          id={name}
+          isActive={reactions[name].isReacted}
+          onClick={doReact}
+        >
+          <S.ReactionCnt>{reactions[name].count}</S.ReactionCnt>
           <Image
-            src={`/icons/${reaction.reactionType.toLowerCase()}.png`}
+            src={`/icons/${name.toLowerCase()}.png`}
             width="15"
             height="15"
             alt=""
@@ -59,7 +89,7 @@ const S = {
     }
   `,
 
-  ReactionButton: styled.button`
+  ReactionButton: styled.button<{ isActive: boolean }>`
     display: flex;
     align-items: center;
     gap: 5px;
@@ -67,6 +97,14 @@ const S = {
     border: 1px solid ${({ theme }) => theme.colors.gray_6};
     border-radius: 15px;
     padding: 4px 10px;
+
+    ${({ theme, isActive }) => {
+      if (isActive)
+        return css`
+          background: ${theme.colors['gray_8']};
+          color: white;
+        `;
+    }};
   `,
 
   ReactionCnt: styled.span``,
