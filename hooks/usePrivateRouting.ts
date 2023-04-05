@@ -14,19 +14,27 @@ export const usePrivateRouting = (
     [setIsLogined]
   );
 
+  const setTrueIsLogined = useCallback(
+    () => setIsLogined(true),
+    [setIsLogined]
+  );
+
   useEffect(() => {
     if (statusCode === 404) return;
     if (isRequiredLoginPage) {
-      handleIsLoginedInLocalStorage(setFalseIsLogined);
+      handleIsLoginedInLocalStorage(setTrueIsLogined, setFalseIsLogined);
     }
-  }, [isRequiredLoginPage, setFalseIsLogined, statusCode]);
+  }, [isRequiredLoginPage, setFalseIsLogined, setTrueIsLogined, statusCode]);
 
   return {
     isLogined,
   };
 };
 
-export function handleIsLoginedInLocalStorage(logout: () => void) {
+export function handleIsLoginedInLocalStorage(
+  login: () => void,
+  logout: () => void
+) {
   const loginExpireAtString = localStorage.getItem(
     LOCAL_STORAGE_KEYS.LOGIN_EXPIRE_AT
   );
@@ -34,6 +42,7 @@ export function handleIsLoginedInLocalStorage(logout: () => void) {
   if (!loginExpireAtString) {
     alert('로그인이 필요합니다.');
     logout();
+    // TODO: replace 113 PR windowNavigate function
     window.location.href = '/sign-in';
     return;
   }
@@ -45,7 +54,10 @@ export function handleIsLoginedInLocalStorage(logout: () => void) {
     alert('로그인 유지기간이 만료되었습니다.');
     logout();
     window.localStorage.removeItem(LOCAL_STORAGE_KEYS.LOGIN_EXPIRE_AT);
+    // TODO: replace 113 PR windowNavigate function
     window.location.href = '/sign-in';
     return;
   }
+
+  login();
 }
