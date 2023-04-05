@@ -18,4 +18,7 @@ export function errorHandler(err: AxiosError<any, any>) {
     alert('권한이 없어요.');
     return windowNavigate(SIGH_IN);
   }
+  if (status === 415) {
+    return console.warn('header의 content-type을 확인해주세요');
+  }
 }
