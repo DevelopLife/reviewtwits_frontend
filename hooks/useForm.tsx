@@ -24,7 +24,20 @@ const useForm = <T extends object>(initialValues: T) => {
 
   const checkFormFilled = useCallback(() => {
     const keys = Object.keys(values) as (keyof T)[];
-    const emptyValues = keys.filter((name) => values[name] === '');
+    const emptyValues = keys.filter((name) => {
+      const value = values[name];
+
+      switch (typeof value) {
+        case 'object':
+          return !(values[name] as File[]).length;
+        case 'string':
+          return value === '';
+        case 'number':
+          return !value;
+        default:
+          return !value;
+      }
+    });
     const isFormFilled = !emptyValues.length;
 
     return isFormFilled;

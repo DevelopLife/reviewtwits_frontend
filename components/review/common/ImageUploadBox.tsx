@@ -79,7 +79,7 @@ const ImageUploadBox = ({
   };
 
   useEffect(() => {
-    setValue('newImageFiles', newFiles);
+    if (newFiles.length) setValue('newImageFiles', newFiles);
   }, [newFiles, setValue]);
 
   return (
