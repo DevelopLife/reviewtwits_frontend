@@ -1,14 +1,20 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
+import { snsAPI } from 'api/sns';
 import useForm from 'hooks/useForm';
 import {
   validateURL,
   validateReviewContent,
   validateReviewScore,
 } from 'utils/validate';
-import { DEFAULT_REVIEW_WRITE_ERRORS, ERROR_MESSAGE } from 'constants/reviews';
+import {
+  DEFAULT_REVIEW_WRITE_ERRORS,
+  ERROR_MESSAGE,
+  SUCCESS_MESSAGE,
+} from 'constants/reviews';
 import { ReviewType } from 'typings/reviews';
 
 import ImageUploadBox from 'components/review/common/ImageUploadBox';
@@ -16,9 +22,9 @@ import RatingBox from 'components/review/common/RatingBox';
 import ReviewCreateButton from 'components/review/common/ReviewCreateButton';
 import ReviewTextArea from 'components/review/common/ReviewTextArea';
 import SearchBar from './SearchBar';
-import { snsAPI } from 'api/sns';
 
 const ReviewWriteForm = () => {
+  const router = useRouter();
   const {
     values,
     isSubmitable,
@@ -33,8 +39,21 @@ const ReviewWriteForm = () => {
     productName: 'productName',
     newImageFiles: [],
   });
-  const { mutate: mutateCreate } = useMutation((data: FormData) =>
-    snsAPI.createReview(data)
+  const { mutate: mutateCreate } = useMutation(
+    (data: FormData) => snsAPI.createReview(data),
+    {
+      onSuccess: () => {
+        alert(SUCCESS_MESSAGE.CREATE);
+        router.push('/social/home');
+      },
+      onError: ({ response }) => {
+        switch (response?.status) {
+          case 400:
+            alert(response.data[0].message);
+            break;
+        }
+      },
+    }
   );
 
   const setDataInToFormData = () => {
