@@ -1,9 +1,10 @@
 import { AxiosError } from 'axios';
 import { windowNavigate } from 'utils/windowNavigate';
 
-const SIGH_IN = 'sign-in';
+const SIGN_IN = 'sign-in';
 
 export function errorHandler(err: AxiosError<any, any>) {
+  const REDIRECT_URL = `${window?.location.origin}/${SIGN_IN}`;
   const status = err.response?.status;
 
   if (!status) {
@@ -12,11 +13,11 @@ export function errorHandler(err: AxiosError<any, any>) {
 
   if (status === 401) {
     alert('재로그인이 필요해요.');
-    return windowNavigate(SIGH_IN);
+    return windowNavigate(REDIRECT_URL);
   }
   if (status === 403) {
     alert('권한이 없어요.');
-    return windowNavigate(SIGH_IN);
+    return windowNavigate(REDIRECT_URL);
   }
   if (status === 415) {
     console.warn('header의 content-type을 확인해주세요');
