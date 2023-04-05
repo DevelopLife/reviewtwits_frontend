@@ -19,22 +19,13 @@ import { doSignIn } from 'utils/auth';
 import { isLoginState } from 'states/isLogin';
 
 const SignInForm = () => {
-  const {
-    values,
-    errors,
-    isSubmitable: isValid,
-    setErrors,
-    handleChange,
-    handleSubmit,
-  } = useForm({
+  const { values, errors, setErrors, handleChange, handleSubmit } = useForm({
     accountId: '',
     accountPw: '',
   });
   const setIsLogined = useSetRecoilState(isLoginState);
 
   const onValid = async () => {
-    if (!isValid) return alert(errors?.accountId || errors?.accountPw);
-
     const signInResult = await usersAPI.signIn(values);
 
     if (signInResult) {
@@ -43,6 +34,10 @@ const SignInForm = () => {
 
       window.location.replace('/');
     }
+  };
+
+  const onInvalid = () => {
+    alert(errors?.accountId || errors?.accountPw);
   };
 
   const signInValidate = useCallback(() => {
@@ -62,6 +57,7 @@ const SignInForm = () => {
 
   const props = {
     onValid,
+    onInvalid,
     handleChange,
     handleSubmit,
   };
@@ -71,6 +67,7 @@ const SignInForm = () => {
 
 interface SignInFormViewProps {
   onValid: () => void;
+  onInvalid: () => void;
   handleChange: (
     e: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>
   ) => void;

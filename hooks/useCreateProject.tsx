@@ -4,12 +4,15 @@ import { useRecoilState } from 'recoil';
 import { PricePlan, UppercasePricePlan } from 'api/projects';
 import { useBoolean } from 'hooks/useBoolean';
 import { createProjectFormState } from 'states/createProjectForm';
+import { projectPlanState } from 'states/projectPlan';
 
 export const useCreateProject = () => {
   const [createProjectForm, setCreateProjectForm] = useRecoilState(
     createProjectFormState
   );
-  const [projectPlan, setProjectPlan] = useState<UppercasePricePlan | ''>('');
+  const [projectPlan, setProjectPlan] = useRecoilState<UppercasePricePlan | ''>(
+    projectPlanState
+  );
 
   const { isOpen: isDisabled, setTrue, setFalse } = useBoolean(true);
 

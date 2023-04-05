@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { SelectedButton } from './FunctionIntroduce';
 
 const Container = styled.div`
   width: ${({ theme }) => theme.devices.desktop}px;
