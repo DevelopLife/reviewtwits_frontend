@@ -58,11 +58,12 @@ const useForm = <T extends object>(initialValues: T) => {
 
   const handleSubmit = async (
     e: FormEvent<HTMLFormElement>,
-    onValid: () => void
+    onValid: () => void,
+    onInvalid?: () => void
   ) => {
     e.preventDefault();
 
-    onValid();
+    (!values || !isSubmitable) && onInvalid ? onInvalid() : onValid();
   };
 
   const initializeForm = useCallback((initialValues: T) => {
