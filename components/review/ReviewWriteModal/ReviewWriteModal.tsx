@@ -6,16 +6,17 @@ import { useRouter } from 'next/router';
 import useForm from 'hooks/useForm';
 import { ReviewResponseType, ReviewType } from 'typings/reviews';
 import { shoppingAPI } from 'api/reviews';
-
-import * as S from './ReviewWriteModal.styles';
-import ServiceSection from './ServiceSection/@index';
-import QualitySection from './QualitySection/@index';
 import { validateReviewContent, validateReviewScore } from 'utils/validate';
 import {
   DEFAULT_REVIEW_WRITE_ERRORS,
   ERROR_MESSAGE,
   SUCCESS_MESSAGE,
 } from 'constants/reviews';
+
+import * as S from './ReviewWriteModal.styles';
+import ServiceSection from './ServiceSection/@index';
+import QualitySection from './QualitySection/@index';
+import ReviewCreateButton from '../common/ReviewCreateButton';
 
 const REVIEW_QUERY_KEY = 'reviews';
 
@@ -162,9 +163,9 @@ const ReviewWriteModal = () => {
           />
         </S.ReviewContent>
         <S.ButtonWrap>
-          <S.CreateButton type="submit" disabled={!isSubmitable}>
+          <ReviewCreateButton color="primary" disabled={!isSubmitable}>
             {isEditPage ? '수정 완료' : '작성 완료'}
-          </S.CreateButton>
+          </ReviewCreateButton>
         </S.ButtonWrap>
       </S.Form>
     </S.Container>
