@@ -11,3 +11,4 @@ export const validatePasswordCheck = (
 
 export const validateReviewScore = (score: number) => score > 0 && score <= 5;
 export const validateReviewContent = (content: string) => content?.length >= 10;
+export const validateURL = (url: string) => regExp.url.test(url);
