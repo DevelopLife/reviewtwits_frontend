@@ -1,5 +1,6 @@
 export interface ReviewType {
   productURL: string;
+  productName?: string;
   content: string;
   score: number;
   newImageFiles?: File[];
