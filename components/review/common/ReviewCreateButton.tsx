@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from 'styles/theme';
 
-interface ReviewCreateButtonProps {
+export interface ReviewCreateButtonProps {
   color: Colors;
   disabled: boolean;
   children: ReactNode;
