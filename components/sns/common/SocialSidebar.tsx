@@ -40,7 +40,7 @@ const SnsSidebar = () => {
           const href = text.toLowerCase();
           const isCurrent = href === lastPathName;
           const iconColor = isCurrent
-            ? theme.colors.black
+            ? theme.colors.secondary
             : theme.colors.gray_4;
 
           return (
