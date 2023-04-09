@@ -23,16 +23,35 @@ const ReactionBox = ({ reviewId, reactions }: ReactionBoxProps) => {
       },
     }
   );
+  const { mutate: deleteReactionMutate } = useMutation(
+    () => snsAPI.deleteReaction(reviewId),
+    {
+      onSuccess: () => {
+        return queryClient.invalidateQueries(['feed']); //
+      },
+    }
+  );
 
-  const doReact = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleClickReactButton = (e: MouseEvent<HTMLButtonElement>) => {
     const reactionType = e.currentTarget.id as ReactionType;
+    const existReaction =
+      reactions &&
+      Object.keys(reactions).filter((name) => reactions[name].isReacted);
 
+    existReaction && existReaction[0] === reactionType
+      ? cancelReact()
+      : doReact(reactionType);
+  };
+
+  const doReact = (reactionType: ReactionType) => {
     addReactionMutate(reactionType);
   };
 
+  const cancelReact = () => deleteReactionMutate();
+
   const props = {
     reactions,
-    doReact,
+    handleClickReactButton,
   };
 
   return <ReactionBoxView {...props} />;
@@ -40,10 +59,13 @@ const ReactionBox = ({ reviewId, reactions }: ReactionBoxProps) => {
 
 interface ReactionBoxViewProps {
   reactions?: ReactionResponseType;
-  doReact: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleClickReactButton: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const ReactionBoxView = ({ reactions, doReact }: ReactionBoxViewProps) => {
+const ReactionBoxView = ({
+  reactions,
+  handleClickReactButton,
+}: ReactionBoxViewProps) => {
   if (!reactions) return null;
   return (
     <S.Box>
@@ -52,7 +74,7 @@ const ReactionBoxView = ({ reactions, doReact }: ReactionBoxViewProps) => {
           key={i}
           id={name}
           isActive={reactions[name].isReacted}
-          onClick={doReact}
+          onClick={handleClickReactButton}
         >
           <S.ReactionCnt>{reactions[name].count}</S.ReactionCnt>
           <Image

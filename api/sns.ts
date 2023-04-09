@@ -23,4 +23,7 @@ export const snsAPI = {
       params,
     });
   },
+  deleteReaction: async (reviewId: number) => {
+    return await api.delete(`${SNS_URL}/review-reaction/${reviewId}`);
+  },
 };
