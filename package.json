@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "jest": "jest --watch",
     "storybook": "storybook dev -p 6006",
     "test": "echo 'No tests specified'",
     "build-storybook": "storybook build",
