@@ -83,13 +83,13 @@ const StyledButton = styled.button<ButtonStyleProps>`
       color: white;
     `}
 
-  &:not(:disabled):hover {
-    cursor: pointer;
-    opacity: 0.8;
+  &:disabled:hover {
+    cursor: default;
+    opacity: 1;
   }
 
   &:disabled {
-    background: ${theme.colors.gray_4};
+    background: ${theme.colors.gray_3};
   }
 `;
 
