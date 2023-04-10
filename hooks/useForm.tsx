@@ -59,12 +59,14 @@ const useForm = <T extends object>(initialValues: T) => {
     setIsSubmitable(isFormFilled && isFormValid);
   }, [checkFormFilled, checkFormValid]);
 
-  const handleChange = ({
-    currentTarget,
-  }:
-    | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    | MouseEvent<HTMLButtonElement>) => {
-    const { name, value } = currentTarget;
+  const handleChange = (
+    e:
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | MouseEvent<HTMLButtonElement>
+  ) => {
+    const { type, name, value } = e.currentTarget;
+
+    if (type === 'date' && value === '') alert('정확한 날짜를 입력해주세요.');
 
     setValue(name, value);
   };
