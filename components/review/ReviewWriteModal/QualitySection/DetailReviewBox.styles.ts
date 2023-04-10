@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import theme from 'styles/theme';
 
 import * as S from '../ReviewWriteModal.styles';
 
@@ -17,19 +16,4 @@ const Box = styled.div`
   }
 `;
 
-const TextArea = styled.textarea`
-  width: 790px;
-  height: 256px;
-  padding: 14px;
-  font-size: 14px;
-
-  outline: none;
-  resize: none;
-  border: ${({ theme }) => `2px solid ${theme.colors.gray_4}`};
-
-  &::placeholder {
-    color: ${theme.colors.gray_5};
-  }
-`;
-
-export { SectionTitle, Box, ReviewFor, TextArea };
+export { SectionTitle, Box, ReviewFor };

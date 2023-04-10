@@ -1,18 +1,24 @@
 import { useState, useRef, ChangeEvent, MouseEvent, useEffect } from 'react';
 import Image from 'next/image';
 
+import { Colors } from 'styles/theme';
 import { formattedImageUrl } from 'utils/format';
 import * as S from './ImageUploadBox.styles';
-import CameraIcon from 'public/images/camera_icon.svg';
+import CameraIcon from 'public/icons/camera.svg';
 import CloseIcon from 'public/images/close_icon.svg';
 import useHorizontalScroll from 'hooks/useHorizontalScroll';
 
-interface ImageUploadBox {
+export interface ImageUploadBoxProps {
+  buttonColor: Colors;
   imageNameList?: string[];
   setValue: (name: string, value: File[] | string[]) => void;
 }
 
-const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
+const ImageUploadBox = ({
+  buttonColor,
+  imageNameList,
+  setValue,
+}: ImageUploadBoxProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useHorizontalScroll();
   const existImageCnt = useRef<number>(imageNameList?.length || 0);
@@ -73,7 +79,7 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
   };
 
   useEffect(() => {
-    setValue('newImageFiles', newFiles);
+    if (newFiles.length) setValue('newImageFiles', newFiles);
   }, [newFiles, setValue]);
 
   return (
@@ -98,9 +104,12 @@ const ImageUploadBox = ({ imageNameList, setValue }: ImageUploadBox) => {
           </S.ImageBox>
         ))}
       </S.ImageList>
-      <S.ImageUploadButton type="button" onClick={handleClickImageUpload}>
+      <S.ImageUploadButton
+        type="button"
+        color={buttonColor}
+        onClick={handleClickImageUpload}
+      >
         <CameraIcon />
-        {/* <Image width={24} height={24} src={CameraIcon} alt="" /> */}
         사진 올리기
       </S.ImageUploadButton>
       <input

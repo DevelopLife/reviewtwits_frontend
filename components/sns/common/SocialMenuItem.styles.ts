@@ -1,20 +1,23 @@
 import styled from '@emotion/styled';
 
 const SocialMenuItem = styled.li<{ isCurrent: boolean }>`
-  width: 153px;
-  height: 24px;
-  margin-bottom: 36px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: ${({ theme, isCurrent }) =>
+    isCurrent && theme.colors.secondary + '3D'};
 
   & > a {
     display: flex;
+    width: 100%;
     align-items: center;
     gap: 16px;
     text-decoration: none;
-    font-weight: 400;
     font-size: 20px;
+    font-weight: ${({ isCurrent }) => (isCurrent ? 700 : 400)};
 
     color: ${({ theme, isCurrent }) =>
-      isCurrent ? theme.colors.black : theme.colors.gray_4};
+      isCurrent ? theme.colors.secondary : theme.colors.gray_4};
   }
 `;
 

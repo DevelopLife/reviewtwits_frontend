@@ -5,11 +5,22 @@ interface FormProps {
   title: string;
   children: ReactNode;
   onValid: () => void;
-  handleSubmit: (e: FormEvent<HTMLFormElement>, fn: () => void) => void;
+  onInvalid?: () => void;
+  handleSubmit: (
+    e: FormEvent<HTMLFormElement>,
+    onValid: () => void,
+    onInvalid?: () => void
+  ) => void;
 }
 
-const Form = ({ title, children, onValid, handleSubmit }: FormProps) => (
-  <StyledForm onSubmit={(e) => handleSubmit(e, onValid)}>
+const Form = ({
+  title,
+  children,
+  onValid,
+  onInvalid,
+  handleSubmit,
+}: FormProps) => (
+  <StyledForm onSubmit={(e) => handleSubmit(e, onValid, onInvalid)}>
     <Title>{title}</Title>
     {children}
   </StyledForm>
@@ -19,7 +30,6 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   border-radius: 30px;
-  padding: 68px;
 `;
 
 const Title = styled.h2`
