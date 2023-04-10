@@ -1,14 +1,12 @@
 import SocialLayout from 'components/sns/common/SocialLayout';
 import SocialTitleSection from 'components/sns/common/SocialTitleSection';
-import ChangeFollowListButton from 'components/social/Follower/ChangeFollowListButton';
-import SocialList from 'components/social/Follower/SocialList';
+import FollowerSection from 'components/social/Follower';
 
 const SocialFollowPage = () => {
   return (
     <SocialLayout>
       <SocialTitleSection title="팔로워 관리">
-        <ChangeFollowListButton />
-        <SocialList></SocialList>
+        <FollowerSection />
       </SocialTitleSection>
     </SocialLayout>
   );
