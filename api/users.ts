@@ -42,7 +42,11 @@ export const usersAPI = {
       .then((res) => res.data);
   },
   signOut: async () => {
-    return await api.post(`${USERS_URL}/logout`);
+    return await api.post(`${USERS_URL}/logout`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   },
   setUserProfile: async (data: FormData) => {
     return await api.post(`${USERS_URL}/register-addition`, data);

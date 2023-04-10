@@ -1,3 +1,3 @@
-import UserProfileForm from './UserProfileForm';
+import UserProfileCard from './UserProfileCard';
 
-export { UserProfileForm };
+export { UserProfileCard };

@@ -8,7 +8,7 @@ import CameraIcon from 'public/icons/camera.svg';
 import CloseIcon from 'public/images/close_icon.svg';
 import useHorizontalScroll from 'hooks/useHorizontalScroll';
 
-interface ImageUploadBox {
+export interface ImageUploadBoxProps {
   buttonColor: Colors;
   imageNameList?: string[];
   setValue: (name: string, value: File[] | string[]) => void;
@@ -18,7 +18,7 @@ const ImageUploadBox = ({
   buttonColor,
   imageNameList,
   setValue,
-}: ImageUploadBox) => {
+}: ImageUploadBoxProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useHorizontalScroll();
   const existImageCnt = useRef<number>(imageNameList?.length || 0);
@@ -79,7 +79,7 @@ const ImageUploadBox = ({
   };
 
   useEffect(() => {
-    setValue('newImageFiles', newFiles);
+    if (newFiles.length) setValue('newImageFiles', newFiles);
   }, [newFiles, setValue]);
 
   return (
