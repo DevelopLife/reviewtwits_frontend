@@ -23,6 +23,7 @@ const colors = {
   gray_9: '#292a2b',
   black: '#3d3d3d',
   yellow: '#F8BB2B',
+  white: '#ffffff',
   border_gray: '#e9e9e9',
 } as const;
 
