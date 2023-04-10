@@ -1,57 +1,61 @@
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-import { Colors } from 'styles/theme';
+import useGetSocialProfile from 'hooks/useGetSocialProfile';
+import useUserProfile from 'hooks/useUserProfile';
+import { mockSocialProfile } from 'constants/mockSocialProfile';
+import type { Colors } from 'styles/theme';
+import type { SocialProfile } from 'typings/social';
 
 export const SocialProfileCard = () => {
-  const mockProfileData: SocialProfileCardViewProps = {
-    profileImage: '',
-    nickName: 'mockNickname',
-    carrer: 'IT 엔지니어',
-    description: `안녕하세요! 저는 전문 리뷰어입니다.
-      영화, 책, 음악, 레스토랑, 여행지 등을 평가하며,
-      공정하고 중립적인 리뷰를 작성합니다.
-      늘 사용자들이 신뢰할 수 있는 정보를 제공하는 것을 목표로 하고 있습니다.
-      영화, 책, 음악, 레스토랑, 여행지 등을 평가하며,
-      공정하고 중립적인 리뷰를 작성합니다.
-      늘 사용자들이 신뢰할 수 있는 정보를 제공하는 것을 목표로 하고 있습니다.
-      영화, 책, 음악, 레스토랑, 여행지 등을 평가하며,
-      공정하고 중립적인 리뷰를 작성합니다.
-      늘 사용자들이 신뢰할 수 있는 정보를 제공하는 것을 목표로 하고 있습니다.
-      영화, 책, 음악, 레스토랑, 여행지 등을 평가하며,
-      공정하고 중립적인 리뷰를 작성합니다.
-      늘 사용자들이 신뢰할 수 있는 정보를 제공하는 것을 목표로 하고 있습니다.`,
-    reviewCount: 1,
-    follwerCount: 20,
-    follwingCount: 300,
-  };
-  return <SocialProfileCardView {...mockProfileData} />;
+  const router = useRouter();
+  const { pathname } = router;
+  const isMyPage = pathname === 'social/mypage';
+
+  const userData = useUserProfile();
+  const { data: socialProfile, status } = useGetSocialProfile(
+    userData?.nickname
+  );
+
+  if (status && socialProfile?.userId) {
+    return (
+      <SocialProfileCardView isMyPage={isMyPage} profile={socialProfile} />
+    );
+  }
+
+  return (
+    <SocialProfileCardView isMyPage={isMyPage} profile={mockSocialProfile} />
+  );
 };
 
 interface SocialProfileCardViewProps {
-  profileImage: string;
-  nickName: string;
-  carrer: string;
-  description: string;
-  reviewCount: number;
-  follwerCount: number;
-  follwingCount: number;
+  isMyPage: boolean;
+  profile: SocialProfile;
 }
 
 export const SocialProfileCardView = ({
-  profileImage,
-  nickName,
-  carrer,
-  description,
-  reviewCount,
-  follwerCount,
-  follwingCount,
+  isMyPage,
+  profile,
 }: SocialProfileCardViewProps) => {
+  const {
+    userId,
+    nickname,
+    accountId,
+    introduceText,
+    profileImage,
+    reviewCount,
+    followers,
+    followings,
+  } = profile;
+
   return (
     <S.ProfileCard>
       <S.ProfileCardContent>
         <S.ProfileDetail>
-          <div
+          <Image
+            width={80}
+            height={80}
             style={{
               minWidth: '80px',
               height: '80px',
@@ -59,18 +63,14 @@ export const SocialProfileCardView = ({
               overflow: 'hidden',
               backgroundColor: 'white',
             }}
-          ></div>
-          {/* <Image
-            width={80}
-            height={80}
-            src={profileImage}
+            src={profileImage ? profileImage : ''}
             alt={'socialProfileImage'}
-          /> */}
+          />
           <S.FlexItem>
-            <S.SocialNickname>{nickName}</S.SocialNickname>
-            <S.Carrer>{carrer}</S.Carrer>
+            <S.SocialNickname>{nickname}</S.SocialNickname>
+            <S.Carrer>{accountId}</S.Carrer>
           </S.FlexItem>
-          <S.Description>{description}</S.Description>
+          <S.Description>{introduceText}</S.Description>
         </S.ProfileDetail>
         <S.AccountDetail>
           <S.FollowBox>
@@ -80,16 +80,22 @@ export const SocialProfileCardView = ({
             </S.FollowBoxItem>
             <S.FollowBoxItem>
               <S.FollowBoxName>Followers</S.FollowBoxName>
-              {follwerCount}
+              {followers}
             </S.FollowBoxItem>
             <S.FollowBoxItem>
               <S.FollowBoxName>Following</S.FollowBoxName>
-              {follwingCount}
+              {followings}
             </S.FollowBoxItem>
           </S.FollowBox>
           <S.ButtonBox>
-            <S.Button color={'secondary'}>Follow</S.Button>
-            <S.Button color={'secondary'}>Message</S.Button>
+            {isMyPage ? (
+              <S.Button color={'secondary'}>Edit Profile</S.Button>
+            ) : (
+              <>
+                <S.Button color={'secondary'}>Follow</S.Button>
+                <S.Button color={'secondary'}>Message</S.Button>
+              </>
+            )}
           </S.ButtonBox>
         </S.AccountDetail>
       </S.ProfileCardContent>
@@ -99,11 +105,10 @@ export const SocialProfileCardView = ({
 
 const S = {
   ProfileCard: styled.div`
-    width: 880px;
+    width: 635px;
     height: 328px;
     border-radius: 20px;
     margin-bottom: 40px;
-    padding: 20px;
 
     overflow: hidden;
     color: white;
@@ -111,12 +116,11 @@ const S = {
   `,
   FlexItem: styled.div``,
   ProfileCardContent: styled.div`
-    padding: 40px 53px;
+    padding: 30px 40px;
     gap: 60px;
   `,
   ProfileDetail: styled.div`
     display: flex;
-    width: 726px;
     gap: 20px;
   `,
   AccountDetail: styled.div`
