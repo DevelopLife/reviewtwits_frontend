@@ -30,7 +30,6 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   border-radius: 30px;
-  padding: 68px;
 `;
 
 const Title = styled.h2`
