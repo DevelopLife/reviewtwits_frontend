@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
 
 import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
 import type { WrapProps } from 'typings/wrapperProps';
-import socialAPI from 'api/social';
+
 import useUserProfile from 'hooks/useUserProfile';
 import useGetSocialReviews from 'hooks/useGetSocialReviews';
 

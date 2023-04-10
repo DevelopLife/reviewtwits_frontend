@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import socialAPI from 'api/social';
+
+import { snsAPI } from 'api/sns';
 
 const useGetSocialReviews = (nickname: string) => {
-  return useQuery(['socialMyReviews'], () => socialAPI.getMyReviews(nickname), {
+  return useQuery(['socialMyReviews'], () => snsAPI.getMyReviews(nickname), {
     enabled: !!nickname,
   });
 };

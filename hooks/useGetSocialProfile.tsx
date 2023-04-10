@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-
-import socialAPI from 'api/social';
+import { snsAPI } from 'api/sns';
 
 const useGetSocialProfile = (nickname: string) => {
   const socialProfileQuery = useQuery(
     ['socialProfile'],
-    () => socialAPI.getProfile(nickname),
+    () => snsAPI.getProfile(nickname),
     {
       enabled: !!nickname,
     }
