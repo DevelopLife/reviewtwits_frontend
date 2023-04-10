@@ -40,4 +40,5 @@ export interface ReviewResponseType {
   userInfo: UserProfileResponseType;
   commentCount?: number;
   reactionResponses?: ReactionResponseType;
+  isScrapped: boolean;
 }

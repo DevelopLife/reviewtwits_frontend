@@ -10,7 +10,7 @@ import Card from '../../Card';
 import ReactionBox from './ReactionBox';
 import StarBox from './StarBox';
 import ImageList from './ImageList';
-import BookmarkOutlineIcon from 'public/icons/bookmark_outline.svg';
+import ScrapButton from './ScrapButton';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -29,12 +29,13 @@ interface ReviewViewProps {
 }
 
 const ReviewView = ({ data }: ReviewViewProps) => {
+  if (!data) return null;
   return (
     <Card>
       <S.Content>
-        <S.ScrapButton>
-          <BookmarkOutlineIcon />
-        </S.ScrapButton>
+        <S.ScrapButtonWrap>
+          <ScrapButton isScrapped={data.isScrapped} reviewId={data.reviewId} />
+        </S.ScrapButtonWrap>
         <S.ReviewInfoBox>
           <S.UserInfo>
             <S.UserImage src="" alt="" />
@@ -45,12 +46,10 @@ const ReviewView = ({ data }: ReviewViewProps) => {
         </S.ReviewInfoBox>
         <S.ReviewText>{data?.content}</S.ReviewText>
         <ImageList imageNameList={data?.reviewImageNameList} />
-        {data?.reviewId && (
-          <ReactionBox
-            reviewId={data?.reviewId}
-            reactions={data?.reactionResponses}
-          />
-        )}
+        <ReactionBox
+          reviewId={data?.reviewId}
+          reactions={data?.reactionResponses}
+        />
         <S.CommentOpenButton>
           {data?.commentCount}개의 댓글이 달림
         </S.CommentOpenButton>
@@ -76,7 +75,7 @@ const S = {
     padding: 32px;
   `,
 
-  ScrapButton: styled.button`
+  ScrapButtonWrap: styled.div`
     position: absolute;
     top: 15px;
     right: 5px;

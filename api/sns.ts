@@ -26,4 +26,10 @@ export const snsAPI = {
   deleteReaction: async (reviewId: number) => {
     return await api.delete(`${SNS_URL}/review-reaction/${reviewId}`);
   },
+  addScrap: async (reviewId: number) => {
+    return await api.post(`${SNS_URL}/scrap-reviews/${reviewId}`);
+  },
+  deleteScrap: async (reviewId: number) => {
+    return await api.delete(`${SNS_URL}/scrap-reviews/${reviewId}`);
+  },
 };
