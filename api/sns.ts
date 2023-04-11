@@ -17,4 +17,13 @@ export const snsAPI = {
 
     return response.data;
   },
+  follow: (body: FollowAndUnFollowRequestBody) =>
+    api.post(`${SNS_URL}/request-follow`, body),
+
+  unfollow: (body: FollowAndUnFollowRequestBody) =>
+    api.post(`${SNS_URL}/request-unfollow`, body),
+};
+
+type FollowAndUnFollowRequestBody = {
+  targetUserAccountId: string;
 };
