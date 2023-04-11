@@ -39,9 +39,8 @@ export const SocialProfileCardView = ({
   profile,
 }: SocialProfileCardViewProps) => {
   const {
-    userId,
     nickname,
-    accountId,
+    detailIntroduce,
     introduceText,
     profileImage,
     reviewCount,
@@ -68,7 +67,7 @@ export const SocialProfileCardView = ({
           />
           <S.FlexItem>
             <S.SocialNickname>{nickname}</S.SocialNickname>
-            <S.Carrer>{accountId}</S.Carrer>
+            <S.Carrer>{detailIntroduce}</S.Carrer>
           </S.FlexItem>
           <S.Description>{introduceText}</S.Description>
         </S.ProfileDetail>

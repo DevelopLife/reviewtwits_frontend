@@ -3,6 +3,7 @@ export type SocialProfile = {
   nickname: string;
   accountId: string;
   introduceText: string;
+  detailIntroduce: string;
   profileImage: string | null;
   reviewCount: number;
   followers: number;
