@@ -33,11 +33,11 @@ const SnsSidebar = () => {
 
   return (
     <S.SidebarLayout>
-      <SidebarTitle href={'home'}>{SERVICE_TITLE}</SidebarTitle>
+      <SidebarTitle href={'/social/home'}>{SERVICE_TITLE}</SidebarTitle>
       <SearchBar />
       <SocialMenus>
         {MENUS.map(({ text, Icon }) => {
-          const href = text.toLowerCase();
+          const href = `/social/${text.toLowerCase()}`;
           const isCurrent = href === lastPathName;
           const iconColor = isCurrent
             ? theme.colors.secondary
