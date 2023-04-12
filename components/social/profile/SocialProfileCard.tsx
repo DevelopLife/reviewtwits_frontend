@@ -11,7 +11,8 @@ import type { SocialProfile } from 'typings/social';
 export const SocialProfileCard = () => {
   const router = useRouter();
   const { pathname } = router;
-  const isMyPage = pathname === 'social/mypage';
+
+  const isMyPage = pathname === '/social/profile';
 
   const userData = useUserProfile();
   const { data: socialProfile, status } = useGetSocialProfile(
@@ -47,6 +48,8 @@ export const SocialProfileCardView = ({
     followers,
     followings,
   } = profile;
+
+  console.log(isMyPage);
 
   return (
     <S.ProfileCard>
