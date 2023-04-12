@@ -21,6 +21,9 @@ export function redirectErrorHandler(err: AxiosError<ResponseError, any>) {
     alert('권한이 없어요.');
     return windowNavigate(REDIRECT_URL);
   }
+  if (status === 404) {
+    return windowNavigate('/404');
+  }
 
   throw err;
 }
