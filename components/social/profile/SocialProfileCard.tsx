@@ -1,17 +1,19 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 import useGetSocialProfile from 'hooks/useGetSocialProfile';
 import useUserProfile from 'hooks/useUserProfile';
 import { mockSocialProfile } from 'constants/mockSocialProfile';
 import type { Colors } from 'styles/theme';
 import type { SocialProfile } from 'typings/social';
+import SocialFollowButton from 'components/social/profile/SocialFollowButton';
+import EditProfileButton from 'components/social/profile/EditProfileButton';
+import SocialProfileImage from 'components/social/profile/SocialProfileImage';
+// import SocialUnFollowButton from 'components/social/profile/SocialUnFollowButton';
 
 export const SocialProfileCard = () => {
   const router = useRouter();
   const { pathname } = router;
-
   const isMyPage = pathname === '/social/profile';
 
   const userData = useUserProfile();
@@ -41,6 +43,7 @@ export const SocialProfileCardView = ({
 }: SocialProfileCardViewProps) => {
   const {
     nickname,
+    accountId,
     detailIntroduce,
     introduceText,
     profileImage,
@@ -49,25 +52,11 @@ export const SocialProfileCardView = ({
     followings,
   } = profile;
 
-  console.log(isMyPage);
-
   return (
     <S.ProfileCard>
       <S.ProfileCardContent>
         <S.ProfileDetail>
-          <Image
-            width={80}
-            height={80}
-            style={{
-              minWidth: '80px',
-              height: '80px',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              backgroundColor: 'white',
-            }}
-            src={profileImage ? profileImage : ''}
-            alt={'socialProfileImage'}
-          />
+          <SocialProfileImage profileImage={profileImage} />
           <S.FlexItem>
             <S.SocialNickname>{nickname}</S.SocialNickname>
             <S.Carrer>{detailIntroduce}</S.Carrer>
@@ -91,10 +80,15 @@ export const SocialProfileCardView = ({
           </S.FollowBox>
           <S.ButtonBox>
             {isMyPage ? (
-              <S.Button color={'secondary'}>Edit Profile</S.Button>
+              <EditProfileButton />
             ) : (
               <>
-                <S.Button color={'secondary'}>Follow</S.Button>
+                {
+                  // TODO: following인지 아닌지 판단해서 Component를 렌더링해주게 작성해야함
+                  <SocialFollowButton targetUserAccountId={accountId} />
+                  // <SocialUnFollowButton targetUserAccountId={''} />
+                }
+
                 <S.Button color={'secondary'}>Message</S.Button>
               </>
             )}
