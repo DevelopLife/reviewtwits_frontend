@@ -10,7 +10,9 @@ import Card from '../../Card';
 import ReactionBox from './ReactionBox';
 import StarBox from './StarBox';
 import ImageList from './ImageList';
+import AddReactionBox from './AddReactionBox';
 import ScrapButton from './ScrapButton';
+import CommentIcon from 'public/icons/comment.svg';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -46,13 +48,17 @@ const ReviewView = ({ data }: ReviewViewProps) => {
         </S.ReviewInfoBox>
         <S.ReviewText>{data?.content}</S.ReviewText>
         <ImageList imageNameList={data?.reviewImageNameList} />
+        <S.UserResponseBox>
+          <AddReactionBox />
+          <S.CommentButton>
+            <CommentIcon />
+            {data?.commentCount}
+          </S.CommentButton>
+        </S.UserResponseBox>
         <ReactionBox
           reviewId={data?.reviewId}
           reactions={data?.reactionResponses}
         />
-        <S.CommentOpenButton>
-          {data?.commentCount}개의 댓글이 달림
-        </S.CommentOpenButton>
         <S.ButtonBox>
           <S.Button color="primary">상품 구매</S.Button>
           <S.Button color="secondary">상품 정보</S.Button>
@@ -124,11 +130,24 @@ const S = {
     -webkit-box-orient: vertical;
   `,
 
-  CommentOpenButton: styled.button`
+  UserResponseBox: styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    position: relative;
+    margin-top: 24px;
+  `,
+
+  CommentButton: styled.button`
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
     color: black;
-    padding: 0;
-    font-size: 16px;
-    font-weight: 600;
+    padding: 0 0 2px 0;
+    font-size: 18px;
+    font-weight: 700;
 
     width: fit-content;
   `,
