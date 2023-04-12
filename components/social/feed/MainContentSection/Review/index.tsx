@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 import { Colors } from 'styles/theme';
 
@@ -19,10 +20,15 @@ interface ReviewProps {
 }
 
 const Review = ({ data }: ReviewProps) => {
+  const router = useRouter();
+
+  const goProductPage = () => data && router.push(data.productUrl);
+
   const props = {
     data,
     isReactionExist:
       data?.reactionResponses && Object.keys(data.reactionResponses).length > 0,
+    goProductPage,
   };
 
   return <ReviewView {...props} />;
@@ -31,9 +37,14 @@ const Review = ({ data }: ReviewProps) => {
 interface ReviewViewProps {
   data?: ReviewResponseType;
   isReactionExist?: boolean;
+  goProductPage: () => void;
 }
 
-const ReviewView = ({ data, isReactionExist }: ReviewViewProps) => {
+const ReviewView = ({
+  data,
+  isReactionExist,
+  goProductPage,
+}: ReviewViewProps) => {
   if (!data) return null;
   return (
     <Card>
@@ -65,7 +76,9 @@ const ReviewView = ({ data, isReactionExist }: ReviewViewProps) => {
           />
         )}
         <S.ButtonBox>
-          <S.Button color="primary">상품 구매</S.Button>
+          <S.Button color="primary" onClick={goProductPage}>
+            상품 구매
+          </S.Button>
           <S.Button color="secondary">상품 정보</S.Button>
         </S.ButtonBox>
       </S.Content>
