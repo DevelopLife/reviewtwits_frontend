@@ -1,23 +1,20 @@
-import styled from '@emotion/styled';
 import Image from 'next/image';
 
 import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
-import type { WrapProps } from 'typings/wrapperProps';
-
-import useUserProfile from 'hooks/useUserProfile';
+import SocialFeedSectionView, {
+  CARD_WIDTH,
+} from 'components/social/profile/SocialFeedSection/SocialFeedSectionView';
 import useGetSocialReviews from 'hooks/useGetSocialReviews';
 
-interface SocialFeedSectionProps extends WrapProps {
-  columnWidth: number;
-}
+import { useRouter } from 'next/router';
 
-const CARD_WIDTH = 318;
-
-const SocialFeedSection = () => {
-  const userData = useUserProfile();
+const SocialAnoterUserFeedSection = () => {
+  const router = useRouter();
+  const { query } = router;
+  const { nickname } = query as { nickname: string };
 
   const { data: socialMyReviews, status: socialMyReviewsStatus } =
-    useGetSocialReviews(userData?.nickname);
+    useGetSocialReviews(nickname);
 
   if (socialMyReviewsStatus === 'success' && socialMyReviews) {
     return (
@@ -54,27 +51,10 @@ const SocialFeedSection = () => {
   return (
     <SocialFeedSectionView columnWidth={CARD_WIDTH}>
       {
-        // TODO: 리뷰작성유도 화면을 보여줘도 될 것 같음
+        // TODO: 다른 유저의 피드 페이지이기 때문에 피드가 없다는 걸 보여줘야 할 것 같다.
       }
     </SocialFeedSectionView>
   );
 };
 
-const SocialFeedSectionView = ({
-  children,
-  columnWidth,
-}: SocialFeedSectionProps) => {
-  return <S.FeedSection columnWidth={columnWidth}>{children}</S.FeedSection>;
-};
-
-export default SocialFeedSection;
-
-const S = {
-  FeedSection: styled.section<{ columnWidth: number }>`
-    width: 100%;
-    display: grid;
-    grid-template-columns: ${({ columnWidth }) =>
-      `repeat(auto-fill, minmax(${columnWidth}px, ${columnWidth}px))`};
-    gap: 16px 24px;
-  `,
-};
+export default SocialAnoterUserFeedSection;
