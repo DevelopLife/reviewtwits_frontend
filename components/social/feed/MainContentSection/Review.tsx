@@ -11,6 +11,7 @@ import PleadingFaceIcon from 'public/icons/pleading_face.svg';
 import SunglassesIcon from 'public/icons/sunglasses.svg';
 import AngryIcon from 'public/icons/angry.svg';
 import KissingHeartIcon from 'public/icons/kissing_heart.svg';
+import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 
 const Review = () => {
   return (
@@ -22,7 +23,9 @@ const Review = () => {
         <S.ReviewInfoBox>
           <S.UserInfo>
             <S.UserImage src="" alt="" />
-            <S.Nickname>nickname</S.Nickname>
+            <SocialUserNicknameLink nickname={'slyvia.lehner2'}>
+              <S.Nickname>nickname</S.Nickname>
+            </SocialUserNicknameLink>
           </S.UserInfo>
           <S.StarBox>
             {Array.from({ length: 4 }).map((_, i) => (
