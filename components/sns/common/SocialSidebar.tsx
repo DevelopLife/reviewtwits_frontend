@@ -17,6 +17,13 @@ import * as S from './SocialSidebar.styles';
 
 const SERVICE_TITLE = 'ReviewTwits';
 
+/*
+
+TODO: social/profile이 아닌 social/user/${nickname}으로 피드페이지 url이 변경되었기 때문에 
+그에 맞게 사이드바의 active 효과도 변경해주어야 합니다. useData와 nickname이 일치하는지 체크해주게 작업하면 될 것 같습니다.
+
+*/
+
 const MENUS = [
   { text: 'Home', Icon: HomeIcon },
   { text: 'Notifications', Icon: BellIcon },
