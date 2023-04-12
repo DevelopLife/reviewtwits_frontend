@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
+import useReaction from 'hooks/useReaction';
+import { ReactionType } from 'typings/reviews';
 import AddReactionIcon from 'public/icons/add_reaction.svg';
 
 const emojiList = [
@@ -17,14 +19,27 @@ const emojiList = [
   'NOTICING',
 ];
 
-const AddReactionBox = () => {
+interface AddReactionBoxProps {
+  reviewId: number;
+}
+
+const AddReactionBox = ({ reviewId }: AddReactionBoxProps) => {
   const [isReactionListOpen, setIsReactionListOpen] = useState(false);
+  const { doReact } = useReaction(reviewId);
 
   const toggleListOpen = () => setIsReactionListOpen((prev) => !prev);
+
+  const onClickEmoji = (e: MouseEvent<HTMLButtonElement>) => {
+    const reactionType = e.currentTarget.id as ReactionType;
+
+    doReact(reactionType);
+    setIsReactionListOpen(false);
+  };
 
   const props = {
     isListOpen: isReactionListOpen,
     toggleListOpen,
+    onClickEmoji,
   };
 
   return <AddReactionBoxView {...props} />;
@@ -33,11 +48,13 @@ const AddReactionBox = () => {
 interface AddReactionBoxViewProps {
   isListOpen: boolean;
   toggleListOpen: () => void;
+  onClickEmoji: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const AddReactionBoxView = ({
   isListOpen,
   toggleListOpen,
+  onClickEmoji,
 }: AddReactionBoxViewProps) => {
   return (
     <>
@@ -47,7 +64,7 @@ const AddReactionBoxView = ({
       {isListOpen && (
         <S.ReactionList>
           {emojiList.map((name, i) => (
-            <S.ReactionButton key={i}>
+            <S.ReactionButton key={i} id={name} onClick={onClickEmoji}>
               <Image
                 width={24}
                 height={24}

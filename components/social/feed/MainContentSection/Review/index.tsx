@@ -21,6 +21,8 @@ interface ReviewProps {
 const Review = ({ data }: ReviewProps) => {
   const props = {
     data,
+    isReactionExist:
+      data?.reactionResponses && Object.keys(data.reactionResponses).length > 0,
   };
 
   return <ReviewView {...props} />;
@@ -28,9 +30,10 @@ const Review = ({ data }: ReviewProps) => {
 
 interface ReviewViewProps {
   data?: ReviewResponseType;
+  isReactionExist?: boolean;
 }
 
-const ReviewView = ({ data }: ReviewViewProps) => {
+const ReviewView = ({ data, isReactionExist }: ReviewViewProps) => {
   if (!data) return null;
   return (
     <Card>
@@ -49,16 +52,18 @@ const ReviewView = ({ data }: ReviewViewProps) => {
         <S.ReviewText>{data?.content}</S.ReviewText>
         <ImageList imageNameList={data?.reviewImageNameList} />
         <S.UserResponseBox>
-          <AddReactionBox />
+          <AddReactionBox reviewId={data?.reviewId} />
           <S.CommentButton>
             <CommentIcon />
             {data?.commentCount}
           </S.CommentButton>
         </S.UserResponseBox>
-        <ReactionBox
-          reviewId={data?.reviewId}
-          reactions={data?.reactionResponses}
-        />
+        {isReactionExist && (
+          <ReactionBox
+            reviewId={data?.reviewId}
+            reactions={data?.reactionResponses}
+          />
+        )}
         <S.ButtonBox>
           <S.Button color="primary">상품 구매</S.Button>
           <S.Button color="secondary">상품 정보</S.Button>

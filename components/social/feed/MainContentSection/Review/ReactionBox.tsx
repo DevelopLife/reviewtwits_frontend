@@ -3,10 +3,8 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { ReactionResponseType, ReactionType } from 'typings/reviews';
-import { snsAPI } from 'api/sns';
+import useReaction from 'hooks/useReaction';
 
 interface ReactionBoxProps {
   reviewId: number;
@@ -14,23 +12,7 @@ interface ReactionBoxProps {
 }
 
 const ReactionBox = ({ reviewId, reactions }: ReactionBoxProps) => {
-  const queryClient = useQueryClient();
-  const { mutate: addReactionMutate } = useMutation(
-    (reaction: ReactionType) => snsAPI.addReaction(reviewId, reaction),
-    {
-      onSuccess: () => {
-        return queryClient.invalidateQueries(['feed']); //
-      },
-    }
-  );
-  const { mutate: deleteReactionMutate } = useMutation(
-    () => snsAPI.deleteReaction(reviewId),
-    {
-      onSuccess: () => {
-        return queryClient.invalidateQueries(['feed']); //
-      },
-    }
-  );
+  const { doReact, cancelReact } = useReaction(reviewId);
 
   const handleClickReactButton = (e: MouseEvent<HTMLButtonElement>) => {
     const reactionType = e.currentTarget.id as ReactionType;
@@ -43,15 +25,9 @@ const ReactionBox = ({ reviewId, reactions }: ReactionBoxProps) => {
       : doReact(reactionType);
   };
 
-  const doReact = (reactionType: ReactionType) => {
-    addReactionMutate(reactionType);
-  };
-
-  const cancelReact = () => deleteReactionMutate();
-
   const props = {
     reactions,
-    handleClickReactButton,
+    handleReact: handleClickReactButton,
   };
 
   return <ReactionBoxView {...props} />;
@@ -59,13 +35,10 @@ const ReactionBox = ({ reviewId, reactions }: ReactionBoxProps) => {
 
 interface ReactionBoxViewProps {
   reactions?: ReactionResponseType;
-  handleClickReactButton: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleReact: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const ReactionBoxView = ({
-  reactions,
-  handleClickReactButton,
-}: ReactionBoxViewProps) => {
+const ReactionBoxView = ({ reactions, handleReact }: ReactionBoxViewProps) => {
   if (!reactions) return null;
   return (
     <S.Box>
@@ -74,7 +47,7 @@ const ReactionBoxView = ({
           key={i}
           id={name}
           isActive={reactions[name].isReacted}
-          onClick={handleClickReactButton}
+          onClick={handleReact}
         >
           <S.ReactionCnt>{reactions[name].count}</S.ReactionCnt>
           <Image
