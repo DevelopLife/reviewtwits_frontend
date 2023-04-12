@@ -24,11 +24,16 @@ const Review = ({ data }: ReviewProps) => {
 
   const goProductPage = () => data && router.push(data.productUrl);
 
+  // 임시
+  const goProductInfoPage = () =>
+    data && router.push(`/product?name=${data.productName}`);
+
   const props = {
     data,
     isReactionExist:
       data?.reactionResponses && Object.keys(data.reactionResponses).length > 0,
     goProductPage,
+    goProductInfoPage,
   };
 
   return <ReviewView {...props} />;
@@ -38,12 +43,14 @@ interface ReviewViewProps {
   data?: ReviewResponseType;
   isReactionExist?: boolean;
   goProductPage: () => void;
+  goProductInfoPage: () => void;
 }
 
 const ReviewView = ({
   data,
   isReactionExist,
   goProductPage,
+  goProductInfoPage,
 }: ReviewViewProps) => {
   if (!data) return null;
   return (
@@ -79,7 +86,9 @@ const ReviewView = ({
           <S.Button color="primary" onClick={goProductPage}>
             상품 구매
           </S.Button>
-          <S.Button color="secondary">상품 정보</S.Button>
+          <S.Button color="secondary" onClick={goProductInfoPage}>
+            상품 정보
+          </S.Button>
         </S.ButtonBox>
       </S.Content>
     </Card>
