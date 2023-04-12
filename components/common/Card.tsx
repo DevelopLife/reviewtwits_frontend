@@ -8,6 +8,11 @@ interface CardProps {
 const Card = ({ children }: CardProps) => <StyledCard>{children}</StyledCard>;
 
 const StyledCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 68px;
+
   background: #f7f7f7;
   box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.09);
   border-radius: 30px;

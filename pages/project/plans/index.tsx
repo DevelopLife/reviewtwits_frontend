@@ -12,7 +12,6 @@ import { BUTTON_TEXTS, PROJECT_TITLE } from 'constants/project';
 const ProjectPlansPage = () => {
   const router = useRouter();
   const navigate = {
-    login: () => router.replace('../sign-in'),
     projectManagement: () => router.replace('./management'),
   };
 
@@ -21,14 +20,6 @@ const ProjectPlansPage = () => {
     () => projectsAPI.create({ ...createProjectForm, pricePlan: projectPlan }),
     {
       onSuccess: () => navigate.projectManagement(),
-      onError: (err: AxiosError) => {
-        const statusCode = err?.response?.status;
-
-        if (statusCode === 401) {
-          alert(`${statusCode} 로그인 페이지로 이동합니다.`);
-          navigate.login();
-        }
-      },
     }
   );
 

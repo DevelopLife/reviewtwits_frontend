@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 
 import styled from '@emotion/styled';
 
-interface ReviewTextAreaProps {
+export interface ReviewTextAreaProps {
   content: string;
   handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }

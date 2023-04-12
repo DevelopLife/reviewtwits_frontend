@@ -24,7 +24,20 @@ const useForm = <T extends object>(initialValues: T) => {
 
   const checkFormFilled = useCallback(() => {
     const keys = Object.keys(values) as (keyof T)[];
-    const emptyValues = keys.filter((name) => values[name] === '');
+    const emptyValues = keys.filter((name) => {
+      const value = values[name];
+
+      switch (typeof value) {
+        case 'object':
+          return !(values[name] as File[]).length;
+        case 'string':
+          return value === '';
+        case 'number':
+          return !value;
+        default:
+          return !value;
+      }
+    });
     const isFormFilled = !emptyValues.length;
 
     return isFormFilled;
@@ -46,12 +59,14 @@ const useForm = <T extends object>(initialValues: T) => {
     setIsSubmitable(isFormFilled && isFormValid);
   }, [checkFormFilled, checkFormValid]);
 
-  const handleChange = ({
-    currentTarget,
-  }:
-    | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    | MouseEvent<HTMLButtonElement>) => {
-    const { name, value } = currentTarget;
+  const handleChange = (
+    e:
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | MouseEvent<HTMLButtonElement>
+  ) => {
+    const { type, name, value } = e.currentTarget;
+
+    if (type === 'date' && value === '') alert('정확한 날짜를 입력해주세요.');
 
     setValue(name, value);
   };

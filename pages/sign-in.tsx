@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { naverOauthAPI } from 'api/oauth';
-import { SignInForm } from 'components/signIn/@index';
+import { SignInCard } from 'components/signIn/@index';
 
 import Layout from 'components/common/Layout';
 
@@ -15,7 +15,7 @@ const SignInPage = () => {
 
   return (
     <Layout color="gray">
-      <SignInForm />
+      <SignInCard />
     </Layout>
   );
 };

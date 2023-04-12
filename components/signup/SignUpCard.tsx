@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, MouseEvent, useState, useEffect } from 'react';
+import styled from '@emotion/styled';
 
 import useForm, { ErrorType } from 'hooks/useForm';
 import { usersAPI } from 'api/users';
@@ -17,8 +18,12 @@ import {
   SIGN_UP_FORM_NAMES,
 } from 'constants/account';
 
-import * as S from './SignUpForm.styles';
 import { doSignIn } from 'utils/auth';
+import theme from 'styles/theme';
+import Card from 'components/common/Card';
+import Form from 'components/common/Form';
+import Input from 'components/common/Input';
+import Button from 'components/common/Button';
 
 const SignUpForm = () => {
   const {
@@ -125,47 +130,40 @@ const SignUpFormView = ({
   handleChange,
   ...rest
 }: SignUpFormViewProps) => (
-  <S.Card>
+  <Card>
     <S.FormWrap>
-      <S.Form title="Sign Up" {...rest}>
+      <Form title="Sign Up" {...rest}>
         <S.FormContent>
           <S.FormItem>
             <S.InputLabel>아이디</S.InputLabel>
             <S.EmailBox>
-              <S.Input
+              <Input
                 name={SIGN_UP_FORM_NAMES.ACCOUND_ID}
                 placeholder="이메일"
                 handleChange={handleChange}
               />
               <S.VerifyButtonWrap>
-                <S.Button
+                <Button
                   disabled={!isCodeIssuable}
                   color="black"
                   handleClick={sendEmailVerifyCode}
                 >
                   인증번호 받기
-                </S.Button>
+                </Button>
               </S.VerifyButtonWrap>
             </S.EmailBox>
             {isCodeIssued && (
-              <S.Input
+              <Input
                 name={SIGN_UP_FORM_NAMES.VERIFY_CODE}
                 placeholder="인증번호 입력"
                 handleChange={handleChange}
               />
             )}
             {values?.accountId && <S.WarnText>{errors?.accountId}</S.WarnText>}
-            {/* <S.EmailInputBox>
-          <S.Input placeholder="이메일" />
-          <S.At>@</S.At>
-          <S.Select>
-            <S.Option>선택</S.Option>
-          </S.Select>
-        </S.EmailInputBox> */}
           </S.FormItem>
           <S.FormItem>
             <S.InputLabel>휴대폰 번호</S.InputLabel>
-            <S.Input
+            <Input
               name={SIGN_UP_FORM_NAMES.PHONE_NUMBER}
               placeholder="숫자만 입력 ('-' 제외)"
               handleChange={handleChange}
@@ -176,14 +174,14 @@ const SignUpFormView = ({
           </S.FormItem>
           <S.FormItem>
             <S.InputLabel>비밀번호</S.InputLabel>
-            <S.Input
+            <Input
               name={SIGN_UP_FORM_NAMES.ACCOUNT_PW}
               type="password"
               placeholder="영문, 숫자, 특수문자 조합 6자리 이상"
               handleChange={handleChange}
             />
             {values?.accountPw && <S.WarnText>{errors?.accountPw}</S.WarnText>}
-            <S.Input
+            <Input
               name={SIGN_UP_FORM_NAMES.ACCOUNT_PW_CHECK}
               type="password"
               placeholder="비밀번호 재입력"
@@ -205,22 +203,22 @@ const SignUpFormView = ({
             <S.FormItem>
               <S.InputLabel>성별</S.InputLabel>
               <S.ButtonBox>
-                <S.Button
+                <Button
                   name={SIGN_UP_FORM_NAMES.GENDER}
                   value={GENDER.MALE}
                   isActive={values.gender === GENDER.MALE}
                   handleClick={handleChange}
                 >
                   {GENDER.MALE}
-                </S.Button>
-                <S.Button
+                </Button>
+                <Button
                   name={SIGN_UP_FORM_NAMES.GENDER}
                   value={GENDER.FEMALE}
                   isActive={values.gender === GENDER.FEMALE}
                   handleClick={handleChange}
                 >
                   {GENDER.FEMALE}
-                </S.Button>
+                </Button>
               </S.ButtonBox>
             </S.FormItem>
           </S.DivideBox>
@@ -228,12 +226,103 @@ const SignUpFormView = ({
         <S.Notice>
           입력하신 개인정보는 리뷰추천 성능 향상 목적 외에 사용되지 않습니다.
         </S.Notice>
-        <S.Button type="submit" large color="primary" disabled={disabled}>
+        <Button type="submit" large color="primary" disabled={disabled}>
           입력 완료
-        </S.Button>
-      </S.Form>
+        </Button>
+      </Form>
     </S.FormWrap>
-  </S.Card>
+  </Card>
 );
 
 export default SignUpForm;
+
+const S = {
+  DivideBox: styled.div`
+    display: flex;
+    gap: 20px;
+
+    > div {
+      width: 50%;
+    }
+  `,
+
+  FormWrap: styled.div`
+    margin: 0 200px;
+  `,
+
+  FormContent: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  `,
+
+  FormItem: styled.div`
+    display: flex;
+    flex-direction: column;
+    color: black;
+  `,
+
+  WarnText: styled.small`
+    font-size: 14px;
+    color: ${theme.colors.red_0};
+    font-weight: 500;
+    margin-top: 10px;
+  `,
+
+  InputLabel: styled.label`
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: 500;
+  `,
+
+  DateInput: styled.input`
+    border: none;
+    outline: none;
+    background: ${theme.colors.black};
+    border-radius: 30px;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    font-size: 16px;
+
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
+  `,
+
+  EmailBox: styled.div`
+    position: relative;
+  `,
+
+  VerifyButtonWrap: styled.div`
+    position: absolute;
+    right: -160px;
+    top: 10px;
+  `,
+
+  Notice: styled.p`
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    margin: 33px 0 15px 0;
+  `,
+
+  ButtonBox: styled.div`
+    display: flex;
+    gap: 10px;
+
+    > button {
+      width: 50%;
+    }
+  `,
+
+  EmailInputBox: styled.div`
+    display: flex;
+    align-items: center;
+    > input,
+    select {
+      width: 50%;
+    }
+  `,
+};

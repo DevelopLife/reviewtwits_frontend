@@ -32,4 +32,16 @@ export const snsAPI = {
   deleteScrap: async (reviewId: number) => {
     return await api.delete(`${SNS_URL}/scrap-reviews/${reviewId}`);
   },
+  createReview: async (formData: FormData) => {
+    return await api.post(`${SNS_URL}/reviews`, formData);
+  },
+  follow: (body: FollowAndUnFollowRequestBody) =>
+    api.post(`${SNS_URL}/request-follow`, body),
+
+  unfollow: (body: FollowAndUnFollowRequestBody) =>
+    api.post(`${SNS_URL}/request-unfollow`, body),
+};
+
+type FollowAndUnFollowRequestBody = {
+  targetUserAccountId: string;
 };

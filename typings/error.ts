@@ -1,7 +1,7 @@
-type ResponseArror = {
+export interface ResponseErrorDto {
   errorType: string;
   fieldName: string;
   message: string;
-};
+}
 
-export default ResponseArror;
+export type ResponseError = ResponseErrorDto[];
