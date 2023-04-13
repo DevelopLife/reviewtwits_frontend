@@ -11,8 +11,15 @@ import PleadingFaceIcon from 'public/icons/pleading_face.svg';
 import SunglassesIcon from 'public/icons/sunglasses.svg';
 import AngryIcon from 'public/icons/angry.svg';
 import KissingHeartIcon from 'public/icons/kissing_heart.svg';
+import useModal from 'hooks/useModal';
+import MODAL_LIST from 'constants/modal';
 
 const Review = () => {
+  const modal = useModal();
+
+  const onModalOpen = () => {
+    modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
+  };
   return (
     <Card>
       <S.Content>
@@ -32,7 +39,7 @@ const Review = () => {
           </S.StarBox>
           <S.LastTime>1h</S.LastTime>
         </S.ReviewInfoBox>
-        <S.ReviewText>
+        <S.ReviewText onClick={onModalOpen}>
           저번에는 냉동피자 중에 좀 가격대가 있는 우주인피자 주문했었는데요.
           불고기 피자가 먹고 싶다고 해서 찾다가 오뚜기 불고기 피자가 있길래 주문
           했어요. 우주인피자는 한 판에 만 원이 훌쩍 넘는데, 오뚜기 피자는 3개에
@@ -51,6 +58,7 @@ const Review = () => {
               src=""
               alt=""
               style={{ background: 'gray' }}
+              onClick={onModalOpen}
             />
           ))}
         </S.ImageList>
@@ -72,7 +80,9 @@ const Review = () => {
             <KissingHeartIcon />
           </S.ReactionButton>
         </S.ReactionBox>
-        <S.CommentOpenButton>24개의 댓글이 달림</S.CommentOpenButton>
+        <S.CommentOpenButton onClick={onModalOpen}>
+          24개의 댓글이 달림
+        </S.CommentOpenButton>
         <S.ButtonBox>
           <S.Button color="primary">상품 구매</S.Button>
           <S.Button color="secondary">상품 정보</S.Button>
