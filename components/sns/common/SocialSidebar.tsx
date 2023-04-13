@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import SocialMenuItem from 'components/sns/common/SocialMenuItem';
 import SocialMenus from 'components/sns/common/SocialMenus';
+import SocialProfileMenuItem from 'components/sns/common/SocialProfileMenuItem';
 import SidebarTitle from 'components/sns/common/SidebarTitle';
 import SearchBar from 'components/sns/common/SearchBar';
 
@@ -14,7 +15,6 @@ import UserIcon from 'public/icons/user.svg';
 
 import theme from 'styles/theme';
 import * as S from './SocialSidebar.styles';
-import SocialProfileMenuItem from 'components/sns/common/SocialProfileMenuItem';
 
 const SERVICE_TITLE = 'ReviewTwits';
 
@@ -33,7 +33,7 @@ const SnsSidebar = () => {
 
   return (
     <S.SidebarLayout>
-      <SidebarTitle href={'/social/home'}>{SERVICE_TITLE}</SidebarTitle>
+      <SidebarTitle href="/social/home">{SERVICE_TITLE}</SidebarTitle>
       <SearchBar />
       <SocialMenus>
         {MENUS.map(({ text, Icon }) => {
