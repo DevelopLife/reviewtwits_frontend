@@ -12,11 +12,11 @@ interface SocialMenuItemViewProps extends WrapProps {
 const SocialMenuItem = ({
   children,
   href,
-  ...rest
+  isCurrent,
 }: SocialMenuItemViewProps) => {
   return (
     <Hover>
-      <S.SocialMenuItem {...rest}>
+      <S.SocialMenuItem isCurrent={isCurrent}>
         <Link href={href}>{children}</Link>
       </S.SocialMenuItem>
     </Hover>

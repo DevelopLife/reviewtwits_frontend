@@ -14,15 +14,9 @@ import UserIcon from 'public/icons/user.svg';
 
 import theme from 'styles/theme';
 import * as S from './SocialSidebar.styles';
+import SocialProfileMenuItem from 'components/sns/common/SocialProfileMenuItem';
 
 const SERVICE_TITLE = 'ReviewTwits';
-
-/*
-
-TODO: social/profile이 아닌 social/user/${nickname}으로 피드페이지 url이 변경되었기 때문에 
-그에 맞게 사이드바의 active 효과도 변경해주어야 합니다. useData와 nickname이 일치하는지 체크해주게 작업하면 될 것 같습니다.
-
-*/
 
 const MENUS = [
   { text: 'Home', Icon: HomeIcon },
@@ -35,8 +29,7 @@ const MENUS = [
 
 const SnsSidebar = () => {
   const router = useRouter();
-  const pathNames = router.pathname.split('/');
-  const lastPathName = pathNames[pathNames.length - 1];
+  const { pathname } = router;
 
   return (
     <S.SidebarLayout>
@@ -45,10 +38,21 @@ const SnsSidebar = () => {
       <SocialMenus>
         {MENUS.map(({ text, Icon }) => {
           const href = `/social/${text.toLowerCase()}`;
-          const isCurrent = href === lastPathName;
+          const isCurrent = href === pathname;
           const iconColor = isCurrent
             ? theme.colors.secondary
             : theme.colors.gray_4;
+
+          if (text === 'Profile') {
+            return (
+              <SocialProfileMenuItem key={text}>
+                <>
+                  <Icon fill={iconColor} />
+                  {text}
+                </>
+              </SocialProfileMenuItem>
+            );
+          }
 
           return (
             <SocialMenuItem key={text} isCurrent={isCurrent} href={href}>
