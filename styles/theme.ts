@@ -25,7 +25,7 @@ const colors = {
   yellow: '#F8BB2B',
   white: '#ffffff',
   border_gray: '#e9e9e9',
-  white: '#ffffff',
+  text_black_100: '#181818',
 } as const;
 
 const devices = {
