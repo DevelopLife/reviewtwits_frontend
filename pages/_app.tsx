@@ -22,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const userAgent = navigator.userAgent;
     const isMobile = validateMobile(userAgent);
+    const searchRoute = document.referrer;
   }, []);
 
   return (
