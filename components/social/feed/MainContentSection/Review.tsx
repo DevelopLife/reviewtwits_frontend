@@ -7,10 +7,10 @@ import Card from '../Card';
 import BookmarkOutlineIcon from 'public/icons/bookmark_outline.svg';
 import FullStarImg from 'public/images/full_star_img.png';
 import EmptyStarImg from 'public/images/empty_star_img.png';
-import PleadingFaceIcon from 'public/icons/pleading_face.svg';
-import SunglassesIcon from 'public/icons/sunglasses.svg';
-import AngryIcon from 'public/icons/angry.svg';
-import KissingHeartIcon from 'public/icons/kissing_heart.svg';
+// import PleadingFaceIcon from 'public/icons/pleading_face.svg';
+// import SunglassesIcon from 'public/icons/sunglasses.svg';
+// import AngryIcon from 'public/icons/angry.svg';
+// import KissingHeartIcon from 'public/icons/kissing_heart.svg';
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 
 const Review = () => {
@@ -60,19 +60,19 @@ const Review = () => {
         <S.ReactionBox>
           <S.ReactionButton>
             <S.ReactionCnt>2</S.ReactionCnt>
-            <PleadingFaceIcon />
+            {/* <PleadingFaceIcon /> */}
           </S.ReactionButton>
           <S.ReactionButton>
             <S.ReactionCnt>9</S.ReactionCnt>
-            <SunglassesIcon />
+            {/* <SunglassesIcon /> */}
           </S.ReactionButton>
           <S.ReactionButton>
             <S.ReactionCnt>8</S.ReactionCnt>
-            <AngryIcon />
+            {/* <AngryIcon /> */}
           </S.ReactionButton>
           <S.ReactionButton>
             <S.ReactionCnt>13</S.ReactionCnt>
-            <KissingHeartIcon />
+            {/* <KissingHeartIcon /> */}
           </S.ReactionButton>
         </S.ReactionBox>
         <S.CommentOpenButton>24개의 댓글이 달림</S.CommentOpenButton>
