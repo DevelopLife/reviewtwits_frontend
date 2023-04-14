@@ -5,6 +5,8 @@ import { WrapProps } from 'typings/wrapperProps';
 
 import MessageIcon from 'public/icons/message.svg';
 import SmileIcon from 'public/icons/smile.svg';
+import useModal from 'hooks/useModal';
+import MODAL_LIST from 'constants/modal';
 
 type FeedCardStyles = {
   width: number;
@@ -23,6 +25,7 @@ interface SocialFeedCardViewProps extends SocialFeedCardProps {
 
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  onClick: () => void;
 }
 
 export const SocialFeedCard = ({
@@ -32,6 +35,11 @@ export const SocialFeedCard = ({
   children,
 }: SocialFeedCardProps) => {
   const { isOpen: isHover, setTrue, setFalse } = useBoolean(false);
+  const modal = useModal();
+
+  const onModalOpen = () => {
+    modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
+  };
 
   const onMouseEnter = () => setTrue();
   const onMouseLeave = () => setFalse();
@@ -42,6 +50,7 @@ export const SocialFeedCard = ({
       isHover={isHover}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={onModalOpen}
       emojiCount={emojiCount}
       commentCount={commentCount}
     >
@@ -56,6 +65,7 @@ export const SocialFeedCardView = ({
   isHover,
   onMouseEnter,
   onMouseLeave,
+  onClick,
   emojiCount,
   commentCount,
 }: SocialFeedCardViewProps) => {
@@ -64,6 +74,7 @@ export const SocialFeedCardView = ({
       {...styles}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={onClick}
     >
       <S.Content>{children}</S.Content>
       {isHover && (
