@@ -5,7 +5,7 @@ import Product from './Product';
 
 const TrendyProductsContent = () => {
   return (
-    <Card color="black">
+    <Card color="text_black_100">
       <S.Content>
         <S.ContentTitle>오늘의 트렌드 상품</S.ContentTitle>
         <S.MainContent>
