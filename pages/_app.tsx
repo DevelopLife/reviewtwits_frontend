@@ -14,15 +14,24 @@ import theme from 'styles/theme';
 import ModalContainer from 'components/common/Modal/ModalContainer';
 
 import { validateMobile } from 'utils/validate';
+import { getCookie, setCookie } from 'utils/cookies';
 
 export default function App({ Component, pageProps }: AppProps) {
   // TODO: consider setting defaultOptions
   const [queryClient] = useState(() => new QueryClient());
 
   useEffect(() => {
+    const isVisited = getCookie('visited');
+
+    if (isVisited === 'Y') return;
+
     const userAgent = navigator.userAgent;
     const isMobile = validateMobile(userAgent);
     const searchRoute = document.referrer;
+
+    // Request
+
+    setCookie('visited', 'Y');
   }, []);
 
   return (
