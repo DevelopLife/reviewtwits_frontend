@@ -17,24 +17,24 @@ export const snsAPI = {
       })
       .then((res) => res.data);
   },
-  addReaction: async (reviewId: number, reaction: ReactionType) => {
+  addReaction: (reviewId: number, reaction: ReactionType) => {
     const params = { reaction };
 
-    return await api.post(`${SNS_URL}/review-reaction/${reviewId}`, null, {
+    return api.post(`${SNS_URL}/review-reaction/${reviewId}`, null, {
       params,
     });
   },
-  deleteReaction: async (reviewId: number) => {
-    return await api.delete(`${SNS_URL}/review-reaction/${reviewId}`);
+  deleteReaction: (reviewId: number) => {
+    return api.delete(`${SNS_URL}/review-reaction/${reviewId}`);
   },
-  addScrap: async (reviewId: number) => {
-    return await api.post(`${SNS_URL}/scrap-reviews/${reviewId}`);
+  addScrap: (reviewId: number) => {
+    return api.post(`${SNS_URL}/scrap-reviews/${reviewId}`);
   },
-  deleteScrap: async (reviewId: number) => {
-    return await api.delete(`${SNS_URL}/scrap-reviews/${reviewId}`);
+  deleteScrap: (reviewId: number) => {
+    return api.delete(`${SNS_URL}/scrap-reviews/${reviewId}`);
   },
-  createReview: async (formData: FormData) => {
-    return await api.post(`${SNS_URL}/reviews`, formData);
+  createReview: (formData: FormData) => {
+    return api.post(`${SNS_URL}/reviews`, formData);
   },
   getProfile: async (nickname: string): Promise<SocialProfile> => {
     const response = await api.get(`${SNS_URL}/profile/${nickname}`);
