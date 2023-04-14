@@ -2,13 +2,23 @@ import { useCallback, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { isLoginState } from 'states/isLogin';
-import { getCookie } from 'utils/cookies';
 import { validateToken } from 'utils/auth';
+import { getCookie } from 'utils/cookies';
+import { checkPreviousHostnameEqualMyHostName } from 'utils/checkFrom';
 
-export const usePrivateRouting = (
-  isRequiredLoginPage: boolean,
-  statusCode?: number
-) => {
+interface UsePrivateRoutingProps {
+  isRequiredLogin?: boolean;
+  isRequiredAuthorization?: boolean;
+  statusCode?: number;
+  redirectURL?: string;
+}
+
+export const usePrivateRouting = ({
+  isRequiredAuthorization,
+  isRequiredLogin,
+  statusCode,
+  redirectURL,
+}: UsePrivateRoutingProps) => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginState);
   const setFalseIsLogined = useCallback(
     () => setIsLogined(false),
@@ -22,22 +32,46 @@ export const usePrivateRouting = (
 
   useEffect(() => {
     if (statusCode === 404) return;
-    if (isRequiredLoginPage) {
-      handleIsLoginedInLocalStorage(setTrueIsLogined, setFalseIsLogined);
+    if (isRequiredLogin) {
+      redirectNotLogin(setTrueIsLogined, setFalseIsLogined, redirectURL);
     }
-  }, [isRequiredLoginPage, setFalseIsLogined, setTrueIsLogined, statusCode]);
+
+    if (isRequiredAuthorization) {
+      redirectNotAuthoriztion(redirectURL);
+    }
+  }, [
+    isRequiredAuthorization,
+    isRequiredLogin,
+    redirectURL,
+    setFalseIsLogined,
+    setTrueIsLogined,
+    statusCode,
+  ]);
 
   return {
     isLogined,
   };
 };
 
-export function handleIsLoginedInLocalStorage(
+export function redirectNotAuthoriztion(redirectURL?: string) {
+  const previouseHostnameEqualMyHostname =
+    checkPreviousHostnameEqualMyHostName();
+
+  if (previouseHostnameEqualMyHostname) {
+    return window.history.back();
+  }
+
+  window.location.href = redirectURL ? redirectURL : '/';
+}
+
+export function redirectNotLogin(
   login: () => void,
-  logout: () => void
+  logout: () => void,
+  redirectURL?: string
 ) {
   const tokenExpireAt = getCookie('expireAt');
-  const redirectSignIn = () => (window.location.href = '/sign-in');
+  const redirectSignIn = () =>
+    (window.location.href = redirectURL ? redirectURL : '/sign-in');
 
   if (!tokenExpireAt) {
     alert('로그인이 필요합니다.');

@@ -8,20 +8,21 @@ const NOT_REQUIRED_LOGIN_URLS = ['/sign-in', '/sign-up', '/'];
 const PrivateRoute = ({ children }: { children: ReactElement }) => {
   const router = useRouter();
   const { pathname } = router;
-  const isRequiredLoginPage = !NOT_REQUIRED_LOGIN_URLS.includes(pathname);
-
-  const { isLogined } = usePrivateRouting(
-    isRequiredLoginPage,
-    children.props.statusCode
-  );
-
+  const isRequiredLogin = !NOT_REQUIRED_LOGIN_URLS.includes(pathname);
   const statusCode = children.props.statusCode;
+
+  const { isLogined } = usePrivateRouting({
+    isRequiredLogin,
+    isRequiredAuthorization: false,
+    statusCode,
+    redirectURL: undefined,
+  });
 
   if (statusCode) {
     return <>{children}</>;
   }
 
-  if (!isRequiredLoginPage || isLogined) {
+  if (!isRequiredLogin || isLogined) {
     return <>{children}</>;
   }
 
