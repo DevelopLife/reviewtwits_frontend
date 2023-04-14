@@ -1,8 +1,6 @@
+import Image from 'next/image';
+
 import styled from '@emotion/styled';
-// import PleadingFaceIcon from 'public/icons/pleading_face.svg';
-// import SunglassesIcon from 'public/icons/sunglasses.svg';
-// import AngryIcon from 'public/icons/angry.svg';
-// import KissingHeartIcon from 'public/icons/kissing_heart.svg';
 
 const Reactions = () => {
   return (
@@ -12,19 +10,19 @@ const Reactions = () => {
       <S.ReactionBox>
         <S.ReactionButton>
           <S.ReactionCnt>2</S.ReactionCnt>
-          {/* <PleadingFaceIcon /> */}
+          <Image width={20} height={20} src="/icons/leading.png" alt="" />
         </S.ReactionButton>
         <S.ReactionButton>
           <S.ReactionCnt>9</S.ReactionCnt>
-          {/* <SunglassesIcon /> */}
+          <Image width={20} height={20} src="/icons/sunglasses.png" alt="" />
         </S.ReactionButton>
         <S.ReactionButton>
           <S.ReactionCnt>8</S.ReactionCnt>
-          {/* <AngryIcon /> */}
+          <Image width={20} height={20} src="/icons/angry.png" alt="" />
         </S.ReactionButton>
         <S.ReactionButton>
           <S.ReactionCnt>13</S.ReactionCnt>
-          {/* <KissingHeartIcon /> */}
+          <Image width={20} height={20} src="/icons/kissing.png" alt="" />
         </S.ReactionButton>
       </S.ReactionBox>
     </S.Container>
