@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 
-import SocialMenuItem from 'components/sns/common/SocialMenuItem';
-import SocialMenus from 'components/sns/common/SocialMenus';
-import SocialProfileMenuItem from 'components/sns/common/SocialProfileMenuItem';
-import SidebarTitle from 'components/sns/common/SidebarTitle';
-import SearchBar from 'components/sns/common/SearchBar';
+import SocialMenuItem from 'components/social/common/SocialMenuItem';
+import SocialMenus from 'components/social/common/SocialMenus';
+import SocialProfileMenuItem from 'components/social/common/SocialProfileMenuItem';
+import SidebarTitle from 'components/social/common/SidebarTitle';
+import SearchBar from 'components/social/common/SearchBar';
 
 import HomeIcon from 'public/icons/home.svg';
 import BellIcon from 'public/icons/bell.svg';

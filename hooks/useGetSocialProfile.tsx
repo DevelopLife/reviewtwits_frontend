@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 
 import { snsAPI } from 'api/sns';
 import { ResponseError } from 'typings/error';
@@ -10,10 +10,8 @@ const useGetSocialProfile = (nickname: string) => {
     ['socialProfile', nickname],
     () => snsAPI.getProfile(nickname),
     {
-      onError: (err: AxiosError<ResponseError>) => {
-        redirectErrorHandler(err);
-      },
       enabled: !!nickname,
+      onError: (err: AxiosError<ResponseError>) => redirectErrorHandler(err),
     }
   );
 
