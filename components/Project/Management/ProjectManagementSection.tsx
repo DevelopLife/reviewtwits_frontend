@@ -1,16 +1,13 @@
 import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
 import type { ReactNode } from 'react';
-import { AxiosError } from 'axios';
 
 import { ProjectCard } from 'components/Project/Management/ProjectCard';
 import { Styles } from 'components/Project/Management/ProjectCardCommon';
 import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
 
 import { GetProjectsResponseData, projectsAPI } from 'api/projects';
-import ResponseArror from 'typings/error';
 
 interface ProjectManagementSectionViewProps {
   children?: ReactNode;
@@ -23,19 +20,7 @@ const CREATE_PROJECT_STYLES: Styles = {
 };
 
 export const ProjectManagementSection = () => {
-  const router = useRouter();
-  const navigateLogin = useCallback(() => router.push('../sign-in'), [router]);
-
   const { data } = useQuery(['projectManagement'], projectsAPI.get, {
-    onError: (err: AxiosError) => {
-      const statusCode = err?.response?.status;
-
-      if (statusCode === 401) {
-        const data = err?.response?.data as ResponseArror[];
-        alert(`$code: {statusCode} ${data[0].message}`);
-        navigateLogin();
-      }
-    },
     retry: false,
   });
 

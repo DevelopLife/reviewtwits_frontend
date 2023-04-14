@@ -25,10 +25,17 @@ export interface SighInParams {
   accountPw: string;
 }
 
-export interface UserProfileType {
+export interface UserProfileFormType {
   nickname?: string;
   intro?: string;
   userImg?: File;
+}
+
+export interface UserProfileResponseType {
+  accountId: string;
+  nickname?: string;
+  introductText?: string;
+  profileImage?: string;
 }
 
 export type Gender = '남자' | '여자';

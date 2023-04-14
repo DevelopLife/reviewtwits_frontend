@@ -3,12 +3,16 @@ import styled from '@emotion/styled';
 import SearchIcon from 'public/icons/search.svg';
 
 const SearchBar = () => {
+  return <SearchBarView />;
+};
+
+const SearchBarView = () => {
   return (
     <S.Bar>
       <S.IconWrap>
         <SearchIcon />
       </S.IconWrap>
-      <S.Input type="text" />
+      <S.Input type="text" name="productName" />
     </S.Bar>
   );
 };

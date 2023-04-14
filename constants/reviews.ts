@@ -12,4 +12,5 @@ export const SUCCESS_MESSAGE = {
 export const ERROR_MESSAGE = {
   NULL_SCORE: '별점은 필수 값입니다. 별점을 선택해주세요.',
   NULL_CONTENT: '리뷰는 10자 이상이어야 합니다.',
+  INVALID_URL: '상품 URL은 http 혹은 https로 시작하는 url 형식이어야 합니다.',
 };

@@ -10,23 +10,27 @@ import {
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
+import styled from '@emotion/styled';
 
 import useForm from 'hooks/useForm';
 import useUserProfile from 'hooks/useUserProfile';
 import { usersAPI } from 'api/users';
-import { UserProfileType } from 'typings/account';
+import { UserProfileFormType } from 'typings/account';
 import { formattedImageUrl } from 'utils/format';
-
-import * as S from './UserProfileForm.styles';
-import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 import { SUCCESS_MESSAGE } from 'constants/account';
+
+import Card from 'components/common/Card';
+import Form from 'components/common/Form';
+import Button from 'components/common/Button';
+import Input from 'components/common/Input';
+import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 
 const UserProfileForm = () => {
   const router = useRouter();
   const [pathFrom, setPathFrom] = useState<string | null>('');
   const userData = useUserProfile();
   const { values, setValue, initializeForm, handleChange, handleSubmit } =
-    useForm<UserProfileType>({
+    useForm<UserProfileFormType>({
       nickname: '',
       intro: '',
     });
@@ -123,7 +127,7 @@ const UserProfileForm = () => {
 };
 
 interface UserProfileFormViewProps {
-  values: UserProfileType;
+  values: UserProfileFormType;
   preview: string;
   inputRef: RefObject<HTMLInputElement>;
   loadFile: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -146,14 +150,15 @@ const UserProfileFormView = ({
   setProfileLater,
 }: UserProfileFormViewProps) => {
   return (
-    <S.Card>
-      <S.Form title="Profile" onValid={onValid} handleSubmit={handleSubmit}>
+    <Card>
+      <Form title="Profile" onValid={onValid} handleSubmit={handleSubmit}>
         <S.FormContent>
           <S.UserImageBox>
             <Image
               src={preview !== '' ? preview : DefaultUserProfileImg}
               width={145}
               height={145}
+              unoptimized={true}
               alt="userProfileImg"
             />
             <S.ImageUploadButton
@@ -180,7 +185,7 @@ const UserProfileFormView = ({
           </S.FormItem>
           <S.FormItem>
             <S.InputLabel>닉네임</S.InputLabel>
-            <S.Input
+            <Input
               type="text"
               name="nickname"
               value={values?.nickname}
@@ -189,17 +194,85 @@ const UserProfileFormView = ({
             />
           </S.FormItem>
           <S.ButtonBox>
-            <S.Button large type="submit" color="primary">
+            <Button large type="submit" color="primary">
               설정 완료
-            </S.Button>
-            <S.Button large color="black" handleClick={setProfileLater}>
+            </Button>
+            <Button large color="black" handleClick={setProfileLater}>
               나중에 하기
-            </S.Button>
+            </Button>
           </S.ButtonBox>
         </S.FormContent>
-      </S.Form>
-    </S.Card>
+      </Form>
+    </Card>
   );
 };
 
 export default UserProfileForm;
+
+const S = {
+  FormContent: styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 36px;
+
+    width: 387px;
+  `,
+
+  FormItem: styled.div`
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+  `,
+
+  UserImageBox: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    margin-bottom: 12px;
+
+    > img {
+      border-radius: 50%;
+    }
+  `,
+
+  ImageUploadButton: styled.button`
+    font-weight: 500;
+    font-size: 18px;
+    color: ${({ theme }) => theme.colors.primary};
+
+    background: none;
+    border: none;
+  `,
+
+  ImageUploadInput: styled.input`
+    display: none;
+  `,
+
+  IntroductionInput: styled.input`
+    padding: 15px;
+    border: 1px solid ${({ theme }) => theme.colors.gray_5};
+    outline: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.gray_5};
+    }
+  `,
+
+  InputLabel: styled.label`
+    color: black;
+    font-weight: 500;
+    font-size: 18px;
+  `,
+
+  ButtonBox: styled.div`
+    display: flex;
+    gap: 16px;
+    width: 100%;
+  `,
+};

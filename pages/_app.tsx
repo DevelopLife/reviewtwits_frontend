@@ -11,7 +11,9 @@ import { useState } from 'react';
 
 import reset from 'styles/reset';
 import theme from 'styles/theme';
+
 import PrivateRoute from 'components/common/PrivateRoute';
+import ModalContainer from 'components/common/Modal/ModalContainer';
 
 export default function App({ Component, pageProps }: AppProps) {
   // TODO: consider setting defaultOptions
@@ -25,7 +27,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={theme}>
           <RecoilRoot>
             <PrivateRoute>
-              <Component {...pageProps} />
+              <>
+                <ModalContainer />
+                <Component {...pageProps} />
+              </>
             </PrivateRoute>
           </RecoilRoot>
         </ThemeProvider>
