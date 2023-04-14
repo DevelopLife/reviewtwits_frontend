@@ -2,7 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { isLoginState } from 'states/isLogin';
-import { LOCAL_STORAGE_KEYS } from 'constants/localStorage';
+import { getCookie } from 'utils/cookies';
+import { validateToken } from 'utils/auth';
 
 export const usePrivateRouting = (
   isRequiredLoginPage: boolean,
@@ -35,27 +36,22 @@ export function handleIsLoginedInLocalStorage(
   login: () => void,
   logout: () => void
 ) {
-  const loginExpireAtString = localStorage.getItem(
-    LOCAL_STORAGE_KEYS.LOGIN_EXPIRE_AT
-  );
+  const tokenExpireAt = getCookie('expireAt');
+  const redirectSignIn = () => (window.location.href = '/sign-in');
 
-  if (!loginExpireAtString) {
+  if (!tokenExpireAt) {
     alert('로그인이 필요합니다.');
     logout();
-    // TODO: replace 113 PR windowNavigate function
-    window.location.href = '/sign-in';
+    redirectSignIn();
     return;
   }
 
-  const loginData = JSON.parse(loginExpireAtString);
-  const isValidate = Date.now() - loginData.expireAt;
+  const isValidToken = validateToken();
 
-  if (!isValidate) {
+  if (!isValidToken) {
     alert('로그인 유지기간이 만료되었습니다.');
     logout();
-    window.localStorage.removeItem(LOCAL_STORAGE_KEYS.LOGIN_EXPIRE_AT);
-    // TODO: replace 113 PR windowNavigate function
-    window.location.href = '/sign-in';
+    redirectSignIn();
     return;
   }
 
