@@ -13,7 +13,6 @@ const PrivateRoute = ({ children }: { children: ReactElement }) => {
 
   const { isLogined } = usePrivateRouting({
     isRequiredLogin,
-    isRequiredAuthorization: false,
     statusCode,
     redirectURL: undefined,
   });

@@ -4,17 +4,14 @@ import { useRecoilState } from 'recoil';
 import { isLoginState } from 'states/isLogin';
 import { validateToken } from 'utils/auth';
 import { getCookie } from 'utils/cookies';
-import { checkPreviousHostnameEqualMyHostName } from 'utils/checkFrom';
 
 interface UsePrivateRoutingProps {
-  isRequiredLogin?: boolean;
-  isRequiredAuthorization?: boolean;
+  isRequiredLogin: boolean;
   statusCode?: number;
   redirectURL?: string;
 }
 
 export const usePrivateRouting = ({
-  isRequiredAuthorization,
   isRequiredLogin,
   statusCode,
   redirectURL,
@@ -35,12 +32,7 @@ export const usePrivateRouting = ({
     if (isRequiredLogin) {
       redirectNotLogin(setTrueIsLogined, setFalseIsLogined, redirectURL);
     }
-
-    if (isRequiredAuthorization) {
-      redirectNotAuthoriztion(redirectURL);
-    }
   }, [
-    isRequiredAuthorization,
     isRequiredLogin,
     redirectURL,
     setFalseIsLogined,
@@ -52,17 +44,6 @@ export const usePrivateRouting = ({
     isLogined,
   };
 };
-
-export function redirectNotAuthoriztion(redirectURL?: string) {
-  const previouseHostnameEqualMyHostname =
-    checkPreviousHostnameEqualMyHostName();
-
-  if (previouseHostnameEqualMyHostname) {
-    return window.history.back();
-  }
-
-  window.location.href = redirectURL ? redirectURL : '/';
-}
 
 export function redirectNotLogin(
   login: () => void,
