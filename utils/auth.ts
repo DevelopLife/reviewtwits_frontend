@@ -5,10 +5,11 @@ import { getCookie, removeCookie, setCookie } from './cookies';
 import { usersAPI } from 'api/users';
 import { LOCAL_STORAGE_KEYS } from 'constants/localStorage';
 
-function validateToken() {
+export function validateToken() {
   const now = new Date();
-  const expiredAt = getCookie('expireAt');
+  const expiredAt: Date = getCookie('expireAt');
   const expireAtDate = new Date(expiredAt);
+
   return expiredAt && now < expireAtDate;
 }
 
