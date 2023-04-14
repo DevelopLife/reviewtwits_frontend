@@ -1,9 +1,8 @@
-import { AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 
-import { windowNavigate } from 'utils/windowNavigate';
 import type { ResponseError } from 'typings/error';
 
-const SIGN_IN = 'sign-in';
+const SIGN_IN = '/sign-in';
 
 export function redirectErrorHandler(err: AxiosError<ResponseError, any>) {
   const REDIRECT_URL = `${window?.location.origin}/${SIGN_IN}`;
@@ -15,14 +14,17 @@ export function redirectErrorHandler(err: AxiosError<ResponseError, any>) {
 
   if (status === 401) {
     alert('재로그인이 필요해요.');
-    return windowNavigate(REDIRECT_URL);
+    window.location.href = REDIRECT_URL;
+    return;
   }
   if (status === 403) {
     alert('권한이 없어요.');
-    return windowNavigate(REDIRECT_URL);
+    window.location.href = REDIRECT_URL;
+    return;
   }
   if (status === 404) {
-    return windowNavigate('/404');
+    window.location.href = '/404';
+    return;
   }
 
   throw err;
