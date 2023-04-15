@@ -36,6 +36,14 @@ export const snsAPI = {
   createReview: async (formData: FormData) => {
     return await api.post(`${SNS_URL}/reviews`, formData);
   },
+
+  getFollowerList: async (accountId: string) => {
+    return await api.get(`${SNS_URL}/get-followers/${accountId}`);
+  },
+
+  getFollowingList: async (accountId: string) => {
+    return await api.get(`${SNS_URL}/get-followings/${accountId}`);
+  },
   getProfile: async (nickname: string): Promise<SocialProfile> => {
     const response = await api.get(`${SNS_URL}/profile/${nickname}`);
 
