@@ -12,7 +12,8 @@ export const useGetFollowerList = (accountId: string) => {
 };
 
 export const useGetFollowingList = (accountId: string) => {
-  return useQuery<AxiosResponse, AxiosError>(['useGetFollowingList'], () =>
-    snsAPI.getFollowingList(accountId)
+  return useQuery<AxiosResponse<FollowListType>, AxiosError>(
+    ['useGetFollowingList'],
+    () => snsAPI.getFollowingList(accountId)
   );
 };
