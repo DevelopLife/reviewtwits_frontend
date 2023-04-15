@@ -49,13 +49,9 @@ export const snsAPI = {
 
     return response.data;
   },
-  getMyReviews: async ({
-    nickname,
-    size,
-  }: {
-    nickname: string;
-    size: number;
-  }): Promise<SocialReview[]> => {
+  getMyReviews: async (nickname: string): Promise<SocialReview[]> => {
+    const size = 10;
+
     const response = await api.get(`${SNS_URL}/profile/reviews/${nickname}`, {
       params: {
         size,

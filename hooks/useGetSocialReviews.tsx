@@ -5,14 +5,9 @@ import { snsAPI } from 'api/sns';
 import type { ResponseError } from 'typings/error';
 import { redirectErrorHandler } from 'utils/errorHandler';
 
-const SIZE = 5;
-
 const useGetSocialReviews = (nickname: string) => {
   const getMyReviewsInfiniteQuery = async ({ pageParam = 0 }) => {
-    const resposne = await snsAPI.getMyReviews({
-      nickname,
-      size: SIZE,
-    });
+    const resposne = await snsAPI.getMyReviews(nickname);
 
     // TODO: if lastPage?
 
