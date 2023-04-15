@@ -9,13 +9,13 @@ import SocialUnFollowButton from 'components/social/profile/SocialUnFollowButton
 
 interface SocialProfileCardViewProps {
   isMyPage: boolean;
-  following?: boolean;
+  isFollowing?: boolean;
   profile: SocialProfile;
 }
 
 const SocialProfileCardView = ({
   isMyPage,
-  following,
+  isFollowing,
   profile,
 }: SocialProfileCardViewProps) => {
   const {
@@ -62,7 +62,7 @@ const SocialProfileCardView = ({
               <>
                 {
                   // TODO: following인지 아닌지 판단해서 Component를 렌더링해주게 작성해야함
-                  following ? (
+                  isFollowing ? (
                     <SocialUnFollowButton targetUserAccountId={accountId} />
                   ) : (
                     <SocialFollowButton targetUserAccountId={accountId} />

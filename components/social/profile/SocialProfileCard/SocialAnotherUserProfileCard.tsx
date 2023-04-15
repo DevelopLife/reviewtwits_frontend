@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { mockSocialProfile } from 'constants/mockSocialProfile';
 import useGetSocialProfile from 'hooks/useGetSocialProfile';
 import SocialProfileCardView from 'components/social/profile/SocialProfileCard/SocialProfileCardView';
+import { useGetFollowingList } from 'hooks/queries/sns';
+import useUserProfile from 'hooks/useUserProfile';
 
 const SocialAnotherUserProfileCard = () => {
   const router = useRouter();
@@ -13,14 +15,18 @@ const SocialAnotherUserProfileCard = () => {
 
   const { data: socialAnotherUserProfile, status } =
     useGetSocialProfile(nickname);
+  const userData = useUserProfile();
+  const { data } = useGetFollowingList(userData.accountId);
 
-  // TODO: following 해당 유저를 follow 중인지 아닌지 확인할 수 있어야 한다.
+  const isFollowing = data?.data.some(
+    ({ nickname: followingUserNickanme }) => followingUserNickanme === nickname
+  );
 
   if (status === 'success' && socialAnotherUserProfile?.userId) {
     return (
       <SocialProfileCardView
         isMyPage={isMypage}
-        following={true}
+        isFollowing={isFollowing}
         profile={socialAnotherUserProfile}
       />
     );
