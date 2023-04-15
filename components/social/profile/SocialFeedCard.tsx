@@ -16,7 +16,7 @@ type FeedCardStyles = {
 
 interface SocialFeedCardProps extends WrapProps {
   styles: FeedCardStyles;
-  emojiCount: number;
+  reactionCount: number;
   commentCount: number;
 }
 
@@ -30,7 +30,7 @@ interface SocialFeedCardViewProps extends SocialFeedCardProps {
 
 export const SocialFeedCard = ({
   styles,
-  emojiCount,
+  reactionCount,
   commentCount,
   children,
 }: SocialFeedCardProps) => {
@@ -51,7 +51,7 @@ export const SocialFeedCard = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onModalOpen}
-      emojiCount={emojiCount}
+      reactionCount={reactionCount}
       commentCount={commentCount}
     >
       {children}
@@ -66,7 +66,7 @@ export const SocialFeedCardView = ({
   onMouseEnter,
   onMouseLeave,
   onClick,
-  emojiCount,
+  reactionCount,
   commentCount,
 }: SocialFeedCardViewProps) => {
   return (
@@ -81,7 +81,7 @@ export const SocialFeedCardView = ({
         <SocialVirtualFeedCardView>
           <S.VirtualContentItem>
             <SmileIcon />
-            {emojiCount}
+            {reactionCount}
           </S.VirtualContentItem>
           <S.VirtualContentItem>
             <MessageIcon />
