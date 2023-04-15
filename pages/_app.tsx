@@ -11,6 +11,7 @@ import { useState } from 'react';
 
 import reset from 'styles/reset';
 import theme from 'styles/theme';
+import ModalContainer from 'components/common/Modal/ModalContainer';
 
 export default function App({ Component, pageProps }: AppProps) {
   // TODO: consider setting defaultOptions
@@ -23,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <RecoilRoot>
+            <ModalContainer />
             <Component {...pageProps} />
           </RecoilRoot>
         </ThemeProvider>

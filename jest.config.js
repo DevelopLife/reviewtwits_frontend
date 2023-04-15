@@ -13,6 +13,7 @@ const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   // 테스트를 위한 jest dom 환경 구성
   testEnvironment: 'jest-environment-jsdom',
+  setupFilesAfterEnv: ['@testing-library/jest-dom'],
 };
 
 // yarn jest에서 사용되는 Jest 구성 객체

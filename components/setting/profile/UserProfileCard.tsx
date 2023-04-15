@@ -15,7 +15,7 @@ import styled from '@emotion/styled';
 import useForm from 'hooks/useForm';
 import useUserProfile from 'hooks/useUserProfile';
 import { usersAPI } from 'api/users';
-import { UserProfileType } from 'typings/account';
+import { UserProfileFormType } from 'typings/account';
 import { formattedImageUrl } from 'utils/format';
 import { SUCCESS_MESSAGE } from 'constants/account';
 
@@ -30,7 +30,7 @@ const UserProfileForm = () => {
   const [pathFrom, setPathFrom] = useState<string | null>('');
   const userData = useUserProfile();
   const { values, setValue, initializeForm, handleChange, handleSubmit } =
-    useForm<UserProfileType>({
+    useForm<UserProfileFormType>({
       nickname: '',
       intro: '',
     });
@@ -127,7 +127,7 @@ const UserProfileForm = () => {
 };
 
 interface UserProfileFormViewProps {
-  values: UserProfileType;
+  values: UserProfileFormType;
   preview: string;
   inputRef: RefObject<HTMLInputElement>;
   loadFile: (e: ChangeEvent<HTMLInputElement>) => void;

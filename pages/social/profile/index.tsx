@@ -9,7 +9,7 @@ const SocialProfilePage = () => {
     <SocialLayout>
       <SocialTitleSection>
         <SocialProfileLayout>
-          <SocialProfileCard>profile</SocialProfileCard>
+          <SocialProfileCard />
           <SocialFeedSection />
         </SocialProfileLayout>
       </SocialTitleSection>
