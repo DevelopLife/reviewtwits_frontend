@@ -5,15 +5,17 @@ import type { SocialProfile } from 'typings/social';
 import SocialFollowButton from 'components/social/profile/SocialFollowButton';
 import EditProfileButton from 'components/social/profile/EditProfileButton';
 import SocialProfileImage from 'components/social/profile/SocialProfileImage';
-// import SocialUnFollowButton from 'components/social/profile/SocialUnFollowButton';
+import SocialUnFollowButton from 'components/social/profile/SocialUnFollowButton';
 
 interface SocialProfileCardViewProps {
   isMyPage: boolean;
+  following?: boolean;
   profile: SocialProfile;
 }
 
 const SocialProfileCardView = ({
   isMyPage,
+  following,
   profile,
 }: SocialProfileCardViewProps) => {
   const {
@@ -60,10 +62,12 @@ const SocialProfileCardView = ({
               <>
                 {
                   // TODO: following인지 아닌지 판단해서 Component를 렌더링해주게 작성해야함
-                  <SocialFollowButton targetUserAccountId={accountId} />
-                  // <SocialUnFollowButton targetUserAccountId={''} />
+                  following ? (
+                    <SocialUnFollowButton targetUserAccountId={accountId} />
+                  ) : (
+                    <SocialFollowButton targetUserAccountId={accountId} />
+                  )
                 }
-
                 <S.Button color={'secondary'}>Message</S.Button>
               </>
             )}

@@ -14,10 +14,13 @@ const SocialAnotherUserProfileCard = () => {
   const { data: socialAnotherUserProfile, status } =
     useGetSocialProfile(nickname);
 
+  // TODO: following 해당 유저를 follow 중인지 아닌지 확인할 수 있어야 한다.
+
   if (status === 'success' && socialAnotherUserProfile?.userId) {
     return (
       <SocialProfileCardView
         isMyPage={isMypage}
+        following={true}
         profile={socialAnotherUserProfile}
       />
     );
