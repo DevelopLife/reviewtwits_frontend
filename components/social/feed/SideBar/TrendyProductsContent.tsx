@@ -1,16 +1,24 @@
 import styled from '@emotion/styled';
 
+import { useQuery } from '@tanstack/react-query';
+import { snsAPI } from 'api/sns';
+import { ProductType } from 'typings/reviews';
+
 import Card from '../Card';
 import Product from './Product';
 
 const TrendyProductsContent = () => {
+  const { data: products } = useQuery<ProductType[]>(['trend'], () =>
+    snsAPI.getTrendyProducts()
+  );
+
   return (
     <Card color="text_black_100">
       <S.Content>
         <S.ContentTitle>오늘의 트렌드 상품</S.ContentTitle>
         <S.MainContent>
-          {Array.from({ length: 3 }).map((_, i) => (
-            <Product key={i} />
+          {products?.map((product, i) => (
+            <Product key={i} data={product} />
           ))}
         </S.MainContent>
       </S.Content>

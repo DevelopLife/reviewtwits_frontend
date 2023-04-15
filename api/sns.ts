@@ -17,6 +17,8 @@ export const snsAPI = {
       })
       .then((res) => res.data);
   },
+  getTrendyProducts: () =>
+    api.get(`${SNS_URL}/recommend-product`).then((res) => res.data),
   addReaction: (reviewId: number, reaction: ReactionType) => {
     const params = { reaction };
 
