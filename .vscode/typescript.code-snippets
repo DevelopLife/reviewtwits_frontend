@@ -1,0 +1,48 @@
+{
+  "Print to Console": {
+    "prefix": "cl",
+    "body": "console.log('$1');",
+    "description": "Log output to console"
+  },
+  "Create Component Test Code": {
+    "prefix": "createTest",
+    "body": [
+      "// you press `tab` key cursor move next step",
+      "import { GlobalProvider } from 'components/common/GlobalProvider';",
+      "import { render, screen, waitFor } from '@testing-library/react';",
+      "// `step1` import test target Component",
+      "$1",
+      "",
+      "// `step2` insert test root description",
+      "describe('$2', () => {",
+      "// `step3` insert test case description",
+      "it('$3', async () => {",
+      "",
+      "// `step4` render Test Component",
+      "render($4);",
+      "});",
+      "});"
+    ],
+    "description": "create Test Code"
+  },
+  "Create Story Code": {
+    "prefix": "createStory",
+    "body": [
+      "import type { Meta, StoryFn } from '@storybook/react';",
+      "",
+      "// `setp1` import target ComponentFile",
+      "$1",
+      "",
+      "export default {",
+      "// `step2`",
+      "title: '$2',",
+      "// `step3`",
+      "component: $3,",
+      "} as Meta<typeof $4>;",
+      "",
+      "",
+      "export const Primary: StoryFn<typeof $5> = () => ($6)"
+    ],
+    "description": "create Storybook Code"
+  }
+}
