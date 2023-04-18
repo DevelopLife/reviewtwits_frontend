@@ -15,7 +15,7 @@ const SocialUnFollowButton = ({
   const { unfollow } = useFollowAndUnFollow(targetUserAccountId);
 
   return (
-    <SocialUnFollowButtonView onClick={unfollow}>
+    <SocialUnFollowButtonView onClick={unfollow} color="secondary">
       {UN_FOLLOW}
     </SocialUnFollowButtonView>
   );
@@ -24,15 +24,17 @@ const SocialUnFollowButton = ({
 export default SocialUnFollowButton;
 
 interface SocialUnFollowButtonViewProps extends WrapProps {
+  color: Colors;
   onClick: () => void;
 }
 
 const SocialUnFollowButtonView = ({
+  color,
   onClick,
   children,
 }: SocialUnFollowButtonViewProps) => {
   return (
-    <S.Button color="secondary" onClick={onClick}>
+    <S.Button color={color} onClick={onClick}>
       {children}
     </S.Button>
   );
