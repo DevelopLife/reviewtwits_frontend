@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { mockSocialProfile } from 'constants/mockSocialProfile';
 import useGetSocialProfile from 'hooks/useGetSocialProfile';
 import SocialProfileCardView from 'components/social/profile/SocialProfileCard/SocialProfileCardView';
-import useGetIsFolliwng from 'hooks/useGetIsFollowing';
+import useGetIsFollowing from 'hooks/useGetIsFollowing';
 
 const SocialAnotherUserProfileCard = () => {
   const router = useRouter();
@@ -14,7 +14,7 @@ const SocialAnotherUserProfileCard = () => {
     useGetSocialProfile(nickname);
 
   const isMypage = false;
-  const isFollowing = useGetIsFolliwng(nickname);
+  const isFollowing = useGetIsFollowing(nickname);
 
   if (status === 'success' && socialAnotherUserProfile?.userId) {
     return (
