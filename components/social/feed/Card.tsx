@@ -24,6 +24,6 @@ const S = {
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.21);
 
     background: ${({ color, theme }) => color && theme.colors[color]};
-    color: ${({ color }) => color === 'black' && 'white'};
+    color: ${({ color }) => color === 'text_black_100' && 'white'};
   `,
 };

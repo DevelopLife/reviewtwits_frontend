@@ -43,3 +43,11 @@ export interface ReviewResponseType {
   reactionResponses?: ReactionResponseType;
   isScrapped: boolean;
 }
+
+export interface ProductType {
+  itemId: number;
+  productName: string;
+  productImageUrl: string;
+  score: number;
+  url: string;
+}
