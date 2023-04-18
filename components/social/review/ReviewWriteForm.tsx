@@ -35,7 +35,7 @@ const ReviewWriteForm = () => {
     productURL: 'http://www.example.com/123',
     content: '',
     score: 0,
-    productName: 'productName',
+    productName: '',
     newImageFiles: [],
   });
   const { mutate: mutateCreate } = useMutation(
