@@ -7,13 +7,15 @@
   "Function Component": {
     "prefix": "addFc",
     "body": [
-      "interface $1Props {$2}",
+      "interface ${TM_FILENAME_BASE}Props {$1}",
       "",
-      "const Component = ({}: $3Props) => {",
-      " return ($4)",
+      "const ${TM_FILENAME_BASE} = ({$2}: ${TM_FILENAME_BASE/(.*){/pascalcase}/}Props) => {",
+      " return ($3)",
       "}",
       "",
-      "export default $5Component"
+      "export default ${TM_FILENAME_BASE}",
+      "",
+      "const S = {$3}"
     ],
     "description": "Basic of Function Component"
   },
