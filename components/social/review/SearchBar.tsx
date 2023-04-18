@@ -8,18 +8,22 @@ const SearchBar = () => {
 
 const SearchBarView = () => {
   return (
-    <S.Bar>
-      <S.IconWrap>
-        <SearchIcon />
-      </S.IconWrap>
-      <S.Input type="text" name="productName" />
-    </S.Bar>
+    <S.Box>
+      <S.Bar>
+        <S.IconWrap>
+          <SearchIcon />
+        </S.IconWrap>
+        <S.Input type="text" name="productName" />
+      </S.Bar>
+    </S.Box>
   );
 };
 
 export default SearchBar;
 
 const S = {
+  Box: styled.div``,
+
   Bar: styled.div`
     position: relative;
   `,
