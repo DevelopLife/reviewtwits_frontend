@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useGetFollowingList } from 'hooks/queries/sns';
+import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
 import useUserProfile from 'hooks/useUserProfile';
 import { FollowingDictionary } from 'typings/sns';
 
@@ -7,7 +8,7 @@ export const useGetIsFollowing = (nickname: string) => {
   const userData = useUserProfile();
   useGetFollowingList(userData.accountId);
   const { data: isFollowingDictionary } = useQuery<FollowingDictionary>(
-    ['isFollowingDictionary'],
+    FOLLOWING_DICTIONARY_KEY,
     {
       networkMode: 'offlineFirst',
     }

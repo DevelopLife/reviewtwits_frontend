@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { snsAPI } from 'api/sns';
 import { AxiosError, AxiosResponse } from 'axios';
+import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
 
@@ -33,9 +34,9 @@ export const useGetFollowingList = (accountId: string) => {
     () => snsAPI.getFollowingList(accountId),
     {
       onSuccess: (response) => {
-        queryClient.cancelQueries(['isFollowingDictionary']);
+        queryClient.cancelQueries(FOLLOWING_DICTIONARY_KEY);
         queryClient.fetchQuery({
-          queryKey: ['isFollowingDictionary'],
+          queryKey: FOLLOWING_DICTIONARY_KEY,
           queryFn: () => setFollowingDictionary(response.data),
         });
       },
