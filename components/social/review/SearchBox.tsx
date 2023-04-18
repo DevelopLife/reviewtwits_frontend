@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -12,8 +12,21 @@ interface SearchBoxProps {
 const SearchBox = ({ setValue }: SearchBoxProps) => {
   const [searchValue, setSearchValue] = useState<string>('');
 
+  const highlightText = (text: string) => {
+    return text.replaceAll(
+      searchValue,
+      `<span style="color: #4c80f1; font-weight: 600">${searchValue}</span>`
+    );
+  };
+
+  const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
   const props = {
     setValue,
+    highlightText,
+    onChangeValue,
   };
 
   return <SearchBoxView {...props} />;
@@ -21,16 +34,27 @@ const SearchBox = ({ setValue }: SearchBoxProps) => {
 
 interface SearchBoxViewProps {
   setValue: (name: string, value: number) => void;
+  highlightText: (text: string) => string;
+  onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBoxView = ({ setValue }: SearchBoxViewProps) => {
+const SearchBoxView = ({
+  setValue,
+  highlightText,
+  onChangeValue,
+}: SearchBoxViewProps) => {
   return (
     <S.SearchBox>
       <S.SearchBarWrap>
-        <SearchBar />
+        <SearchBar onChangeValue={onChangeValue} />
         <S.ProductList>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, i) => (
-            <S.Product key={i}>productName</S.Product>
+            <S.Product
+              key={i}
+              dangerouslySetInnerHTML={{
+                __html: highlightText('productName'),
+              }}
+            />
           ))}
         </S.ProductList>
       </S.SearchBarWrap>
@@ -76,6 +100,8 @@ const S = {
       text-decoration: underline;
     }
   `,
+
+  Highlight: styled.span``,
 
   GuideText: styled.small`
     display: inline-block;

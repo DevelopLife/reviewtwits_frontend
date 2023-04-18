@@ -1,19 +1,33 @@
+import { ChangeEvent } from 'react';
+
 import styled from '@emotion/styled';
 
 import SearchIcon from 'public/icons/search.svg';
 
-const SearchBar = () => {
-  return <SearchBarView />;
+interface SearchBarProps {
+  onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SearchBar = ({ onChangeValue }: SearchBarProps) => {
+  const props = {
+    onChangeValue,
+  };
+
+  return <SearchBarView {...props} />;
 };
 
-const SearchBarView = () => {
+interface SearchBarViewProps {
+  onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SearchBarView = ({ onChangeValue }: SearchBarViewProps) => {
   return (
     <S.Box>
       <S.Bar>
         <S.IconWrap>
           <SearchIcon />
         </S.IconWrap>
-        <S.Input type="text" name="productName" />
+        <S.Input type="text" name="productName" onChange={onChangeValue} />
       </S.Bar>
     </S.Box>
   );
