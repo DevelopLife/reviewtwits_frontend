@@ -17,6 +17,15 @@
     ],
     "description": "Basic of Function Component"
   },
+  "React Custom Hook": {
+    "prefix": "addCh",
+    "body": [
+      "const $TM_FILENAME_BASE = () => {}",
+      "",
+      "export default $TM_FILENAME_BASE"
+    ],
+    "description": ""
+  },
   "Test Code": {
     "prefix": "addTe",
     "body": [
