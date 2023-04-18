@@ -53,18 +53,17 @@
     "body": [
       "import type { Meta, StoryFn } from '@storybook/react';",
       "",
-      "// `setp1` import target ComponentFile",
-      "$1",
-      "",
       "export default {",
+      "// `step1`",
+      "title: '$1/${TM_FILENAME_BASE/(.stories)$//}',",
+      "component: ${TM_FILENAME_BASE/(.stories)$//},",
+      "} as Meta<typeof ${TM_FILENAME_BASE/(.stories)$//}>;",
+      "",
+      "",
       "// `step2`",
-      "title: '$2',",
-      "// `step3`",
-      "component: $3,",
-      "} as Meta<typeof $4>;",
-      "",
-      "",
-      "export const Primary: StoryFn<typeof $5> = () => ($6)"
+      "export const Primary: StoryFn<typeof ${TM_FILENAME_BASE/(.stories)$//}> = () => (",
+      "<${TM_FILENAME_BASE/(.stories)$//} $2 />",
+      ")"
     ],
     "description": "Basic of Story File Code"
   }
