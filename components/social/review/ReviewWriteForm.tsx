@@ -133,7 +133,7 @@ const ReviewWriteFormView = ({
         <S.ReviewFor>상품 URL</S.ReviewFor>
         <S.Input type="text" name="productURL" onChange={handleChange} />
         <S.ReviewFor>상품 검색</S.ReviewFor>
-        <SearchBox setValue={setValue} />
+        <SearchBox productName={values.productName} setValue={setValue} />
         <S.ReviewFor>상세 리뷰</S.ReviewFor>
         <ReviewTextArea content={values?.content} handleChange={handleChange} />
         <S.ImageUploadBoxWrap>

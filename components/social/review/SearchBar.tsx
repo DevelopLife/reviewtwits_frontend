@@ -5,11 +5,13 @@ import styled from '@emotion/styled';
 import SearchIcon from 'public/icons/search.svg';
 
 interface SearchBarProps {
+  searchValue: string;
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBar = ({ onChangeValue }: SearchBarProps) => {
+const SearchBar = ({ searchValue, onChangeValue }: SearchBarProps) => {
   const props = {
+    searchValue,
     onChangeValue,
   };
 
@@ -17,10 +19,11 @@ const SearchBar = ({ onChangeValue }: SearchBarProps) => {
 };
 
 interface SearchBarViewProps {
+  searchValue: string;
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBarView = ({ onChangeValue }: SearchBarViewProps) => {
+const SearchBarView = ({ searchValue, onChangeValue }: SearchBarViewProps) => {
   return (
     <S.Box>
       <S.Bar>
@@ -30,6 +33,7 @@ const SearchBarView = ({ onChangeValue }: SearchBarViewProps) => {
         <S.Input
           type="text"
           name="productName"
+          value={searchValue}
           spellCheck={false}
           onChange={onChangeValue}
         />

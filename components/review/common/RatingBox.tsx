@@ -6,11 +6,16 @@ import FullStarImg from 'public/images/full_star_img.png';
 import EmptyStarImg from 'public/images/empty_star_img.png';
 
 interface RatingBoxProps {
+  productName?: string;
   score?: number;
   setValue: (name: string, value: number) => void;
 }
 
-const RatingBox = ({ score: initialScore, setValue }: RatingBoxProps) => {
+const RatingBox = ({
+  productName,
+  score: initialScore,
+  setValue,
+}: RatingBoxProps) => {
   const [score, setScore] = useState(initialScore || 0);
   const [hoverScore, setHoverScore] = useState(initialScore || 0);
 
@@ -39,7 +44,11 @@ const RatingBox = ({ score: initialScore, setValue }: RatingBoxProps) => {
         style={{ background: 'gray' }}
       />
       <div>
-        <S.ProductName>오뚜기 콤비네이션 피자 415g 오뚜기, 2개</S.ProductName>
+        <S.ProductName>
+          {productName
+            ? productName
+            : '오뚜기 콤비네이션 피자 415g 오뚜기, 2개'}
+        </S.ProductName>
         <S.StarRating onMouseLeave={handleLeaveStar}>
           {Array.from({ length: 5 }).map((_, i) => (
             <S.Star

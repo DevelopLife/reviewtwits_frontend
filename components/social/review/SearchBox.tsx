@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { ProductSearchResultType } from 'typings/product';
@@ -9,10 +9,11 @@ import RatingBox from 'components/review/common/RatingBox';
 import itemsAPI from 'api/items';
 
 interface SearchBoxProps {
-  setValue: (name: string, value: number) => void;
+  productName?: string;
+  setValue: (name: string, value: number | string) => void;
 }
 
-const SearchBox = ({ setValue }: SearchBoxProps) => {
+const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const { data: searchResult } = useQuery<ProductSearchResultType[]>(
     ['searchProductName', searchValue],
@@ -33,41 +34,60 @@ const SearchBox = ({ setValue }: SearchBoxProps) => {
     setSearchValue(e.target.value);
   };
 
+  const onClickProduct = (e: MouseEvent<HTMLLIElement>) => {
+    const selectedProduct = e.currentTarget.id as string;
+
+    setValue('productName', selectedProduct);
+    setSearchValue(selectedProduct);
+  };
+
   const props = {
+    productName,
+    searchValue,
     searchResult,
     setValue,
     highlightText,
     onChangeValue,
+    onClickProduct,
   };
 
   return <SearchBoxView {...props} />;
 };
 
 interface SearchBoxViewProps {
+  productName?: string;
+  searchValue: string;
   searchResult?: ProductSearchResultType[];
   setValue: (name: string, value: number) => void;
   highlightText: (text: string) => string;
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickProduct: (e: MouseEvent<HTMLLIElement>) => void;
 }
 
 const SearchBoxView = ({
+  productName,
+  searchValue,
   searchResult,
   setValue,
   highlightText,
   onChangeValue,
+  onClickProduct,
 }: SearchBoxViewProps) => {
   return (
     <S.SearchBox>
       <S.SearchBarWrap>
-        <SearchBar onChangeValue={onChangeValue} />
+        <SearchBar searchValue={searchValue} onChangeValue={onChangeValue} />
         {searchResult && searchResult?.length > 0 && (
           <S.ProductList>
             {searchResult.map((result, i) => (
               <S.Product
                 key={i}
+                id={result.keyword} // requestId로 변경
+                value={result.keyword}
                 dangerouslySetInnerHTML={{
                   __html: highlightText(result.keyword),
                 }}
+                onClick={onClickProduct}
               />
             ))}
           </S.ProductList>
@@ -76,7 +96,7 @@ const SearchBoxView = ({
       <S.GuideText>
         찾으시는 상품이 없으신가요? 해당 작성하신 상품 URL로 상품 등록하기
       </S.GuideText>
-      <RatingBox setValue={setValue} />
+      <RatingBox productName={productName} setValue={setValue} />
     </S.SearchBox>
   );
 };
