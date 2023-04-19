@@ -1,10 +1,17 @@
 import React from 'react';
 import Review from './Review';
+import { ShoppingMallReviewDetail } from 'typings/reviews';
 
-const Reviews = () => {
+interface ReviewsProps {
+  shoppingmallReviewList: ShoppingMallReviewDetail[];
+}
+
+const Reviews = ({ shoppingmallReviewList }: ReviewsProps) => {
   return (
     <div>
-      <Review />
+      {shoppingmallReviewList.map((review) => (
+        <Review reviewDetail={review} key={review.reviewId} />
+      ))}
     </div>
   );
 };
