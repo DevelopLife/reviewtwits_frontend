@@ -30,6 +30,16 @@ const shoppingAPI = {
       },
     });
   },
+
+  getShoppingMallReviewList: async (
+    productURL = 'http://www.example.com/123'
+  ) => {
+    return await api.get(`${SHOPPING_URL}/list`, {
+      headers: {
+        productURL: productURL,
+      },
+    });
+  },
 };
 
 export { shoppingAPI };
