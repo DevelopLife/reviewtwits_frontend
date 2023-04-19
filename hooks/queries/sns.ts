@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { snsAPI } from 'api/sns';
 import { AxiosError, AxiosResponse } from 'axios';
 
+import { snsAPI } from 'api/sns';
 import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
