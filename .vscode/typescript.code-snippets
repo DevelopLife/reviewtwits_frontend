@@ -1,0 +1,70 @@
+{
+  "Print to Console": {
+    "prefix": "cl",
+    "body": "console.log('$1');",
+    "description": "Log output to console"
+  },
+  "Function Component": {
+    "prefix": "addFc",
+    "body": [
+      "interface ${TM_FILENAME_BASE}Props {$1}",
+      "",
+      "const ${TM_FILENAME_BASE} = ({$2}: ${TM_FILENAME_BASE/(.*){/pascalcase}/}Props) => {",
+      " return ($3)",
+      "}",
+      "",
+      "export default ${TM_FILENAME_BASE}",
+      "",
+      "const S = {$3}"
+    ],
+    "description": "Basic of Function Component"
+  },
+  "React Custom Hook": {
+    "prefix": "addCh",
+    "body": [
+      "const $TM_FILENAME_BASE = () => {}",
+      "",
+      "export default $TM_FILENAME_BASE"
+    ],
+    "description": ""
+  },
+  "Test Code": {
+    "prefix": "addTe",
+    "body": [
+      "// you press `tab` key cursor move next step",
+      "import TestGlobalProvider from 'components/test/TestGlobalProvider';",
+      "import { render, screen, waitFor } from '@testing-library/react';",
+      "// `step1` insert test root description",
+      "describe('$1', () => {",
+      "  // `step2` insert test case description",
+      "  it('$2', async () => {",
+      "    render(",
+      "      <TestGlobalProvider>",
+      "        <${TM_FILENAME_BASE/(.test)$//} />",
+      "      </TestGlobalProvider>",
+      "    );",
+      "  });",
+      "});"
+    ],
+    "description": "Basic of Test File Code"
+  },
+  "Story Code": {
+    "prefix": "addSt",
+    "body": [
+      "import type { Meta, StoryFn } from '@storybook/react';",
+      "",
+      "export default {",
+      "// `step1`",
+      "title: '$1/${TM_FILENAME_BASE/(.stories)$//}',",
+      "component: ${TM_FILENAME_BASE/(.stories)$//},",
+      "} as Meta<typeof ${TM_FILENAME_BASE/(.stories)$//}>;",
+      "",
+      "",
+      "// `step2`",
+      "export const Primary: StoryFn<typeof ${TM_FILENAME_BASE/(.stories)$//}> = () => (",
+      "<${TM_FILENAME_BASE/(.stories)$//} $2 />",
+      ")"
+    ],
+    "description": "Basic of Story File Code"
+  }
+}
