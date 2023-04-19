@@ -60,14 +60,11 @@ const SocialProfileCardView = ({
               <EditProfileButton />
             ) : (
               <>
-                {
-                  // TODO: following인지 아닌지 판단해서 Component를 렌더링해주게 작성해야함
-                  isFollowing ? (
-                    <SocialUnFollowButton targetUserAccountId={accountId} />
-                  ) : (
-                    <SocialFollowButton targetUserAccountId={accountId} />
-                  )
-                }
+                {isFollowing ? (
+                  <SocialUnFollowButton targetUserAccountId={accountId} />
+                ) : (
+                  <SocialFollowButton targetUserAccountId={accountId} />
+                )}
                 <S.Button color={'secondary'}>Message</S.Button>
               </>
             )}

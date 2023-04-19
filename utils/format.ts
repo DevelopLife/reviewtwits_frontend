@@ -1,5 +1,5 @@
 export const formattedImageUrl = (url: string) =>
-  `${process.env.NEXT_PUBLIC_SERVER_URL}/request-images/${url}`;
+  `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`;
 
 export const formattedLastTime = (pastTimeArr?: number[]): string => {
   if (!pastTimeArr) return '';

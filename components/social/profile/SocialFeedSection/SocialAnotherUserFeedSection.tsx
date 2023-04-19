@@ -1,12 +1,12 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
 import SocialFeedSectionView, {
   CARD_WIDTH,
 } from 'components/social/profile/SocialFeedSection/SocialFeedSectionView';
 import useGetSocialReviews from 'hooks/useGetSocialReviews';
-
-import { useRouter } from 'next/router';
+import { formattedImageUrl } from 'utils/format';
 
 const SocialAnoterUserFeedSection = () => {
   const router = useRouter();
@@ -22,12 +22,7 @@ const SocialAnoterUserFeedSection = () => {
       <SocialFeedSectionView columnWidth={CARD_WIDTH}>
         {reviewPages?.map(({ currentPage }) =>
           currentPage.map(
-            ({
-              reviewId,
-              reviewImageNameList,
-              reactionCount,
-              commentCount,
-            }) => (
+            ({ reviewId, reviewImageUrlList, reactionCount, commentCount }) => (
               <SocialFeedCard
                 key={reviewId}
                 styles={{
@@ -41,10 +36,8 @@ const SocialAnoterUserFeedSection = () => {
                 <Image
                   quality={100}
                   src={
-                    // TODO: 지수가 작업한 formattedImageUrl (https://github.com/DevelopLife/reviewtwits_frontend/pull/128/files/c520e4a1249e073e1bc4d2036f4d18cc5644fb64#diff-3984ffbe4039599af4e1ec47a5294914d774dde97b957c884e8d8967c400d67f)
-                    // 로 변경해야함
-                    reviewImageNameList[0]
-                      ? `${process.env.NEXT_PUBLIC_SERVER_URL}/request-images/${reviewImageNameList[0]}`
+                    reviewImageUrlList?.[0]
+                      ? formattedImageUrl(reviewImageUrlList[0])
                       : ''
                   }
                   alt="feedThumbnail"

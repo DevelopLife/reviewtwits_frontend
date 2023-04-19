@@ -1,11 +1,11 @@
 import Image from 'next/image';
+import { formattedImageUrl } from 'utils/format';
 
 interface SocialProfileImageProps {
   profileImage: string | null;
 }
 
 const SocialProfileImage = ({ profileImage }: SocialProfileImageProps) => {
-  // TODO: src 부분 지수가 작업한 걸로 교체해야함
   return (
     <Image
       width={80}
@@ -17,11 +17,7 @@ const SocialProfileImage = ({ profileImage }: SocialProfileImageProps) => {
         overflow: 'hidden',
         backgroundColor: 'white',
       }}
-      src={
-        profileImage
-          ? `${process.env.NEXT_PUBLIC_SERVER_URL}/request-images/${profileImage}`
-          : ''
-      }
+      src={profileImage ? formattedImageUrl(profileImage) : ''}
       alt={'socialProfileImage'}
     />
   );

@@ -13,7 +13,7 @@ export type SocialProfile = {
 export type SocialReview = {
   reviewId: number;
   userInfo: SocialProfile;
-  reviewImageNameList: string[];
+  reviewImageUrlList: string[];
   commentCount: number;
   reactionCount: number;
 };
