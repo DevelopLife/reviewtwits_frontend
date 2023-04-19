@@ -27,7 +27,12 @@ const SearchBarView = ({ onChangeValue }: SearchBarViewProps) => {
         <S.IconWrap>
           <SearchIcon />
         </S.IconWrap>
-        <S.Input type="text" name="productName" onChange={onChangeValue} />
+        <S.Input
+          type="text"
+          name="productName"
+          spellCheck={false}
+          onChange={onChangeValue}
+        />
       </S.Bar>
     </S.Box>
   );

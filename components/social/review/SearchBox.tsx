@@ -1,9 +1,12 @@
 import { ChangeEvent, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+import { ProductSearchResultType } from 'typings/product';
 
 import styled from '@emotion/styled';
-
 import SearchBar from './SearchBar';
 import RatingBox from 'components/review/common/RatingBox';
+import itemsAPI from 'api/items';
 
 interface SearchBoxProps {
   setValue: (name: string, value: number) => void;
@@ -11,6 +14,13 @@ interface SearchBoxProps {
 
 const SearchBox = ({ setValue }: SearchBoxProps) => {
   const [searchValue, setSearchValue] = useState<string>('');
+  const { data: searchResult } = useQuery<ProductSearchResultType[]>(
+    ['searchProductName', searchValue],
+    () => itemsAPI.searchProductName(searchValue),
+    {
+      enabled: !!searchValue,
+    }
+  );
 
   const highlightText = (text: string) => {
     return text.replaceAll(
@@ -24,6 +34,7 @@ const SearchBox = ({ setValue }: SearchBoxProps) => {
   };
 
   const props = {
+    searchResult,
     setValue,
     highlightText,
     onChangeValue,
@@ -33,12 +44,14 @@ const SearchBox = ({ setValue }: SearchBoxProps) => {
 };
 
 interface SearchBoxViewProps {
+  searchResult?: ProductSearchResultType[];
   setValue: (name: string, value: number) => void;
   highlightText: (text: string) => string;
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SearchBoxView = ({
+  searchResult,
   setValue,
   highlightText,
   onChangeValue,
@@ -47,16 +60,18 @@ const SearchBoxView = ({
     <S.SearchBox>
       <S.SearchBarWrap>
         <SearchBar onChangeValue={onChangeValue} />
-        <S.ProductList>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, i) => (
-            <S.Product
-              key={i}
-              dangerouslySetInnerHTML={{
-                __html: highlightText('productName'),
-              }}
-            />
-          ))}
-        </S.ProductList>
+        {searchResult && searchResult?.length > 0 && (
+          <S.ProductList>
+            {searchResult.map((result, i) => (
+              <S.Product
+                key={i}
+                dangerouslySetInnerHTML={{
+                  __html: highlightText(result.keyword),
+                }}
+              />
+            ))}
+          </S.ProductList>
+        )}
       </S.SearchBarWrap>
       <S.GuideText>
         찾으시는 상품이 없으신가요? 해당 작성하신 상품 URL로 상품 등록하기
