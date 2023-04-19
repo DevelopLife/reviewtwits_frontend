@@ -14,8 +14,6 @@ interface ReviewProps {
 const Review = ({ reviewDetail }: ReviewProps) => {
   const { nickname, profileImage } = reviewDetail.userInfo;
   const { content, reviewImageUrlList } = reviewDetail;
-  console.log(reviewDetail);
-  console.log(reviewImageUrlList);
   return (
     <S.Container>
       <S.WriterInfo>
