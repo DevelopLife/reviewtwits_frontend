@@ -6,14 +6,19 @@ import {
   Reviews,
 } from './@index';
 import * as S from './ShoppingMallReview.styles';
-import { ShoppingMallReviewInfo } from 'typings/reviews';
+import {
+  ShoppingMallReviewDetail,
+  ShoppingMallReviewInfo,
+} from 'typings/reviews';
 
 interface ShoppingMallReviewProps {
   shoppingmallReviewInfoData: ShoppingMallReviewInfo;
+  shoppingmallReviewList: ShoppingMallReviewDetail[];
 }
 
 const ShoppingMallReview = ({
   shoppingmallReviewInfoData,
+  shoppingmallReviewList,
 }: ShoppingMallReviewProps) => {
   return (
     <S.Layout>
@@ -29,7 +34,7 @@ const ShoppingMallReview = ({
         <ReviewHeader />
       </S.ReviewHeaderLayout>
       <S.ReviewsLayout>
-        <Reviews />
+        <Reviews shoppingmallReviewList={shoppingmallReviewList} />
       </S.ReviewsLayout>
     </S.Layout>
   );
