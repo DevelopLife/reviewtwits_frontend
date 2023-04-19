@@ -6,12 +6,21 @@ import {
   Reviews,
 } from './@index';
 import * as S from './ShoppingMallReview.styles';
+import { ShoppingMallReviewInfo } from 'typings/reviews';
 
-const ShoppingMallReview = () => {
+interface ShoppingMallReviewProps {
+  shoppingmallReviewInfoData: ShoppingMallReviewInfo;
+}
+
+const ShoppingMallReview = ({
+  shoppingmallReviewInfoData,
+}: ShoppingMallReviewProps) => {
   return (
     <S.Layout>
       <S.ComprehensiveRatesLayout>
-        <ComprehensiveRates />
+        <ComprehensiveRates
+          shoppingmallReviewInfoData={shoppingmallReviewInfoData}
+        />
       </S.ComprehensiveRatesLayout>
       <S.KeywordRatesLayout>
         <KeywordRates />
