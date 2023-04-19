@@ -3,25 +3,31 @@ import React from 'react';
 
 import risingArray from 'public/images/rising_array.png';
 import grayStar from 'public/images/gray_star.png';
-import { state } from 'states/shoppingMall';
+import emptyStar from 'public/images/empty_star.png';
 import * as S from './ComprehensiveRates.styles';
+import { ShoppingMallReviewInfo } from 'typings/reviews';
 
-const ComprehensiveRates = () => {
-  // 임시 데이터로 출력
-  const reviewstate = state;
+interface ComprehensiveRatesProps {
+  shoppingmallReviewInfoData: ShoppingMallReviewInfo;
+}
+
+const ComprehensiveRates = ({
+  shoppingmallReviewInfoData,
+}: ComprehensiveRatesProps) => {
   return (
     <S.Container>
       <S.OverallReviewNumber>
         <S.Strong>전체 리뷰수 </S.Strong>
         <S.NumberInfos>
           <S.H4>
-            {reviewstate.totalReviewCount >= 1000
-              ? Math.floor(reviewstate.totalReviewCount / 1000) + 'k'
-              : reviewstate.totalReviewCount}
+            {shoppingmallReviewInfoData.totalReviewCount >= 1000
+              ? Math.floor(shoppingmallReviewInfoData.totalReviewCount / 1000) +
+                'k'
+              : shoppingmallReviewInfoData.totalReviewCount}
           </S.H4>
           <div>
             <div>
-              {reviewstate.recentReviewCount}
+              {shoppingmallReviewInfoData.recentReviewCount}
               <Image
                 src={risingArray}
                 alt="arrow image"
@@ -37,7 +43,7 @@ const ComprehensiveRates = () => {
       <S.OverallRating>
         <S.Strong>평점</S.Strong>
         <S.StarInfos>
-          <S.H4>{reviewstate.averageStarScore}</S.H4>
+          <S.H4>{shoppingmallReviewInfoData.averageStarScore}</S.H4>
           <S.Stars>
             <S.Star>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -71,24 +77,34 @@ const ComprehensiveRates = () => {
 
       <S.OverallRatingDetail>
         <li>
-          <Image src={grayStar} alt="" width={15} height={15} />
-          5 <S.PrograssBar prograssRange={'150'} />
+          <Image src={grayStar} alt="" width={15} height={15} />5{' '}
+          <S.PrograssBar
+            prograssRange={shoppingmallReviewInfoData.starScoreArray[0]}
+          />
         </li>
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />4
-          <S.PrograssBar prograssRange={'75'} />
+          <S.PrograssBar
+            prograssRange={shoppingmallReviewInfoData.starScoreArray[1]}
+          />
         </li>
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />3
-          <S.PrograssBar prograssRange={'30'} />
+          <S.PrograssBar
+            prograssRange={shoppingmallReviewInfoData.starScoreArray[2]}
+          />
         </li>
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />2
-          <S.PrograssBar prograssRange={'15'} />
+          <S.PrograssBar
+            prograssRange={shoppingmallReviewInfoData.starScoreArray[3]}
+          />
         </li>
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />1
-          <S.PrograssBar prograssRange={'12'} />
+          <S.PrograssBar
+            prograssRange={shoppingmallReviewInfoData.starScoreArray[4]}
+          />
         </li>
       </S.OverallRatingDetail>
     </S.Container>

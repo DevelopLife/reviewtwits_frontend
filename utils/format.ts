@@ -11,13 +11,13 @@ export const formattedLastTime = (pastTimeArr?: number[]): string => {
 
   const minDiff = Math.floor(timeDiff / 1000 / 60);
   const hourDiff = Math.floor(minDiff / 60);
-  const dayDiff = Math.floor(hourDiff / 60);
+  const dayDiff = Math.floor(hourDiff / 24);
 
-  return dayDiff
+  return dayDiff > 0
     ? `${dayDiff}d`
-    : hourDiff
+    : hourDiff > 0
     ? `${hourDiff}h`
-    : minDiff
+    : minDiff > 0
     ? `${minDiff}m`
     : 'now';
 };

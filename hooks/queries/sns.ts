@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { snsAPI } from 'api/sns';
 import { AxiosError, AxiosResponse } from 'axios';
+
 import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
@@ -17,7 +18,6 @@ export const useGetFollowingList = (accountId: string) => {
 
   const setFollowingDictionary = (followingList: FollowListType) => {
     const defaultFollowingDictionary: FollowingDictionary = {};
-
     const result = followingList.reduce(
       (followingDictionary, { nickname, ...rest }) => {
         followingDictionary[nickname] = rest;
