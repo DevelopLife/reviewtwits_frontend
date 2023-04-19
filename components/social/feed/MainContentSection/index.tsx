@@ -6,6 +6,11 @@ import { ReviewResponseType } from 'typings/reviews';
 
 import Review from './Review';
 
+import { useGetInfiniteFeed } from 'hooks/queries/sns';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import { useRef } from 'react';
+import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
+
 const MainContentSection = () => {
   const { data: reviewData } = useQuery<ReviewResponseType[]>(['feed'], () =>
     snsAPI.getFeed()
@@ -15,24 +20,43 @@ const MainContentSection = () => {
     reviewData,
   };
 
-  return <MainContentSectionView {...props} />;
+  // infiniteScroll 설명을 위한 임시 작업
+
+  // return <MainContentSectionView {...props} />;
+  return <MainContentSectionView />;
 };
 
 interface MainContentSectionViewProps {
   reviewData?: ReviewResponseType[];
 }
 
-const MainContentSectionView = ({
-  reviewData,
-}: MainContentSectionViewProps) => {
-  return (
-    <S.Section>
-      {reviewData?.map((data: ReviewResponseType, i) => (
-        <Review key={i} data={data} />
-      ))}
-    </S.Section>
-  );
-};
+const MainContentSectionView = () =>
+  //   {
+  //   reviewData,
+  // }: MainContentSectionViewProps
+  {
+    // infiniteScroll 설명을 위한 임시 작업
+
+    const observeTarget = useRef<HTMLDivElement>(null);
+
+    const infiniteQuery = useGetInfiniteFeed();
+
+    useIntersectionObserver({
+      containerTarget: observeTarget,
+      onIntersect: infiniteQuery.fetchNextPage,
+    });
+    const reviewData = linkageInfiniteScrollData<ReviewResponseType>(
+      infiniteQuery?.data
+    );
+
+    return (
+      <S.Section ref={observeTarget}>
+        {reviewData?.map((data: ReviewResponseType, i) => (
+          <Review key={i} data={data} />
+        ))}
+      </S.Section>
+    );
+  };
 
 export default MainContentSection;
 
