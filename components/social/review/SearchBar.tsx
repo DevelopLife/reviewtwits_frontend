@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, RefObject, useEffect, useRef } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -6,24 +6,42 @@ import SearchIcon from 'public/icons/search.svg';
 
 interface SearchBarProps {
   searchValue: string;
+  setIsFocused: (value: boolean) => void;
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBar = ({ searchValue, onChangeValue }: SearchBarProps) => {
+const SearchBar = ({
+  searchValue,
+  setIsFocused,
+  onChangeValue,
+}: SearchBarProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const inputElement = inputRef.current;
+
+    inputElement?.addEventListener('focus', () => setIsFocused(true));
+
+    return () =>
+      inputElement?.removeEventListener('focus', () => setIsFocused(true));
+  }, [setIsFocused]);
+
   const props = {
-    searchValue,
-    onChangeValue,
+    inputRef,
+    value: searchValue,
+    onChange: onChangeValue,
   };
 
   return <SearchBarView {...props} />;
 };
 
 interface SearchBarViewProps {
-  searchValue: string;
-  onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputRef: RefObject<HTMLInputElement>;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBarView = ({ searchValue, onChangeValue }: SearchBarViewProps) => {
+const SearchBarView = ({ inputRef, ...rest }: SearchBarViewProps) => {
   return (
     <S.Box>
       <S.Bar>
@@ -31,11 +49,11 @@ const SearchBarView = ({ searchValue, onChangeValue }: SearchBarViewProps) => {
           <SearchIcon />
         </S.IconWrap>
         <S.Input
+          ref={inputRef}
           type="text"
           name="productName"
-          value={searchValue}
           spellCheck={false}
-          onChange={onChangeValue}
+          {...rest}
         />
       </S.Bar>
     </S.Box>

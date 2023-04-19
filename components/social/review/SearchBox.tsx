@@ -1,4 +1,11 @@
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import {
+  ChangeEvent,
+  MouseEvent,
+  useState,
+  useRef,
+  RefObject,
+  useEffect,
+} from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { ProductSearchResultType } from 'typings/product';
@@ -15,6 +22,7 @@ interface SearchBoxProps {
 
 const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
   const [searchValue, setSearchValue] = useState<string>('');
+  const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
   const { data: searchResult } = useQuery<ProductSearchResultType[]>(
     ['searchProductName', searchValue],
     () => itemsAPI.searchProductName(searchValue),
@@ -22,6 +30,7 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
       enabled: !!searchValue,
     }
   );
+  const searchRef = useRef<HTMLDivElement>(null);
 
   const highlightText = (text: string) => {
     return text.replaceAll(
@@ -41,11 +50,23 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
     setSearchValue(selectedProduct);
   };
 
+  useEffect(() => {
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+
+      if (!searchRef.current?.contains(target)) setIsSearchFocused(false);
+    });
+  }, []);
+
   const props = {
+    searchRef,
+    isSearchFocused,
+    isSearchResultExist: searchResult ? searchResult.length > 0 : false,
     productName,
     searchValue,
     searchResult,
     setValue,
+    setIsFocused: setIsSearchFocused,
     highlightText,
     onChangeValue,
     onClickProduct,
@@ -55,31 +76,37 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
 };
 
 interface SearchBoxViewProps {
+  searchRef: RefObject<HTMLDivElement>;
+  isSearchFocused: boolean;
+  isSearchResultExist: boolean;
   productName?: string;
   searchValue: string;
   searchResult?: ProductSearchResultType[];
   setValue: (name: string, value: number) => void;
+  setIsFocused: (value: boolean) => void;
   highlightText: (text: string) => string;
   onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickProduct: (e: MouseEvent<HTMLLIElement>) => void;
 }
 
 const SearchBoxView = ({
+  searchRef,
+  isSearchFocused,
+  isSearchResultExist,
   productName,
-  searchValue,
   searchResult,
   setValue,
   highlightText,
-  onChangeValue,
   onClickProduct,
+  ...searchBarProps
 }: SearchBoxViewProps) => {
   return (
     <S.SearchBox>
-      <S.SearchBarWrap>
-        <SearchBar searchValue={searchValue} onChangeValue={onChangeValue} />
-        {searchResult && searchResult?.length > 0 && (
+      <S.SearchBarWrap ref={searchRef}>
+        <SearchBar {...searchBarProps} />
+        {isSearchFocused && isSearchResultExist && (
           <S.ProductList>
-            {searchResult.map((result, i) => (
+            {searchResult?.map((result, i) => (
               <S.Product
                 key={i}
                 id={result.keyword} // requestId로 변경
