@@ -23,7 +23,7 @@ const SocialProfileCardView = ({
     accountId,
     detailIntroduce,
     introduceText,
-    profileImage,
+    profileImageUrl,
     reviewCount,
     followers,
     followings,
@@ -33,7 +33,7 @@ const SocialProfileCardView = ({
     <S.ProfileCard>
       <S.ProfileCardContent>
         <S.ProfileDetail>
-          <SocialProfileImage profileImage={profileImage} />
+          <SocialProfileImage profileImageUrl={profileImageUrl} />
           <S.FlexItem>
             <S.SocialNickname>{nickname}</S.SocialNickname>
             <S.Carrer>{detailIntroduce}</S.Carrer>

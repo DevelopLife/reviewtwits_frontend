@@ -2,10 +2,10 @@ import Image from 'next/image';
 import { formattedImageUrl } from 'utils/format';
 
 interface SocialProfileImageProps {
-  profileImage: string | null;
+  profileImageUrl: string | null;
 }
 
-const SocialProfileImage = ({ profileImage }: SocialProfileImageProps) => {
+const SocialProfileImage = ({ profileImageUrl }: SocialProfileImageProps) => {
   return (
     <Image
       width={80}
@@ -17,7 +17,7 @@ const SocialProfileImage = ({ profileImage }: SocialProfileImageProps) => {
         overflow: 'hidden',
         backgroundColor: 'white',
       }}
-      src={profileImage ? formattedImageUrl(profileImage) : ''}
+      src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
       alt={'socialProfileImage'}
     />
   );

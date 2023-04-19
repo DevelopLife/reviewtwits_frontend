@@ -4,7 +4,7 @@ export type SocialProfile = {
   accountId: string;
   introduceText: string;
   detailIntroduce: string;
-  profileImage: string | null;
+  profileImageUrl: string | null;
   reviewCount: number;
   followers: number;
   followings: number;
