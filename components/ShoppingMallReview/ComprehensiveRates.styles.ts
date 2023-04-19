@@ -131,7 +131,7 @@ const OverallRatingDetail = styled.ul`
 
 const PrograssBar = styled.div<{ prograssRange: number }>`
   height: 10px;
-  width: ${(props) => 100 * props.prograssRange}px;
+  width: ${(props) => 192 * props.prograssRange}px;
 
   margin-left: 15px;
 
