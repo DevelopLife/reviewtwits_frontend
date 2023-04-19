@@ -20,6 +20,16 @@ const shoppingAPI = {
     const body = values;
     return await api.patch(`${SHOPPING_URL}/${reviewId}`, body);
   },
+
+  getShoppingMallReviewInfo: async (
+    productURL = 'http://www.example.com/123'
+  ) => {
+    return await api.get(`${SHOPPING_URL}`, {
+      headers: {
+        productURL: productURL,
+      },
+    });
+  },
 };
 
 export { shoppingAPI };
