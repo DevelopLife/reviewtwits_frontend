@@ -20,9 +20,11 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
+  // "plugins": ["inline-react-svg"],
   "rules": {
     "no-console": "warn",
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "@typescript-eslint/no-var-requires": 0
   },
   "overrides": [
     {

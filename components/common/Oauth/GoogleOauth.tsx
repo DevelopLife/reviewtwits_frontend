@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styled from '@emotion/styled';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 
@@ -36,7 +35,7 @@ interface CustomGoogleLoginButtonProps {
 const GoogleLoginButtonView = ({ onClick }: CustomGoogleLoginButtonProps) => {
   return (
     <S.Button onClick={onClick}>
-      <Image width={35} height={35} src={GoogleIconSVG} alt={'google_icon'} />
+      <GoogleIconSVG />
     </S.Button>
   );
 };

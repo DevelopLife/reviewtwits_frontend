@@ -88,7 +88,6 @@ const reset = css`
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */
@@ -149,6 +148,17 @@ const reset = css`
   body {
     color: ${theme.colors.gray_7};
     border-color: ${theme.colors.gray_4};
+  }
+
+  button {
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 `;
 

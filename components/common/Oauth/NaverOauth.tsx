@@ -1,5 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
+
+declare global {
+  interface Window {
+    naver: any;
+  }
+}
 
 const NAVER_ID_LOGIN = 'naverIdLogin';
 
@@ -31,7 +38,7 @@ export const NaverSDKScript = () => {
   return (
     <script
       type="text/javascript"
-      src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
+      src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
       async
     ></script>
   );
