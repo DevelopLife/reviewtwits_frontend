@@ -51,3 +51,10 @@ export interface ProductType {
   score: number;
   url: string;
 }
+
+export interface ShoppingMallReviewInfo {
+  averageStarScore: number;
+  totalReviewCount: number;
+  recentReviewCount: number;
+  starScoreArray: number[];
+}
