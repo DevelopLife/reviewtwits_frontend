@@ -8,7 +8,7 @@ const itemsAPI = {
 
     return await api
       .get(`${ITEMS_URL}/search`, { params })
-      .then((res) => JSON.parse(res.data.slice(1, -1)));
+      .then((res) => res.data);
   },
 };
 
