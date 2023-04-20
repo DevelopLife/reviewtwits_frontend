@@ -161,6 +161,11 @@ const reset = css`
       opacity: 0.8;
     }
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 export default reset;
