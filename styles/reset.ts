@@ -151,6 +151,7 @@ const reset = css`
   }
 
   button {
+    padding: 0;
     outline: none;
     border: none;
     background: none;
