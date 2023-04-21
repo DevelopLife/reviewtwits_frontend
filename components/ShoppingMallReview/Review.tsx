@@ -4,16 +4,27 @@ import React from 'react';
 import grayStar from 'public/images/gray_star.png';
 import thumbsUp from 'public/images/thumbs_up.png';
 import * as S from './Review.styles';
+import { ShoppingMallReviewDetail } from 'typings/reviews';
+import { formattedImageUrl } from 'utils/format';
 
-const Review = () => {
+interface ReviewProps {
+  reviewDetail: ShoppingMallReviewDetail;
+}
+
+const Review = ({ reviewDetail }: ReviewProps) => {
+  const { nickname, profileImage } = reviewDetail.userInfo;
+  const { content, reviewImageUrlList } = reviewDetail;
   return (
     <S.Container>
       <S.WriterInfo>
         <S.WriterImage>
-          <Image src="" alt="" />
+          <Image
+            src={profileImage ? formattedImageUrl(profileImage) : ''}
+            alt=""
+          />
         </S.WriterImage>
         <S.WriterDesc>
-          <S.WriterName>인생마린</S.WriterName>
+          <S.WriterName>{nickname}</S.WriterName>
           <S.StarRateWithDate>
             <S.Stars>
               <li>
@@ -45,7 +56,15 @@ const Review = () => {
       <S.ProductImageBox>
         <p>마린이 직접만든 리조또, 520g 1팩</p>
         <S.ProductImages>
-          <Image src="" alt="" />
+          {reviewImageUrlList?.map((imageURL) => (
+            <Image
+              src={imageURL ? formattedImageUrl(imageURL) : ''}
+              alt=""
+              key={imageURL}
+              height={80}
+              width={100}
+            />
+          ))}
           <Image src="" alt="" />
           <Image src="" alt="" />
           <Image src="" alt="" />
@@ -54,12 +73,7 @@ const Review = () => {
 
       <S.ProductDesc>
         <strong>마린의 손맛이 느껴지는 맛입니다</strong>
-        <p>
-          저번에 먹었던 마린이 직접만든 육개장보다 맛있어요!! 애는 단짠단짠의
-          맛이구요~ 누군가는 좋아할맛이지만 호불호가 있는맛이라고 생각합니다
-          영양성분 보시면 아시겠지만 타사의 제품과 다르게 건강에 신경쓴 부분도
-          좋았어요 밖에서 사먹는 리조또 꿇리지 않네요 재구매의사 x100!!
-        </p>
+        <p>{content}</p>
       </S.ProductDesc>
 
       <S.Keywords>

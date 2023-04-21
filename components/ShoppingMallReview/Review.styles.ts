@@ -4,6 +4,7 @@ const Container = styled.div`
   width: 424px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 `;
 
 const WriterInfo = styled.div`
@@ -100,22 +101,24 @@ const ProductImages = styled.div`
   flex-direction: row;
   gap: 8px;
 
-  img {
+  /* Image {
     width: 100px;
     height: 80px;
 
     background: #d9d9d9;
-  }
+  } */
 `;
 
 const ProductDesc = styled.div`
   width: 413px;
-  height: 126px;
+  max-height: 126px;
 
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 12px;
   line-height: 120%;
+
+  margin-bottom: 15px;
 
   color: #333333;
   strong {

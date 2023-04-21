@@ -5,6 +5,7 @@ import {
   useEffect,
   useCallback,
 } from 'react';
+import { useSetRecoilState } from 'recoil';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 
@@ -14,6 +15,7 @@ import { validateEmail, validatePassword } from 'utils/validate';
 
 import { usersAPI } from 'api/users';
 import { doSignIn } from 'utils/auth';
+import { isLoginState } from 'states/isLogin';
 
 import Form from 'components/common/Form';
 import Input from 'components/common/Input';
@@ -24,12 +26,15 @@ const SignInForm = () => {
     accountId: '',
     accountPw: '',
   });
+  const setIsLogined = useSetRecoilState(isLoginState);
 
   const onValid = async () => {
     const signInResult = await usersAPI.signIn(values);
 
     if (signInResult) {
       doSignIn(signInResult.accessToken);
+      setIsLogined(true);
+
       window.location.replace('/');
     }
   };
