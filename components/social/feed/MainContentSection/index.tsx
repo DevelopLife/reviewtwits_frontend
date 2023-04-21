@@ -37,14 +37,8 @@ const MainContentSectionView = () =>
   {
     // infiniteScroll 설명을 위한 임시 작업
 
-    const observeTarget = useRef<HTMLDivElement>(null);
-
     const infiniteQuery = useGetInfiniteFeed();
-
-    useIntersectionObserver({
-      containerTarget: observeTarget,
-      onIntersect: infiniteQuery.fetchNextPage,
-    });
+    const observeTarget = useIntersectionObserver(infiniteQuery.fetchNextPage);
     const reviewData = linkageInfiniteScrollData<ReviewResponseType>(
       infiniteQuery?.data
     );
