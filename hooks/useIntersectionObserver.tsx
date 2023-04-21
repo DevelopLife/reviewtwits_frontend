@@ -1,14 +1,16 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
 interface useIntersectionObserverProps {
-  containerTarget: RefObject<Element>;
+  // containerTarget: RefObject<Element>;
   onIntersect: () => void;
 }
 
-const useIntersectionObserver = ({
-  containerTarget,
-  onIntersect,
-}: useIntersectionObserverProps) => {
+const useIntersectionObserver = (
+  // containerTarget,
+  onIntersect: () => void
+) => {
+  const containerTarget: RefObject<HTMLDivElement> = useRef(null);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleIntersect = (target: IntersectionObserverEntry[]) => {
     if (!target[0].isIntersecting) return;
@@ -36,6 +38,8 @@ const useIntersectionObserver = ({
       intersectionObserver.disconnect();
     };
   }, [containerTarget, handleIntersect]);
+
+  return containerTarget;
 };
 
 export default useIntersectionObserver;
