@@ -12,11 +12,10 @@ import { useState } from 'react';
 import reset from 'styles/reset';
 import theme from 'styles/theme';
 import type { WrapProps } from 'typings/wrapperProps';
+import { PageProps } from 'pages/_app';
 
 interface GlobalProviderProps extends WrapProps {
-  pageProps: {
-    dehydratedState: DehydratedState;
-  };
+  pageProps: PageProps;
 }
 
 const GlobalProvider = ({ children, pageProps }: GlobalProviderProps) => {
