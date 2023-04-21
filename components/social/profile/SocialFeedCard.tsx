@@ -7,6 +7,7 @@ import MessageIcon from 'public/icons/message.svg';
 import SmileIcon from 'public/icons/smile.svg';
 import useModal from 'hooks/useModal';
 import MODAL_LIST from 'constants/modal';
+import { useEffect } from 'react';
 
 type FeedCardStyles = {
   width: number;
@@ -43,6 +44,10 @@ export const SocialFeedCard = ({
 
   const onMouseEnter = () => setTrue();
   const onMouseLeave = () => setFalse();
+
+  useEffect(() => {
+    return () => modal.hide();
+  }, []);
 
   return (
     <SocialFeedCardView
