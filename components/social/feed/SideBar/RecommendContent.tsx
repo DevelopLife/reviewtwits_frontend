@@ -5,7 +5,7 @@ import Card from '../Card';
 
 const RecommendContent = () => {
   return (
-    <Card color="black">
+    <Card color="text_black_100">
       <S.Content>
         <S.UserProfileBox>
           <S.UserImage src="" alt="" />

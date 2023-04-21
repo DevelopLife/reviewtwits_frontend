@@ -43,3 +43,44 @@ export interface ReviewResponseType {
   reactionResponses?: ReactionResponseType;
   isScrapped: boolean;
 }
+
+export interface ProductType {
+  itemId: number;
+  productName: string;
+  productImageUrl: string;
+  score: number;
+  url: string;
+}
+
+export interface ShoppingMallUserInfo {
+  userId: number;
+  nickname: string;
+  accountId: string;
+  introduceText: string;
+  profileImage: null;
+  detailIntroduce: null;
+  reviewCount: number;
+  followers: number;
+  followings: number;
+}
+
+export interface ShoppingMallReviewInfo {
+  averageStarScore: number;
+  totalReviewCount: number;
+  recentReviewCount: number;
+  starScoreArray: number[];
+}
+
+export interface ShoppingMallReviewDetail {
+  createdDate: number[];
+  lastModifiedDate: number[];
+  reviewId: number;
+  userInfo: ShoppingMallUserInfo;
+  projectId: number;
+  content: string;
+  productUrl: string;
+  productName: null;
+  score: number;
+  reviewImageUrlList: string[];
+  exist: boolean;
+}
