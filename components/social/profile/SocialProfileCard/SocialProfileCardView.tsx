@@ -20,7 +20,6 @@ const SocialProfileCardView = ({
 }: SocialProfileCardViewProps) => {
   const {
     nickname,
-    accountId,
     detailIntroduce,
     introduceText,
     profileImageUrl,
@@ -61,9 +60,9 @@ const SocialProfileCardView = ({
             ) : (
               <>
                 {isFollowing ? (
-                  <SocialUnFollowButton targetUserAccountId={accountId} />
+                  <SocialUnFollowButton nickname={nickname} />
                 ) : (
-                  <SocialFollowButton targetUserAccountId={accountId} />
+                  <SocialFollowButton nickname={nickname} />
                 )}
                 <S.Button color={'secondary'}>Message</S.Button>
               </>

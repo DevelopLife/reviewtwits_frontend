@@ -6,13 +6,11 @@ import type { Colors } from 'styles/theme';
 import type { WrapProps } from 'typings/wrapperProps';
 
 interface SocialUnFollowButtonProps {
-  targetUserAccountId: string;
+  nickname: string;
 }
 
-const SocialUnFollowButton = ({
-  targetUserAccountId,
-}: SocialUnFollowButtonProps) => {
-  const { unfollow } = useFollowAndUnFollow(targetUserAccountId);
+const SocialUnFollowButton = ({ nickname }: SocialUnFollowButtonProps) => {
+  const { unfollow } = useFollowAndUnFollow(nickname);
 
   return (
     <SocialUnFollowButtonView onClick={unfollow} color="secondary">

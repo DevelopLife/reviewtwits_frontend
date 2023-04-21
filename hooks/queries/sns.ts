@@ -6,14 +6,14 @@ import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
 
-export const useGetFollowerList = (accountId: string) => {
+export const useGetFollowerList = (nickname: string) => {
   return useQuery<AxiosResponse<FollowListType>, AxiosError<ResponseError>>(
     ['useGetFollowerList'],
-    () => snsAPI.getFollowerList(accountId)
+    () => snsAPI.getFollowerList(nickname)
   );
 };
 
-export const useGetFollowingList = (accountId: string) => {
+export const useGetFollowingList = (nickname: string) => {
   const queryClient = useQueryClient();
 
   const setFollowingDictionary = (followingList: FollowListType) => {
@@ -31,7 +31,7 @@ export const useGetFollowingList = (accountId: string) => {
 
   return useQuery<AxiosResponse<FollowListType>, AxiosError>(
     ['useGetFollowingList'],
-    () => snsAPI.getFollowingList(accountId),
+    () => snsAPI.getFollowingList(nickname),
     {
       onSuccess: (response) => {
         queryClient.cancelQueries(FOLLOWING_DICTIONARY_KEY);

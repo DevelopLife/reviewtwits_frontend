@@ -68,6 +68,7 @@ const ReviewView = ({
   const openModal = () => {
     handleOpenModal();
   };
+
   return (
     <Card>
       <S.Content>

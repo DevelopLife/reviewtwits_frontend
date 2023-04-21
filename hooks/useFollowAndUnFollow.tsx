@@ -12,14 +12,11 @@ import { FollowingDictionary } from 'typings/sns';
 
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
 
-const useFollowAndUnFollow = (targetUserAccountId: string) => {
+const useFollowAndUnFollow = (targetUserNickname: string) => {
   const queryClient = useQueryClient();
   const originFollowingDictionary = queryClient.getQueryData(
     FOLLOWING_DICTIONARY_KEY
   ) as FollowingDictionary;
-
-  // FIXME: 팔로우할때는 accountId, 리뷰를 요청할때는 nickname 팔로우 중인지 소셜 프로필도 nickname이다. 이거 nickname으로 통일할 수 없나?
-  const nickname = '0min';
 
   const onFollowOptimisticUpdate = () => {
     optimisticUpdateByReactQuery({
@@ -27,13 +24,13 @@ const useFollowAndUnFollow = (targetUserAccountId: string) => {
       queryKey: FOLLOWING_DICTIONARY_KEY,
       newData: {
         ...originFollowingDictionary,
-        [nickname]: {},
+        [targetUserNickname]: {},
       },
     });
   };
 
   const onUnfollowOptimisticUpdate = () => {
-    const { [nickname]: removedValue, ...restIsFollowingDictionary } =
+    const { [targetUserNickname]: removedValue, ...restIsFollowingDictionary } =
       originFollowingDictionary;
 
     optimisticUpdateByReactQuery({
@@ -66,7 +63,7 @@ const useFollowAndUnFollow = (targetUserAccountId: string) => {
   }
 
   const { mutate: follow } = useMutation(
-    () => snsAPI.follow({ targetUserAccountId }),
+    () => snsAPI.follow({ targetUserNickname }),
     {
       onMutate: () => {
         onFollowOptimisticUpdate();
@@ -78,7 +75,7 @@ const useFollowAndUnFollow = (targetUserAccountId: string) => {
     }
   );
   const { mutate: unfollow } = useMutation(
-    () => snsAPI.unfollow({ targetUserAccountId }),
+    () => snsAPI.unfollow({ targetUserNickname }),
     {
       onMutate: () => {
         onUnfollowOptimisticUpdate();
