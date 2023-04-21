@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { ProductSearchResultType } from 'typings/product';
+import { ProductInfoType, ProductSearchResultType } from 'typings/product';
 
 import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
@@ -28,8 +28,18 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
     () => itemsAPI.searchProductName(searchValue),
     {
       enabled: !!searchValue,
+      refetchOnWindowFocus: false,
     }
   );
+  const { data: productInfo, isFetching: isProductInfoFetching } =
+    useQuery<ProductInfoType | null>(
+      ['productInfo', productName],
+      () => (productName ? itemsAPI.getProductInfo(productName) : null),
+      {
+        enabled: !!productName,
+        refetchOnWindowFocus: false,
+      }
+    );
   const searchRef = useRef<HTMLDivElement>(null);
 
   const highlightText = (text: string) => {
@@ -62,6 +72,8 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
     searchRef,
     isSearchFocused,
     isSearchResultExist: searchResult ? searchResult.length > 0 : false,
+    isProductInfoFetching,
+    productImgUrl: productInfo?.imagePath,
     productName,
     searchValue,
     searchResult,
@@ -79,7 +91,9 @@ interface SearchBoxViewProps {
   searchRef: RefObject<HTMLDivElement>;
   isSearchFocused: boolean;
   isSearchResultExist: boolean;
+  isProductInfoFetching: boolean;
   productName?: string;
+  productImgUrl?: string;
   searchValue: string;
   searchResult?: ProductSearchResultType[];
   setValue: (name: string, value: number) => void;
@@ -93,7 +107,9 @@ const SearchBoxView = ({
   searchRef,
   isSearchFocused,
   isSearchResultExist,
+  isProductInfoFetching,
   productName,
+  productImgUrl,
   searchResult,
   setValue,
   highlightText,
@@ -109,7 +125,7 @@ const SearchBoxView = ({
             {searchResult?.map((result, i) => (
               <S.Product
                 key={i}
-                id={result.keyword} // requestId로 변경
+                id={result.keyword}
                 value={result.keyword}
                 dangerouslySetInnerHTML={{
                   __html: highlightText(result.keyword),
@@ -120,10 +136,15 @@ const SearchBoxView = ({
           </S.ProductList>
         )}
       </S.SearchBarWrap>
-      <S.GuideText>
+      {/* <S.GuideText>
         찾으시는 상품이 없으신가요? 해당 작성하신 상품 URL로 상품 등록하기
-      </S.GuideText>
-      <RatingBox productName={productName} setValue={setValue} />
+      </S.GuideText> */}
+      <RatingBox
+        isFetching={isProductInfoFetching}
+        productName={productName}
+        productImgUrl={productImgUrl}
+        setValue={setValue}
+      />
     </S.SearchBox>
   );
 };
@@ -135,6 +156,7 @@ const S = {
 
   SearchBarWrap: styled.div`
     position: relative;
+    margin-bottom: 20px;
 
     display: flex;
     flex-direction: column;

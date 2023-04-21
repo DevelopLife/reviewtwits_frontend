@@ -50,6 +50,7 @@ const SearchBarView = ({ inputRef, ...rest }: SearchBarViewProps) => {
         </S.IconWrap>
         <S.Input
           ref={inputRef}
+          autoComplete="off"
           type="text"
           name="productName"
           spellCheck={false}

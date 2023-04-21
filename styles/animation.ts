@@ -9,4 +9,10 @@ const expand = keyframes`
   }
 `;
 
-export { expand };
+const spinner = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export { expand, spinner };

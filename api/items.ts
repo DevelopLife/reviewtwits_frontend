@@ -10,6 +10,13 @@ const itemsAPI = {
       .get(`${ITEMS_URL}/search`, { params })
       .then((res) => res.data);
   },
+  getProductInfo: async (productName: string) => {
+    const params = { productName };
+
+    return await api
+      .post(`${ITEMS_URL}/request-crawling`, {}, { params })
+      .then((res) => res.data);
+  },
 };
 
 export default itemsAPI;
