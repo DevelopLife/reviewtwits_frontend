@@ -1,13 +1,12 @@
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
 
-import { useBoolean } from 'hooks/useBoolean';
 import { WrapProps } from 'typings/wrapperProps';
-
+import { useBoolean } from 'hooks/useBoolean';
+import useModal from 'hooks/useModal';
 import MessageIcon from 'public/icons/message.svg';
 import SmileIcon from 'public/icons/smile.svg';
-import useModal from 'hooks/useModal';
 import MODAL_LIST from 'constants/modal';
-import { useEffect } from 'react';
 
 type FeedCardStyles = {
   width: number;
@@ -46,7 +45,7 @@ export const SocialFeedCard = ({
   const onMouseLeave = () => setFalse();
 
   useEffect(() => {
-    return () => modal.hide();
+    return () => modal?.hide();
   }, []);
 
   return (
