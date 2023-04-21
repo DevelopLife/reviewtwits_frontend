@@ -5,11 +5,13 @@ import { formattedImageUrl } from 'utils/format';
 
 interface ImageListProps {
   imageNameList?: string[];
+  handleOpenModal: () => void;
 }
 
-const ImageList = ({ imageNameList }: ImageListProps) => {
+const ImageList = ({ imageNameList, handleOpenModal }: ImageListProps) => {
   const props = {
     imageNameList,
+    handleOpenModal,
   };
 
   return <ImageListView {...props} />;
@@ -17,13 +19,21 @@ const ImageList = ({ imageNameList }: ImageListProps) => {
 
 interface ImageListViewProps {
   imageNameList?: string[];
+  handleOpenModal: () => void;
 }
 
-const ImageListView = ({ imageNameList }: ImageListViewProps) => {
+const ImageListView = ({
+  imageNameList,
+  handleOpenModal,
+}: ImageListViewProps) => {
+  const openModal = () => {
+    handleOpenModal();
+  };
   return (
     <S.ImageList>
       {imageNameList?.map((url, i) => (
         <Image
+          onClick={openModal}
           key={i}
           width={84}
           height={84}

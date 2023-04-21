@@ -129,9 +129,9 @@ const OverallRatingDetail = styled.ul`
   }
 `;
 
-const PrograssBar = styled.div<{ prograssRange: string }>`
+const PrograssBar = styled.div<{ prograssRange: number }>`
   height: 10px;
-  width: ${(props) => props.prograssRange}px;
+  width: ${(props) => 192 * props.prograssRange}px;
 
   margin-left: 15px;
 
