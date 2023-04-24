@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { WrapProps } from 'typings/wrapperProps';
 
 interface SocialUserNicknameLinkProps extends WrapProps {
-  nickname: string;
+  nickname: string | undefined;
 }
 
 export const SocialUserNicknameLink = ({

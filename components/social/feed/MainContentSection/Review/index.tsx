@@ -17,6 +17,7 @@ import CommentIcon from 'public/icons/comment.svg';
 import useModal from 'hooks/useModal';
 
 import MODAL_LIST from 'constants/modal';
+import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -78,7 +79,9 @@ const ReviewView = ({
         <S.ReviewInfoBox>
           <S.UserInfo>
             <S.UserImage src="" alt="" />
-            <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
+            <SocialUserNicknameLink nickname={data?.userInfo?.nickname}>
+              <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
+            </SocialUserNicknameLink>
           </S.UserInfo>
           <StarBox score={data?.score} />
           <S.LastTime>{formattedLastTime(data?.lastModifiedDate)}</S.LastTime>
