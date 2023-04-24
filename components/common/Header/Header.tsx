@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { APP_NAME } from 'constants/index';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -41,8 +42,12 @@ const Header = () => {
             </>
           ) : (
             <S.AuthButtons>
-              <S.Login>로그인</S.Login>
-              <S.Signup>회원가입</S.Signup>
+              <Link href="/sign-in">
+                <S.Login>로그인</S.Login>
+              </Link>
+              <Link href="/sign-up">
+                <S.Signup>회원가입</S.Signup>
+              </Link>
             </S.AuthButtons>
           )}
         </S.RightBox>
