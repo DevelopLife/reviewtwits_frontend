@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import SocialCard from 'components/sns/common/SocialCard';
+import SocialCard from 'components/social/common/SocialCard';
 import React from 'react';
 
 const MockDatas = [
