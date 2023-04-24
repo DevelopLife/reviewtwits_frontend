@@ -44,11 +44,11 @@ export const snsAPI = {
   createReview: (formData: FormData) => {
     return requiredTokenApi.post(`${SNS_URL}/reviews`, formData);
   },
-  getFollowerList: async (accountId: string) => {
-    return await optionalTokenAPI.get(`${SNS_URL}/get-followers/${accountId}`);
+  getFollowerList: async (nickname: string) => {
+    return await optionalTokenAPI.get(`${SNS_URL}/get-followers/${nickname}`);
   },
-  getFollowingList: async (accountId: string) => {
-    return await optionalTokenAPI.get(`${SNS_URL}/get-followings/${accountId}`);
+  getFollowingList: async (nickname: string) => {
+    return await optionalTokenAPI.get(`${SNS_URL}/get-followings/${nickname}`);
   },
   getProfile: async (nickname: string): Promise<SocialProfile> => {
     const response = await optionalTokenAPI.get(

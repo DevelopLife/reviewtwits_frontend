@@ -120,7 +120,7 @@ const S = {
     gap: 20px;
     height: 100%;
 
-    opacity: 0.5;
+    opacity: 0.8;
     cursor: pointer;
 
     background-color: ${({ theme }) => theme.colors.gray_1};

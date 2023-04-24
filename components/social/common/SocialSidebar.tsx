@@ -7,8 +7,6 @@ import SidebarTitle from 'components/social/common/SidebarTitle';
 import SearchBar from 'components/social/common/SearchBar';
 
 import HomeIcon from 'public/icons/home.svg';
-import BellIcon from 'public/icons/bell.svg';
-import CompassIcon from 'public/icons/compass.svg';
 import FolderIcon from 'public/icons/folder.svg';
 import FullHeartIcon from 'public/icons/full-heart.svg';
 import UserIcon from 'public/icons/user.svg';
@@ -18,13 +16,14 @@ import * as S from './SocialSidebar.styles';
 
 const SERVICE_TITLE = 'ReviewTwits';
 
+const SOCIAL_URL = '/social';
+const USER_FEED_URL = `${SOCIAL_URL}/user`;
+
 const MENUS = [
-  { text: 'Home', Icon: HomeIcon },
-  { text: 'Notifications', Icon: BellIcon },
-  { text: 'Explore', Icon: CompassIcon },
-  { text: 'Create', Icon: FolderIcon },
-  { text: 'Follower', Icon: FullHeartIcon },
-  { text: 'Profile', Icon: UserIcon },
+  { href: `${SOCIAL_URL}/home`, text: 'Home', Icon: HomeIcon },
+  { href: `${SOCIAL_URL}/review/write`, text: 'Create', Icon: FolderIcon },
+  { href: `${SOCIAL_URL}/follower`, text: 'Follower', Icon: FullHeartIcon },
+  { href: USER_FEED_URL, text: 'Profile', Icon: UserIcon },
 ];
 
 const SnsSidebar = () => {
@@ -36,14 +35,13 @@ const SnsSidebar = () => {
       <SidebarTitle href="/social/home">{SERVICE_TITLE}</SidebarTitle>
       <SearchBar />
       <SocialMenus>
-        {MENUS.map(({ text, Icon }) => {
-          const href = `/social/${text.toLowerCase()}`;
+        {MENUS.map(({ href, text, Icon }) => {
           const isCurrent = href === pathname;
           const iconColor = isCurrent
             ? theme.colors.secondary
             : theme.colors.gray_4;
 
-          if (text === 'Profile') {
+          if (href === USER_FEED_URL) {
             return (
               <SocialProfileMenuItem key={text}>
                 <>
