@@ -1,4 +1,4 @@
-import { api } from 'api/instance';
+import { optionalTokenAPI } from 'api/instance';
 
 const ITEMS_URL = '/items';
 
@@ -6,14 +6,14 @@ const itemsAPI = {
   searchProductName: async (productName: string) => {
     const params = { productName };
 
-    return await api
+    return await optionalTokenAPI
       .get(`${ITEMS_URL}/search`, { params })
       .then((res) => res.data);
   },
   getProductInfo: async (productName: string) => {
     const params = { productName };
 
-    return await api
+    return await optionalTokenAPI
       .post(`${ITEMS_URL}/request-crawling`, {}, { params })
       .then((res) => res.data);
   },
