@@ -9,7 +9,10 @@ import { FollowListType, FollowingDictionary } from 'typings/sns';
 export const useGetFollowerList = (nickname: string) => {
   return useQuery<AxiosResponse<FollowListType>, AxiosError<ResponseError>>(
     ['useGetFollowerList'],
-    () => snsAPI.getFollowerList(nickname)
+    () => snsAPI.getFollowerList(nickname),
+    {
+      enabled: !!nickname,
+    }
   );
 };
 
@@ -40,6 +43,7 @@ export const useGetFollowingList = (nickname: string) => {
           queryFn: () => setFollowingDictionary(response.data),
         });
       },
+      enabled: !!nickname,
     }
   );
 };
