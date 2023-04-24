@@ -1,52 +1,28 @@
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
 
-import useGetSocialProfile from 'hooks/useGetSocialProfile';
-import useUserProfile from 'hooks/useUserProfile';
-import { mockSocialProfile } from 'constants/mockSocialProfile';
 import type { Colors } from 'styles/theme';
 import type { SocialProfile } from 'typings/social';
 import SocialFollowButton from 'components/social/profile/SocialFollowButton';
 import EditProfileButton from 'components/social/profile/EditProfileButton';
 import SocialProfileImage from 'components/social/profile/SocialProfileImage';
-// import SocialUnFollowButton from 'components/social/profile/SocialUnFollowButton';
-
-export const SocialProfileCard = () => {
-  const router = useRouter();
-  const { pathname } = router;
-  const isMyPage = pathname === '/social/profile';
-
-  const userData = useUserProfile();
-  const { data: socialProfile, status } = useGetSocialProfile(
-    userData?.nickname
-  );
-
-  if (status && socialProfile?.userId) {
-    return (
-      <SocialProfileCardView isMyPage={isMyPage} profile={socialProfile} />
-    );
-  }
-
-  return (
-    <SocialProfileCardView isMyPage={isMyPage} profile={mockSocialProfile} />
-  );
-};
+import SocialUnFollowButton from 'components/social/profile/SocialUnFollowButton';
 
 interface SocialProfileCardViewProps {
   isMyPage: boolean;
+  isFollowing?: boolean;
   profile: SocialProfile;
 }
 
-export const SocialProfileCardView = ({
+const SocialProfileCardView = ({
   isMyPage,
+  isFollowing,
   profile,
 }: SocialProfileCardViewProps) => {
   const {
     nickname,
-    accountId,
     detailIntroduce,
     introduceText,
-    profileImage,
+    profileImageUrl,
     reviewCount,
     followers,
     followings,
@@ -56,7 +32,7 @@ export const SocialProfileCardView = ({
     <S.ProfileCard>
       <S.ProfileCardContent>
         <S.ProfileDetail>
-          <SocialProfileImage profileImage={profileImage} />
+          <SocialProfileImage profileImageUrl={profileImageUrl} />
           <S.FlexItem>
             <S.SocialNickname>{nickname}</S.SocialNickname>
             <S.Carrer>{detailIntroduce}</S.Carrer>
@@ -83,12 +59,11 @@ export const SocialProfileCardView = ({
               <EditProfileButton />
             ) : (
               <>
-                {
-                  // TODO: following인지 아닌지 판단해서 Component를 렌더링해주게 작성해야함
-                  <SocialFollowButton targetUserAccountId={accountId} />
-                  // <SocialUnFollowButton targetUserAccountId={''} />
-                }
-
+                {isFollowing ? (
+                  <SocialUnFollowButton nickname={nickname} />
+                ) : (
+                  <SocialFollowButton nickname={nickname} />
+                )}
                 <S.Button color={'secondary'}>Message</S.Button>
               </>
             )}
@@ -98,6 +73,8 @@ export const SocialProfileCardView = ({
     </S.ProfileCard>
   );
 };
+
+export default SocialProfileCardView;
 
 const S = {
   ProfileCard: styled.div`

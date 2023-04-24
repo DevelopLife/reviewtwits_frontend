@@ -19,7 +19,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'thumbnail7.coupangcdn.com',
+        hostname: '**.coupangcdn.com',
         port: '',
         pathname: '/**',
       },
