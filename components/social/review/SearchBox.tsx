@@ -173,6 +173,8 @@ const S = {
     background-color: white;
     border: 1px solid gray;
     padding: 10px 0;
+
+    z-index: 5;
   `,
 
   Product: styled.li`
