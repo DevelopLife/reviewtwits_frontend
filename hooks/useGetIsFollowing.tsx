@@ -6,7 +6,7 @@ import { FollowingDictionary } from 'typings/sns';
 
 export const useGetIsFollowing = (nickname: string) => {
   const userData = useUserProfile();
-  useGetFollowingList(userData.nickname);
+  useGetFollowingList(userData.nickname || '');
   const { data: isFollowingDictionary } = useQuery<FollowingDictionary>(
     FOLLOWING_DICTIONARY_KEY,
     {
