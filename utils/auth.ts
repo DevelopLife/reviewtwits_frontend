@@ -67,4 +67,5 @@ export function doSignOut() {
   usersAPI.signOut();
   removeCookie('expireAt');
   setAuthorizationToken();
+  window.location.href = '/';
 }

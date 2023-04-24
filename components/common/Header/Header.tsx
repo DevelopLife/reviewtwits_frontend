@@ -1,10 +1,17 @@
 import { APP_NAME } from 'constants/index';
 import Image from 'next/image';
 import { useState } from 'react';
+
 import * as S from './Header.styles';
+import UserMenu from './UserMenu';
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [userLoggedIn] = useState<boolean>(false);
+
+  const toggleMenuOpen = () => setIsMenuOpen((prev) => !prev);
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <S.Container>
       <S.Header>
@@ -15,21 +22,26 @@ const Header = () => {
           <S.NavLink>가격</S.NavLink>
           <S.NavLink>Docs</S.NavLink>
         </S.Navbar>
-        {userLoggedIn ? (
-          <S.Profile>
-            <Image
-              src="https://s3-alpha-sig.figma.com/img/bb12/da5f/d8677bd88607c96432496808e0e191d2?Expires=1678060800&amp;Signature=Rkde6MRIbKJc3j5My4a6xUvnZPe9GhqxjXjMJOk9iV4-CHGuFnPI-hXnSig4WyhZGHbSELzra2MT6u0rMyiXM48MggRqcCq35zyFWkl3P8rMnN~95c7mIEXXZNacE7QYXT3OWgY~nhLTW4MbpivikVUMhhS-Un4Ut2kiAPDQbG-wFIuClZs3b-v1oRdMzFvGPU9J2~8PiSbFWBDf0svozdV6oE16npwK617OjPwQDxscqVQLeDI2FT-uYm5EV7i6MSR59pQgrFYRsAUNJm5DRYu8CIzUB0U-~yz9TQjxb-rKYEQLCkqWIaQEQLhsdrXXQMjKy6QKIv9oqUryjnwVtA__&amp;Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-              width={40}
-              height={40}
-              alt={''}
-            />
-          </S.Profile>
-        ) : (
-          <S.AuthButtons>
-            <S.Login>로그인</S.Login>
-            <S.Signup>회원가입</S.Signup>
-          </S.AuthButtons>
-        )}
+        <S.RightBox>
+          {!userLoggedIn ? (
+            <>
+              <S.Profile onClick={toggleMenuOpen}>
+                <Image
+                  src="https://s3-alpha-sig.figma.com/img/bb12/da5f/d8677bd88607c96432496808e0e191d2?Expires=1678060800&amp;Signature=Rkde6MRIbKJc3j5My4a6xUvnZPe9GhqxjXjMJOk9iV4-CHGuFnPI-hXnSig4WyhZGHbSELzra2MT6u0rMyiXM48MggRqcCq35zyFWkl3P8rMnN~95c7mIEXXZNacE7QYXT3OWgY~nhLTW4MbpivikVUMhhS-Un4Ut2kiAPDQbG-wFIuClZs3b-v1oRdMzFvGPU9J2~8PiSbFWBDf0svozdV6oE16npwK617OjPwQDxscqVQLeDI2FT-uYm5EV7i6MSR59pQgrFYRsAUNJm5DRYu8CIzUB0U-~yz9TQjxb-rKYEQLCkqWIaQEQLhsdrXXQMjKy6QKIv9oqUryjnwVtA__&amp;Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                  width={40}
+                  height={40}
+                  alt={''}
+                />
+              </S.Profile>
+              {isMenuOpen && <UserMenu closeMenu={closeMenu} />}
+            </>
+          ) : (
+            <S.AuthButtons>
+              <S.Login>로그인</S.Login>
+              <S.Signup>회원가입</S.Signup>
+            </S.AuthButtons>
+          )}
+        </S.RightBox>
       </S.Header>
     </S.Container>
   );
