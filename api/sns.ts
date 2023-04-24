@@ -44,11 +44,9 @@ export const snsAPI = {
   createReview: (formData: FormData) => {
     return requiredTokenApi.post(`${SNS_URL}/reviews`, formData);
   },
-
   getFollowerList: async (accountId: string) => {
     return await optionalTokenAPI.get(`${SNS_URL}/get-followers/${accountId}`);
   },
-
   getFollowingList: async (accountId: string) => {
     return await optionalTokenAPI.get(`${SNS_URL}/get-followings/${accountId}`);
   },
@@ -59,9 +57,23 @@ export const snsAPI = {
 
     return response.data;
   },
-  getMyReviews: async (nickname: string): Promise<SocialReview[]> => {
+  getMyReviews: async (
+    nickname: string,
+    reviewId?: number
+  ): Promise<SocialReview[]> => {
+    const size = 10;
+    const params = reviewId
+      ? {
+          size,
+          reviewId,
+        }
+      : { size };
+
     const response = await optionalTokenAPI.get(
-      `${SNS_URL}/profile/reviews/${nickname}`
+      `${SNS_URL}/profile/reviews/${nickname}`,
+      {
+        params,
+      }
     );
 
     return response.data;
@@ -74,5 +86,5 @@ export const snsAPI = {
 };
 
 type FollowAndUnFollowRequestBody = {
-  targetUserAccountId: string;
+  targetUserNickname: string;
 };

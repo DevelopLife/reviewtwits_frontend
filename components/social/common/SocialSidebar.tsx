@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 
-import SocialMenuItem from 'components/sns/common/SocialMenuItem';
-import SocialMenus from 'components/sns/common/SocialMenus';
-import SidebarTitle from 'components/sns/common/SidebarTitle';
-import SearchBar from 'components/sns/common/SearchBar';
+import SocialMenuItem from 'components/social/common/SocialMenuItem';
+import SocialMenus from 'components/social/common/SocialMenus';
+import SocialProfileMenuItem from 'components/social/common/SocialProfileMenuItem';
+import SidebarTitle from 'components/social/common/SidebarTitle';
+import SearchBar from 'components/social/common/SearchBar';
 
 import HomeIcon from 'public/icons/home.svg';
 import BellIcon from 'public/icons/bell.svg';
@@ -28,20 +29,30 @@ const MENUS = [
 
 const SnsSidebar = () => {
   const router = useRouter();
-  const pathNames = router.pathname.split('/');
-  const lastPathName = pathNames[pathNames.length - 1];
+  const { pathname } = router;
 
   return (
     <S.SidebarLayout>
-      <SidebarTitle href={'home'}>{SERVICE_TITLE}</SidebarTitle>
+      <SidebarTitle href="/social/home">{SERVICE_TITLE}</SidebarTitle>
       <SearchBar />
       <SocialMenus>
         {MENUS.map(({ text, Icon }) => {
-          const href = text.toLowerCase();
-          const isCurrent = href === lastPathName;
+          const href = `/social/${text.toLowerCase()}`;
+          const isCurrent = href === pathname;
           const iconColor = isCurrent
             ? theme.colors.secondary
             : theme.colors.gray_4;
+
+          if (text === 'Profile') {
+            return (
+              <SocialProfileMenuItem key={text}>
+                <>
+                  <Icon fill={iconColor} />
+                  {text}
+                </>
+              </SocialProfileMenuItem>
+            );
+          }
 
           return (
             <SocialMenuItem key={text} isCurrent={isCurrent} href={href}>
