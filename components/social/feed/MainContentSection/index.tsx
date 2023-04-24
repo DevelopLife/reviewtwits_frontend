@@ -28,10 +28,7 @@ const MainContentSectionView = ({
   return (
     <S.Section>
       {reviewData?.map((data: ReviewResponseType, i) => (
-        <Review
-          key={i}
-          // data={data} FIXME: build error를 위해 임시 주석처리
-        />
+        <Review key={i} data={data} />
       ))}
     </S.Section>
   );
