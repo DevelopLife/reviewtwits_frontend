@@ -4,7 +4,16 @@ import { ReactElement } from 'react';
 import { usePrivateRouting } from 'hooks/usePrivateRouting';
 import type { PageProps } from 'pages/_app';
 
-const NOT_REQUIRED_LOGIN_URLS = ['/sign-in', '/sign-up', '/'];
+// TODO: public url을 추가해주세요
+const PUBLIC_URLS = [
+  '/',
+  '/sign-in',
+  '/sign-up',
+  '/social/main',
+  '/social/home',
+  '/socual/user',
+  '/social/user/[nickname]',
+];
 
 const PrivateRoute = ({
   pageProps,
@@ -15,7 +24,7 @@ const PrivateRoute = ({
 }) => {
   const router = useRouter();
   const { pathname } = router;
-  const isRequiredLogin = !NOT_REQUIRED_LOGIN_URLS.includes(pathname);
+  const isRequiredLogin = !PUBLIC_URLS.includes(pathname);
   const statusCode = pageProps.statusCode;
 
   const { isLogined } = usePrivateRouting({
