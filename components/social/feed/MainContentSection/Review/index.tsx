@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Colors } from 'styles/theme';
 
 import { ReviewResponseType } from 'typings/reviews';
-import { formattedLastTime } from 'utils/format';
+import { formattedLastTime, formattedImageUrl } from 'utils/format';
 
 import Card from '../../Card';
 import ReactionBox from './ReactionBox';
@@ -64,12 +64,11 @@ const ReviewView = ({
   goProductInfoPage,
   handleOpenModal,
 }: ReviewViewProps) => {
-  if (!data) return null;
-
   const openModal = () => {
     handleOpenModal();
   };
 
+  if (!data) return null;
   return (
     <Card>
       <S.Content>
@@ -78,10 +77,17 @@ const ReviewView = ({
         </S.ScrapButtonWrap>
         <S.ReviewInfoBox>
           <S.UserInfo>
-            <S.UserImage src="" alt="" />
-            <SocialUserNicknameLink nickname={data?.userInfo?.nickname}>
-              <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
-            </SocialUserNicknameLink>
+            <S.UserImage
+              width={32}
+              height={32}
+              src={
+                data?.userInfo?.profileImageUrl
+                  ? formattedImageUrl(data.userInfo.profileImageUrl)
+                  : '/images/default_user_profile_img.png'
+              }
+              alt=""
+            />
+            <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
           </S.UserInfo>
           <StarBox score={data?.score} />
           <S.LastTime>{formattedLastTime(data?.lastModifiedDate)}</S.LastTime>
@@ -151,8 +157,6 @@ const S = {
   UserImage: styled(Image)`
     background: gray;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
   `,
 
   Nickname: styled.span`
