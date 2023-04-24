@@ -64,7 +64,7 @@ export function redirectNotLogin(
   const isValidToken = validateToken();
 
   if (!isValidToken) {
-    alert('로그인 유지기간이 만료되었습니다.');
+    alert('로그인이 필요합니다.');
     logout();
     redirectSignIn();
     return;

@@ -151,6 +151,7 @@ const reset = css`
   }
 
   button {
+    padding: 0;
     outline: none;
     border: none;
     background: none;
@@ -159,6 +160,11 @@ const reset = css`
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 `;
 
