@@ -10,3 +10,6 @@ export interface FollowType {
   followings: number;
 }
 export type FollowListType = FollowType[];
+
+export type ExceptNicknameInFollowType = Omit<FollowType, 'nickname'>;
+export type FollowingDictionary = { [key: string]: ExceptNicknameInFollowType };

@@ -1,33 +1,69 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { snsAPI } from 'api/sns';
 import { ResponseError } from 'typings/error';
-import { FollowListType } from 'typings/sns';
+import { FollowListType, FollowingDictionary } from 'typings/sns';
 import { alertErrorHandler } from 'utils/errorHandler';
+import { snsAPI } from 'api/sns';
+import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
 
-export const useGetFollowerList = (accountId: string) => {
+export const useGetFollowerList = (nickname: string) => {
   return useQuery<AxiosResponse<FollowListType>, AxiosError<ResponseError>>(
     ['useGetFollowerList'],
-    () => snsAPI.getFollowerList(accountId)
+    () => snsAPI.getFollowerList(nickname),
+    {
+      enabled: !!nickname,
+    }
   );
 };
 
-export const useGetFollowingList = (accountId: string) => {
-  return useQuery<AxiosResponse, AxiosError>(['useGetFollowingList'], () =>
-    snsAPI.getFollowingList(accountId)
+export const useGetFollowingList = (nickname: string) => {
+  const queryClient = useQueryClient();
+
+  const setFollowingDictionary = (followingList: FollowListType) => {
+    const defaultFollowingDictionary: FollowingDictionary = {};
+    const result = followingList.reduce(
+      (followingDictionary, { nickname, ...rest }) => {
+        followingDictionary[nickname] = rest;
+        return followingDictionary;
+      },
+      defaultFollowingDictionary
+    );
+
+    return result;
+  };
+
+  return useQuery<AxiosResponse<FollowListType>, AxiosError>(
+    ['useGetFollowingList'],
+    () => snsAPI.getFollowingList(nickname),
+    {
+      onSuccess: (response) => {
+        queryClient.cancelQueries(FOLLOWING_DICTIONARY_KEY);
+        queryClient.fetchQuery({
+          queryKey: FOLLOWING_DICTIONARY_KEY,
+          queryFn: () => setFollowingDictionary(response.data),
+        });
+      },
+      enabled: !!nickname,
+    }
   );
 };
 
-export const useFollowAndUnFollow = (targetUserAccountId: string) => {
+export const useGetMyReviews = (nickname: string, reviewId?: number) => {
+  return useQuery(['reviews', nickname], () =>
+    snsAPI.getMyReviews(nickname, reviewId)
+  );
+};
+
+export const useFollowAndUnFollow = (targetUserNickname: string) => {
   const { mutate: follow } = useMutation(
-    () => snsAPI.follow({ targetUserAccountId }),
+    () => snsAPI.follow({ targetUserNickname }),
     {
       onError: (err: AxiosError<ResponseError>) => alertErrorHandler(err),
     }
   );
   const { mutate: unfollow } = useMutation(
-    () => snsAPI.unfollow({ targetUserAccountId }),
+    () => snsAPI.unfollow({ targetUserNickname }),
     {
       onError: (err: AxiosError<ResponseError>) => alertErrorHandler(err),
     }

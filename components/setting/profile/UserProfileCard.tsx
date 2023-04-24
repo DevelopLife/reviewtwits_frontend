@@ -104,8 +104,8 @@ const UserProfileForm = () => {
       intro: userData.introduceText,
     };
 
-    if (userData.profileImage) {
-      const formattedUserImage = formattedImageUrl(userData.profileImage);
+    if (userData.profileImageUrl) {
+      const formattedUserImage = formattedImageUrl(userData.profileImageUrl);
       setPreview(formattedUserImage);
     }
     initializeForm(initialData);

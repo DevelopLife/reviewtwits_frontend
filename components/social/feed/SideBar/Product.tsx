@@ -11,7 +11,7 @@ interface ProductProps {
 
 const Product = ({ data }: ProductProps) => {
   return (
-    <S.StyledLink target="_blank" href={data.url}>
+    <Link target="_blank" href={data.url}>
       <S.Box>
         <Image
           width={84}
@@ -31,7 +31,7 @@ const Product = ({ data }: ProductProps) => {
           </S.MetaInfoBox>
         </S.ProductInfoBox>
       </S.Box>
-    </S.StyledLink>
+    </Link>
   );
 };
 
@@ -43,11 +43,6 @@ const MetaText = styled.span`
 `;
 
 const S = {
-  StyledLink: styled(Link)`
-    text-decoration: none;
-    color: white;
-  `,
-
   Box: styled.div`
     display: flex;
     gap: 12px;

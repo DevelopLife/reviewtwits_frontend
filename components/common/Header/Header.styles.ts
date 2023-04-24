@@ -47,11 +47,21 @@ const NavLink = styled.li`
   color: #000000;
 `;
 
+const RightBox = styled.div`
+  position: relative;
+`;
+
 const Profile = styled.div`
   width: 40px;
   height: 40px;
+
   img {
     border-radius: 50%;
+  }
+
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
   }
 `;
 
@@ -77,6 +87,7 @@ const Login = styled.button`
 
   color: #181818;
 `;
+
 const Signup = styled.button`
   width: 99px;
   height: 38px;
@@ -99,6 +110,7 @@ export {
   Title,
   Navbar,
   NavLink,
+  RightBox,
   Profile,
   AuthButtons,
   Login,
