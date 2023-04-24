@@ -6,8 +6,8 @@ export const mockSocialProfile: SocialProfile = {
   accountId: '',
   introduceText: '',
   detailIntroduce: '',
-  profileImage: '',
   reviewCount: 0,
   followers: 0,
   followings: 0,
+  profileImageUrl: '',
 };
