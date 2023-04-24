@@ -38,11 +38,11 @@ export const snsAPI = {
   createReview: (formData: FormData) => {
     return api.post(`${SNS_URL}/reviews`, formData);
   },
-  getFollowerList: async (accountId: string) => {
-    return await api.get(`${SNS_URL}/get-followers/${accountId}`);
+  getFollowerList: async (nickname: string) => {
+    return await api.get(`${SNS_URL}/get-followers/${nickname}`);
   },
-  getFollowingList: async (accountId: string) => {
-    return await api.get(`${SNS_URL}/get-followings/${accountId}`);
+  getFollowingList: async (nickname: string) => {
+    return await api.get(`${SNS_URL}/get-followings/${nickname}`);
   },
   getProfile: async (nickname: string): Promise<SocialProfile> => {
     const response = await api.get(`${SNS_URL}/profile/${nickname}`);
@@ -75,5 +75,5 @@ export const snsAPI = {
 };
 
 type FollowAndUnFollowRequestBody = {
-  targetUserAccountId: string;
+  targetUserNickname: string;
 };
