@@ -12,7 +12,7 @@ const SocialMyFeedSection = () => {
   const userData = useUserProfile();
 
   const { data: socialMyReviewPages, status: socialMyReviewsStatus } =
-    useGetSocialReviews(userData?.nickname);
+    useGetSocialReviews(userData?.nickname || '');
 
   if (socialMyReviewsStatus === 'success' && socialMyReviewPages) {
     const reviewPages = socialMyReviewPages?.pages;

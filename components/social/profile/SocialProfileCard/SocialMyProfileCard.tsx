@@ -8,7 +8,7 @@ const SocialMyProfileCard = () => {
 
   const userData = useUserProfile();
   const { data: socialProfile, status } = useGetSocialProfile(
-    userData?.nickname
+    userData?.nickname || ''
   );
 
   if (status === 'success' && socialProfile?.userId) {
