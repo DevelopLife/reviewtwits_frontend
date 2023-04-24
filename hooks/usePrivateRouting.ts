@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { SetterOrUpdater, useRecoilState } from 'recoil';
 
 import { isLoginState } from 'states/isLogin';
 import { validateToken } from 'utils/auth';
@@ -30,19 +30,26 @@ export const usePrivateRouting = ({
   useEffect(() => {
     if (statusCode === 404) return;
     if (isRequiredLogin) {
-      redirectNotLogin(setTrueIsLogined, setFalseIsLogined, redirectURL);
+      return redirectNotLogin(setTrueIsLogined, setFalseIsLogined, redirectURL);
     }
-  }, [
-    isRequiredLogin,
-    redirectURL,
-    setFalseIsLogined,
-    setTrueIsLogined,
-    statusCode,
-  ]);
+
+    setIsLoginAtom(setIsLogined);
+  }, []);
 
   return {
     isLogined,
   };
+};
+
+export const setIsLoginAtom = (setIsLogined: SetterOrUpdater<boolean>) => {
+  const tokenExpireAt = getCookie('expireAt');
+
+  if (tokenExpireAt) {
+    const isValidToken = validateToken();
+    setIsLogined(isValidToken);
+  } else {
+    setIsLogined(false);
+  }
 };
 
 export function redirectNotLogin(
