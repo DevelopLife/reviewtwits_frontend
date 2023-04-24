@@ -76,19 +76,21 @@ const ReviewView = ({
           <ScrapButton isScrapped={data.isScrapped} reviewId={data.reviewId} />
         </S.ScrapButtonWrap>
         <S.ReviewInfoBox>
-          <S.UserInfo>
-            <S.UserImage
-              width={32}
-              height={32}
-              src={
-                data?.userInfo?.profileImageUrl
-                  ? formattedImageUrl(data.userInfo.profileImageUrl)
-                  : '/images/default_user_profile_img.png'
-              }
-              alt=""
-            />
-            <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
-          </S.UserInfo>
+          <SocialUserNicknameLink nickname={data?.userInfo?.nickname}>
+            <S.UserInfo>
+              <S.UserImage
+                width={32}
+                height={32}
+                src={
+                  data?.userInfo?.profileImageUrl
+                    ? formattedImageUrl(data.userInfo.profileImageUrl)
+                    : '/images/default_user_profile_img.png'
+                }
+                alt=""
+              />
+              <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
+            </S.UserInfo>
+          </SocialUserNicknameLink>
           <StarBox score={data?.score} />
           <S.LastTime>{formattedLastTime(data?.lastModifiedDate)}</S.LastTime>
         </S.ReviewInfoBox>
