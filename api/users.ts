@@ -1,4 +1,4 @@
-import { authApi, optionalTokenAPI } from 'api/instance';
+import { authApi, optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { ERROR_MESSAGE } from 'constants/account';
 import { SighInParams, SignUpParams, UserFormType } from 'typings/account';
 
@@ -49,10 +49,10 @@ export const usersAPI = {
     });
   },
   setUserProfile: async (data: FormData) => {
-    return await optionalTokenAPI.post(`${USERS_URL}/register-addition`, data);
+    return await requiredTokenApi.post(`${USERS_URL}/register-addition`, data);
   },
   getUserProfile: async () => {
-    return await optionalTokenAPI
+    return await requiredTokenApi
       .get(`${USERS_URL}/me`)
       .then((res) => res.data);
   },
