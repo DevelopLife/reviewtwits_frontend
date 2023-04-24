@@ -1,9 +1,15 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  QueryClient,
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { AxiosError, AxiosResponse } from 'axios';
 
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
-import { alertErrorHandler } from 'utils/errorHandler';
+import { alertErrorHandler, redirectErrorHandler } from 'utils/errorHandler';
 import { snsAPI } from 'api/sns';
 import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
 
@@ -55,17 +61,92 @@ export const useGetMyReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
+// import {
+//   QueryClient,
+//   useMutation,
+//   useQueryClient,
+// } from '@tanstack/react-query';
+// import type { AxiosError } from 'axios';
+
+// import { snsAPI } from 'api/sns';
+// import { alertErrorHandler } from 'utils/errorHandler';
+// import type { ResponseError } from 'typings/error';
+// import { FollowingDictionary } from 'typings/sns';
+
+// export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
+
 export const useFollowAndUnFollow = (targetUserNickname: string) => {
+  const queryClient = useQueryClient();
+  const originFollowingDictionary = queryClient.getQueryData(
+    FOLLOWING_DICTIONARY_KEY
+  ) as FollowingDictionary;
+
+  const onFollowOptimisticUpdate = () => {
+    optimisticUpdateByReactQuery({
+      queryClient,
+      queryKey: FOLLOWING_DICTIONARY_KEY,
+      newData: {
+        ...originFollowingDictionary,
+        [targetUserNickname]: {},
+      },
+    });
+  };
+
+  const onUnfollowOptimisticUpdate = () => {
+    const { [targetUserNickname]: removedValue, ...restIsFollowingDictionary } =
+      originFollowingDictionary;
+
+    optimisticUpdateByReactQuery({
+      queryClient,
+      queryKey: FOLLOWING_DICTIONARY_KEY,
+      newData: restIsFollowingDictionary,
+    });
+  };
+
+  const resetOriginFollowingDictionary = () => {
+    queryClient.setQueryData(
+      FOLLOWING_DICTIONARY_KEY,
+      originFollowingDictionary
+    );
+  };
+
+  type OptimisticUpdateByReactQueryParams = {
+    queryClient: QueryClient;
+    queryKey: string[];
+    newData: unknown;
+  };
+
+  function optimisticUpdateByReactQuery({
+    queryClient,
+    queryKey,
+    newData,
+  }: OptimisticUpdateByReactQueryParams) {
+    queryClient.cancelQueries(queryKey);
+    queryClient.setQueryData(queryKey, newData);
+  }
+
   const { mutate: follow } = useMutation(
     () => snsAPI.follow({ targetUserNickname }),
     {
-      onError: (err: AxiosError<ResponseError>) => alertErrorHandler(err),
+      onMutate: () => {
+        onFollowOptimisticUpdate();
+      },
+      onError: (err: AxiosError<ResponseError>) => {
+        resetOriginFollowingDictionary();
+        alertErrorHandler(err);
+      },
     }
   );
   const { mutate: unfollow } = useMutation(
     () => snsAPI.unfollow({ targetUserNickname }),
     {
-      onError: (err: AxiosError<ResponseError>) => alertErrorHandler(err),
+      onMutate: () => {
+        onUnfollowOptimisticUpdate();
+      },
+      onError: (err: AxiosError<ResponseError>) => {
+        resetOriginFollowingDictionary();
+        alertErrorHandler(err);
+      },
     }
   );
 
@@ -88,7 +169,22 @@ export const useGetSocialProfile = (nickname: string) => {
 };
 
 export const useGetSocialReviews = (nickname: string) => {
-  return useQuery(['socialMyReviews'], () => snsAPI.getMyReviews(nickname), {
+  const getMyReviewsInfiniteQuery = async ({ pageParam = 0 }) => {
+    const resposne = await snsAPI.getMyReviews(nickname);
+
+    // TODO: if lastPage?
+
+    return {
+      currentPage: resposne,
+      nextPage: pageParam + 1,
+    };
+  };
+
+  return useInfiniteQuery({
+    queryKey: ['socialMyReviews', nickname],
+    queryFn: getMyReviewsInfiniteQuery,
+    getNextPageParam: (lastPage, pages) => lastPage.nextPage,
+    onError: (err: AxiosError<ResponseError>) => redirectErrorHandler(err),
     enabled: !!nickname,
   });
 };

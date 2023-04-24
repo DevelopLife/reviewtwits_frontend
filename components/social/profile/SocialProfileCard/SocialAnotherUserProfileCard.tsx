@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 
 import { mockSocialProfile } from 'constants/mockSocialProfile';
-import useGetSocialProfile from 'hooks/useGetSocialProfile';
 import SocialProfileCardView from 'components/social/profile/SocialProfileCard/SocialProfileCardView';
 import useGetIsFollowing from 'hooks/useGetIsFollowing';
+import { useGetSocialProfile } from 'hooks/queries/sns';
 
 const SocialAnotherUserProfileCard = () => {
   const router = useRouter();

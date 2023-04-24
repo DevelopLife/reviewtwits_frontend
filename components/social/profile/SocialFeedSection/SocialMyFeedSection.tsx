@@ -4,8 +4,8 @@ import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
 import SocialFeedSectionView, {
   CARD_WIDTH,
 } from 'components/social/profile/SocialFeedSection/SocialFeedSectionView';
-import useGetSocialReviews from 'hooks/useGetSocialReviews';
-import useUserProfile from 'hooks/useUserProfile';
+import { useGetSocialReviews } from 'hooks/queries/sns';
+import useUserProfile from 'hooks/queries/users';
 import { formattedImageUrl } from 'utils/format';
 
 const SocialMyFeedSection = () => {
