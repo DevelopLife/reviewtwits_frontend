@@ -14,16 +14,18 @@ const RecommendContent = () => {
     <Card color="text_black_100">
       <S.Content>
         <S.UserProfileBox>
-          <S.UserImage
-            width={68}
-            height={68}
-            src={
-              profileImageUrl
-                ? formattedImageUrl(profileImageUrl)
-                : '/images/default_user_profile_img.png'
-            }
-            alt="userImg"
-          />
+          <SocialUserNicknameLink nickname={nickname}>
+            <S.UserImage
+              width={68}
+              height={68}
+              src={
+                profileImageUrl
+                  ? formattedImageUrl(profileImageUrl)
+                  : '/images/default_user_profile_img.png'
+              }
+              alt="userImg"
+            />
+          </SocialUserNicknameLink>
           <S.UserInfoBox>
             <S.UserNickname>{nickname}</S.UserNickname>
             <SocialUserNicknameLink nickname={nickname}>
