@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
+import useUserProfile from 'hooks/useUserProfile';
+
 import Card from '../Card';
+import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 
 const RecommendContent = () => {
+  const { nickname } = useUserProfile();
+
   return (
     <Card color="text_black_100">
       <S.Content>
@@ -11,7 +16,9 @@ const RecommendContent = () => {
           <S.UserImage src="" alt="" />
           <S.UserInfoBox>
             <S.UserNickname>nickname</S.UserNickname>
-            <S.EditButton>수정하기</S.EditButton>
+            <SocialUserNicknameLink nickname={nickname}>
+              <S.EditButton>수정하기</S.EditButton>
+            </SocialUserNicknameLink>
           </S.UserInfoBox>
         </S.UserProfileBox>
         <S.MainContent>
