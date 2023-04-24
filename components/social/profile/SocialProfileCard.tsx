@@ -1,15 +1,14 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-import useGetSocialProfile from 'hooks/useGetSocialProfile';
-import useUserProfile from 'hooks/useUserProfile';
+import useUserProfile from 'hooks/queries/users';
+import { useGetSocialProfile } from 'hooks/queries/sns';
 import { mockSocialProfile } from 'constants/mockSocialProfile';
 import type { Colors } from 'styles/theme';
 import type { SocialProfile } from 'typings/social';
 import SocialFollowButton from 'components/social/profile/SocialFollowButton';
 import EditProfileButton from 'components/social/profile/EditProfileButton';
 import SocialProfileImage from 'components/social/profile/SocialProfileImage';
-// import SocialUnFollowButton from 'components/social/profile/SocialUnFollowButton';
 
 export const SocialProfileCard = () => {
   const router = useRouter();

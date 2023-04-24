@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import SocialLayout from 'components/sns/common/SocialLayout';
 import { SocialTitleSection } from 'components/sns/common/SocialTitleSection.styles';
-import useUserProfile from 'hooks/useUserProfile';
+import useUserProfile from 'hooks/queries/users';
 
 const UserPage = () => {
   const userProfile = useUserProfile();

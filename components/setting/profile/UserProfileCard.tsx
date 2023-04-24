@@ -13,7 +13,7 @@ import { useMutation } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 
 import useForm from 'hooks/useForm';
-import useUserProfile from 'hooks/useUserProfile';
+import useUserProfile from 'hooks/queries/users';
 import { usersAPI } from 'api/users';
 import { UserProfileFormType } from 'typings/account';
 import { formattedImageUrl } from 'utils/format';

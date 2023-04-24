@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { UN_FOLLOW } from 'constants/followAndUnFollow';
 
-import useFollowAndUnFollow from 'hooks/useFollowAndUnFollow';
+import { UN_FOLLOW } from 'constants/followAndUnFollow';
+import { useFollowAndUnFollow } from 'hooks/queries/sns';
 import type { Colors } from 'styles/theme';
 import type { WrapProps } from 'typings/wrapperProps';
 

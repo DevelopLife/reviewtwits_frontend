@@ -3,9 +3,8 @@ import Image from 'next/image';
 
 import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
 import type { WrapProps } from 'typings/wrapperProps';
-
-import useUserProfile from 'hooks/useUserProfile';
-import useGetSocialReviews from 'hooks/useGetSocialReviews';
+import { useGetSocialReviews } from 'hooks/queries/sns';
+import useUserProfile from 'hooks/queries/users';
 
 interface SocialFeedSectionProps extends WrapProps {
   columnWidth: number;
