@@ -1,6 +1,6 @@
 import { InternalAxiosRequestConfig } from 'axios';
 
-import { requiredTokenApi } from 'api/instance';
+import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { getCookie, removeCookie, setCookie } from './cookies';
 import { usersAPI } from 'api/users';
 import { LOCAL_STORAGE_KEYS } from 'constants/localStorage';
@@ -34,8 +34,13 @@ export function verifyTokenErrorHandler() {
 }
 
 export function setAuthorizationToken(token?: string) {
-  if (token) requiredTokenApi.defaults.headers.common['x-auth-token'] = token;
-  else delete requiredTokenApi.defaults.headers.common['x-auth-token'];
+  if (token) {
+    requiredTokenApi.defaults.headers.common['x-auth-token'] = token;
+    optionalTokenAPI.defaults.headers.common['x-auth-token'] = token;
+  } else {
+    delete requiredTokenApi.defaults.headers.common['x-auth-token'];
+    delete optionalTokenAPI.defaults.headers.common['x-auth-token'];
+  }
 }
 
 export function doSignIn(token: string) {
@@ -68,4 +73,10 @@ export function doSignOut() {
   removeCookie('expireAt');
   setAuthorizationToken();
   window.location.href = '/';
+}
+
+export function doSignOutOptionalTokenApi() {
+  usersAPI.signOut();
+  removeCookie('expireAt');
+  setAuthorizationToken();
 }
