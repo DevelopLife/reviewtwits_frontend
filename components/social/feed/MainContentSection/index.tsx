@@ -6,6 +6,10 @@ import { ReviewResponseType } from 'typings/reviews';
 
 import Review from './Review';
 
+// import useIntersectionObserver from 'hooks/useIntersectionObserver';
+// import { useRef } from 'react';
+// import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
+
 const MainContentSection = () => {
   const { data: reviewData } = useQuery<ReviewResponseType[]>(['feed'], () =>
     snsAPI.getFeed()
@@ -15,6 +19,9 @@ const MainContentSection = () => {
     reviewData,
   };
 
+  // infiniteScroll 설명을 위한 임시 작업
+
+  // return <MainContentSectionView {...props} />;
   return <MainContentSectionView {...props} />;
 };
 
@@ -25,8 +32,18 @@ interface MainContentSectionViewProps {
 const MainContentSectionView = ({
   reviewData,
 }: MainContentSectionViewProps) => {
+  // infiniteScroll 설명을 위한 임시 작업
+
+  // const infiniteQuery = useGetInfiniteFeed();
+  // const observeTarget = useIntersectionObserver(infiniteQuery.fetchNextPage);
+  // const reviewData = linkageInfiniteScrollData<ReviewResponseType>(
+  // infiniteQuery?.data
+  // );
+
   return (
-    <S.Section>
+    <S.Section
+    //  ref={observeTarget}
+    >
       {reviewData?.map((data: ReviewResponseType, i) => (
         <Review key={i} data={data} />
       ))}

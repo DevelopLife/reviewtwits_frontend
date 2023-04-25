@@ -17,6 +17,21 @@ export const snsAPI = {
       })
       .then((res) => res.data);
   },
+
+  // infiniteScroll 설명을 위한 임시 작업
+  getInfiniteFeed: async (lastId: number) => {
+    const SIZE = 10;
+
+    return await optionalTokenAPI
+      .get(`${SNS_URL}/feeds`, {
+        params: {
+          size: SIZE,
+          reviewId: lastId,
+        },
+      })
+      .then((res) => res.data);
+  },
+
   getTrendyProducts: () =>
     optionalTokenAPI
       .get(`${SNS_URL}/recommend-product`)
