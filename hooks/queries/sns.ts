@@ -61,20 +61,6 @@ export const useGetMyReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
-// import {
-//   QueryClient,
-//   useMutation,
-//   useQueryClient,
-// } from '@tanstack/react-query';
-// import type { AxiosError } from 'axios';
-
-// import { snsAPI } from 'api/sns';
-// import { alertErrorHandler } from 'utils/errorHandler';
-// import type { ResponseError } from 'typings/error';
-// import { FollowingDictionary } from 'typings/sns';
-
-// export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
-
 export const useFollowAndUnFollow = (targetUserNickname: string) => {
   const queryClient = useQueryClient();
   const originFollowingDictionary = queryClient.getQueryData(
