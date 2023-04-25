@@ -7,7 +7,7 @@ import theme from 'styles/theme';
 import UserIcon from 'public/icons/user.svg';
 import mockNextRouter from 'test/mockRouter';
 import SocialProfileMenuItem from 'components/social/common/SocialProfileMenuItem';
-import useUserProfile from 'hooks/useUserProfile';
+import useUserProfile from 'hooks/queries/users';
 
 const client = new QueryClient();
 const TEST_NICKNAME = 'test_nickname';
@@ -18,19 +18,29 @@ const ProfileMenu = {
 
 // emotion css 속성에 접근하기 위한 코드
 expect.extend(matchers);
-
 // Mock useUserProfile hook
-jest.mock('hooks/useUserProfile');
+jest.mock('hooks/queries/users');
 const mockUseUserProfile = useUserProfile as jest.MockedFunction<
   typeof useUserProfile
 >;
+
+const MOCK_USE_USER_PROFILE_RETURN_VALUE = {
+  nickname: TEST_NICKNAME,
+  isLogin: false,
+  profileImageUrl: undefined,
+  introduceText: undefined,
+  accountId: undefined,
+  birthDate: undefined,
+  gender: undefined,
+  phoneNumber: undefined,
+};
 
 describe('SocialProfileMenuItem', () => {
   it('rendering', async () => {
     // Mock useRouter hook
     mockNextRouter({ query: { nickname: TEST_NICKNAME } });
     // Mock useUserProfile Return Value useQuery Success case
-    mockUseUserProfile.mockReturnValue({ nickname: TEST_NICKNAME });
+    mockUseUserProfile.mockReturnValue(MOCK_USE_USER_PROFILE_RETURN_VALUE);
 
     render(
       <QueryClientProvider client={client}>
@@ -47,7 +57,7 @@ describe('SocialProfileMenuItem', () => {
   });
 
   it('success api call case By useUserProfile', async () => {
-    mockUseUserProfile.mockReturnValue({ nickname: TEST_NICKNAME });
+    mockUseUserProfile.mockReturnValue(MOCK_USE_USER_PROFILE_RETURN_VALUE);
 
     render(
       <QueryClientProvider client={client}>
@@ -67,7 +77,10 @@ describe('SocialProfileMenuItem', () => {
   });
 
   it('fail api call case By useUserProfile', async () => {
-    mockUseUserProfile.mockReturnValue(null);
+    mockUseUserProfile.mockReturnValue({
+      ...MOCK_USE_USER_PROFILE_RETURN_VALUE,
+      nickname: undefined,
+    });
 
     render(
       <QueryClientProvider client={client}>
@@ -85,7 +98,7 @@ describe('SocialProfileMenuItem', () => {
 
   it('check actived background-color and color', async () => {
     mockNextRouter({ query: { nickname: TEST_NICKNAME } });
-    mockUseUserProfile.mockReturnValue({ nickname: TEST_NICKNAME });
+    mockUseUserProfile.mockReturnValue(MOCK_USE_USER_PROFILE_RETURN_VALUE);
 
     render(
       <QueryClientProvider client={client}>

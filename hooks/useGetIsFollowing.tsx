@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useGetFollowingList } from 'hooks/queries/sns';
+import useUserProfile from 'hooks/queries/users';
 import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
-import useUserProfile from 'hooks/useUserProfile';
 import { FollowingDictionary } from 'typings/sns';
 
 export const useGetIsFollowing = (nickname: string) => {

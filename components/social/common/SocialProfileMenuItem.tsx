@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import SocialMenuItem from 'components/social/common/SocialMenuItem';
-import useUserProfile from 'hooks/useUserProfile';
+import useUserProfile from 'hooks/queries/users';
 import { WrapProps } from 'typings/wrapperProps';
 
 const SocialProfileMenuItem = ({ children }: WrapProps) => {

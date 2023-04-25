@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import * as S from './Header.styles';
 import UserMenu from './UserMenu';
-import useUserProfile from 'hooks/useUserProfile';
 import { formattedImageUrl } from 'utils/format';
+import useUserProfile from 'hooks/queries/users';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

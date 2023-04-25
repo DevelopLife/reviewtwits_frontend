@@ -5,8 +5,8 @@ import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
 import SocialFeedSectionView, {
   CARD_WIDTH,
 } from 'components/social/profile/SocialFeedSection/SocialFeedSectionView';
-import useGetSocialReviews from 'hooks/useGetSocialReviews';
 import { formattedImageUrl } from 'utils/format';
+import { useGetSocialReviews } from 'hooks/queries/sns';
 
 const SocialAnoterUserFeedSection = () => {
   const router = useRouter();

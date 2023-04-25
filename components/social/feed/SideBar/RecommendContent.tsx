@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
-import useUserProfile from 'hooks/useUserProfile';
+import useUserProfile from 'hooks/queries/users';
 import { formattedImageUrl } from 'utils/format';
 
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
