@@ -21,7 +21,7 @@ export const snsAPI = {
     optionalTokenAPI
       .get(`${SNS_URL}/recommend-product`)
       .then((res) => res.data),
-  addReaction: (reviewId: number, reaction: ReactionType) => {
+  toggleReaction: (reviewId: number, reaction: ReactionType) => {
     const params = { reaction };
 
     return requiredTokenApi.post(
