@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
 import { KakaoSDKScript } from 'components/common/Oauth/KakaoOauth';
-import { NaverSDKScript } from 'components/common/Oauth/NaverOauth';
+// import { NaverSDKScript } from 'components/common/Oauth/NaverOauth';
 
 export default function Document() {
   return (
@@ -13,7 +13,7 @@ export default function Document() {
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
         />
         <KakaoSDKScript />
-        <NaverSDKScript />
+        {/* <NaverSDKScript /> */}
       </Head>
       <body>
         <Main />
