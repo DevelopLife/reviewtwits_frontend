@@ -6,11 +6,20 @@ import FullStarImg from 'public/images/full_star_img.png';
 import EmptyStarImg from 'public/images/empty_star_img.png';
 
 interface RatingBoxProps {
+  isFetching?: boolean;
+  productName?: string;
+  productImgUrl?: string;
   score?: number;
   setValue: (name: string, value: number) => void;
 }
 
-const RatingBox = ({ score: initialScore, setValue }: RatingBoxProps) => {
+const RatingBox = ({
+  isFetching,
+  productName,
+  productImgUrl,
+  score: initialScore,
+  setValue,
+}: RatingBoxProps) => {
   const [score, setScore] = useState(initialScore || 0);
   const [hoverScore, setHoverScore] = useState(initialScore || 0);
 
@@ -29,17 +38,20 @@ const RatingBox = ({ score: initialScore, setValue }: RatingBoxProps) => {
 
   const handleLeaveStar = () => setHoverScore(score);
 
+  if (!productName) return null;
   return (
     <S.Box>
-      <Image
-        width={150}
-        height={150}
-        src=""
-        alt=""
-        style={{ background: 'gray' }}
-      />
+      {productImgUrl ? (
+        <Image width={150} height={150} src={productImgUrl} alt="" />
+      ) : isFetching ? (
+        <S.LoadingBox>
+          <S.Spinner />
+        </S.LoadingBox>
+      ) : (
+        <S.NullImage>No Image</S.NullImage>
+      )}
       <div>
-        <S.ProductName>오뚜기 콤비네이션 피자 415g 오뚜기, 2개</S.ProductName>
+        <S.ProductName>{productName}</S.ProductName>
         <S.StarRating onMouseLeave={handleLeaveStar}>
           {Array.from({ length: 5 }).map((_, i) => (
             <S.Star

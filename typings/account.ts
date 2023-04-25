@@ -33,9 +33,12 @@ export interface UserProfileFormType {
 
 export interface UserProfileResponseType {
   accountId: string;
+  birthDate: string;
+  gender: string;
+  introduceText?: string;
   nickname?: string;
-  introductText?: string;
-  profileImage?: string;
+  phoneNumber: string;
+  profileImageUrl?: string;
 }
 
 export type Gender = '남자' | '여자';
