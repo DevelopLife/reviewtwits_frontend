@@ -34,7 +34,14 @@ export const usePrivateRouting = ({
     }
 
     setIsLoginAtom(setIsLogined);
-  }, []);
+  }, [
+    isRequiredLogin,
+    redirectURL,
+    setFalseIsLogined,
+    setIsLogined,
+    setTrueIsLogined,
+    statusCode,
+  ]);
 
   return {
     isLogined,
