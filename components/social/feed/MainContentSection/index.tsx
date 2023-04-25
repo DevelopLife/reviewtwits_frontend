@@ -6,10 +6,9 @@ import { ReviewResponseType } from 'typings/reviews';
 
 import Review from './Review';
 
-import { useGetInfiniteFeed } from 'hooks/queries/sns';
-import useIntersectionObserver from 'hooks/useIntersectionObserver';
-import { useRef } from 'react';
-import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
+// import useIntersectionObserver from 'hooks/useIntersectionObserver';
+// import { useRef } from 'react';
+// import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 
 const MainContentSection = () => {
   const { data: reviewData } = useQuery<ReviewResponseType[]>(['feed'], () =>
@@ -23,34 +22,34 @@ const MainContentSection = () => {
   // infiniteScroll 설명을 위한 임시 작업
 
   // return <MainContentSectionView {...props} />;
-  return <MainContentSectionView />;
+  return <MainContentSectionView {...props} />;
 };
 
 interface MainContentSectionViewProps {
   reviewData?: ReviewResponseType[];
 }
 
-const MainContentSectionView = () =>
-  //   {
-  //   reviewData,
-  // }: MainContentSectionViewProps
-  {
-    // infiniteScroll 설명을 위한 임시 작업
+const MainContentSectionView = ({
+  reviewData,
+}: MainContentSectionViewProps) => {
+  // infiniteScroll 설명을 위한 임시 작업
 
-    const infiniteQuery = useGetInfiniteFeed();
-    const observeTarget = useIntersectionObserver(infiniteQuery.fetchNextPage);
-    const reviewData = linkageInfiniteScrollData<ReviewResponseType>(
-      infiniteQuery?.data
-    );
+  // const infiniteQuery = useGetInfiniteFeed();
+  // const observeTarget = useIntersectionObserver(infiniteQuery.fetchNextPage);
+  // const reviewData = linkageInfiniteScrollData<ReviewResponseType>(
+  // infiniteQuery?.data
+  // );
 
-    return (
-      <S.Section ref={observeTarget}>
-        {reviewData?.map((data: ReviewResponseType, i) => (
-          <Review key={i} data={data} />
-        ))}
-      </S.Section>
-    );
-  };
+  return (
+    <S.Section
+    //  ref={observeTarget}
+    >
+      {reviewData?.map((data: ReviewResponseType, i) => (
+        <Review key={i} data={data} />
+      ))}
+    </S.Section>
+  );
+};
 
 export default MainContentSection;
 

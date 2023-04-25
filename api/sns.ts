@@ -22,7 +22,7 @@ export const snsAPI = {
   getInfiniteFeed: async (lastId: number) => {
     const SIZE = 10;
 
-    return await api
+    return await optionalTokenAPI
       .get(`${SNS_URL}/feeds`, {
         params: {
           size: SIZE,
