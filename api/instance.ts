@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-import { verifyToken, verifyTokenErrorHandler } from 'utils/auth';
+import {
+  doSignOutOptionalTokenApi,
+  verifyToken,
+  verifyTokenErrorHandler,
+} from 'utils/auth';
 import { redirectErrorHandler } from 'utils/errorHandler';
 
 export const requiredTokenApi = axios.create({
@@ -24,4 +28,9 @@ requiredTokenApi.interceptors.request.use(verifyToken, verifyTokenErrorHandler);
 requiredTokenApi.interceptors.response.use(
   (response) => response,
   redirectErrorHandler
+);
+
+optionalTokenAPI.interceptors.request.use(
+  verifyToken,
+  doSignOutOptionalTokenApi
 );
