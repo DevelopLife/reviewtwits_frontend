@@ -12,17 +12,11 @@ interface ReactionBoxProps {
 }
 
 const ReactionBox = ({ reviewId, reactions }: ReactionBoxProps) => {
-  const { doReact, cancelReact } = useReaction(reviewId);
+  const { doReact } = useReaction(reviewId);
 
   const handleClickReactButton = (e: MouseEvent<HTMLButtonElement>) => {
     const reactionType = e.currentTarget.id as ReactionType;
-    const existReaction =
-      reactions &&
-      Object.keys(reactions).filter((name) => reactions[name].isReacted);
-
-    existReaction && existReaction[0] === reactionType
-      ? cancelReact()
-      : doReact(reactionType);
+    doReact(reactionType);
   };
 
   const props = {

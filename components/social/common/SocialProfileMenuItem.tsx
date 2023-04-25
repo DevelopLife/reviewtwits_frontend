@@ -8,11 +8,12 @@ const SocialProfileMenuItem = ({ children }: WrapProps) => {
   const userProfile = useUserProfile();
   const router = useRouter();
   const { nickname } = router.query;
-  const href = `/social/user/${userProfile?.nickname}`;
+  const notLoginedHref = '/sign-in';
+  const loginedHref = `/social/user/${userProfile?.nickname}`;
 
   if (!userProfile?.nickname) {
     return (
-      <SocialMenuItem isCurrent={false} href="">
+      <SocialMenuItem isCurrent={false} href={notLoginedHref}>
         {children}
       </SocialMenuItem>
     );
@@ -20,7 +21,7 @@ const SocialProfileMenuItem = ({ children }: WrapProps) => {
 
   const isMypage = nickname === userProfile?.nickname;
   return (
-    <SocialMenuItem isCurrent={isMypage} href={href}>
+    <SocialMenuItem isCurrent={isMypage} href={loginedHref}>
       {children}
     </SocialMenuItem>
   );
