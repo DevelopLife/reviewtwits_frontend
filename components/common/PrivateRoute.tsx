@@ -10,7 +10,6 @@ const PUBLIC_URLS = [
   '/sign-in',
   '/sign-up',
   '/social',
-  '/social/home',
   '/socual/user',
   '/social/user/[nickname]',
   '/404',
