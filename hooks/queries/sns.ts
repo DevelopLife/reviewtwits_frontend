@@ -9,9 +9,12 @@ import { AxiosError, AxiosResponse } from 'axios';
 
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
+import { SocialReview } from 'typings/social';
 import { alertErrorHandler, redirectErrorHandler } from 'utils/errorHandler';
+import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
 import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 export const useGetFollowerList = (nickname: string) => {
   return useQuery<AxiosResponse<FollowListType>, AxiosError<ResponseError>>(
@@ -153,24 +156,38 @@ export const useGetSocialProfile = (nickname: string) => {
 
   return socialProfileQuery;
 };
-
-export const useGetSocialReviews = (nickname: string) => {
-  const getMyReviewsInfiniteQuery = async ({ pageParam = 0 }) => {
-    const resposne = await snsAPI.getMyReviews(nickname);
-
-    // TODO: if lastPage?
-
-    return {
-      currentPage: resposne,
-      nextPage: pageParam + 1,
-    };
+export const useGetInfiniteSocialReviews = (nickname: string) => {
+  const getUserReviewsInfiniteQuery = async ({
+    pageParam: lastReviewId = 0,
+  }) => {
+    return await snsAPI.getMyReviews(nickname, lastReviewId);
   };
 
-  return useInfiniteQuery({
+  const socialReviewsInfiniteQuery = useInfiniteQuery({
     queryKey: ['socialMyReviews', nickname],
-    queryFn: getMyReviewsInfiniteQuery,
-    getNextPageParam: (lastPage, pages) => lastPage.nextPage,
+    queryFn: getUserReviewsInfiniteQuery,
+    getNextPageParam: (lastPage, pages) => {
+      const lastReviewId = lastPage?.[lastPage.length - 1]?.reviewId;
+      const isLastPage = lastPage.length !== pages[0].length;
+
+      if (isLastPage) return undefined;
+      return lastReviewId;
+    },
     onError: (err: AxiosError<ResponseError>) => redirectErrorHandler(err),
     enabled: !!nickname,
   });
+
+  const targetRef = useIntersectionObserver(
+    socialReviewsInfiniteQuery.fetchNextPage
+  );
+
+  const data = linkageInfiniteScrollData<SocialReview>(
+    socialReviewsInfiniteQuery?.data
+  );
+
+  return {
+    infiniteQuery: socialReviewsInfiniteQuery,
+    targetRef,
+    data,
+  };
 };
