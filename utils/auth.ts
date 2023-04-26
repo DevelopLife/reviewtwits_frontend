@@ -69,10 +69,11 @@ export function setLocalStorageExpireAt(hour: number) {
 }
 
 export function doSignOut() {
-  usersAPI.signOut();
-  removeCookie('expireAt');
-  setAuthorizationToken();
-  window.location.href = '/';
+  usersAPI.signOut().then(() => {
+    removeCookie('expireAt');
+    setAuthorizationToken();
+    window.location.href = '/';
+  });
 }
 
 export function doSignOutOptionalTokenApi() {
