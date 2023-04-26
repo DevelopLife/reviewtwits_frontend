@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Button from 'components/common/Button';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const NotFound = () => {
   return (
@@ -16,10 +17,11 @@ const NotFound = () => {
         <S.Content>
           <h1>해당 페이지를 찾지 못했습니다</h1>
           <small>주소가 잘못되었거나 더 이상 제공되지 않는 페이지입니다</small>
-
-          <Button color="primary" large>
-            메인페이지로 이동
-          </Button>
+          <Link href="/">
+            <Button color="primary" large>
+              메인페이지로 이동
+            </Button>
+          </Link>
         </S.Content>
       </S.Box>
     </S.Container>
