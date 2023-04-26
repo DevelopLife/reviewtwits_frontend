@@ -1,7 +1,7 @@
 import * as S from './SocialLoginBox.styles';
 import { GoogleOauth } from 'components/common/Oauth/GoogleOauth';
 import { KakaoOauth } from 'components/common/Oauth/KakaoOauth';
-// import { NaverOauth } from 'components/common/Oauth/NaverOauth';
+import { NaverOauth } from 'components/common/Oauth/NaverOauth';
 
 const SocialLoginBox = () => {
   return (
@@ -14,7 +14,7 @@ const SocialLoginBox = () => {
       <S.ButtonBox>
         <GoogleOauth />
         <KakaoOauth />
-        {/* <NaverOauth /> */}
+        <NaverOauth />
       </S.ButtonBox>
     </S.Box>
   );
