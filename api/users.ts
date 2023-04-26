@@ -42,7 +42,7 @@ export const usersAPI = {
       .then((res) => res.data);
   },
   signOut: async () => {
-    return await optionalTokenAPI.post(`${USERS_URL}/logout`, {
+    return await requiredTokenApi.post(`${USERS_URL}/logout`, {
       headers: {
         'Content-Type': 'application/json',
       },
