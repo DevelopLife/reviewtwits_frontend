@@ -10,6 +10,7 @@ env:
   S3_BUCKET_NAME: reviewtwitsbucket
   CODE_DEPLOY_APPLICATION_NAME: reviewtwits_codedeploy
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: reviewtwits
+  NEXT_PUBLIC_SERVER_URL: ${{secrets.NEXT_PUBLIC_SERVER_URL}}
 
 jobs:
   build:
@@ -21,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      
+
       - name: Check Node v
         run: node -v
 
@@ -38,13 +39,13 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_FRONTEND }} 
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_FRONTEND }} 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_FRONTEND }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_FRONTEND }}
           aws-region: ${{ secrets.AWS_REGION_FRONTEND }}
 
       - name: Upload to S3
         env:
-          AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID_FRONTEND }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_FRONTEND }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_FRONTEND }}
         run: aws s3 cp --region ${{ secrets.AWS_REGION_FRONTEND }} ./$GITHUB_SHA.zip s3://${{ env.S3_BUCKET_NAME }}/$GITHUB_SHA.zip
 
