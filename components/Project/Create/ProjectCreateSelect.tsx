@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 
 import { useCreateProject } from 'hooks/useCreateProject';
-import DownTriangleSVG from 'public/images/down_triangle.svg';
+import DownTriangleSVG from 'public/icons/down_triangle.svg';
 import { useSelect } from 'hooks/useSelect';
 
 interface ProjectCreateSelectProps {
