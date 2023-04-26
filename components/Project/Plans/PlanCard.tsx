@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import CheckedIconSVG from 'public/images/checked_icon.svg';
+import CheckedIconSVG from 'public/icons/checked.svg';
 
 interface IsSelected {
   isSelected: boolean;
