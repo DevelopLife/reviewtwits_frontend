@@ -5,15 +5,14 @@ import SocialCard from 'components/social/common/SocialCard';
 import { FollowListType } from 'typings/sns';
 
 const SocialList = ({ userList }: { userList: FollowListType }) => {
-  console.log(userList);
   return (
     <S.Container>
-      {userList.map(({ nickname, userId, profileImage }) => (
+      {userList.map(({ nickname, userId, profileImage, detailIntroduce }) => (
         <SocialCard
           key={userId}
           imageUrl={profileImage}
           nickname={nickname}
-          role={''}
+          role={detailIntroduce}
         />
       ))}
     </S.Container>

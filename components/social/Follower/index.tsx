@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import ChangeFollowListButton from './ChangeFollowListButton';
 import SocialList from './SocialList';
 import { useGetFollowerList, useGetFollowingList } from 'hooks/queries/sns';
@@ -10,8 +11,8 @@ type FollowButton = (typeof FOLLOW_BUTTON)[keyof typeof FOLLOW_BUTTON];
 const FollowerSection = () => {
   const useProfile = useUserProfile();
   const { nickname } = useProfile;
-  const { data: followerList } = useGetFollowerList(nickname);
-  const { data: followingList } = useGetFollowingList(nickname);
+  const { data: followerList } = useGetFollowerList(nickname || '');
+  const { data: followingList } = useGetFollowingList(nickname || '');
 
   const [targettedButton, setTargettedButton] = useState<FollowButton>(
     FOLLOW_BUTTON.FOLLOWER
