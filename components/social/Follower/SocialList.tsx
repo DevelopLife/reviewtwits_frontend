@@ -1,20 +1,20 @@
 import styled from '@emotion/styled';
+
 import SocialCard from 'components/social/common/SocialCard';
-import React from 'react';
 
-const MockDatas = [
-  { name: '1', role: '모델' },
-  { name: '2', role: '모델' },
-  { name: '3', role: '모델' },
-  { name: '4', role: '모델' },
-  { name: '5', role: '모델' },
-];
+import { FollowListType } from 'typings/sns';
 
-const SocialList = () => {
+const SocialList = ({ userList }: { userList: FollowListType }) => {
+  console.log(userList);
   return (
     <S.Container>
-      {MockDatas.map(({ name, role }) => (
-        <SocialCard key={name} name={name} role={role} />
+      {userList.map(({ nickname, userId, profileImage }) => (
+        <SocialCard
+          key={userId}
+          imageUrl={profileImage}
+          nickname={nickname}
+          role={''}
+        />
       ))}
     </S.Container>
   );

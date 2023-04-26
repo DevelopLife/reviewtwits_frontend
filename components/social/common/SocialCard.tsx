@@ -4,12 +4,14 @@ import { useState } from 'react';
 import * as S from './SocialCard.styles';
 
 interface SocialCardProps {
-  name: string;
+  imageUrl: string | null;
+  nickname: string;
   role: string;
 }
 
-const SocialCard = ({ name, role }: SocialCardProps) => {
+const SocialCard = ({ nickname, role }: SocialCardProps) => {
   const [followState, setFollowState] = useState();
+
   return (
     <S.Container>
       <S.userBox>
@@ -17,7 +19,7 @@ const SocialCard = ({ name, role }: SocialCardProps) => {
           <Image src="" alt="" />
         </S.ImageBox>
         <S.UserInfos>
-          <S.UserName>{name}</S.UserName>
+          <S.UserName>{nickname}</S.UserName>
           <S.UserRole>{role}</S.UserRole>
         </S.UserInfos>
       </S.userBox>
