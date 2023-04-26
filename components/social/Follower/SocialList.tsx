@@ -7,14 +7,16 @@ import { FollowListType } from 'typings/sns';
 const SocialList = ({ userList }: { userList: FollowListType }) => {
   return (
     <S.Container>
-      {userList.map(({ nickname, userId, profileImage, detailIntroduce }) => (
-        <SocialCard
-          key={userId}
-          imageUrl={profileImage}
-          nickname={nickname}
-          role={detailIntroduce}
-        />
-      ))}
+      {userList.map(
+        ({ nickname, userId, detailIntroduce, profileImageUrl }) => (
+          <SocialCard
+            key={userId}
+            imageUrl={profileImageUrl}
+            nickname={nickname}
+            role={detailIntroduce}
+          />
+        )
+      )}
     </S.Container>
   );
 };

@@ -28,10 +28,12 @@ const userBox = styled.div`
 `;
 
 const ImageBox = styled.div`
+  position: relative;
   width: 72px;
   height: 72px;
 
   border-radius: 50%;
+  overflow: hidden;
 
   background-color: white;
 `;
