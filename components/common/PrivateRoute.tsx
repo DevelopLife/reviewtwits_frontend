@@ -13,6 +13,7 @@ const PUBLIC_URLS = [
   '/social/home',
   '/socual/user',
   '/social/user/[nickname]',
+  '/404',
 ];
 
 const PrivateRoute = ({

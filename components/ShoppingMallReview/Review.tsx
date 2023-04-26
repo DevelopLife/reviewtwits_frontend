@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 
-import grayStar from 'public/images/gray_star.png';
-import thumbsUp from 'public/images/thumbs_up.png';
+import grayStar from 'public/images/empty_star_img.png';
+import thumbsUp from 'public/icons/thumbs_up.png';
 import * as S from './Review.styles';
 import { ShoppingMallReviewDetail } from 'typings/reviews';
 import { formattedImageUrl } from 'utils/format';
