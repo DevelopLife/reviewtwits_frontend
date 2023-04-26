@@ -96,7 +96,7 @@ const ReviewView = ({
         </S.ReviewInfoBox>
         <S.ReviewText onClick={openModal}>{data?.content}</S.ReviewText>
         <ImageList
-          imageNameList={data?.reviewImageNameList}
+          imageUrlList={data?.reviewImageUrlList}
           handleOpenModal={openModal}
         />
         <S.UserResponseBox>
@@ -173,7 +173,7 @@ const S = {
 
   ReviewText: styled.p`
     display: -webkit-box;
-    height: 100px;
+    height: 90px;
     overflow: hidden;
     margin: 24px 0;
 
@@ -181,7 +181,7 @@ const S = {
     line-height: 1.4;
     word-break: keep-all;
     white-space: normal;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   `,
 

@@ -38,7 +38,7 @@ const ReviewWriteForm = () => {
     productName: '',
     newImageFiles: [],
   });
-  const { mutate: mutateCreate } = useMutation(
+  const { mutate: mutateCreate, isLoading } = useMutation(
     (data: FormData) => snsAPI.createReview(data),
     {
       onSuccess: () => {
@@ -71,6 +71,8 @@ const ReviewWriteForm = () => {
   };
 
   const onValid = () => {
+    if (isLoading) return;
+
     const formData = setDataInToFormData();
     mutateCreate(formData);
   };

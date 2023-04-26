@@ -29,7 +29,7 @@ const QualitySection = ({
       <DetailReviewBox content={values?.content} handleChange={handleChange} />
       <ImageUploadBox
         buttonColor="primary"
-        imageNameList={data?.reviewImageNameList}
+        imageNameList={data?.reviewImageUrlList}
         setValue={setValue}
       />
       <SurveyBox />
