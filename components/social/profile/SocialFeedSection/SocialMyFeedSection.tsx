@@ -4,56 +4,44 @@ import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
 import SocialFeedSectionView, {
   CARD_WIDTH,
 } from 'components/social/profile/SocialFeedSection/SocialFeedSectionView';
-import { useGetSocialReviews } from 'hooks/queries/sns';
+import { useGetInfiniteSocialReviews } from 'hooks/queries/sns';
 import useUserProfile from 'hooks/queries/users';
 import { formattedImageUrl } from 'utils/format';
 
 const SocialMyFeedSection = () => {
   const userData = useUserProfile();
 
-  const { data: socialMyReviewPages, status: socialMyReviewsStatus } =
-    useGetSocialReviews(userData?.nickname || '');
-
-  if (socialMyReviewsStatus === 'success' && socialMyReviewPages) {
-    const reviewPages = socialMyReviewPages?.pages;
-    return (
-      <SocialFeedSectionView columnWidth={CARD_WIDTH}>
-        {reviewPages.map(({ currentPage }) =>
-          currentPage.map(
-            ({ reviewId, reviewImageUrlList, reactionCount, commentCount }) => (
-              <SocialFeedCard
-                key={reviewId}
-                styles={{
-                  width: CARD_WIDTH,
-                  height: 318,
-                  borderRadius: 20,
-                }}
-                reactionCount={reactionCount}
-                commentCount={commentCount}
-              >
-                <Image
-                  quality={100}
-                  src={
-                    reviewImageUrlList?.[0]
-                      ? formattedImageUrl(reviewImageUrlList[0])
-                      : ''
-                  }
-                  alt="feedThumbnail"
-                  fill
-                />
-              </SocialFeedCard>
-            )
-          )
-        )}
-      </SocialFeedSectionView>
-    );
-  }
+  const { targetRef, data: myReviews } = useGetInfiniteSocialReviews(
+    userData?.nickname || ''
+  );
 
   return (
-    <SocialFeedSectionView columnWidth={CARD_WIDTH}>
-      {
-        // TODO: 리뷰작성유도 화면을 보여줘도 될 것 같음
-      }
+    <SocialFeedSectionView columnWidth={CARD_WIDTH} targetRef={targetRef}>
+      {myReviews?.map(
+        ({ reviewId, reviewImageUrlList, reactionCount, commentCount }) => (
+          <SocialFeedCard
+            key={reviewId}
+            styles={{
+              width: CARD_WIDTH,
+              height: 318,
+              borderRadius: 20,
+            }}
+            reactionCount={reactionCount}
+            commentCount={commentCount}
+          >
+            <Image
+              quality={100}
+              src={
+                reviewImageUrlList?.[0]
+                  ? formattedImageUrl(reviewImageUrlList[0])
+                  : ''
+              }
+              alt="feedThumbnail"
+              fill
+            />
+          </SocialFeedCard>
+        )
+      )}
     </SocialFeedSectionView>
   );
 };
