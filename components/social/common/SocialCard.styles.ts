@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 const Container = styled.div`
   /* Auto layout */
-
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -10,13 +9,8 @@ const Container = styled.div`
   padding: 32px;
   gap: 159px;
 
-  position: absolute;
   width: 457px;
   height: 136px;
-  left: 904px;
-  top: 238px;
-
-  /* Black */
 
   background: #181818;
   box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.09);
