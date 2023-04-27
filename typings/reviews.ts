@@ -37,7 +37,7 @@ export interface ReviewResponseType {
   starScore: number;
   score: number;
   content: string;
-  reviewImageNameList: string[];
+  reviewImageUrlList: string[];
   userInfo: UserProfileResponseType;
   commentCount?: number;
   reactionResponses?: ReactionResponseType;
