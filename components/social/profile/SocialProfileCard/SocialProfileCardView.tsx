@@ -2,20 +2,19 @@ import styled from '@emotion/styled';
 
 import type { Colors } from 'styles/theme';
 import type { SocialProfile } from 'typings/social';
-import SocialFollowButton from 'components/social/profile/SocialFollowButton';
+import SocialFollowAndUnfollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
 import EditProfileButton from 'components/social/profile/EditProfileButton';
 import SocialProfileImage from 'components/social/profile/SocialProfileImage';
-import SocialUnFollowButton from 'components/social/profile/SocialUnFollowButton';
 
 interface SocialProfileCardViewProps {
   isMyPage: boolean;
-  isFollowing?: boolean;
+  followButtonTextList: [string, string];
   profile: SocialProfile;
 }
 
 const SocialProfileCardView = ({
   isMyPage,
-  isFollowing,
+  followButtonTextList,
   profile,
 }: SocialProfileCardViewProps) => {
   const {
@@ -59,11 +58,11 @@ const SocialProfileCardView = ({
               <EditProfileButton />
             ) : (
               <>
-                {isFollowing ? (
-                  <SocialUnFollowButton nickname={nickname} />
-                ) : (
-                  <SocialFollowButton nickname={nickname} />
-                )}
+                <SocialFollowAndUnfollowButton
+                  nickname={nickname}
+                  size={'normal'}
+                  TextList={followButtonTextList}
+                />
                 <S.Button color={'secondary'}>Message</S.Button>
               </>
             )}
