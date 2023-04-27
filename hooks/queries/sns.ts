@@ -174,3 +174,21 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
     data,
   };
 };
+
+export const useGetInfiniteFeed = () => {
+  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType>({
+    queryKey: ['useGetInfiniteFeed'],
+    getNextPage: (nextRequest) => {
+      return snsAPI.getInfiniteFeed(nextRequest);
+    },
+  });
+
+  const targetRef = useIntersectionObserver(infiniteQuery.fetchNextPage);
+  const data = linkageInfiniteScrollData<ReviewResponseType>(
+    infiniteQuery?.data
+  );
+  return {
+    targetRef,
+    data,
+  };
+};
