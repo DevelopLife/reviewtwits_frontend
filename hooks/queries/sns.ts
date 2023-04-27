@@ -173,6 +173,7 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
     targetRef,
     data,
   };
+
 };
 
 export const useGetInfiniteFeed = () => {
@@ -191,4 +192,5 @@ export const useGetInfiniteFeed = () => {
     targetRef,
     data,
   };
+
 };
