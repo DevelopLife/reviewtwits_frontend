@@ -1,13 +1,13 @@
 import Layout from 'components/common/Layout';
 import SocialMainLayout from 'components/social/main/SocialMainLayout';
 import SocialMainImage from 'components/social/main/SocialMainImage';
-import SignInForm from 'components/signIn/SignInForm';
+import SignInCard from 'components/signIn/SignInCard';
 
 const SocialMainPage = () => {
   return (
     <Layout>
       <SocialMainLayout>
-        <SignInForm />
+        <SignInCard />
         <SocialMainImage />
       </SocialMainLayout>
     </Layout>

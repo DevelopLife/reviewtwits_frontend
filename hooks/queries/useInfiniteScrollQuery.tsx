@@ -4,33 +4,30 @@ import {
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { ReviewResponseType } from 'typings/reviews';
 
-interface UseInfiniteScrollQueryParams {
+interface UseInfiniteScrollQueryParams<T> {
   queryKey: QueryKey;
-  getNextPage: (nextRequest: number) => Promise<ReviewResponseType[]>;
+  getNextPage: (nextRequest: number) => Promise<T[]>;
   options?: Omit<UseInfiniteQueryOptions, 'queryKey' | 'queryFn'>;
 }
-const useInfiniteScrollQuery = ({
+function useInfiniteScrollQuery<T extends Record<'reviewId', number>>({
   queryKey,
   getNextPage,
-}: UseInfiniteScrollQueryParams) => {
-  const query = useInfiniteQuery(
-    queryKey,
-    async ({ pageParam = 1000000 }) => {
+}: UseInfiniteScrollQueryParams<T>) {
+  const query = useInfiniteQuery({
+    queryKey: queryKey,
+    queryFn: async ({ pageParam = 1000000 }) => {
       return await getNextPage(pageParam);
     },
-    {
-      getNextPageParam: (data) => {
-        if (!data) return undefined;
+    getNextPageParam: (data) => {
+      if (!data) return undefined;
 
-        const pageParam = data.at(-1)?.reviewId;
-        if (!pageParam) return undefined;
+      const pageParam = data.at(-1)?.reviewId;
+      if (!pageParam) return undefined;
 
-        return pageParam;
-      },
-    }
-  );
+      return pageParam;
+    },
+  });
 
   const clearCache = () => {
     return () => {
@@ -43,6 +40,6 @@ const useInfiniteScrollQuery = ({
   }, []);
 
   return query;
-};
+}
 
 export default useInfiniteScrollQuery;

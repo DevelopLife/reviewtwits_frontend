@@ -18,7 +18,6 @@ export const snsAPI = {
       .then((res) => res.data);
   },
 
-  // infiniteScroll 설명을 위한 임시 작업
   getInfiniteFeed: async (lastId: number) => {
     const SIZE = 10;
 
