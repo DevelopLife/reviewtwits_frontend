@@ -96,7 +96,7 @@ const ReviewView = ({
         </S.ReviewInfoBox>
         <S.ReviewText onClick={openModal}>{data?.content}</S.ReviewText>
         <ImageList
-          imageNameList={data?.reviewImageNameList}
+          imageNameList={data?.reviewImageUrlList}
           handleOpenModal={openModal}
         />
         <S.UserResponseBox>
