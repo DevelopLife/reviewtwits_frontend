@@ -12,6 +12,7 @@ const PUBLIC_URLS = [
   '/social',
   '/socual/user',
   '/social/user/[nickname]',
+  '/shoppingMallReview',
   '/404',
 ];
 
