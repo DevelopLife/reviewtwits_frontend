@@ -5,6 +5,7 @@ import SocialList from './SocialList';
 import { useGetFollowerList, useGetFollowingList } from 'hooks/queries/sns';
 import useUserProfile from 'hooks/queries/users';
 import { FOLLOW_BUTTON } from 'constants/social';
+import styled from '@emotion/styled';
 
 type FollowButton = (typeof FOLLOW_BUTTON)[keyof typeof FOLLOW_BUTTON];
 
@@ -22,14 +23,26 @@ const FollowerSection = () => {
     targettedButton === 'FOLLOWER' ? followerList?.data : followingList?.data;
 
   return (
-    <div>
+    <S.FollowerSectinoContainer>
       <ChangeFollowListButton
         targettedButton={targettedButton}
         setTargettedButton={setTargettedButton}
       />
-      {userList?.length ? <SocialList userList={userList} /> : null}
-    </div>
+      {userList?.length ? (
+        <SocialList userList={userList} />
+      ) : (
+        <S.GuideMessage>{`You Have No ${targettedButton}`}</S.GuideMessage>
+      )}
+    </S.FollowerSectinoContainer>
   );
+};
+
+const S = {
+  FollowerSectinoContainer: styled.div``,
+  GuideMessage: styled.h1`
+    text-align: center;
+    margin-top: 30px;
+  `,
 };
 
 export default FollowerSection;
