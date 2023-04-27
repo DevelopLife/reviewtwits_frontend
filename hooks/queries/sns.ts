@@ -9,9 +9,14 @@ import { AxiosError, AxiosResponse } from 'axios';
 
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
+import { SocialReview } from 'typings/social';
 import { alertErrorHandler, redirectErrorHandler } from 'utils/errorHandler';
+import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
 import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import useInfiniteScrollQuery from './useInfiniteScrollQuery';
+import { ReviewResponseType } from 'typings/reviews';
 
 export const useGetFollowerList = (nickname: string) => {
   return useQuery<AxiosResponse<FollowListType>, AxiosError<ResponseError>>(
@@ -153,24 +158,19 @@ export const useGetSocialProfile = (nickname: string) => {
 
   return socialProfileQuery;
 };
-
-export const useGetSocialReviews = (nickname: string) => {
-  const getMyReviewsInfiniteQuery = async ({ pageParam = 0 }) => {
-    const resposne = await snsAPI.getMyReviews(nickname);
-
-    // TODO: if lastPage?
-
-    return {
-      currentPage: resposne,
-      nextPage: pageParam + 1,
-    };
-  };
-
-  return useInfiniteQuery({
+export const useGetInfiniteSocialReviews = (nickname: string) => {
+  const infiniteQuery = useInfiniteScrollQuery<SocialReview>({
     queryKey: ['socialMyReviews', nickname],
-    queryFn: getMyReviewsInfiniteQuery,
-    getNextPageParam: (lastPage, pages) => lastPage.nextPage,
-    onError: (err: AxiosError<ResponseError>) => redirectErrorHandler(err),
-    enabled: !!nickname,
+    getNextPage: (nextRequest) => {
+      return snsAPI.getMyReviews(nickname, nextRequest);
+    },
   });
+
+  const targetRef = useIntersectionObserver(infiniteQuery.fetchNextPage);
+  const data = linkageInfiniteScrollData<SocialReview>(infiniteQuery?.data);
+
+  return {
+    targetRef,
+    data,
+  };
 };
