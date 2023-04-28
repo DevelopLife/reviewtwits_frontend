@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Colors } from 'styles/theme';
 
 import { ReviewResponseType } from 'typings/reviews';
-import { formattedLastTime } from 'utils/format';
+import { formattedLastTime, formattedImageUrl } from 'utils/format';
 
 import Card from '../../Card';
 import ReactionBox from './ReactionBox';
@@ -14,6 +14,10 @@ import ImageList from './ImageList';
 import AddReactionBox from './AddReactionBox';
 import ScrapButton from './ScrapButton';
 import CommentIcon from 'public/icons/comment.svg';
+import useModal from 'hooks/useModal';
+
+import MODAL_LIST from 'constants/modal';
+import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -21,6 +25,7 @@ interface ReviewProps {
 
 const Review = ({ data }: ReviewProps) => {
   const router = useRouter();
+  const modal = useModal();
 
   const goProductPage = () => data && router.push(data.productUrl);
 
@@ -28,12 +33,17 @@ const Review = ({ data }: ReviewProps) => {
   const goProductInfoPage = () =>
     data && router.push(`/product?name=${data.productName}`);
 
+  const handleOpenModal = () => {
+    modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
+  };
+
   const props = {
     data,
     isReactionExist:
       data?.reactionResponses && Object.keys(data.reactionResponses).length > 0,
     goProductPage,
     goProductInfoPage,
+    handleOpenModal,
   };
 
   return <ReviewView {...props} />;
@@ -44,6 +54,7 @@ interface ReviewViewProps {
   isReactionExist?: boolean;
   goProductPage: () => void;
   goProductInfoPage: () => void;
+  handleOpenModal: () => void;
 }
 
 const ReviewView = ({
@@ -51,7 +62,12 @@ const ReviewView = ({
   isReactionExist,
   goProductPage,
   goProductInfoPage,
+  handleOpenModal,
 }: ReviewViewProps) => {
+  const openModal = () => {
+    handleOpenModal();
+  };
+
   if (!data) return null;
   return (
     <Card>
@@ -60,18 +76,32 @@ const ReviewView = ({
           <ScrapButton isScrapped={data.isScrapped} reviewId={data.reviewId} />
         </S.ScrapButtonWrap>
         <S.ReviewInfoBox>
-          <S.UserInfo>
-            <S.UserImage src="" alt="" />
-            <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
-          </S.UserInfo>
+          <SocialUserNicknameLink nickname={data?.userInfo?.nickname}>
+            <S.UserInfo>
+              <S.UserImage
+                width={32}
+                height={32}
+                src={
+                  data?.userInfo?.profileImageUrl
+                    ? formattedImageUrl(data.userInfo.profileImageUrl)
+                    : '/images/default_user_profile_img.png'
+                }
+                alt=""
+              />
+              <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
+            </S.UserInfo>
+          </SocialUserNicknameLink>
           <StarBox score={data?.score} />
           <S.LastTime>{formattedLastTime(data?.lastModifiedDate)}</S.LastTime>
         </S.ReviewInfoBox>
-        <S.ReviewText>{data?.content}</S.ReviewText>
-        <ImageList imageNameList={data?.reviewImageNameList} />
+        <S.ReviewText onClick={openModal}>{data?.content}</S.ReviewText>
+        <ImageList
+          imageUrlList={data?.reviewImageUrlList}
+          handleOpenModal={openModal}
+        />
         <S.UserResponseBox>
           <AddReactionBox reviewId={data?.reviewId} />
-          <S.CommentButton>
+          <S.CommentButton onClick={openModal}>
             <CommentIcon />
             {data?.commentCount}
           </S.CommentButton>
@@ -129,8 +159,6 @@ const S = {
   UserImage: styled(Image)`
     background: gray;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
   `,
 
   Nickname: styled.span`
@@ -145,7 +173,7 @@ const S = {
 
   ReviewText: styled.p`
     display: -webkit-box;
-    height: 100px;
+    height: 90px;
     overflow: hidden;
     margin: 24px 0;
 
@@ -153,7 +181,7 @@ const S = {
     line-height: 1.4;
     word-break: keep-all;
     white-space: normal;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   `,
 

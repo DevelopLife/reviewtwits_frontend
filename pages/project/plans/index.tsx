@@ -1,4 +1,3 @@
-import type { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 

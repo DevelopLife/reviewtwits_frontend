@@ -5,7 +5,7 @@ import { Colors } from 'styles/theme';
 import { formattedImageUrl } from 'utils/format';
 import * as S from './ImageUploadBox.styles';
 import CameraIcon from 'public/icons/camera.svg';
-import CloseIcon from 'public/images/close_icon.svg';
+import CloseIcon from 'public/icons/close.svg';
 import useHorizontalScroll from 'hooks/useHorizontalScroll';
 
 export interface ImageUploadBoxProps {

@@ -1,7 +1,7 @@
 import { useState, MouseEvent } from 'react';
 
 import * as S from './SatisfactionBox.styles';
-import ThumbIcon from 'public/images/thumb_icon.svg';
+import ThumbIcon from 'public/icons/thumb.svg';
 
 const SatisfactionBox = () => {
   const [isSatisfied, setIsSatisfied] = useState<boolean | null>(null);

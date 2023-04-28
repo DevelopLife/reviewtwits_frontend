@@ -1,6 +1,4 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import { QueryClient } from '@tanstack/react-query';
-
 import ReviewWriteModal from 'components/review/ReviewWriteModal/ReviewWriteModal';
 
 export default {

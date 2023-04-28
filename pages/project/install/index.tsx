@@ -4,7 +4,7 @@ import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayo
 import { PROJECT_TITLE } from 'constants/project';
 import Link from 'next/link';
 
-import ReactIcon from 'public/images/react_icon.svg';
+import ReactIcon from 'public/icons/react.svg';
 
 const PLATFORMS = [
   {

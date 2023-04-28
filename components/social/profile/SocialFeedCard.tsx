@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
 
-import { useBoolean } from 'hooks/useBoolean';
 import { WrapProps } from 'typings/wrapperProps';
-
+import { useBoolean } from 'hooks/useBoolean';
+import useModal from 'hooks/useModal';
 import MessageIcon from 'public/icons/message.svg';
 import SmileIcon from 'public/icons/smile.svg';
+import MODAL_LIST from 'constants/modal';
 
 type FeedCardStyles = {
   width: number;
@@ -14,7 +16,7 @@ type FeedCardStyles = {
 
 interface SocialFeedCardProps extends WrapProps {
   styles: FeedCardStyles;
-  emojiCount: number;
+  reactionCount: number;
   commentCount: number;
 }
 
@@ -23,18 +25,28 @@ interface SocialFeedCardViewProps extends SocialFeedCardProps {
 
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  onClick: () => void;
 }
 
 export const SocialFeedCard = ({
   styles,
-  emojiCount,
+  reactionCount,
   commentCount,
   children,
 }: SocialFeedCardProps) => {
   const { isOpen: isHover, setTrue, setFalse } = useBoolean(false);
+  const modal = useModal();
+
+  const onModalOpen = () => {
+    modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
+  };
 
   const onMouseEnter = () => setTrue();
   const onMouseLeave = () => setFalse();
+
+  useEffect(() => {
+    return () => modal?.hide();
+  }, []);
 
   return (
     <SocialFeedCardView
@@ -42,7 +54,8 @@ export const SocialFeedCard = ({
       isHover={isHover}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      emojiCount={emojiCount}
+      onClick={onModalOpen}
+      reactionCount={reactionCount}
       commentCount={commentCount}
     >
       {children}
@@ -56,7 +69,8 @@ export const SocialFeedCardView = ({
   isHover,
   onMouseEnter,
   onMouseLeave,
-  emojiCount,
+  onClick,
+  reactionCount,
   commentCount,
 }: SocialFeedCardViewProps) => {
   return (
@@ -64,13 +78,14 @@ export const SocialFeedCardView = ({
       {...styles}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={onClick}
     >
       <S.Content>{children}</S.Content>
       {isHover && (
         <SocialVirtualFeedCardView>
           <S.VirtualContentItem>
             <SmileIcon />
-            {emojiCount}
+            {reactionCount}
           </S.VirtualContentItem>
           <S.VirtualContentItem>
             <MessageIcon />
@@ -105,7 +120,7 @@ const S = {
     gap: 20px;
     height: 100%;
 
-    opacity: 0.5;
+    opacity: 0.8;
     cursor: pointer;
 
     background-color: ${({ theme }) => theme.colors.gray_1};

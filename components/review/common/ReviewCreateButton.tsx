@@ -30,7 +30,7 @@ const S = {
     background: ${({ theme, color }) => theme.colors[color]};
 
     &:disabled {
-      background: ${({ theme }) => theme.colors.gray_5};
+      background: ${({ theme }) => theme.colors.gray_3};
       cursor: default;
 
       :hover {

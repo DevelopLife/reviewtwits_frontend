@@ -6,15 +6,7 @@ import { ReactionType } from 'typings/reviews';
 const useReaction = (reviewId: number) => {
   const queryClient = useQueryClient();
   const { mutate: addReactionMutate } = useMutation(
-    (reaction: ReactionType) => snsAPI.addReaction(reviewId, reaction),
-    {
-      onSuccess: () => {
-        return queryClient.invalidateQueries(['feed']);
-      },
-    }
-  );
-  const { mutate: deleteReactionMutate } = useMutation(
-    () => snsAPI.deleteReaction(reviewId),
+    (reaction: ReactionType) => snsAPI.toggleReaction(reviewId, reaction),
     {
       onSuccess: () => {
         return queryClient.invalidateQueries(['feed']);
@@ -24,7 +16,6 @@ const useReaction = (reviewId: number) => {
 
   return {
     doReact: addReactionMutate,
-    cancelReact: deleteReactionMutate,
   };
 };
 

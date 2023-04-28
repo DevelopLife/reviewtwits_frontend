@@ -9,7 +9,7 @@ const ComprehensiveData = () => {
     <S.Container>
       <Shadow boxSize="SMALL">
         <S.Card>
-          <Image width={30} height={30} src={'mock'} alt={'mock'} />
+          <Image width={30} height={30} src={''} alt={'mock'} />
           <div>
             <S.CardTitle>일별 조회수</S.CardTitle>
             <S.CardDesc>1,504</S.CardDesc>
@@ -18,7 +18,7 @@ const ComprehensiveData = () => {
       </Shadow>
       <Shadow boxSize="SMALL">
         <S.Card>
-          <Image width={30} height={30} src={'mock'} alt={'mock'} />
+          <Image width={30} height={30} src={''} alt={'mock'} />
           <div>
             <S.CardTitle>대기중인 리뷰</S.CardTitle>
             <S.CardDesc>32</S.CardDesc>
@@ -27,7 +27,7 @@ const ComprehensiveData = () => {
       </Shadow>
       <Shadow boxSize="SMALL">
         <S.Card>
-          <Image width={30} height={30} src={'mock'} alt={'mock'} />
+          <Image width={30} height={30} src={''} alt={'mock'} />
           <S.Orders>
             <S.Order>
               <S.OrderState>배송준비</S.OrderState>

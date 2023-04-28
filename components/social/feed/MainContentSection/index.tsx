@@ -1,32 +1,28 @@
-import { useQuery } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 
-import { snsAPI } from 'api/sns';
 import { ReviewResponseType } from 'typings/reviews';
 
 import Review from './Review';
+import { useGetInfiniteFeed } from 'hooks/queries/sns';
+import { RefObject } from 'react';
 
 const MainContentSection = () => {
-  const { data: reviewData } = useQuery<ReviewResponseType[]>(['feed'], () =>
-    snsAPI.getFeed()
-  );
+  const { targetRef, data } = useGetInfiniteFeed();
 
-  const props = {
-    reviewData,
-  };
-
-  return <MainContentSectionView {...props} />;
+  return <MainContentSectionView targetRef={targetRef} reviewData={data} />;
 };
 
 interface MainContentSectionViewProps {
   reviewData?: ReviewResponseType[];
+  targetRef: RefObject<HTMLDivElement>;
 }
 
 const MainContentSectionView = ({
+  targetRef,
   reviewData,
 }: MainContentSectionViewProps) => {
   return (
-    <S.Section>
+    <S.Section ref={targetRef}>
       {reviewData?.map((data: ReviewResponseType, i) => (
         <Review key={i} data={data} />
       ))}

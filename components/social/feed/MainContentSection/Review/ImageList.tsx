@@ -4,26 +4,36 @@ import styled from '@emotion/styled';
 import { formattedImageUrl } from 'utils/format';
 
 interface ImageListProps {
-  imageNameList?: string[];
+  imageUrlList?: string[];
+  handleOpenModal: () => void;
 }
 
-const ImageList = ({ imageNameList }: ImageListProps) => {
+const ImageList = ({ imageUrlList, handleOpenModal }: ImageListProps) => {
   const props = {
-    imageNameList,
+    imageUrlList,
+    handleOpenModal,
   };
 
   return <ImageListView {...props} />;
 };
 
 interface ImageListViewProps {
-  imageNameList?: string[];
+  imageUrlList?: string[];
+  handleOpenModal: () => void;
 }
 
-const ImageListView = ({ imageNameList }: ImageListViewProps) => {
+const ImageListView = ({
+  imageUrlList,
+  handleOpenModal,
+}: ImageListViewProps) => {
+  const openModal = () => {
+    handleOpenModal();
+  };
   return (
     <S.ImageList>
-      {imageNameList?.map((url, i) => (
+      {imageUrlList?.map((url, i) => (
         <Image
+          onClick={openModal}
           key={i}
           width={84}
           height={84}

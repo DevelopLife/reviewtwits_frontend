@@ -38,7 +38,7 @@ export const NaverSDKScript = () => {
   return (
     <script
       type="text/javascript"
-      src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
+      src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
       async
     ></script>
   );
@@ -49,7 +49,6 @@ const S = {
     display: flex;
     justify-content: center;
     align-items: center;
-
     height: 80px;
     width: 80px;
     margin: 0;

@@ -13,7 +13,7 @@ import { useMutation } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 
 import useForm from 'hooks/useForm';
-import useUserProfile from 'hooks/useUserProfile';
+import useUserProfile from 'hooks/queries/users';
 import { usersAPI } from 'api/users';
 import { UserProfileFormType } from 'typings/account';
 import { formattedImageUrl } from 'utils/format';
@@ -28,7 +28,7 @@ import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 const UserProfileForm = () => {
   const router = useRouter();
   const [pathFrom, setPathFrom] = useState<string | null>('');
-  const userData = useUserProfile();
+  const { nickname, introduceText, profileImageUrl } = useUserProfile();
   const { values, setValue, initializeForm, handleChange, handleSubmit } =
     useForm<UserProfileFormType>({
       nickname: '',
@@ -97,19 +97,17 @@ const UserProfileForm = () => {
   }, []);
 
   useEffect(() => {
-    if (!userData) return;
-
     const initialData = {
-      nickname: userData.nickname,
-      intro: userData.introduceText,
+      nickname: nickname,
+      intro: introduceText,
     };
 
-    if (userData.profileImage) {
-      const formattedUserImage = formattedImageUrl(userData.profileImage);
+    if (profileImageUrl) {
+      const formattedUserImage = formattedImageUrl(profileImageUrl);
       setPreview(formattedUserImage);
     }
     initializeForm(initialData);
-  }, [initializeForm, userData]);
+  }, [initializeForm, nickname, introduceText, profileImageUrl]);
 
   const props = {
     values,

@@ -1,17 +1,36 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
+import useUserProfile from 'hooks/queries/users';
+import { formattedImageUrl } from 'utils/format';
+
+import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 import Card from '../Card';
 
 const RecommendContent = () => {
+  const { nickname, profileImageUrl } = useUserProfile();
+
   return (
-    <Card color="black">
+    <Card color="text_black_100">
       <S.Content>
         <S.UserProfileBox>
-          <S.UserImage src="" alt="" />
+          <SocialUserNicknameLink nickname={nickname}>
+            <S.UserImage
+              width={68}
+              height={68}
+              src={
+                profileImageUrl
+                  ? formattedImageUrl(profileImageUrl)
+                  : '/images/default_user_profile_img.png'
+              }
+              alt="userImg"
+            />
+          </SocialUserNicknameLink>
           <S.UserInfoBox>
-            <S.UserNickname>nickname</S.UserNickname>
-            <S.EditButton>수정하기</S.EditButton>
+            <S.UserNickname>{nickname}</S.UserNickname>
+            <SocialUserNicknameLink nickname={nickname}>
+              <S.EditButton>수정하기</S.EditButton>
+            </SocialUserNicknameLink>
           </S.UserInfoBox>
         </S.UserProfileBox>
         <S.MainContent>
@@ -64,10 +83,6 @@ const S = {
   `,
 
   UserImage: styled(Image)`
-    width: 68px;
-    height: 68px;
-    background: gray;
-
     border-radius: 50%;
   `,
 

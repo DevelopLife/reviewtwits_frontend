@@ -22,7 +22,7 @@ const PageData = () => {
       </S.Datas>
       <Button>
         방문 통계
-        <Image width={30} height={30} src="mock" alt="mock" />
+        <Image width={30} height={30} src="" alt="mock" />
       </Button>
     </S.Container>
   );

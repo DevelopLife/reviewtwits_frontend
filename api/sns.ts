@@ -1,4 +1,4 @@
-import { api } from 'api/instance';
+import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { SocialProfile, SocialReview } from 'typings/social';
 
 import { ReactionType } from 'typings/reviews';
@@ -9,7 +9,7 @@ export const snsAPI = {
   getFeed: async () => {
     const SIZE = 10;
 
-    return await api
+    return await optionalTokenAPI
       .get(`${SNS_URL}/feeds`, {
         params: {
           size: SIZE,
@@ -17,42 +17,88 @@ export const snsAPI = {
       })
       .then((res) => res.data);
   },
-  addReaction: async (reviewId: number, reaction: ReactionType) => {
+
+  getInfiniteFeed: async (lastId: number) => {
+    const SIZE = 10;
+
+    return await optionalTokenAPI
+      .get(`${SNS_URL}/feeds`, {
+        params: {
+          size: SIZE,
+          reviewId: lastId,
+        },
+      })
+      .then((res) => res.data);
+  },
+
+  getTrendyProducts: () =>
+    optionalTokenAPI
+      .get(`${SNS_URL}/recommend-product`)
+      .then((res) => res.data),
+  toggleReaction: (reviewId: number, reaction: ReactionType) => {
     const params = { reaction };
 
-    return await api.post(`${SNS_URL}/review-reaction/${reviewId}`, null, {
-      params,
-    });
+    return requiredTokenApi.post(
+      `${SNS_URL}/review-reaction/${reviewId}`,
+      null,
+      {
+        params,
+      }
+    );
   },
-  deleteReaction: async (reviewId: number) => {
-    return await api.delete(`${SNS_URL}/review-reaction/${reviewId}`);
+  deleteReaction: (reviewId: number) => {
+    return requiredTokenApi.delete(`${SNS_URL}/review-reaction/${reviewId}`);
   },
-  addScrap: async (reviewId: number) => {
-    return await api.post(`${SNS_URL}/scrap-reviews/${reviewId}`);
+  addScrap: (reviewId: number) => {
+    return requiredTokenApi.post(`${SNS_URL}/scrap-reviews/${reviewId}`);
   },
-  deleteScrap: async (reviewId: number) => {
-    return await api.delete(`${SNS_URL}/scrap-reviews/${reviewId}`);
+  deleteScrap: (reviewId: number) => {
+    return requiredTokenApi.delete(`${SNS_URL}/scrap-reviews/${reviewId}`);
   },
-  createReview: async (formData: FormData) => {
-    return await api.post(`${SNS_URL}/reviews`, formData);
+  createReview: (formData: FormData) => {
+    return requiredTokenApi.post(`${SNS_URL}/reviews`, formData);
+  },
+  getFollowerList: async (nickname: string) => {
+    return await optionalTokenAPI.get(`${SNS_URL}/get-followers/${nickname}`);
+  },
+  getFollowingList: async (nickname: string) => {
+    return await optionalTokenAPI.get(`${SNS_URL}/get-followings/${nickname}`);
   },
   getProfile: async (nickname: string): Promise<SocialProfile> => {
-    const response = await api.get(`${SNS_URL}/profile/${nickname}`);
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/profile/${nickname}`
+    );
 
     return response.data;
   },
-  getMyReviews: async (nickname: string): Promise<SocialReview[]> => {
-    const response = await api.get(`${SNS_URL}/profile/reviews/${nickname}`);
+  getMyReviews: async (
+    nickname: string,
+    reviewId?: number
+  ): Promise<SocialReview[]> => {
+    const size = 10;
+    const params = reviewId
+      ? {
+          size,
+          reviewId,
+        }
+      : { size };
+
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/profile/reviews/${nickname}`,
+      {
+        params,
+      }
+    );
 
     return response.data;
   },
   follow: (body: FollowAndUnFollowRequestBody) =>
-    api.post(`${SNS_URL}/request-follow`, body),
+    requiredTokenApi.post(`${SNS_URL}/request-follow`, body),
 
   unfollow: (body: FollowAndUnFollowRequestBody) =>
-    api.post(`${SNS_URL}/request-unfollow`, body),
+    requiredTokenApi.post(`${SNS_URL}/request-unfollow`, body),
 };
 
 type FollowAndUnFollowRequestBody = {
-  targetUserAccountId: string;
+  targetUserNickname: string;
 };

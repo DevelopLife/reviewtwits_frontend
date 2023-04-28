@@ -18,10 +18,9 @@ import {
 import { ReviewType } from 'typings/reviews';
 
 import ImageUploadBox from 'components/review/common/ImageUploadBox';
-import RatingBox from 'components/review/common/RatingBox';
 import ReviewCreateButton from 'components/review/common/ReviewCreateButton';
 import ReviewTextArea from 'components/review/common/ReviewTextArea';
-import SearchBar from './SearchBar';
+import SearchBox from './SearchBox';
 
 const ReviewWriteForm = () => {
   const router = useRouter();
@@ -36,10 +35,10 @@ const ReviewWriteForm = () => {
     productURL: 'http://www.example.com/123',
     content: '',
     score: 0,
-    productName: 'productName',
+    productName: '',
     newImageFiles: [],
   });
-  const { mutate: mutateCreate } = useMutation(
+  const { mutate: mutateCreate, isLoading } = useMutation(
     (data: FormData) => snsAPI.createReview(data),
     {
       onSuccess: () => {
@@ -72,6 +71,8 @@ const ReviewWriteForm = () => {
   };
 
   const onValid = () => {
+    if (isLoading) return;
+
     const formData = setDataInToFormData();
     mutateCreate(formData);
   };
@@ -134,15 +135,7 @@ const ReviewWriteFormView = ({
         <S.ReviewFor>상품 URL</S.ReviewFor>
         <S.Input type="text" name="productURL" onChange={handleChange} />
         <S.ReviewFor>상품 검색</S.ReviewFor>
-        <S.SearchBox>
-          <S.SearchBarWrap>
-            <SearchBar />
-            <S.GuideText>
-              찾으시는 상품이 없으신가요? 해당 작성하신 상품 URL로 상품 등록하기
-            </S.GuideText>
-          </S.SearchBarWrap>
-          <RatingBox setValue={setValue} />
-        </S.SearchBox>
+        <SearchBox productName={values.productName} setValue={setValue} />
         <S.ReviewFor>상세 리뷰</S.ReviewFor>
         <ReviewTextArea content={values?.content} handleChange={handleChange} />
         <S.ImageUploadBoxWrap>
@@ -190,22 +183,6 @@ const S = {
     padding: 10px 12px;
     border: 2px solid ${({ theme }) => theme.colors.gray_4};
     outline: none;
-  `,
-
-  SearchBox: styled.div``,
-
-  SearchBarWrap: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    width: 100%;
-    font-size: 16px;
-    color: ${({ theme }) => theme.colors.primary};
-  `,
-
-  GuideText: styled.small`
-    margin-bottom: 14px;
   `,
 
   ImageUploadBoxWrap: styled.div`
