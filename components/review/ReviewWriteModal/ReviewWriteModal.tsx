@@ -44,6 +44,7 @@ const ReviewWriteModal = () => {
     productURL: 'http://www.example.com/123',
     content: '',
     score: 0,
+    newImageFiles: [],
   });
   const { mutate: mutateCreate } = useMutation(
     (formData: FormData) => shoppingAPI.createReview(formData),

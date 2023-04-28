@@ -3,7 +3,6 @@ import { ChangeEvent } from 'react';
 import * as S from '../ReviewWriteModal.styles';
 
 import QualityQuestionBox from './QualityQuestionBox';
-import RatingBox from 'components/review/common/RatingBox';
 import { ReviewResponseType, ReviewType } from 'typings/reviews';
 import DetailReviewBox from '../QualitySection/DetailReviewBox';
 import ImageUploadBox from 'components/review/common/ImageUploadBox';
@@ -26,7 +25,7 @@ const QualitySection = ({
   return (
     <S.Section>
       <QualityQuestionBox />
-      <StarRating initialScore={formValues.score} setValue={setValue} />
+      <StarRating initialScore={reviewData?.score} setValue={setValue} />
       <DetailReviewBox
         content={formValues?.content}
         handleChange={handleChange}
