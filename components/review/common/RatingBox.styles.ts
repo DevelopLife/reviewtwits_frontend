@@ -1,11 +1,6 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
-import { expand, spinner } from 'styles/animation';
-
-interface StarStyleProps {
-  isActive: boolean;
-}
+import { spinner } from 'styles/animation';
 
 const Box = styled.div`
   display: flex;
@@ -52,24 +47,4 @@ const ProductName = styled.span`
   color: black;
 `;
 
-const StarRating = styled.div`
-  display: flex;
-  gap: 5px;
-`;
-
-const Star = styled.button<StarStyleProps>`
-  outline: none;
-  background: none;
-  border: none;
-  padding: 0;
-
-  cursor: pointer;
-
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      animation: ${expand} 0.3s reverse;
-    `};
-`;
-
-export { Box, ProductName, LoadingBox, Spinner, NullImage, StarRating, Star };
+export { Box, ProductName, LoadingBox, Spinner, NullImage };
