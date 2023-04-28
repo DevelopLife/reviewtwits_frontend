@@ -1,73 +1,20 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import styled from '@emotion/styled';
 
-import useUserProfile from 'hooks/queries/users';
-import { useGetFollowSuggestion } from 'hooks/queries/sns';
-import { formattedImageUrl } from 'utils/format';
-
-import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 import Card from '../Card';
+import UserProfileBox from './UserProfileBox';
+import RecommendUserList from './RecommendUserList';
 
 const RecommendContent = () => {
-  const { nickname, profileImageUrl } = useUserProfile();
-  const { data: followSuggestion } = useGetFollowSuggestion();
-
   return (
     <Card color="text_black_100">
       <S.Content>
-        <S.UserProfileBox>
-          <SocialUserNicknameLink nickname={nickname}>
-            <S.UserImage
-              width={68}
-              height={68}
-              src={
-                profileImageUrl
-                  ? formattedImageUrl(profileImageUrl)
-                  : '/images/default_user_profile_img.png'
-              }
-              alt="userImg"
-            />
-          </SocialUserNicknameLink>
-          <S.UserInfoBox>
-            <S.UserNickname>{nickname}</S.UserNickname>
-            <Link href="/setting/profile">
-              <S.EditButton>수정하기</S.EditButton>
-            </Link>
-          </S.UserInfoBox>
-        </S.UserProfileBox>
+        <UserProfileBox />
         <S.MainContent>
           <S.RecommendContentBox>
             <S.ContentTitle>내가 좋아할만한 컨텐츠</S.ContentTitle>
             <S.ShowAllButton>전체보기</S.ShowAllButton>
           </S.RecommendContentBox>
-          <S.RecommendUserContainer>
-            {followSuggestion?.map((user, i) => (
-              <S.RecommendUser key={i}>
-                <S.RecommendUserBox>
-                  <S.RecommendUserImage
-                    width={40}
-                    height={40}
-                    src={
-                      user.profileImage
-                        ? formattedImageUrl(user.profileImage)
-                        : '/images/default_user_profile_img.png'
-                    }
-                    alt=""
-                  />
-                  <S.RecommendUserInfoBox>
-                    <S.RecommendUserNickname>
-                      {user.nickname}
-                    </S.RecommendUserNickname>
-                    {user.followers > 0 && (
-                      <S.FollowedByText>followed by nickname</S.FollowedByText>
-                    )}
-                  </S.RecommendUserInfoBox>
-                </S.RecommendUserBox>
-                <S.FollowButton>팔로우</S.FollowButton>
-              </S.RecommendUser>
-            ))}
-          </S.RecommendUserContainer>
+          <RecommendUserList />
         </S.MainContent>
       </S.Content>
     </Card>
@@ -76,53 +23,13 @@ const RecommendContent = () => {
 
 export default RecommendContent;
 
-const Button = styled.button`
-  color: white;
-  font-size: 14px;
-  padding: 4px 10px;
-
-  border-radius: 37px;
-`;
-
 const S = {
   Content: styled.div`
     width: 400px;
     padding: 40px;
   `,
 
-  UserProfileBox: styled.div`
-    display: flex;
-    gap: 16px;
-    align-items: center;
-
-    margin-bottom: 32px;
-  `,
-
-  UserImage: styled(Image)`
-    border-radius: 50%;
-  `,
-
-  UserInfoBox: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  `,
-
-  UserNickname: styled.span`
-    font-size: 16px;
-  `,
-
-  EditButton: styled(Button)`
-    background: ${({ theme }) => theme.colors.primary};
-  `,
-
   MainContent: styled.div``,
-
-  RecommendUserBox: styled.div`
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  `,
 
   RecommendContentBox: styled.div`
     display: flex;
@@ -142,45 +49,5 @@ const S = {
     font-size: 16px;
 
     padding: 0;
-  `,
-
-  RecommendUserContainer: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  `,
-
-  RecommendUser: styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  `,
-
-  RecommendUserImage: styled(Image)`
-    border-radius: 50%;
-    background: gray;
-  `,
-
-  RecommendUserInfoBox: styled.div`
-    display: flex;
-    flex-direction: column;
-
-    gap: 3px;
-  `,
-
-  RecommendUserNickname: styled.span`
-    font-size: 14px;
-    font-weight: 700;
-  `,
-
-  FollowedByText: styled.span`
-    font-size: 10px;
-    font-weight: 300;
-  `,
-
-  FollowButton: styled(Button)`
-    background: ${({ theme }) => theme.colors.secondary};
-    color: white;
-    float: left;
   `,
 };
