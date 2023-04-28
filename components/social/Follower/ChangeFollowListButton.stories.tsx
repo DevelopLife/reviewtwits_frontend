@@ -1,3 +1,4 @@
+import { SetStateAction } from 'react';
 import ChangeFollowListButton from './ChangeFollowListButton';
 
 export default {
@@ -5,4 +6,13 @@ export default {
   component: ChangeFollowListButton,
 };
 
-export const Basic = () => <ChangeFollowListButton />;
+export const Basic = () => (
+  <ChangeFollowListButton
+    targettedButton={'FOLLOWER'}
+    setTargettedButton={function (
+      value: SetStateAction<'FOLLOWER' | 'FOLLOWING'>
+    ): void {
+      throw new Error('Function not implemented.');
+    }}
+  />
+);

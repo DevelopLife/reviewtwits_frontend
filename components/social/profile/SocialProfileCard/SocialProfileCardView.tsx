@@ -8,7 +8,7 @@ import SocialProfileImage from 'components/social/profile/SocialProfileImage';
 
 interface SocialProfileCardViewProps {
   isMyPage: boolean;
-  followButtonTextList: [string, string];
+  followButtonTextList?: [string, string];
   profile: SocialProfile;
 }
 
@@ -58,11 +58,14 @@ const SocialProfileCardView = ({
               <EditProfileButton />
             ) : (
               <>
-                <SocialFollowAndUnfollowButton
-                  nickname={nickname}
-                  size={'normal'}
-                  TextList={followButtonTextList}
-                />
+                {followButtonTextList?.length ? (
+                  <SocialFollowAndUnfollowButton
+                    nickname={nickname}
+                    size={'normal'}
+                    TextList={followButtonTextList}
+                  />
+                ) : null}
+
                 <S.Button color={'secondary'}>Message</S.Button>
               </>
             )}
