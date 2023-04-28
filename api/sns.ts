@@ -97,6 +97,10 @@ export const snsAPI = {
 
   unfollow: (body: FollowAndUnFollowRequestBody) =>
     requiredTokenApi.post(`${SNS_URL}/request-unfollow`, body),
+  getFollowSuggestion: () =>
+    requiredTokenApi
+      .get(`${SNS_URL}/suggest-followers`)
+      .then((res) => res.data),
 };
 
 type FollowAndUnFollowRequestBody = {

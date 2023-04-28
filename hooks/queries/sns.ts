@@ -8,7 +8,7 @@ import {
 import { AxiosError, AxiosResponse } from 'axios';
 
 import { ResponseError } from 'typings/error';
-import { FollowListType, FollowingDictionary } from 'typings/sns';
+import { FollowListType, FollowType, FollowingDictionary } from 'typings/sns';
 import { SocialReview } from 'typings/social';
 import { alertErrorHandler, redirectErrorHandler } from 'utils/errorHandler';
 import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
@@ -173,7 +173,6 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
     targetRef,
     data,
   };
-
 };
 
 export const useGetInfiniteFeed = () => {
@@ -192,5 +191,10 @@ export const useGetInfiniteFeed = () => {
     targetRef,
     data,
   };
+};
 
+export const useGetFollowSuggestion = () => {
+  return useQuery<FollowType[]>(['followSuggestion'], () =>
+    snsAPI.getFollowSuggestion()
+  );
 };

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 
 import useUserProfile from 'hooks/queries/users';
+import { useGetFollowSuggestion } from 'hooks/queries/sns';
 import { formattedImageUrl } from 'utils/format';
 
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
@@ -9,6 +10,7 @@ import Card from '../Card';
 
 const RecommendContent = () => {
   const { nickname, profileImageUrl } = useUserProfile();
+  const { data: followSuggestion } = useGetFollowSuggestion();
 
   return (
     <Card color="text_black_100">
@@ -39,13 +41,26 @@ const RecommendContent = () => {
             <S.ShowAllButton>전체보기</S.ShowAllButton>
           </S.RecommendContentBox>
           <S.RecommendUserContainer>
-            {Array.from({ length: 5 }).map((_, i) => (
+            {followSuggestion?.map((user, i) => (
               <S.RecommendUser key={i}>
                 <S.RecommendUserBox>
-                  <S.RecommendUserImage src="" alt="" />
+                  <S.RecommendUserImage
+                    width={40}
+                    height={40}
+                    src={
+                      user.profileImage
+                        ? formattedImageUrl(user.profileImage)
+                        : '/images/default_user_profile_img.png'
+                    }
+                    alt=""
+                  />
                   <S.RecommendUserInfoBox>
-                    <S.RecommendUserNickname>nickname2</S.RecommendUserNickname>
-                    <S.FollowedByText>followed by nickname</S.FollowedByText>
+                    <S.RecommendUserNickname>
+                      {user.nickname}
+                    </S.RecommendUserNickname>
+                    {user.followers > 0 && (
+                      <S.FollowedByText>followed by nickname</S.FollowedByText>
+                    )}
                   </S.RecommendUserInfoBox>
                 </S.RecommendUserBox>
                 <S.FollowButton>팔로우</S.FollowButton>
@@ -141,9 +156,6 @@ const S = {
   `,
 
   RecommendUserImage: styled(Image)`
-    width: 40px;
-    height: 40px;
-
     border-radius: 50%;
     background: gray;
   `,
