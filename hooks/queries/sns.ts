@@ -1,6 +1,5 @@
 import {
   QueryClient,
-  useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
@@ -10,13 +9,14 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowType, FollowingDictionary } from 'typings/sns';
 import { SocialReview } from 'typings/social';
-import { alertErrorHandler, redirectErrorHandler } from 'utils/errorHandler';
+import { alertErrorHandler } from 'utils/errorHandler';
 import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
-import { FOLLOWING_DICTIONARY_KEY } from 'hooks/useFollowAndUnFollow';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 import { ReviewResponseType } from 'typings/reviews';
+
+export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
 
 export const useGetFollowerList = (nickname: string) => {
   return useQuery<AxiosResponse<FollowListType>, AxiosError<ResponseError>>(
@@ -66,13 +66,13 @@ export const useGetMyReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
-export const useFollowAndUnFollow = (targetUserNickname: string) => {
+export const useFollowAndUnFollow = () => {
   const queryClient = useQueryClient();
   const originFollowingDictionary = queryClient.getQueryData(
     FOLLOWING_DICTIONARY_KEY
   ) as FollowingDictionary;
 
-  const onFollowOptimisticUpdate = () => {
+  const onFollowOptimisticUpdate = (targetUserNickname: string) => {
     optimisticUpdateByReactQuery({
       queryClient,
       queryKey: FOLLOWING_DICTIONARY_KEY,
@@ -83,7 +83,7 @@ export const useFollowAndUnFollow = (targetUserNickname: string) => {
     });
   };
 
-  const onUnfollowOptimisticUpdate = () => {
+  const onUnfollowOptimisticUpdate = (targetUserNickname: string) => {
     const { [targetUserNickname]: removedValue, ...restIsFollowingDictionary } =
       originFollowingDictionary;
 
@@ -117,10 +117,10 @@ export const useFollowAndUnFollow = (targetUserNickname: string) => {
   }
 
   const { mutate: follow } = useMutation(
-    () => snsAPI.follow({ targetUserNickname }),
+    (targetUserNickname: string) => snsAPI.follow({ targetUserNickname }),
     {
-      onMutate: () => {
-        onFollowOptimisticUpdate();
+      onMutate: (targetUserNickname) => {
+        onFollowOptimisticUpdate(targetUserNickname);
       },
       onError: (err: AxiosError<ResponseError>) => {
         resetOriginFollowingDictionary();
@@ -129,10 +129,10 @@ export const useFollowAndUnFollow = (targetUserNickname: string) => {
     }
   );
   const { mutate: unfollow } = useMutation(
-    () => snsAPI.unfollow({ targetUserNickname }),
+    (targetUserNickname: string) => snsAPI.unfollow({ targetUserNickname }),
     {
-      onMutate: () => {
-        onUnfollowOptimisticUpdate();
+      onMutate: (targetUserNickname) => {
+        onUnfollowOptimisticUpdate(targetUserNickname);
       },
       onError: (err: AxiosError<ResponseError>) => {
         resetOriginFollowingDictionary();
@@ -142,8 +142,8 @@ export const useFollowAndUnFollow = (targetUserNickname: string) => {
   );
 
   return {
-    follow: () => follow(),
-    unfollow: () => unfollow(),
+    follow,
+    unfollow,
   };
 };
 
