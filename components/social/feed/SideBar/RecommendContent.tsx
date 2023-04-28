@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import styled from '@emotion/styled';
 
 import useUserProfile from 'hooks/queries/users';
@@ -30,9 +31,9 @@ const RecommendContent = () => {
           </SocialUserNicknameLink>
           <S.UserInfoBox>
             <S.UserNickname>{nickname}</S.UserNickname>
-            <SocialUserNicknameLink nickname={nickname}>
+            <Link href="/setting/profile">
               <S.EditButton>수정하기</S.EditButton>
-            </SocialUserNicknameLink>
+            </Link>
           </S.UserInfoBox>
         </S.UserProfileBox>
         <S.MainContent>
