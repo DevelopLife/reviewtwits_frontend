@@ -10,10 +10,13 @@ interface SocialUnFollowButtonProps {
 }
 
 const SocialUnFollowButton = ({ nickname }: SocialUnFollowButtonProps) => {
-  const { unfollow } = useFollowAndUnFollow(nickname);
+  const { unfollow } = useFollowAndUnFollow();
 
   return (
-    <SocialUnFollowButtonView onClick={unfollow} color="secondary">
+    <SocialUnFollowButtonView
+      onClick={() => unfollow(nickname)}
+      color="secondary"
+    >
       {UN_FOLLOW}
     </SocialUnFollowButtonView>
   );
