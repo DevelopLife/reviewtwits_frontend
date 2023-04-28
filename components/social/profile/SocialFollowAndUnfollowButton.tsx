@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { useFollowAndUnFollow } from 'hooks/queries/sns';
 import useGetIsFollowing from 'hooks/useGetIsFollowing';
-import { ReactElement } from 'react';
+import { MouseEventHandler, ReactElement } from 'react';
 import type { WrapProps } from 'typings/wrapperProps';
 
 interface FollowAndUnFollowButtonProps {
@@ -16,13 +16,13 @@ const SocialFollowAndUnfollowButton = ({
   size,
   TextList,
 }: FollowAndUnFollowButtonProps) => {
-  const { follow, unfollow } = useFollowAndUnFollow(nickname);
+  const { follow, unfollow } = useFollowAndUnFollow();
   const isFollowing = useGetIsFollowing(nickname);
   const [unfollowText, followText] = TextList;
 
   return (
     <SocialFollowButtonView
-      onClick={isFollowing ? unfollow : follow}
+      onClick={isFollowing ? () => unfollow(nickname) : () => follow(nickname)}
       size={size}
     >
       {isFollowing ? unfollowText : followText}
@@ -34,7 +34,7 @@ export default SocialFollowAndUnfollowButton;
 
 interface SocialFollowButtonViewProps extends WrapProps {
   size?: 'small' | 'normal';
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 const SocialFollowButtonView = ({
