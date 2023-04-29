@@ -3,8 +3,19 @@ import Image from 'next/image';
 import React from 'react';
 import FullStarImg from 'public/images/full_star_img.png';
 import EmptyStarImg from 'public/images/empty_star_img.png';
+import { SocialProfile } from 'typings/social';
 
-const Reviewer = () => {
+const Reviewer = ({
+  userId,
+  nickname,
+  accountId,
+  introduceText,
+  detailIntroduce,
+  profileImageUrl,
+  reviewCount,
+  followers,
+  followings,
+}: SocialProfile) => {
   return (
     <S.ReviewInfoBox>
       <S.UserImage src="" alt="" />

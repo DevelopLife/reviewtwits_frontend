@@ -1,13 +1,26 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import React from 'react';
+import { formattedImageUrl } from 'utils/format';
 
-const DetailImage = () => {
+interface DetailImageProps {
+  reviewImageUrlList: string[];
+}
+
+const DetailImage = ({ reviewImageUrlList }: DetailImageProps) => {
   return (
     <S.Container>
       <S.LeftButton>left</S.LeftButton>
       <div>
-        <Image src="" alt="" width={422} height={422} />
+        {reviewImageUrlList.map((reviewImageUrl) => (
+          <Image
+            key={reviewImageUrl}
+            src={formattedImageUrl(reviewImageUrl)}
+            alt=""
+            width={422}
+            height={422}
+          />
+        ))}
         <S.ImagePaginators>
           <S.ImagePaginator target={true} />
           <S.ImagePaginator />
