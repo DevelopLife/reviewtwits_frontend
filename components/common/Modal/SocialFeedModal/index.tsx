@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import DetailImage from './DetailImage';
 import Comments from './Comments';
 import styled from '@emotion/styled';
@@ -5,14 +6,34 @@ import Contants from './Contants';
 import Reviewer from './Reviewer';
 import Reactions from './Reactions';
 import AddCommentForm from './AddCommentForm';
+import { useGetOneReview } from 'hooks/queries/sns';
+import { useRouter } from 'next/router';
+import { useLayoutEffect, useState } from 'react';
 
 const SocialFeedModal = () => {
+  const router = useRouter();
+
+  const { nickname, reviewId } = router.query;
+
+  if (!nickname || !reviewId) {
+    return <h1>로딩중...</h1>;
+  }
+
+  const { data: reviewData } = useGetOneReview(
+    nickname as string,
+    Number(reviewId) as number
+  );
+
+  if (!reviewData) {
+    return <h1>로딩중...</h1>;
+  }
+
   return (
     <S.FeedDetailContainer>
-      <DetailImage />
+      <DetailImage reviewImageUrlList={reviewData.reviewImageUrlList} />
       <S.DetailDesc>
-        <Reviewer />
-        <Contants />
+        <Reviewer {...reviewData.userInfo} />
+        <Contants content={reviewData.content} />
         <S.Line />
         <Comments />
         <S.Line />
