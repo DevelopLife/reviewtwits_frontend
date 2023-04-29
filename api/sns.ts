@@ -92,6 +92,18 @@ export const snsAPI = {
 
     return response.data;
   },
+
+  getOneReview: async (nickname: string, reviewId: number) => {
+    const size = 1;
+    const params = { size, reviewId };
+
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/profile/reviews/${nickname}`,
+      { params }
+    );
+    return response.data[0];
+  },
+
   follow: (body: FollowAndUnFollowRequestBody) =>
     requiredTokenApi.post(`${SNS_URL}/request-follow`, body),
 
