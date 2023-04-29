@@ -66,6 +66,12 @@ export const useGetMyReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
+export const useGetOneReview = (nickname: string, reviewId: number) => {
+  return useQuery(['review', nickname, reviewId], () =>
+    snsAPI.getOneReview(nickname, reviewId)
+  );
+};
+
 export const useFollowAndUnFollow = (targetUserNickname: string) => {
   const queryClient = useQueryClient();
   const originFollowingDictionary = queryClient.getQueryData(
@@ -173,7 +179,6 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
     targetRef,
     data,
   };
-
 };
 
 export const useGetInfiniteFeed = () => {
@@ -192,5 +197,4 @@ export const useGetInfiniteFeed = () => {
     targetRef,
     data,
   };
-
 };
