@@ -35,6 +35,7 @@ const Review = ({ data }: ReviewProps) => {
 
   const handleOpenModal = () => {
     modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
+    router.push(`/social/${data?.userInfo.nickname}/${data?.reviewId}`);
   };
 
   const props = {
