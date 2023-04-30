@@ -136,6 +136,19 @@ export const snsAPI = {
     );
     return response.data;
   },
+
+  postReviewComment: async (
+    reviewId: number,
+    createdComment: { content: string; parentId: number }
+  ) => {
+    const response = await requiredTokenApi.post(
+      `${SNS_URL}/comments/${reviewId}`,
+      createdComment
+    );
+    console.log(response.data, '리턴값이어떻게');
+
+    return response.data;
+  },
 };
 
 type FollowAndUnFollowRequestBody = {
