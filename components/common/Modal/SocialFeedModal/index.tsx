@@ -46,7 +46,11 @@ const SocialFeedModal = () => {
         <S.Line />
         <Comments commentsData={commentsData} />
         <S.Line />
-        <Reactions />
+        <Reactions
+          reviewId={reviewId as string}
+          isScrapped={reviewData.isScrapped}
+          reactions={reviewData.reactionResponses}
+        />
         <AddCommentForm />
       </S.DetailDesc>
     </S.FeedDetailContainer>
