@@ -102,6 +102,13 @@ export const snsAPI = {
     return response.data[0];
   },
 
+  getReviewComments: async (reviewId: number) => {
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/comments/${reviewId}`
+    );
+    return response.data;
+  },
+
   follow: (body: FollowAndUnFollowRequestBody) =>
     requiredTokenApi.post(`${SNS_URL}/request-follow`, body),
 
