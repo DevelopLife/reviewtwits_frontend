@@ -1,23 +1,42 @@
 import styled from '@emotion/styled';
 import useForm from 'hooks/useForm';
-import React from 'react';
+import React, { useRef } from 'react';
 import Send from 'public/icons/send.svg';
+import { snsAPI } from 'api/sns';
 
-const AddCommentForm = () => {
+interface AddCommentFormProps {
+  reviewId: string;
+}
+
+interface FormTypes {
+  content: string;
+  parentId?: number;
+}
+
+const AddCommentForm = ({ reviewId }: AddCommentFormProps) => {
   const {
     values,
+    setValue,
     errors,
     isSubmitable: isValid,
     setErrors,
     handleChange,
     handleSubmit,
-  } = useForm({
-    accountId: '',
-    accountPw: '',
+  } = useForm<FormTypes>({
+    content: '',
+    parentId: 0,
   });
 
+  const { content } = values;
+
   const onCommentSubmit = () => {
-    console.log(values);
+    const createdComment = {
+      content,
+      parentId: 0,
+    };
+
+    snsAPI.postReviewComment(Number(reviewId), createdComment);
+    setValue('content', '');
   };
 
   return (
@@ -25,7 +44,10 @@ const AddCommentForm = () => {
       <S.Input
         type="text"
         placeholder="Add a comment..."
+        name="content"
         onChange={handleChange}
+        value={content}
+        // ref={inputRef}
       />
       <S.SendButton>
         <Send />
