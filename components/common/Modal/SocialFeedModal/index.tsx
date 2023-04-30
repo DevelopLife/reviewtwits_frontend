@@ -51,7 +51,7 @@ const SocialFeedModal = () => {
           isScrapped={reviewData.isScrapped}
           reactions={reviewData.reactionResponses}
         />
-        <AddCommentForm />
+        <AddCommentForm reviewId={reviewId as string} />
       </S.DetailDesc>
     </S.FeedDetailContainer>
   );
