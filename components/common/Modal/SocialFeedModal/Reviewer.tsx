@@ -1,33 +1,35 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import React from 'react';
-import FullStarImg from 'public/images/full_star_img.png';
-import EmptyStarImg from 'public/images/empty_star_img.png';
-import { SocialProfile } from 'typings/social';
+import { formattedImageUrl, formattedLastTime } from 'utils/format';
+import StarBox from 'components/social/feed/MainContentSection/Review/StarBox';
+
+interface ReviewerProps {
+  nickname: string;
+  profileImageUrl: string | null;
+  lastModifiedDate: number[];
+  starScore: number;
+}
 
 const Reviewer = ({
-  userId,
   nickname,
-  accountId,
-  introduceText,
-  detailIntroduce,
   profileImageUrl,
-  reviewCount,
-  followers,
-  followings,
-}: SocialProfile) => {
+  lastModifiedDate,
+  starScore,
+}: ReviewerProps) => {
   return (
     <S.ReviewInfoBox>
-      <S.UserImage src="" alt="" />
+      <S.UserImage
+        src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
+        alt=""
+        width={60}
+        height={60}
+      />
       <S.UserInfo>
-        <S.Nickname>nickname</S.Nickname>
+        <S.Nickname>{nickname}</S.Nickname>
         <S.TimeAndStar>
-          <S.LastTime>1h</S.LastTime>
+          <S.LastTime>{formattedLastTime(lastModifiedDate)}</S.LastTime>
           <S.StarBox>
-            {Array.from({ length: 4 }).map((_, i) => (
-              <Image key={i} width={15} height={15} src={FullStarImg} alt="" />
-            ))}
-            <Image width={15} height={15} src={EmptyStarImg} alt="" />
+            <StarBox score={starScore} />
           </S.StarBox>
         </S.TimeAndStar>
       </S.UserInfo>
