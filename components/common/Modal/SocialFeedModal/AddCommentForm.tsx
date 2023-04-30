@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import useForm from 'hooks/useForm';
 import React from 'react';
+import Send from 'public/icons/send.svg';
 
 const AddCommentForm = () => {
   const {
@@ -26,7 +27,9 @@ const AddCommentForm = () => {
         placeholder="Add a comment..."
         onChange={handleChange}
       />
-      <S.Button>✌</S.Button>
+      <S.SendButton>
+        <Send />
+      </S.SendButton>
     </S.Form>
   );
 };
@@ -67,13 +70,11 @@ const S = {
       color: ${({ theme }) => theme.colors.white};
     }
   `,
-  Button: styled.button`
+  SendButton: styled.button`
     margin-right: 32px;
 
     width: 24px;
     height: 24px;
-    border: 1px solid white;
-    color: ${({ theme }) => theme.colors.white};
   `,
 };
 export default AddCommentForm;
