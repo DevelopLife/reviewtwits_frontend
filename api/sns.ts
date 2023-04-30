@@ -94,7 +94,7 @@ export const snsAPI = {
   },
 
   getOneReview: async (nickname: string, reviewId: number) => {
-    const size = 1;
+    const size = 10; // 1로 했을 때 문제가 생겨서 10으로 임의 사용
     const params = { size, reviewId: reviewId + 1 };
 
     const response = await optionalTokenAPI.get(`${SNS_URL}/feeds`, { params });
