@@ -95,12 +95,10 @@ export const snsAPI = {
 
   getOneReview: async (nickname: string, reviewId: number) => {
     const size = 1;
-    const params = { size, reviewId };
+    const params = { size, reviewId: reviewId + 1 };
 
-    const response = await optionalTokenAPI.get(
-      `${SNS_URL}/profile/reviews/${nickname}`,
-      { params }
-    );
+    const response = await optionalTokenAPI.get(`${SNS_URL}/feeds`, { params });
+
     return response.data[0];
   },
 
