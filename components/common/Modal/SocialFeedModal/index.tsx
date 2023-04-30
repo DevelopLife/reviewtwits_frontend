@@ -6,7 +6,7 @@ import Contants from './Contants';
 import Reviewer from './Reviewer';
 import Reactions from './Reactions';
 import AddCommentForm from './AddCommentForm';
-import { useGetOneReview } from 'hooks/queries/sns';
+import { useGetOneReview, useGetReviewComments } from 'hooks/queries/sns';
 import { useRouter } from 'next/router';
 import { useLayoutEffect, useState } from 'react';
 
@@ -24,18 +24,27 @@ const SocialFeedModal = () => {
     Number(reviewId) as number
   );
 
-  if (!reviewData) {
+  const { data: commentsData } = useGetReviewComments(
+    Number(reviewId) as number
+  );
+
+  if (!reviewData || !commentsData) {
     return <h1>로딩중...</h1>;
   }
 
   return (
     <S.FeedDetailContainer>
       <DetailImage reviewImageUrlList={reviewData.reviewImageUrlList} />
+
       <S.DetailDesc>
-        <Reviewer {...reviewData.userInfo} />
+        <Reviewer
+          {...reviewData.userInfo}
+          lastModifiedDate={reviewData.lastModifiedDate}
+          starScore={reviewData.score}
+        />
         <Contants content={reviewData.content} />
         <S.Line />
-        <Comments />
+        <Comments commentsData={commentsData} />
         <S.Line />
         <Reactions />
         <AddCommentForm />
@@ -54,8 +63,8 @@ const S = {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: 1308px;
-    height: 624px;
+    width: 1488px;
+    height: 899px;
 
     padding-left: 60px;
     padding-right: 60px;
@@ -64,10 +73,13 @@ const S = {
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.21);
     border-radius: 20px;
   `,
+
   DetailDesc: styled.div`
     width: 654px;
     margin-top: 92px;
     margin-bottom: 92px;
+
+    border: 1px solid purple;
   `,
 
   Line: styled.div`
