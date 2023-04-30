@@ -17,8 +17,8 @@ const DetailImage = ({ reviewImageUrlList }: DetailImageProps) => {
             key={reviewImageUrl}
             src={formattedImageUrl(reviewImageUrl)}
             alt=""
-            width={422}
-            height={422}
+            width={568}
+            height={603}
           />
         ))}
         <S.ImagePaginators>
@@ -36,11 +36,14 @@ const S = {
   Container: styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: center;
 
-    width: 654px;
+    width: 744px;
 
-    margin-top: 109px;
-    margin-bottom: 93px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+
+    border: 1px solid pink;
   `,
 
   LeftButton: styled.button``,
