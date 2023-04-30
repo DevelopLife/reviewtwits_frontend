@@ -70,9 +70,6 @@ const S = {
     width: 1488px;
     height: 899px;
 
-    padding-left: 60px;
-    padding-right: 60px;
-
     background-color: ${({ theme }) => theme.colors.white};
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.21);
     border-radius: 20px;
@@ -82,8 +79,7 @@ const S = {
     width: 654px;
     margin-top: 92px;
     margin-bottom: 92px;
-
-    border: 1px solid purple;
+    padding-left: 60px;
   `,
 
   Line: styled.div`
