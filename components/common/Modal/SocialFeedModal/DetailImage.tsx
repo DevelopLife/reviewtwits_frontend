@@ -116,7 +116,8 @@ const S = {
     height: 160px;
     margin-top: 40px;
 
-    /* overflow-x: scroll; */
+    overflow-x: scroll;
+    overflow-y: hidden;
   `,
   ImagePaginator: styled(Image)<{ isActiveImage: boolean }>`
     width: 160px;
