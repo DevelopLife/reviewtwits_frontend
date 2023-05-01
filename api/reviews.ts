@@ -24,9 +24,7 @@ const shoppingAPI = {
     return await requiredTokenApi.patch(`${SHOPPING_URL}/${reviewId}`, body);
   },
 
-  getShoppingMallReviewInfo: async (
-    productURL = 'http://www.example.com/123'
-  ) => {
+  getShoppingMallReviewInfo: async (productURL: string) => {
     return await optionalTokenAPI.get(`${SHOPPING_URL}`, {
       headers: {
         productURL: productURL,
@@ -34,9 +32,7 @@ const shoppingAPI = {
     });
   },
 
-  getShoppingMallReviewList: async (
-    productURL = 'http://www.example.com/123'
-  ) => {
+  getShoppingMallReviewList: async (productURL: string) => {
     return await optionalTokenAPI.get(`${SHOPPING_URL}/list`, {
       headers: {
         productURL: productURL,

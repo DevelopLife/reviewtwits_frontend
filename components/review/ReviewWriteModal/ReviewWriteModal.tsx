@@ -7,7 +7,6 @@ import { validateReviewContent, validateReviewScore } from 'utils/validate';
 import { DEFAULT_REVIEW_WRITE_ERRORS, ERROR_MESSAGE } from 'constants/reviews';
 
 import * as S from './ReviewWriteModal.styles';
-import ServiceSection from './ServiceSection/@index';
 import QualitySection from './QualitySection/@index';
 import ReviewCreateButton from '../common/ReviewCreateButton';
 import {
@@ -16,11 +15,12 @@ import {
   useGetShoppingMallReview,
 } from 'hooks/queries/shopping';
 
-const ReviewWriteModal = () => {
+const ReviewWriteModal = ({ productURL }: { productURL: string }) => {
   const router = useRouter();
   const reviewId = Number(router?.query?.id);
   const isEditPage = router?.query?.id;
   const { data: reviewData, isLoading } = useGetShoppingMallReview(reviewId);
+
   const {
     values,
     isSubmitable,
@@ -30,7 +30,7 @@ const ReviewWriteModal = () => {
     handleChange,
     handleSubmit,
   } = useForm<ReviewType>({
-    productURL: 'http://www.example.com/123',
+    productURL: productURL,
     content: '',
     score: 0,
     newImageFiles: [],

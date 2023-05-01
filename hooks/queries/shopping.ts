@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { shoppingAPI } from 'api/reviews';
 import { SUCCESS_MESSAGE } from 'constants/reviews';
