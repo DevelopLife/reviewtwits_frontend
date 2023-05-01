@@ -6,10 +6,15 @@ import { Colors } from 'styles/theme';
 interface ButtonProps {
   color: Colors;
   children: ReactNode;
+  onClick: () => void;
 }
 
-const Button = ({ color, children }: ButtonProps) => {
-  return <S.StyledButton color={color}>{children}</S.StyledButton>;
+const Button = ({ color, children, ...rest }: ButtonProps) => {
+  return (
+    <S.StyledButton color={color} {...rest}>
+      {children}
+    </S.StyledButton>
+  );
 };
 
 export default Button;

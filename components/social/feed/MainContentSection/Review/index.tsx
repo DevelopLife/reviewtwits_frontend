@@ -173,7 +173,7 @@ const S = {
 
   ReviewText: styled.p`
     display: -webkit-box;
-    height: 90px;
+    height: 100px;
     overflow: hidden;
     margin: 24px 0;
 
@@ -181,7 +181,7 @@ const S = {
     line-height: 1.4;
     word-break: keep-all;
     white-space: normal;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
   `,
 

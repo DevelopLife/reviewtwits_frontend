@@ -1,6 +1,9 @@
 import Image from 'next/image';
 
-import { useGetFollowSuggestion } from 'hooks/queries/sns';
+import {
+  useFollowAndUnFollow,
+  useGetFollowSuggestion,
+} from 'hooks/queries/sns';
 import { FollowType } from 'typings/sns';
 import { formattedImageUrl } from 'utils/format';
 
@@ -9,9 +12,15 @@ import Button from './common/Button';
 
 const RecommendUserList = () => {
   const { data: userList } = useGetFollowSuggestion();
+  const { follow, unfollow } = useFollowAndUnFollow();
+
+  const toggleFollow = (isFollowed: boolean, nickname: string) => {
+    isFollowed ? unfollow(nickname) : follow(nickname);
+  };
 
   const props = {
     userList,
+    toggleFollow,
   };
 
   return <RecommendUserListView {...props} />;
@@ -19,9 +28,13 @@ const RecommendUserList = () => {
 
 interface RecommendUserListViewProps {
   userList?: FollowType[];
+  toggleFollow: (isFollowed: boolean, nickname: string) => void;
 }
 
-const RecommendUserListView = ({ userList }: RecommendUserListViewProps) => {
+const RecommendUserListView = ({
+  userList,
+  toggleFollow,
+}: RecommendUserListViewProps) => {
   return (
     <S.List>
       {userList?.map((user, i) => (
@@ -44,7 +57,12 @@ const RecommendUserListView = ({ userList }: RecommendUserListViewProps) => {
               )}
             </S.UserInfoBox>
           </S.UserBox>
-          <Button color="secondary">팔로우</Button>
+          <Button
+            color="secondary"
+            onClick={() => toggleFollow(user.isFollowed, user.nickname)}
+          >
+            {user.isFollowed ? '언팔로우' : '팔로우'}
+          </Button>
         </S.User>
       ))}
     </S.List>
