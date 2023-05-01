@@ -1,21 +1,28 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useRouter } from 'next/router';
 import SNSExplorePage from '../home/index';
+import SocialUserFeedPage from '../user/[nickname]';
+import useModal from 'hooks/useModal';
+import MODAL_LIST from 'constants/modal';
+import { useEffect } from 'react';
 
 const ReviewModalPage = () => {
-  return (
-    <>
-      <div>
-        <h1>배경배경</h1>
-        <div>바보</div>
-      </div>
-      <div>
-        {/* 임시로 mainpage에서만 되게 작업 */}
-        <SNSExplorePage />
-        {/* <UserPage /> */}
-        {/* <SocialUserFeedPage /> */}
-      </div>
-    </>
-  );
+  const route = useRouter();
+  const modal = useModal();
+
+  const storage = globalThis?.sessionStorage;
+  const lastpath = storage.prevPath.split('/').at(-1);
+
+  useEffect(() => {
+    modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
+  }, [modal, route.pathname, route.query]);
+
+  if (storage.prevPath.split('/').includes('home') && lastpath === 'home') {
+    return <SNSExplorePage />;
+  } else if (storage.prevPath.split('/').includes('user')) {
+    return <SocialUserFeedPage />;
+  }
+  return <div>값이 없습니다</div>;
 };
 
 export default ReviewModalPage;
