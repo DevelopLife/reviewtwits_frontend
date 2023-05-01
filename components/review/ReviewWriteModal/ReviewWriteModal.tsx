@@ -1,37 +1,26 @@
 import { useEffect } from 'react';
-
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import useForm from 'hooks/useForm';
-import { ReviewResponseType, ReviewType } from 'typings/reviews';
-import { shoppingAPI } from 'api/reviews';
+import { ReviewType } from 'typings/reviews';
 import { validateReviewContent, validateReviewScore } from 'utils/validate';
-import {
-  DEFAULT_REVIEW_WRITE_ERRORS,
-  ERROR_MESSAGE,
-  SUCCESS_MESSAGE,
-} from 'constants/reviews';
+import { DEFAULT_REVIEW_WRITE_ERRORS, ERROR_MESSAGE } from 'constants/reviews';
 
 import * as S from './ReviewWriteModal.styles';
 import ServiceSection from './ServiceSection/@index';
 import QualitySection from './QualitySection/@index';
 import ReviewCreateButton from '../common/ReviewCreateButton';
-
-const REVIEW_QUERY_KEY = 'reviews';
+import {
+  useCreateShoppingMallReview,
+  useEditShoppingMallReview,
+  useGetShoppingMallReview,
+} from 'hooks/queries/shopping';
 
 const ReviewWriteModal = () => {
   const router = useRouter();
   const reviewId = Number(router?.query?.id);
   const isEditPage = router?.query?.id;
-  const queryClient = useQueryClient();
-  const { data: reviewData, isLoading } = useQuery<ReviewResponseType>(
-    ['REVIEW_QUERY_KEY', reviewId],
-    () => shoppingAPI.getReviewDetail(reviewId),
-    {
-      enabled: !!reviewId,
-    }
-  );
+  const { data: reviewData, isLoading } = useGetShoppingMallReview(reviewId);
   const {
     values,
     isSubmitable,
@@ -44,54 +33,10 @@ const ReviewWriteModal = () => {
     productURL: 'http://www.example.com/123',
     content: '',
     score: 0,
+    newImageFiles: [],
   });
-  const { mutate: mutateCreate } = useMutation(
-    (formData: FormData) => shoppingAPI.createReview(formData),
-    {
-      onSuccess: ({ status }) => {
-        switch (status) {
-          case 200:
-            alert(SUCCESS_MESSAGE.CREATE);
-            router.push('/review');
-            break;
-        }
-      },
-      onError: ({ response }) => {
-        switch (response?.status) {
-          case 400:
-            alert(response.data[0].message);
-            break;
-        }
-      },
-    }
-  );
-  const { mutate: mutateEdit } = useMutation(
-    (formData: FormData) => shoppingAPI.editReview(reviewId, formData),
-    {
-      onMutate: () => {
-        const oldData = queryClient.getQueriesData([REVIEW_QUERY_KEY]);
-        queryClient.cancelQueries([REVIEW_QUERY_KEY]);
-        queryClient.setQueryData([REVIEW_QUERY_KEY], values);
-
-        return () => queryClient.setQueryData([REVIEW_QUERY_KEY], oldData);
-      },
-      onSuccess: ({ status }) => {
-        switch (status) {
-          case 200:
-            alert(SUCCESS_MESSAGE.EDIT);
-            router.push('/review');
-            break;
-        }
-      },
-      onError: ({ response }) => {
-        switch (response?.status) {
-          case 400:
-            alert(response.data[0].message);
-            break;
-        }
-      },
-    }
-  );
+  const { mutate: mutateCreate } = useCreateShoppingMallReview();
+  const { mutate: mutateEdit } = useEditShoppingMallReview(reviewId);
 
   const setDataInToFormData = () => {
     const formData = new FormData();
@@ -152,10 +97,10 @@ const ReviewWriteModal = () => {
       <S.Title>리뷰 관리</S.Title>
       <S.Form onSubmit={(e) => handleSubmit(e, onValid)}>
         <S.ReviewContent>
-          <ServiceSection />
+          {/* <ServiceSection /> */}
           <QualitySection
-            data={reviewData}
-            values={values}
+            reviewData={reviewData}
+            formValues={values}
             setValue={setValue}
             handleChange={handleChange}
           />
