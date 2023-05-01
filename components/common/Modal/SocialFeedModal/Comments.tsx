@@ -1,12 +1,21 @@
 import React from 'react';
 import Comment from './Comment';
 import styled from '@emotion/styled';
+import { CommentResponseType } from 'typings/reviews';
 
-const Comments = () => {
+interface CommentsProps {
+  commentsData: CommentResponseType[] | [];
+}
+
+const Comments = ({ commentsData }: CommentsProps) => {
   return (
     <S.Container>
       <S.Title>댓글</S.Title>
-      <Comment />
+      {commentsData.length == 0 ? (
+        <h1>댓글이 없어요😭💦</h1>
+      ) : (
+        <Comment commentsData={commentsData} />
+      )}
     </S.Container>
   );
 };

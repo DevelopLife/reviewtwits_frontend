@@ -66,6 +66,20 @@ export const useGetMyReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
+
+export const useGetOneReview = (nickname: string, reviewId: number) => {
+  return useQuery(['review', nickname, reviewId], () =>
+    snsAPI.getOneReview(nickname, reviewId)
+  );
+};
+
+export const useGetReviewComments = (reviewId: number) => {
+  return useQuery(['review', 'comments', reviewId], () =>
+    snsAPI.getReviewComments(reviewId)
+  );
+};
+
+
 export const useFollowAndUnFollow = () => {
   const queryClient = useQueryClient();
   const originFollowingDictionary = queryClient.getQueryData(
