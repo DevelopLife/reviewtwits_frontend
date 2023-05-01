@@ -8,7 +8,6 @@ import Reactions from './Reactions';
 import AddCommentForm from './AddCommentForm';
 import { useGetOneReview, useGetReviewComments } from 'hooks/queries/sns';
 import { useRouter } from 'next/router';
-import { useLayoutEffect, useState } from 'react';
 
 const SocialFeedModal = () => {
   const router = useRouter();
