@@ -1,12 +1,10 @@
 import styled from '@emotion/styled';
-import { useEffect } from 'react';
 
 import { WrapProps } from 'typings/wrapperProps';
 import { useBoolean } from 'hooks/useBoolean';
-import useModal from 'hooks/useModal';
 import MessageIcon from 'public/icons/message.svg';
 import SmileIcon from 'public/icons/smile.svg';
-import MODAL_LIST from 'constants/modal';
+import useRouteModalPage from 'hooks/useOpenModal';
 
 type FeedCardStyles = {
   width: number;
@@ -18,6 +16,8 @@ interface SocialFeedCardProps extends WrapProps {
   styles: FeedCardStyles;
   reactionCount: number;
   commentCount: number;
+  nickname?: string;
+  reviewId?: number;
 }
 
 interface SocialFeedCardViewProps extends SocialFeedCardProps {
@@ -33,20 +33,19 @@ export const SocialFeedCard = ({
   reactionCount,
   commentCount,
   children,
+  nickname,
+  reviewId,
 }: SocialFeedCardProps) => {
   const { isOpen: isHover, setTrue, setFalse } = useBoolean(false);
-  const modal = useModal();
 
-  const onModalOpen = () => {
-    modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
+  const routeModalPage = useRouteModalPage(nickname, reviewId);
+
+  const openModal = () => {
+    routeModalPage();
   };
 
   const onMouseEnter = () => setTrue();
   const onMouseLeave = () => setFalse();
-
-  useEffect(() => {
-    return () => modal?.hide();
-  }, []);
 
   return (
     <SocialFeedCardView
@@ -54,7 +53,7 @@ export const SocialFeedCard = ({
       isHover={isHover}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={onModalOpen}
+      onClick={openModal}
       reactionCount={reactionCount}
       commentCount={commentCount}
     >
