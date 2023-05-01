@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 import { formattedImageUrl, formattedLastTime } from 'utils/format';
 import StarBox from 'components/social/feed/MainContentSection/Review/StarBox';
+import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
+import useModal from 'hooks/useModal';
 
 interface ReviewerProps {
   nickname: string;
@@ -16,16 +18,23 @@ const Reviewer = ({
   lastModifiedDate,
   starScore,
 }: ReviewerProps) => {
+  const modal = useModal();
   return (
     <S.ReviewInfoBox>
-      <S.UserImage
-        src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
-        alt=""
-        width={60}
-        height={60}
-      />
+      <SocialUserNicknameLink nickname={nickname}>
+        <S.UserImage
+          src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
+          alt=""
+          width={60}
+          height={60}
+          onClick={() => modal.hide()}
+        />
+      </SocialUserNicknameLink>
+
       <S.UserInfo>
-        <S.Nickname>{nickname}</S.Nickname>
+        <SocialUserNicknameLink nickname={nickname}>
+          <S.Nickname onClick={() => modal.hide()}>{nickname}</S.Nickname>
+        </SocialUserNicknameLink>
         <S.TimeAndStar>
           <S.LastTime>{formattedLastTime(lastModifiedDate)}</S.LastTime>
           <S.StarBox>
