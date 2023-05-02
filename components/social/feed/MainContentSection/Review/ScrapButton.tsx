@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { snsAPI } from 'api/sns';
+import useScrap from 'hooks/useScrap';
 
 import BookmarkOutlineIcon from 'public/icons/bookmark_outline.svg';
 import BookmarkFillIcon from 'public/icons/bookmark_fill.svg';
@@ -17,26 +16,10 @@ const ScrapButton = ({
   reviewId,
   position = 'absolute',
 }: ScrapButtonProps) => {
-  const queryClient = useQueryClient();
-  const { mutate: addScrapMutate } = useMutation(
-    () => snsAPI.addScrap(reviewId),
-    {
-      onSuccess: () => {
-        return queryClient.invalidateQueries(['feed']); //
-      },
-    }
-  );
-  const { mutate: deleteScrapMutate } = useMutation(
-    () => snsAPI.deleteScrap(reviewId),
-    {
-      onSuccess: () => {
-        return queryClient.invalidateQueries(['feed']); //
-      },
-    }
-  );
+  const { doScrap, cancelScrap } = useScrap(reviewId);
 
   const handleClickScrapButton = () => {
-    isScrapped ? deleteScrapMutate() : addScrapMutate();
+    isScrapped ? cancelScrap() : doScrap();
   };
 
   const props = {
