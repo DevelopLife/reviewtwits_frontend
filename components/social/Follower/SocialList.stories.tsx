@@ -31,4 +31,8 @@ const MOCK_USER_LIST: FollowListType = [
   },
 ];
 
-export const Basic = () => <SocialList userList={MOCK_USER_LIST} />;
+const mockRef = { current: null };
+
+export const Basic = () => (
+  <SocialList userList={MOCK_USER_LIST} targetRef={mockRef} />
+);
