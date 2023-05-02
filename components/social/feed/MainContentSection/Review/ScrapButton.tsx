@@ -9,9 +9,14 @@ import BookmarkFillIcon from 'public/icons/bookmark_fill.svg';
 interface ScrapButtonProps {
   isScrapped: boolean;
   reviewId: number;
+  position?: 'absolute' | 'static';
 }
 
-const ScrapButton = ({ isScrapped, reviewId }: ScrapButtonProps) => {
+const ScrapButton = ({
+  isScrapped,
+  reviewId,
+  position = 'absolute',
+}: ScrapButtonProps) => {
   const queryClient = useQueryClient();
   const { mutate: addScrapMutate } = useMutation(
     () => snsAPI.addScrap(reviewId),
@@ -37,6 +42,7 @@ const ScrapButton = ({ isScrapped, reviewId }: ScrapButtonProps) => {
   const props = {
     isScrapped,
     handleClickScrapButton,
+    position,
   };
 
   return <ScrapButtonView {...props} />;
@@ -45,14 +51,16 @@ const ScrapButton = ({ isScrapped, reviewId }: ScrapButtonProps) => {
 interface ScrapButtonViewProps {
   isScrapped: boolean;
   handleClickScrapButton: () => void;
+  position: 'absolute' | 'static';
 }
 
 const ScrapButtonView = ({
   isScrapped,
   handleClickScrapButton,
+  position,
 }: ScrapButtonViewProps) => {
   return (
-    <S.Button onClick={handleClickScrapButton}>
+    <S.Button onClick={handleClickScrapButton} position={position}>
       {isScrapped ? <BookmarkFillIcon /> : <BookmarkOutlineIcon />}
     </S.Button>
   );
@@ -61,8 +69,8 @@ const ScrapButtonView = ({
 export default ScrapButton;
 
 const S = {
-  Button: styled.button`
-    position: absolute;
+  Button: styled.button<{ position: 'absolute' | 'static' }>`
+    position: ${({ position }) => position};
     top: 10px;
     right: 10px;
   `,

@@ -1,7 +1,13 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import { CommentResponseType } from 'typings/reviews';
 
-const Comment = () => {
+interface CommentProps {
+  commentsData: CommentResponseType[] | [];
+}
+
+const Comment = ({ commentsData }: CommentProps) => {
+  console.log(commentsData);
   return (
     <S.Container>
       <S.User>
