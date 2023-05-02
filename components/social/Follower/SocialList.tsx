@@ -1,12 +1,18 @@
 import styled from '@emotion/styled';
 
 import SocialCard from 'components/social/common/SocialCard';
+import { RefObject } from 'react';
 
 import { FollowListType } from 'typings/sns';
 
-const SocialList = ({ userList }: { userList: FollowListType }) => {
+interface SocialListProps {
+  userList: FollowListType;
+  targetRef: RefObject<HTMLDivElement>;
+}
+
+const SocialList = ({ userList, targetRef }: SocialListProps) => {
   return (
-    <S.Container>
+    <S.Container ref={targetRef}>
       {userList.map(
         ({ nickname, userId, detailIntroduce, profileImageUrl }) => (
           <SocialCard

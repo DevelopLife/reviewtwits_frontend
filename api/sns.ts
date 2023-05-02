@@ -2,6 +2,7 @@ import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { SocialProfile, SocialReview } from 'typings/social';
 
 import { ReactionType } from 'typings/reviews';
+import type { FollowListType, GetFollowerListParams } from 'typings/sns';
 
 const SNS_URL = '/sns';
 
@@ -59,11 +60,38 @@ export const snsAPI = {
   //
   // following | follower
 
-  getFollowerList: async (nickname: string) => {
-    return await optionalTokenAPI.get(`${SNS_URL}/get-followers/${nickname}`);
+  getFollowerList: async ({
+    nickname,
+    size,
+    followId,
+  }: GetFollowerListParams): Promise<FollowListType> => {
+    const params = { size, followId };
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/get-followers/${nickname}`,
+      {
+        params,
+      }
+    );
+
+    return response.data;
   },
-  getFollowingList: async (nickname: string) => {
-    return await optionalTokenAPI.get(`${SNS_URL}/get-followings/${nickname}`);
+  getFollowingList: async ({
+    nickname,
+    size,
+    followId,
+  }: GetFollowerListParams): Promise<FollowListType> => {
+    const params = { size, followId };
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/get-followings/${nickname}`,
+      {
+        params,
+      }
+    );
+
+    return response.data;
+    // return await optionalTokenAPI.get(`${SNS_URL}/get-followings/${nickname}`, {
+    //   params,
+    // });
   },
 
   follow: (body: FollowAndUnFollowRequestBody) =>

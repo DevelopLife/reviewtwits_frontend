@@ -12,15 +12,20 @@ type FollowButton = (typeof FOLLOW_BUTTON)[keyof typeof FOLLOW_BUTTON];
 const FollowerSection = () => {
   const useProfile = useUserProfile();
   const { nickname } = useProfile;
-  const { data: followerList } = useGetFollowerList(nickname || '');
-  const { data: followingList } = useGetFollowingList(nickname || '');
+  const { targetRef: followerListRef, data: followerList } = useGetFollowerList(
+    nickname || ''
+  );
+  const { targetRef: followingListRef, data: followingList } =
+    useGetFollowingList(nickname || '');
 
   const [targettedButton, setTargettedButton] = useState<FollowButton>(
     FOLLOW_BUTTON.FOLLOWER
   );
 
   const userList =
-    targettedButton === 'FOLLOWER' ? followerList?.data : followingList?.data;
+    targettedButton === 'FOLLOWER' ? followerList : followingList;
+  const targetRef =
+    targettedButton === 'FOLLOWER' ? followerListRef : followingListRef;
 
   return (
     <S.FollowerSectinoContainer>
@@ -29,7 +34,7 @@ const FollowerSection = () => {
         setTargettedButton={setTargettedButton}
       />
       {userList?.length ? (
-        <SocialList userList={userList} />
+        <SocialList userList={userList} targetRef={targetRef} />
       ) : (
         <S.GuideMessage>{`You Have No ${targettedButton}`}</S.GuideMessage>
       )}

@@ -13,3 +13,9 @@ export type FollowListType = FollowType[];
 
 export type ExceptNicknameInFollowType = Omit<FollowType, 'nickname'>;
 export type FollowingDictionary = { [key: string]: ExceptNicknameInFollowType };
+
+export interface GetFollowerListParams {
+  nickname: string;
+  size: number;
+  followId: number;
+}

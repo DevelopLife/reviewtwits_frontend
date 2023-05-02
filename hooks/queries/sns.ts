@@ -4,7 +4,7 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
@@ -19,15 +19,29 @@ import { ReviewResponseType } from 'typings/reviews';
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
 
 export const useGetFollowerList = (nickname: string) => {
-  return useQuery<AxiosResponse<FollowListType>, AxiosError<ResponseError>>(
-    ['useGetFollowerList'],
-    () => snsAPI.getFollowerList(nickname),
-    {
+  const followerListQuery = useInfiniteScrollQuery({
+    queryKey: ['useGetFollowerList'],
+    getNextPage: (nextRequest) => {
+      return snsAPI.getFollowerList({
+        nickname,
+        size: 3,
+        followId: nextRequest,
+      });
+    },
+    nextRequest: 'userId',
+    options: {
       enabled: !!nickname,
-    }
-  );
-};
+    },
+  });
 
+  const targetRef = useIntersectionObserver(followerListQuery.fetchNextPage);
+  const data = linkageInfiniteScrollData(followerListQuery?.data);
+
+  return {
+    targetRef,
+    data,
+  };
+};
 export const useGetFollowingList = (nickname: string) => {
   const queryClient = useQueryClient();
 
@@ -44,10 +58,18 @@ export const useGetFollowingList = (nickname: string) => {
     return result;
   };
 
-  return useQuery<AxiosResponse<FollowListType>, AxiosError>(
-    ['useGetFollowingList'],
-    () => snsAPI.getFollowingList(nickname),
-    {
+  const followingList = useInfiniteScrollQuery({
+    queryKey: ['useGetFollowingList'],
+    getNextPage: (nextRequest) => {
+      console.log(nextRequest);
+      return snsAPI.getFollowingList({
+        nickname,
+        size: 3,
+        followId: nextRequest,
+      });
+    },
+    nextRequest: 'userId',
+    options: {
       onSuccess: (response) => {
         queryClient.cancelQueries(FOLLOWING_DICTIONARY_KEY);
         queryClient.fetchQuery({
@@ -56,8 +78,15 @@ export const useGetFollowingList = (nickname: string) => {
         });
       },
       enabled: !!nickname,
-    }
-  );
+    },
+  });
+  const targetRef = useIntersectionObserver(followingList.fetchNextPage);
+  const data = linkageInfiniteScrollData(followingList?.data);
+
+  return {
+    targetRef,
+    data,
+  };
 };
 
 export const useGetMyReviews = (nickname: string, reviewId?: number) => {
@@ -65,7 +94,6 @@ export const useGetMyReviews = (nickname: string, reviewId?: number) => {
     snsAPI.getMyReviews(nickname, reviewId)
   );
 };
-
 
 export const useGetOneReview = (nickname: string, reviewId: number) => {
   return useQuery(['review', nickname, reviewId], () =>
@@ -78,7 +106,6 @@ export const useGetReviewComments = (reviewId: number) => {
     snsAPI.getReviewComments(reviewId)
   );
 };
-
 
 export const useFollowAndUnFollow = () => {
   const queryClient = useQueryClient();
@@ -173,11 +200,12 @@ export const useGetSocialProfile = (nickname: string) => {
   return socialProfileQuery;
 };
 export const useGetInfiniteSocialReviews = (nickname: string) => {
-  const infiniteQuery = useInfiniteScrollQuery<SocialReview>({
+  const infiniteQuery = useInfiniteScrollQuery({
     queryKey: ['socialMyReviews', nickname],
     getNextPage: (nextRequest) => {
       return snsAPI.getMyReviews(nickname, nextRequest);
     },
+    nextRequest: 'reviewId',
   });
 
   const targetRef = useIntersectionObserver(infiniteQuery.fetchNextPage);
@@ -190,11 +218,12 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
 };
 
 export const useGetInfiniteFeed = () => {
-  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType>({
+  const infiniteQuery = useInfiniteScrollQuery({
     queryKey: ['useGetInfiniteFeed'],
     getNextPage: (nextRequest) => {
       return snsAPI.getInfiniteFeed(nextRequest);
     },
+    nextRequest: 'reviewId',
   });
 
   const targetRef = useIntersectionObserver(infiniteQuery.fetchNextPage);
