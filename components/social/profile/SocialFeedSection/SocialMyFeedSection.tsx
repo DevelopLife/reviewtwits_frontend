@@ -28,6 +28,8 @@ const SocialMyFeedSection = () => {
             }}
             reactionCount={reactionCount}
             commentCount={commentCount}
+            nickname={userData.nickname}
+            reviewId={reviewId}
           >
             <Image
               quality={100}

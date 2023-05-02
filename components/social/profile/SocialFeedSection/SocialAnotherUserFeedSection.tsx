@@ -29,6 +29,8 @@ const SocialAnoterUserFeedSection = () => {
             }}
             reactionCount={reactionCount}
             commentCount={commentCount}
+            nickname={nickname}
+            reviewId={reviewId}
           >
             <Image
               quality={100}
