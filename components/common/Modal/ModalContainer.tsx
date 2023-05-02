@@ -4,10 +4,12 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import atomModal from 'states/AtomModal';
 import * as modals from './modals';
+import { useRouter } from 'next/router';
 
 const ModalContainer = () => {
   const modalState = useRecoilValue(atomModal);
   const modal = useModal();
+  const router = useRouter();
 
   const { key, isVisible } = modalState;
 
@@ -17,6 +19,7 @@ const ModalContainer = () => {
       return;
     }
     modal.hide();
+    router.back();
   };
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import DetailImage from './DetailImage';
 import Comments from './Comments';
 import styled from '@emotion/styled';
@@ -5,19 +6,51 @@ import Contants from './Contants';
 import Reviewer from './Reviewer';
 import Reactions from './Reactions';
 import AddCommentForm from './AddCommentForm';
+import { useGetOneReview, useGetReviewComments } from 'hooks/queries/sns';
+import { useRouter } from 'next/router';
 
 const SocialFeedModal = () => {
+  const router = useRouter();
+
+  const { nickname, reviewId } = router.query;
+
+  if (!nickname || !reviewId) {
+    return <h1>로딩중...</h1>;
+  }
+
+  const { data: reviewData } = useGetOneReview(
+    nickname as string,
+    Number(reviewId) as number
+  );
+
+  const { data: commentsData } = useGetReviewComments(
+    Number(reviewId) as number
+  );
+
+  if (!reviewData || !commentsData) {
+    return <h1>로딩중...</h1>;
+  }
+
   return (
     <S.FeedDetailContainer>
-      <DetailImage />
+      <DetailImage reviewImageUrlList={reviewData.reviewImageUrlList} />
+
       <S.DetailDesc>
-        <Reviewer />
-        <Contants />
+        <Reviewer
+          {...reviewData.userInfo}
+          lastModifiedDate={reviewData.lastModifiedDate}
+          starScore={reviewData.score}
+        />
+        <Contants content={reviewData.content} />
         <S.Line />
-        <Comments />
+        <Comments commentsData={commentsData} />
         <S.Line />
-        <Reactions />
-        <AddCommentForm />
+        <Reactions
+          reviewId={reviewId as string}
+          isScrapped={reviewData.isScrapped}
+          reactions={reviewData.reactionResponses}
+        />
+        <AddCommentForm reviewId={reviewId as string} />
       </S.DetailDesc>
     </S.FeedDetailContainer>
   );
@@ -33,20 +66,19 @@ const S = {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: 1308px;
-    height: 624px;
-
-    padding-left: 60px;
-    padding-right: 60px;
+    width: 1488px;
+    height: 899px;
 
     background-color: ${({ theme }) => theme.colors.white};
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.21);
     border-radius: 20px;
   `,
+
   DetailDesc: styled.div`
     width: 654px;
     margin-top: 92px;
     margin-bottom: 92px;
+    padding-left: 60px;
   `,
 
   Line: styled.div`

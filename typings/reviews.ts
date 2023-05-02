@@ -84,3 +84,10 @@ export interface ShoppingMallReviewDetail {
   reviewImageUrlList: string[];
   exist: boolean;
 }
+
+export interface CommentResponseType {
+  commentId: number;
+  userInfo: ShoppingMallUserInfo;
+  content: string;
+  parentCommentId: number;
+}
