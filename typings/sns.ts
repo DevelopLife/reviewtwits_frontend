@@ -17,5 +17,5 @@ export type FollowingDictionary = { [key: string]: ExceptNicknameInFollowType };
 export interface GetFollowerListParams {
   nickname: string;
   size: number;
-  followId: number;
+  userId?: number;
 }
