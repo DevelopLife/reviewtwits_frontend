@@ -64,6 +64,7 @@ const S = {
 
     width: 564px;
     height: 54px;
+    margin-top: 16px;
 
     background-color: ${({ theme }) => theme.colors.secondary};
     border-radius: 32px;

@@ -24,7 +24,8 @@ const S = {
   Container: styled.div`
     padding-top: 16px;
     width: 564px;
-    height: 111px;
+    height: 338px;
+    margin-bottom: 16px;
 
     /* overflow-y: scroll; */
   `,
