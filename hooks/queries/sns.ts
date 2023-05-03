@@ -1,4 +1,5 @@
 import {
+  InfiniteData,
   QueryClient,
   useMutation,
   useQuery,
@@ -7,7 +8,7 @@ import {
 import { AxiosError } from 'axios';
 
 import { ResponseError } from 'typings/error';
-import { FollowListType, FollowingDictionary } from 'typings/sns';
+import { FollowListType, FollowType, FollowingDictionary } from 'typings/sns';
 import { SocialReview } from 'typings/social';
 import { alertErrorHandler } from 'utils/errorHandler';
 import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
@@ -58,7 +59,7 @@ export const useGetFollowingList = (nickname: string) => {
     return result;
   };
 
-  const followingList = useInfiniteScrollQuery({
+  const followingList = useInfiniteScrollQuery<FollowType, 'userId'>({
     queryKey: ['useGetFollowingList'],
     getNextPage: (nextRequest) => {
       console.log(nextRequest);
@@ -200,7 +201,7 @@ export const useGetSocialProfile = (nickname: string) => {
   return socialProfileQuery;
 };
 export const useGetInfiniteSocialReviews = (nickname: string) => {
-  const infiniteQuery = useInfiniteScrollQuery({
+  const infiniteQuery = useInfiniteScrollQuery<SocialReview, 'reviewId'>({
     queryKey: ['socialMyReviews', nickname],
     getNextPage: (nextRequest) => {
       return snsAPI.getMyReviews(nickname, nextRequest);
@@ -218,7 +219,7 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
 };
 
 export const useGetInfiniteFeed = () => {
-  const infiniteQuery = useInfiniteScrollQuery({
+  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType, 'reviewId'>({
     queryKey: ['useGetInfiniteFeed'],
     getNextPage: (nextRequest) => {
       return snsAPI.getInfiniteFeed(nextRequest);
