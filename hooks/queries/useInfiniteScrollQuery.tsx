@@ -11,10 +11,11 @@ interface UseInfiniteScrollQueryParams<T, K> {
   getNextPage: (nextRequest: number) => Promise<T[]>;
   nextRequest: K;
   options?: Omit<
-    UseInfiniteQueryOptions<Promise<T[]>, unknown, T[]>,
+    UseInfiniteQueryOptions<T[], unknown, T[]>,
     'queryKey' | 'queryFn'
   >;
 }
+
 function useInfiniteScrollQuery<T extends Record<K, number>, K extends string>({
   queryKey,
   getNextPage,
