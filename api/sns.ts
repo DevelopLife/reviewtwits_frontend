@@ -63,9 +63,9 @@ export const snsAPI = {
   getFollowerList: async ({
     nickname,
     size,
-    followId,
+    userId,
   }: GetFollowerListParams): Promise<FollowListType> => {
-    const params = { size, followId };
+    const params = { size, userId };
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/get-followers/${nickname}`,
       {
@@ -78,9 +78,9 @@ export const snsAPI = {
   getFollowingList: async ({
     nickname,
     size,
-    followId,
+    userId,
   }: GetFollowerListParams): Promise<FollowListType> => {
-    const params = { size, followId };
+    const params = { size, userId };
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/get-followings/${nickname}`,
       {

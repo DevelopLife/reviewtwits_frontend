@@ -1,4 +1,5 @@
 import {
+  InfiniteData,
   QueryClient,
   useMutation,
   useQuery,
@@ -19,13 +20,13 @@ import { ReviewResponseType } from 'typings/reviews';
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
 
 export const useGetFollowerList = (nickname: string) => {
-  const followerListQuery = useInfiniteScrollQuery({
+  const followerListInfiniteQuery = useInfiniteScrollQuery({
     queryKey: ['useGetFollowerList'],
     getNextPage: (nextRequest) => {
       return snsAPI.getFollowerList({
         nickname,
-        size: 3,
-        followId: nextRequest,
+        size: 10,
+        userId: nextRequest,
       });
     },
     nextRequest: 'userId',
@@ -34,10 +35,13 @@ export const useGetFollowerList = (nickname: string) => {
     },
   });
 
-  const targetRef = useIntersectionObserver(followerListQuery.fetchNextPage);
-  const data = linkageInfiniteScrollData(followerListQuery?.data);
+  const targetRef = useIntersectionObserver(
+    followerListInfiniteQuery.fetchNextPage
+  );
+  const data = linkageInfiniteScrollData(followerListInfiniteQuery?.data);
 
   return {
+    followerListInfiniteQuery,
     targetRef,
     data,
   };
@@ -45,9 +49,11 @@ export const useGetFollowerList = (nickname: string) => {
 export const useGetFollowingList = (nickname: string) => {
   const queryClient = useQueryClient();
 
-  const setFollowingDictionary = (followingList: FollowListType) => {
+  const setFollowingDictionary = (followingList: unknown[]) => {
+    const data = followingList as unknown as FollowListType;
     const defaultFollowingDictionary: FollowingDictionary = {};
-    const result = followingList.reduce(
+
+    const result = data?.reduce(
       (followingDictionary, { nickname, ...rest }) => {
         followingDictionary[nickname] = rest;
         return followingDictionary;
@@ -58,32 +64,37 @@ export const useGetFollowingList = (nickname: string) => {
     return result;
   };
 
-  const followingList = useInfiniteScrollQuery({
+  const followingListInfiniteQuery = useInfiniteScrollQuery({
     queryKey: ['useGetFollowingList'],
     getNextPage: (nextRequest) => {
-      console.log(nextRequest);
       return snsAPI.getFollowingList({
         nickname,
-        size: 3,
-        followId: nextRequest,
+        size: 10,
+        userId: nextRequest,
       });
     },
     nextRequest: 'userId',
     options: {
-      onSuccess: (response) => {
+      onSuccess: (data: InfiniteData<unknown>) => {
         queryClient.cancelQueries(FOLLOWING_DICTIONARY_KEY);
         queryClient.fetchQuery({
           queryKey: FOLLOWING_DICTIONARY_KEY,
-          queryFn: () => setFollowingDictionary(response.data),
+          queryFn: () => {
+            const followingList = linkageInfiniteScrollData(data);
+            return setFollowingDictionary(followingList || []);
+          },
         });
       },
       enabled: !!nickname,
     },
   });
-  const targetRef = useIntersectionObserver(followingList.fetchNextPage);
-  const data = linkageInfiniteScrollData(followingList?.data);
+  const targetRef = useIntersectionObserver(
+    followingListInfiniteQuery.fetchNextPage
+  );
+  const data = linkageInfiniteScrollData(followingListInfiniteQuery?.data);
 
   return {
+    followingListInfiniteQuery,
     targetRef,
     data,
   };

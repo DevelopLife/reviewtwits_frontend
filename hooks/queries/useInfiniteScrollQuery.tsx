@@ -15,6 +15,7 @@ function useInfiniteScrollQuery<T extends Record<K, number>, K extends string>({
   queryKey,
   getNextPage,
   nextRequest,
+  options,
 }: UseInfiniteScrollQueryParams<T, K>) {
   const query = useInfiniteQuery({
     queryKey: queryKey,
@@ -29,6 +30,7 @@ function useInfiniteScrollQuery<T extends Record<K, number>, K extends string>({
 
       return pageParam;
     },
+    ...options,
   });
 
   const clearCache = () => {
