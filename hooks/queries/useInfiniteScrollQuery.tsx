@@ -1,6 +1,7 @@
 import {
   QueryKey,
   UseInfiniteQueryOptions,
+  UseInfiniteQueryResult,
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import { useEffect } from 'react';
@@ -9,14 +10,17 @@ interface UseInfiniteScrollQueryParams<T, K> {
   queryKey: QueryKey;
   getNextPage: (nextRequest: number) => Promise<T[]>;
   nextRequest: K;
-  options?: Omit<UseInfiniteQueryOptions, 'queryKey' | 'queryFn'>;
+  options?: Omit<
+    UseInfiniteQueryOptions<Promise<T[]>, unknown, T[]>,
+    'queryKey' | 'queryFn'
+  >;
 }
 function useInfiniteScrollQuery<T extends Record<K, number>, K extends string>({
   queryKey,
   getNextPage,
   nextRequest,
   options,
-}: UseInfiniteScrollQueryParams<T, K>) {
+}: UseInfiniteScrollQueryParams<T, K>): UseInfiniteQueryResult<T[], unknown> {
   const query = useInfiniteQuery({
     queryKey: queryKey,
     queryFn: async ({ pageParam }) => {
