@@ -146,9 +146,8 @@ export const snsAPI = {
       createdComment
     );
     console.log(response.data, '리턴값이어떻게');
+  },
 
-  unfollow: (body: FollowAndUnFollowRequestBody) =>
-    requiredTokenApi.post(`${SNS_URL}/request-unfollow`, body),
   getFollowSuggestion: () =>
     requiredTokenApi
       .get(`${SNS_URL}/suggest-followers`)

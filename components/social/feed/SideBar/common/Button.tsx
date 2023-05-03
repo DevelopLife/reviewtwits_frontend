@@ -6,7 +6,7 @@ import { Colors } from 'styles/theme';
 interface ButtonProps {
   color: Colors;
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button = ({ color, children, ...rest }: ButtonProps) => {
