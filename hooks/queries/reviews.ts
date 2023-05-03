@@ -7,28 +7,20 @@ import {
   ShoppingMallReviewInfo,
 } from 'typings/reviews';
 
-export const useGetShoppingMallReviewInfo = (productURL: string) => {
+export const useGetShoppingMallReviewInfo = () => {
   return useQuery<
     AxiosResponse<ShoppingMallReviewInfo>,
     AxiosError<ResponseError>
-  >(
-    ['useGetShoppingMallReviewInfo'],
-    () => shoppingAPI.getShoppingMallReviewInfo(productURL),
-    {
-      enabled: !!productURL,
-    }
+  >(['useGetShoppingMallReviewInfo'], () =>
+    shoppingAPI.getShoppingMallReviewInfo()
   );
 };
 
-export const useGetShoppingMallReviewList = (productURL: string) => {
+export const useGetShoppingMallReviewList = () => {
   return useQuery<
     AxiosResponse<ShoppingMallReviewDetail[]>,
     AxiosError<ResponseError>
-  >(
-    ['useGetShoppingMallReviewList'],
-    () => shoppingAPI.getShoppingMallReviewList(productURL),
-    {
-      enabled: !!productURL,
-    }
+  >(['useGetShoppingMallReviewList'], () =>
+    shoppingAPI.getShoppingMallReviewList()
   );
 };
