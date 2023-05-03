@@ -39,6 +39,21 @@ const shoppingAPI = {
       },
     });
   },
+
+  //
+  // product register
+
+  // TODO: 제품등록 임시 api
+  registerProduct: async ({ productUrl }: RegisterProductBody) => {
+    return await requiredTokenApi.post(`/products/register`, {
+      productUrl,
+      projectId: 25020,
+    });
+  },
 };
+
+export interface RegisterProductBody {
+  productUrl: string;
+}
 
 export { shoppingAPI };

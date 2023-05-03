@@ -13,6 +13,7 @@ import {
   useCreateShoppingMallReview,
   useEditShoppingMallReview,
   useGetShoppingMallReview,
+  useRegisterShoppingMallProduct,
 } from 'hooks/queries/shopping';
 
 const ReviewWriteModal = ({ productURL }: { productURL: string }) => {
@@ -36,6 +37,8 @@ const ReviewWriteModal = ({ productURL }: { productURL: string }) => {
     newImageFiles: [],
   });
   const { mutate: mutateCreate } = useCreateShoppingMallReview();
+  // TODO: 제품등록 임시 mutate Function
+  const { mutate: mutateRegister } = useRegisterShoppingMallProduct();
   const { mutate: mutateEdit } = useEditShoppingMallReview(reviewId);
 
   const setDataInToFormData = () => {

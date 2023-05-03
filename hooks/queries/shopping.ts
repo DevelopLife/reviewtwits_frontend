@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { shoppingAPI } from 'api/reviews';
+import { RegisterProductBody, shoppingAPI } from 'api/reviews';
 import { SUCCESS_MESSAGE } from 'constants/reviews';
 import { ReviewResponseType } from 'typings/reviews';
 
@@ -37,6 +37,21 @@ export const useCreateShoppingMallReview = () => {
             alert(response.data[0].message);
             break;
         }
+      },
+    }
+  );
+};
+
+// TODO: 제품등록 임시 query hook
+export const useRegisterShoppingMallProduct = () => {
+  return useMutation(
+    (formData: RegisterProductBody) => shoppingAPI.registerProduct(formData),
+    {
+      onSuccess: ({ status }) => {
+        alert('성공');
+      },
+      onError: ({ response }) => {
+        alert(response.data[0].message);
       },
     }
   );
