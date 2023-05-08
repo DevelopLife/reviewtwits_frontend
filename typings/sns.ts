@@ -3,7 +3,7 @@ export interface FollowType {
   nickname: string;
   accountId: string;
   introduceText: string;
-  profileImage: null | string;
+  profileImageUrl: null | string;
   detailIntroduce: string;
   reviewCount: number;
   followers: number;

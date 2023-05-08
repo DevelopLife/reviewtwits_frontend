@@ -66,7 +66,6 @@ export const useGetMyReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
-
 export const useGetOneReview = (nickname: string, reviewId: number) => {
   return useQuery(['review', nickname, reviewId], () =>
     snsAPI.getOneReview(nickname, reviewId)
@@ -78,7 +77,6 @@ export const useGetReviewComments = (reviewId: number) => {
     snsAPI.getReviewComments(reviewId)
   );
 };
-
 
 export const useFollowAndUnFollow = () => {
   const queryClient = useQueryClient();
@@ -205,4 +203,12 @@ export const useGetInfiniteFeed = () => {
     targetRef,
     data,
   };
+};
+
+export const useGetRecentUpdatedUsers = () => {
+  const recentUpdatedUserQuery = useQuery(['recentUpdatedUser'], () =>
+    snsAPI.getRecentUpdatedUsers()
+  );
+
+  return recentUpdatedUserQuery;
 };

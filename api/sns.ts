@@ -149,6 +149,12 @@ export const snsAPI = {
 
     return response.data;
   },
+
+  getRecentUpdatedUsers: async () => {
+    return await requiredTokenApi
+      .get(`${SNS_URL}/recent-update-users`)
+      .then((res) => res.data);
+  },
 };
 
 type FollowAndUnFollowRequestBody = {
