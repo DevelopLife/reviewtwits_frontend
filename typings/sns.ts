@@ -19,3 +19,7 @@ export interface GetFollowerListParams {
   size: number;
   userId?: number;
 }
+
+export type FollowAndUnFollowRequestBody = {
+  targetUserNickname: string;
+};

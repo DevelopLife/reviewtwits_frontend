@@ -2,7 +2,11 @@ import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { SocialProfile, SocialReview } from 'typings/social';
 
 import { ReactionType } from 'typings/reviews';
-import type { FollowListType, GetFollowerListParams } from 'typings/sns';
+import type {
+  FollowAndUnFollowRequestBody,
+  FollowListType,
+  GetFollowerListParams,
+} from 'typings/sns';
 
 const SNS_URL = '/sns';
 
@@ -89,9 +93,6 @@ export const snsAPI = {
     );
 
     return response.data;
-    // return await optionalTokenAPI.get(`${SNS_URL}/get-followings/${nickname}`, {
-    //   params,
-    // });
   },
 
   follow: (body: FollowAndUnFollowRequestBody) =>
@@ -173,12 +174,7 @@ export const snsAPI = {
       `${SNS_URL}/comments/${reviewId}`,
       createdComment
     );
-    console.log(response.data, '리턴값이어떻게');
 
     return response.data;
   },
-};
-
-type FollowAndUnFollowRequestBody = {
-  targetUserNickname: string;
 };
