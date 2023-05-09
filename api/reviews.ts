@@ -1,5 +1,6 @@
 import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { ReviewResponseType } from 'typings/reviews';
+import type { RegisterProjectParams } from 'typings/register';
 
 const SHOPPING_URL = '/reviews/shopping';
 
@@ -44,16 +45,16 @@ const shoppingAPI = {
   // product register
 
   // TODO: 제품등록 임시 api
-  registerProduct: async ({ productUrl }: RegisterProductBody) => {
-    return await requiredTokenApi.post(`/products/register`, {
+  registerProduct: async ({
+    projectName,
+    body: { productUrl, imageUrl, productName },
+  }: RegisterProjectParams) => {
+    return await requiredTokenApi.post(`/products/register/${projectName}`, {
       productUrl,
-      projectId: 25020,
+      imageUrl,
+      productName,
     });
   },
 };
-
-export interface RegisterProductBody {
-  productUrl: string;
-}
 
 export { shoppingAPI };
