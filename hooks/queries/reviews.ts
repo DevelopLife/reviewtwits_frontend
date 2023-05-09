@@ -12,8 +12,8 @@ export const useGetShoppingMallReviewInfo = (productURL: string) => {
     AxiosResponse<ShoppingMallReviewInfo>,
     AxiosError<ResponseError>
   >(
-    ['useGetShoppingMallReviewInfo'],
-    () => shoppingAPI.getShoppingMallReviewInfo(productURL),
+    ['useGetShoppingMallReviewInfo', productURL],
+    () => shoppingAPI.getShoppingMallReviewInfo(encodeURI(productURL)),
     {
       enabled: !!productURL,
     }
@@ -25,8 +25,8 @@ export const useGetShoppingMallReviewList = (productURL: string) => {
     AxiosResponse<ShoppingMallReviewDetail[]>,
     AxiosError<ResponseError>
   >(
-    ['useGetShoppingMallReviewList'],
-    () => shoppingAPI.getShoppingMallReviewList(productURL),
+    ['useGetShoppingMallReviewList', productURL],
+    () => shoppingAPI.getShoppingMallReviewList(encodeURI(productURL)),
     {
       enabled: !!productURL,
     }
