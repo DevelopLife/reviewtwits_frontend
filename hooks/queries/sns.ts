@@ -5,6 +5,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 import { AxiosError, AxiosResponse } from 'axios';
+import { useRecoilValue } from 'recoil';
 
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowingDictionary } from 'typings/sns';
@@ -15,6 +16,7 @@ import { snsAPI } from 'api/sns';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 import { ReviewResponseType } from 'typings/reviews';
+import { selectedUserState } from 'states/reviews';
 
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
 
@@ -188,10 +190,13 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
 };
 
 export const useGetInfiniteFeed = () => {
+  const selectedUser = useRecoilValue(selectedUserState);
   const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType>({
-    queryKey: ['useGetInfiniteFeed'],
+    queryKey: ['useGetInfiniteFeed', selectedUser],
     getNextPage: (nextRequest) => {
-      return snsAPI.getInfiniteFeed(nextRequest);
+      return selectedUser === ''
+        ? snsAPI.getInfiniteFeed(nextRequest)
+        : snsAPI.getUserReviews(selectedUser, nextRequest);
     },
   });
 
