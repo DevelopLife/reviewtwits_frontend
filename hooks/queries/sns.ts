@@ -60,9 +60,9 @@ export const useGetFollowingList = (nickname: string) => {
   );
 };
 
-export const useGetMyReviews = (nickname: string, reviewId?: number) => {
+export const useGetUserReviews = (nickname: string, reviewId?: number) => {
   return useQuery(['reviews', nickname], () =>
-    snsAPI.getMyReviews(nickname, reviewId)
+    snsAPI.getUserReviews(nickname, reviewId)
   );
 };
 
@@ -174,7 +174,7 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
   const infiniteQuery = useInfiniteScrollQuery<SocialReview>({
     queryKey: ['socialMyReviews', nickname],
     getNextPage: (nextRequest) => {
-      return snsAPI.getMyReviews(nickname, nextRequest);
+      return snsAPI.getUserReviews(nickname, nextRequest);
     },
   });
 

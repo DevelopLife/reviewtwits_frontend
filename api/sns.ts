@@ -96,7 +96,7 @@ export const snsAPI = {
   //
   // Profile
 
-  getMyReviews: async (
+  getUserReviews: async (
     nickname: string,
     reviewId?: number
   ): Promise<SocialReview[]> => {
