@@ -1,11 +1,15 @@
-import ReviewWriteModal from 'components/review/ReviewWriteModal/ReviewWriteModal';
+import ReviewWriteModal, {
+  ReviewWriteModalProps,
+} from 'components/review/ReviewWriteModal/ReviewWriteModal';
 import { useRouter } from 'next/router';
 
 const ReviewWritePage = () => {
   const router = useRouter();
-  const { productURL } = router.query as { productURL: string };
+  const { productURL, title } = router.query as ReviewWriteModalProps;
 
-  return productURL ? <ReviewWriteModal productURL={productURL} /> : null;
+  return productURL && title ? (
+    <ReviewWriteModal productURL={productURL} title={title} />
+  ) : null;
 };
 
 export default ReviewWritePage;

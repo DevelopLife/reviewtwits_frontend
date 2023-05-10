@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 
 import useForm from 'hooks/useForm';
 import { ReviewType } from 'typings/reviews';
@@ -13,14 +14,18 @@ import {
   useCreateShoppingMallReview,
   useEditShoppingMallReview,
   useGetShoppingMallReview,
-  useRegisterShoppingMallProduct,
 } from 'hooks/queries/shopping';
 
-const ReviewWriteModal = ({ productURL }: { productURL: string }) => {
+export interface ReviewWriteModalProps extends ParsedUrlQuery {
+  productURL: string;
+  title: string;
+}
+
+const ReviewWriteModal = ({ productURL, title }: ReviewWriteModalProps) => {
   const router = useRouter();
-  const reviewId = Number(router?.query?.id);
-  const isEditPage = router?.query?.id;
-  const { data: reviewData, isLoading } = useGetShoppingMallReview(reviewId);
+  const productId = Number(router?.query?.id);
+  const isEditPage = productId ? true : false;
+  const { data: reviewData, isLoading } = useGetShoppingMallReview(title);
 
   const {
     values,
@@ -37,9 +42,7 @@ const ReviewWriteModal = ({ productURL }: { productURL: string }) => {
     newImageFiles: [],
   });
   const { mutate: mutateCreate } = useCreateShoppingMallReview();
-  // TODO: 제품등록 임시 mutate Function
-  const { mutate: mutateRegister } = useRegisterShoppingMallProduct();
-  const { mutate: mutateEdit } = useEditShoppingMallReview(reviewId);
+  const { mutate: mutateEdit } = useEditShoppingMallReview(productId);
 
   const setDataInToFormData = () => {
     const formData = new FormData();
@@ -49,6 +52,7 @@ const ReviewWriteModal = ({ productURL }: { productURL: string }) => {
     formData.append('score', score.toString());
     formData.append('content', content);
     formData.append('productURL', productURL);
+    formData.append('productName', title);
     newImageFiles?.forEach((image) =>
       formData.append('multipartImageFiles', image)
     );

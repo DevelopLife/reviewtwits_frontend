@@ -9,12 +9,12 @@ import type { RegisterProjectParams } from 'typings/register';
 
 const REVIEW_QUERY_KEY = 'reviews';
 
-export const useGetShoppingMallReview = (reviewId: number) => {
+export const useGetShoppingMallReview = (productName: string) => {
   return useQuery<ReviewResponseType>(
-    [REVIEW_QUERY_KEY, reviewId],
-    () => shoppingAPI.getReviewDetail(reviewId),
+    [REVIEW_QUERY_KEY, productName],
+    () => shoppingAPI.getReviewDetail(productName),
     {
-      enabled: !!reviewId,
+      enabled: !!productName,
     }
   );
 };

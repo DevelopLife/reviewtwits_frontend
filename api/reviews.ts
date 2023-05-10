@@ -14,9 +14,9 @@ const shoppingAPI = {
       },
     });
   },
-  getReviewDetail: async (reviewId: number): Promise<ReviewResponseType> => {
+  getReviewDetail: async (productName: string): Promise<ReviewResponseType> => {
     return await optionalTokenAPI
-      .get(`${SHOPPING_URL}/${reviewId}`)
+      .get(`${SHOPPING_URL}/${productName}`)
       .then((res) => res.data);
   },
   editReview: async (reviewId: number, values: FormData) => {
