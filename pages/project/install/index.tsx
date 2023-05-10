@@ -3,6 +3,7 @@ import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import ReactIcon from 'public/icons/react.svg';
 
@@ -26,6 +27,9 @@ const PLATFORMS = [
 ];
 
 const InstallPage = () => {
+  const router = useRouter();
+  const { projectName } = router.query;
+
   return (
     <ProjectPageLayout>
       <ProjectCreateLayout title={PROJECT_TITLE}>
@@ -33,7 +37,12 @@ const InstallPage = () => {
           <S.ProjectSelectPlatformList>
             {PLATFORMS.map(({ name, Icon }) => (
               <Link
-                href={{ pathname: `install/${name}` }}
+                href={{
+                  pathname: `install/${name}`,
+                  query: {
+                    projectName,
+                  },
+                }}
                 key={name}
                 style={{ textDecoration: 'none', color: '#3D3D3D' }}
               >

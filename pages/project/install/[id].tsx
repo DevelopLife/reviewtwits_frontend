@@ -10,21 +10,81 @@ import {
 import Margin from 'components/Dashboard/common/Margin';
 import CommonButton from 'components/Project/install/common/Button';
 
-const MOCK_CODE = `
-<span class="_1syGnXOL _3VkgqBXB" data-clk="dropbanner1b" style="padding-right: 20px; font-size: 17px; color: black">
-  <span>매일 쓰는 브라우저 보안이 걱정된다면, </span>
-  <strong>안전하고 빠른 최신 브라우저 웨일로 업데이트 하세요.</strong>
-</span>
-`;
-
 const INSTALL_GUIDE_MESSAGES = {
   ONE: '1. 서비스가 로드 될 수 있도록 자신의 사이트 소스코드에 해당 코드를 리뷰가 삽입되고 싶은 위치에 넣어주세요',
-  TWO: '2. 리뷰에 대한 별점이 표시되게 하고 싶은 경우 해당 스크립트를 추가해주세요',
+  TWO: '2. 쇼핑몰 리뷰 작성 팝업창을 열기를 원한다면 해당 코드를 위치에 넣어주세요',
 };
 
 const InstallDetailPage = () => {
   const router = useRouter();
   const redirectPrevHistory = () => router.back();
+  const { projectName } = router.query;
+
+  const MOCK_CODE = `
+    const ReviewTwitsIframe = () => {
+      const [openGraphs, setOpenGraphs] = useState({
+        title: "",
+        image: "",
+      });
+    
+      useEffect(() => {
+        const title = getMetaOpenGraphContent("title");
+        const image = getMetaOpenGraphContent("image");
+    
+        setOpenGraphs({
+          title,
+          image,
+        });
+      }, []);
+
+      const iframeAttributes = {
+        id: "reviewtwits",
+        title: "reviewtwits",
+        src: \`https://reviewtwits.shop/review?projectName=${projectName}&productURL=\${window.location.href}&title=\${openGraphs.title}&image=\${openGraphs.image}\`,
+        width: "100%",
+        height: "700px"
+      }
+
+
+      return (
+        <iframe
+          {...iframeAttributes}
+        ></iframe>
+      );
+    };
+  `;
+
+  const MOCK_CODE_TWO = `
+    const ReviewTwitsWriteButton = () => {
+      const [openGraphs, setOpenGraphs] = useState({
+        title: "",
+        image: "",
+      });
+    
+      useEffect(() => {
+        const title = getMetaOpenGraphContent("title");
+        const image = getMetaOpenGraphContent("image");
+    
+        setOpenGraphs({
+          title,
+          image,
+        });
+      }, []);
+
+      return (
+        <button
+          id="write_button"
+          onClick={() =>
+          window.open(
+            \`https://localhost:3000/review/write?productURL=\${window.location.href}&title=\${openGraphs.title}\`,
+            "리뷰트윗 리뷰작성하기",
+            "width=900,height=800,scrollbars=yes"
+          )}
+        >
+        리뷰작성
+        </button>
+      )
+  `;
 
   return (
     <>
@@ -37,7 +97,7 @@ const InstallDetailPage = () => {
           <Video srcs={['https://']} />
         </Margin>
         <CodeParagraph text={INSTALL_GUIDE_MESSAGES.ONE} code={MOCK_CODE} />
-        <CodeParagraph text={INSTALL_GUIDE_MESSAGES.TWO} code={MOCK_CODE} />
+        <CodeParagraph text={INSTALL_GUIDE_MESSAGES.TWO} code={MOCK_CODE_TWO} />
         <InstallPageButtons>
           <CommonButton
             styleAttributes={{

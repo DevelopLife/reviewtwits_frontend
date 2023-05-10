@@ -1,14 +1,17 @@
 import { requiredTokenApi } from 'api/instance';
 import { AxiosResponse } from 'axios';
+import { CreateProjectResponse } from 'typings/project';
 
 const PROJECTS_URL = 'projects';
 
 export const projectsAPI = {
   get: (): ResponseType<GetProjectsResponseData[]> =>
     requiredTokenApi.get(PROJECTS_URL),
-
-  create: (requestBody: CreateProjectRequestBody) =>
-    requiredTokenApi.post(PROJECTS_URL, requestBody),
+  create: async (requestBody: CreateProjectRequestBody) => {
+    const response: AxiosResponse<CreateProjectResponse> =
+      await requiredTokenApi.post(PROJECTS_URL, requestBody);
+    return response.data;
+  },
   patch: (projectId: string, requestBody: CreateProjectRequestBody) =>
     requiredTokenApi.patch(`${PROJECTS_URL}/${projectId}`, requestBody),
 };
