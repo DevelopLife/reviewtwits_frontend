@@ -4,7 +4,8 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { useRecoilValue } from 'recoil';
 
 import { ResponseError } from 'typings/error';
 import { FollowListType, FollowType, FollowingDictionary } from 'typings/sns';
@@ -15,6 +16,7 @@ import { snsAPI } from 'api/sns';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 import { ReviewResponseType } from 'typings/reviews';
+import { selectedUserState } from 'states/reviews';
 
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
 
@@ -104,9 +106,9 @@ export const useGetFollowingList = (nickname: string) => {
   };
 };
 
-export const useGetMyReviews = (nickname: string, reviewId?: number) => {
+export const useGetUserReviews = (nickname: string, reviewId?: number) => {
   return useQuery(['reviews', nickname], () =>
-    snsAPI.getMyReviews(nickname, reviewId)
+    snsAPI.getUserReviews(nickname, reviewId)
   );
 };
 
@@ -218,7 +220,7 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
   const infiniteQuery = useInfiniteScrollQuery<SocialReview, 'reviewId'>({
     queryKey: ['socialMyReviews', nickname],
     getNextPage: (nextRequest) => {
-      return snsAPI.getMyReviews(nickname, nextRequest);
+      return snsAPI.getUserReviews(nickname, nextRequest);
     },
     nextRequest: 'reviewId',
   });
@@ -233,10 +235,13 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
 };
 
 export const useGetInfiniteFeed = () => {
-  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType, 'reviewId'>({
-    queryKey: ['useGetInfiniteFeed'],
+  const selectedUser = useRecoilValue(selectedUserState);
+  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType>({
+    queryKey: ['useGetInfiniteFeed', selectedUser],
     getNextPage: (nextRequest) => {
-      return snsAPI.getInfiniteFeed(nextRequest);
+      return selectedUser === ''
+        ? snsAPI.getInfiniteFeed(nextRequest)
+        : snsAPI.getUserReviews(selectedUser, nextRequest);
     },
     nextRequest: 'reviewId',
   });
@@ -247,4 +252,12 @@ export const useGetInfiniteFeed = () => {
     targetRef,
     data,
   };
+};
+
+export const useGetRecentUpdatedUsers = () => {
+  const recentUpdatedUserQuery = useQuery(['recentUpdatedUser'], () =>
+    snsAPI.getRecentUpdatedUsers()
+  );
+
+  return recentUpdatedUserQuery;
 };
