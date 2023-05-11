@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 
-import SocialFollowButton from 'components/social/profile/SocialFollowButton';
+import SocialFollowAndUnFollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
 import TestGlobalProvider from 'components/test/TestGlobalProvider';
 import { FOLLOW } from 'constants/followAndUnFollow';
 
@@ -9,7 +9,11 @@ const mockNickname = 'test@test.com';
 test('render SocialUnFollowButton', async () => {
   render(
     <TestGlobalProvider>
-      <SocialFollowButton nickname={mockNickname} />
+      <SocialFollowAndUnFollowButton
+        nickname={mockNickname}
+        size={'normal'}
+        TextList={['unfollow', 'follow']}
+      />
     </TestGlobalProvider>
   );
 

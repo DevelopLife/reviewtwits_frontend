@@ -2,6 +2,11 @@ import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { SocialProfile, SocialReview } from 'typings/social';
 
 import { ReactionType } from 'typings/reviews';
+import type {
+  FollowAndUnFollowRequestBody,
+  FollowListType,
+  GetFollowerListParams,
+} from 'typings/sns';
 
 const SNS_URL = '/sns';
 
@@ -59,11 +64,35 @@ export const snsAPI = {
   //
   // following | follower
 
-  getFollowerList: async (nickname: string) => {
-    return await optionalTokenAPI.get(`${SNS_URL}/get-followers/${nickname}`);
+  getFollowerList: async ({
+    nickname,
+    size,
+    userId,
+  }: GetFollowerListParams): Promise<FollowListType> => {
+    const params = { size, userId };
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/get-followers/${nickname}`,
+      {
+        params,
+      }
+    );
+
+    return response.data;
   },
-  getFollowingList: async (nickname: string) => {
-    return await optionalTokenAPI.get(`${SNS_URL}/get-followings/${nickname}`);
+  getFollowingList: async ({
+    nickname,
+    size,
+    userId,
+  }: GetFollowerListParams): Promise<FollowListType> => {
+    const params = { size, userId };
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/get-followings/${nickname}`,
+      {
+        params,
+      }
+    );
+
+    return response.data;
   },
 
   follow: (body: FollowAndUnFollowRequestBody) =>
@@ -145,7 +174,6 @@ export const snsAPI = {
       `${SNS_URL}/comments/${reviewId}`,
       createdComment
     );
-    console.log(response.data, '리턴값이어떻게');
 
     return response.data;
   },
@@ -155,8 +183,4 @@ export const snsAPI = {
       .get(`${SNS_URL}/recent-update-users`)
       .then((res) => res.data);
   },
-};
-
-type FollowAndUnFollowRequestBody = {
-  targetUserNickname: string;
 };

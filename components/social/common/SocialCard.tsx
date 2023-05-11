@@ -1,28 +1,37 @@
 import { FOLLOW_UNFOLLOW } from 'constants/social';
 import Image from 'next/image';
-import { useState } from 'react';
 import * as S from './SocialCard.styles';
+import { formattedImageUrl } from 'utils/format';
+
+import SocialFollowAndUnfollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
 
 interface SocialCardProps {
-  name: string;
+  imageUrl: string | null;
+  nickname: string;
   role: string;
 }
 
-const SocialCard = ({ name, role }: SocialCardProps) => {
-  const [followState, setFollowState] = useState();
+const SocialCard = ({ imageUrl, nickname, role }: SocialCardProps) => {
   return (
     <S.Container>
       <S.userBox>
         <S.ImageBox>
-          <Image src="" alt="" />
+          <Image
+            src={imageUrl ? formattedImageUrl(imageUrl) : ''}
+            alt="userProfile"
+            fill
+          />
         </S.ImageBox>
         <S.UserInfos>
-          <S.UserName>{name}</S.UserName>
+          <S.UserName>{nickname}</S.UserName>
           <S.UserRole>{role}</S.UserRole>
         </S.UserInfos>
       </S.userBox>
-
-      <S.SocialButton>{FOLLOW_UNFOLLOW.FOLLOW}</S.SocialButton>
+      <SocialFollowAndUnfollowButton
+        nickname={nickname}
+        size={'small'}
+        TextList={[FOLLOW_UNFOLLOW.UNFOLLOW, FOLLOW_UNFOLLOW.FOLLOW]}
+      />
     </S.Container>
   );
 };
