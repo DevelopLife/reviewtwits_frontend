@@ -5,5 +5,5 @@ export const FOLLOW_BUTTON = Object.freeze({
 
 export const FOLLOW_UNFOLLOW = Object.freeze({
   FOLLOW: '팔로우',
-  UNFoLLOW: '언팔로우',
+  UNFOLLOW: '언팔로우',
 });
