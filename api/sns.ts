@@ -120,14 +120,11 @@ export const snsAPI = {
 
   //
   // modal
-  getOneReview: async (nickname: string, reviewId: number) => {
-    const size = 10;
-    // 1로 했을 때 imageUrl, emotion을 하나씩만 받아오는 버그가 있어서 백 수정 전까지는  10으로 임의 사용
-    const params = { size, reviewId: reviewId + 1 };
-
-    const response = await optionalTokenAPI.get(`${SNS_URL}/feeds`, { params });
-
-    return response.data[0];
+  getOneReview: async (reviewId: number) => {
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/reviews/${reviewId}`
+    );
+    return response.data;
   },
 
   getReviewComments: async (reviewId: number) => {

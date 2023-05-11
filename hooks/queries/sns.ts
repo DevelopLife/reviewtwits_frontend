@@ -66,10 +66,8 @@ export const useGetMyReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
-export const useGetOneReview = (nickname: string, reviewId: number) => {
-  return useQuery(['review', nickname, reviewId], () =>
-    snsAPI.getOneReview(nickname, reviewId)
-  );
+export const useGetOneReview = (reviewId: number) => {
+  return useQuery(['review', reviewId], () => snsAPI.getOneReview(reviewId));
 };
 
 export const useGetReviewComments = (reviewId: number) => {
