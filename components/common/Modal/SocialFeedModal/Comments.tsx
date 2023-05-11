@@ -27,7 +27,7 @@ const S = {
     height: 338px;
     margin-bottom: 16px;
 
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
   `,
   Title: styled.h4`
     margin-bottom: 8px;
