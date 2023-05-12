@@ -10,6 +10,8 @@ const PUBLIC_URLS = [
   '/sign-in',
   '/sign-up',
   '/social',
+  '/oauth/callback/kakao',
+  '/oauth/callback/naver',
   '/socual/user',
   '/social/user/[nickname]',
   '/shoppingMallReview',

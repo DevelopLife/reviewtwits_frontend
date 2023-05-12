@@ -23,14 +23,12 @@ const kakaoOauthAPI = {
       .then((res) => res.data);
   },
 
-  getUserData: async (accessToken: string) => {
-    const headers = { Authorization: `Bearer ${accessToken}` };
+  kakaoLogin: async (accessToken: string) => {
+    const headers = {
+      Authorization: accessToken,
+    };
 
-    return await oauthApi
-      .get('https://kapi.kakao.com/v2/user/me', {
-        headers,
-      })
-      .then((res) => res.data);
+    return authApi.post(`${OAUTH_URL}/kakao`, {}, { headers });
   },
 };
 
