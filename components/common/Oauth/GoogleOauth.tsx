@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 
-import { googleOauthAPI } from 'api/oauth';
-import { doSignIn } from 'utils/auth';
-
 import GoogleIconSVG from 'public/google_icon.svg';
 import theme from 'styles/theme';
-import { setCookie } from 'utils/cookies';
+import { doOauthSignIn } from 'utils/oauth';
+
+const PROVIDER = 'GOOGLE';
 
 export const GoogleOauth = () => {
   return (
@@ -22,25 +21,7 @@ export const GoogleLoginButton = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const accessToken = tokenResponse.access_token;
-      if (accessToken) {
-        const loginResult = await googleOauthAPI.googleLogin(accessToken);
-
-        if (loginResult?.status === 200) {
-          doSignIn(loginResult.data.accessToken);
-
-          return location.replace('/');
-        }
-
-        if (loginResult?.status === 202) {
-          const { email } = loginResult.data;
-
-          setCookie('email', email);
-          setCookie('token', accessToken);
-          setCookie('provider', 'GOOGLE');
-
-          return (location.href = '/sign-up');
-        }
-      }
+      if (accessToken) doOauthSignIn(PROVIDER, accessToken);
     },
   });
 

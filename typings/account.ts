@@ -1,5 +1,7 @@
 export type SignUpType = 'COMMON' | 'SOCIAL';
 
+export type SocialProviderType = 'GOOGLE' | 'KAKAO' | 'NAVER';
+
 export interface UserFormType {
   accountId?: string;
   accountPw?: string;
@@ -8,7 +10,7 @@ export interface UserFormType {
   gender?: Gender | '';
   accountPwCheck?: string;
   verifyCode?: string;
-  provider?: 'GOOGLE' | 'KAKAO' | 'NAVER' | '';
+  provider?: SocialProviderType | '';
 }
 
 export type CodeIssuanceType = 'NOT_ISSUED' | 'IN_PROGRESS' | 'COMPLETE';
