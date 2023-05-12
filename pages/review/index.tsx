@@ -56,14 +56,6 @@ const ShoppingMallReviewPage = () => {
     image,
   ]);
 
-  if (
-    !shoppingmallReviewInfoData ||
-    !shoppingmallReviewList ||
-    shoppingmallReviewInfoData?.status === 202
-  ) {
-    return <h1>데이터가 없습니다</h1>;
-  }
-
   if (shoppingmallReviewInfoData?.data && shoppingmallReviewList?.data) {
     return (
       <div>
