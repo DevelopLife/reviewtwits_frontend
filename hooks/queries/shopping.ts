@@ -15,6 +15,7 @@ export const useGetShoppingMallReview = (productName: string) => {
     () => shoppingAPI.getReviewDetail(productName),
     {
       enabled: !!productName,
+      retry: 0,
     }
   );
 };

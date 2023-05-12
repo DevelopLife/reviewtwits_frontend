@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 
 import useForm from 'hooks/useForm';
-import { ReviewType } from 'typings/reviews';
+import { ReviewResponseType, ReviewType } from 'typings/reviews';
 import { validateReviewContent, validateReviewScore } from 'utils/validate';
 import { DEFAULT_REVIEW_WRITE_ERRORS, ERROR_MESSAGE } from 'constants/reviews';
 
@@ -15,6 +15,32 @@ import {
   useEditShoppingMallReview,
   useGetShoppingMallReview,
 } from 'hooks/queries/shopping';
+import ServiceSection from 'components/review/ReviewWriteModal/ServiceSection/@index';
+
+// TODO: DELETE
+
+const mockReviewData: ReviewResponseType = {
+  productUrl:
+    'https://thumbnail6.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/290346317532916-57e0ca03-9d04-4aed-b5ec-19442d97c7ac.png',
+  productName: '코멧 사선컷팅 테이프 크리너 핸들 + 거치대 세트',
+  lastModifiedDate: [],
+  reviewId: 0,
+  projectId: 0,
+  starScore: 0,
+  score: 0,
+  content: '',
+  reviewImageUrlList: [],
+  userInfo: {
+    accountId: 'string',
+    birthDate: 'string',
+    gender: 'string',
+    introduceText: 'string',
+    nickname: 'string',
+    phoneNumber: 'string',
+    profileImageUrl: 'string',
+  },
+  isScrapped: false,
+};
 
 export interface ReviewWriteModalProps extends ParsedUrlQuery {
   productURL: string;
@@ -25,7 +51,7 @@ const ReviewWriteModal = ({ productURL, title }: ReviewWriteModalProps) => {
   const router = useRouter();
   const productId = Number(router?.query?.id);
   const isEditPage = productId ? true : false;
-  const { data: reviewData, isLoading } = useGetShoppingMallReview(title);
+  const { data: reviewData } = useGetShoppingMallReview(title);
 
   const {
     values,
@@ -98,15 +124,16 @@ const ReviewWriteModal = ({ productURL, title }: ReviewWriteModalProps) => {
     }
   }, [reviewData, initializeForm]);
 
-  if (isEditPage && isLoading) return null;
+  // if (!reviewData) return <div>등록되지 않은 상품입니다.</div>;
+
   return (
     <S.Container>
       <S.Title>리뷰 관리</S.Title>
       <S.Form onSubmit={(e) => handleSubmit(e, onValid)}>
         <S.ReviewContent>
-          {/* <ServiceSection /> */}
+          <ServiceSection />
           <QualitySection
-            reviewData={reviewData}
+            reviewData={mockReviewData}
             formValues={values}
             setValue={setValue}
             handleChange={handleChange}
