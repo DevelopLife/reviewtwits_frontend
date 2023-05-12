@@ -9,7 +9,8 @@ const useReaction = (reviewId: number) => {
     (reaction: ReactionType) => snsAPI.toggleReaction(reviewId, reaction),
     {
       onSuccess: () => {
-        return queryClient.invalidateQueries(['feed']);
+        queryClient.invalidateQueries(['useGetInfiniteFeed']);
+        queryClient.invalidateQueries(['review', reviewId]);
       },
     }
   );
