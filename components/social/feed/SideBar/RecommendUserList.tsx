@@ -44,8 +44,8 @@ const RecommendUserListView = ({
               width={40}
               height={40}
               src={
-                user.profileImage
-                  ? formattedImageUrl(user.profileImage)
+                user.profileImageUrl && !user.profileImageUrl.includes('null') //
+                  ? formattedImageUrl(user.profileImageUrl)
                   : '/images/default_user_profile_img.png'
               }
               alt=""
