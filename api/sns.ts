@@ -1,6 +1,5 @@
 import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { SocialProfile, SocialReview } from 'typings/social';
-
 import { ReactionType } from 'typings/reviews';
 import type {
   FollowAndUnFollowRequestBody,
@@ -15,7 +14,6 @@ export const snsAPI = {
   // feed(home)
   getFeed: async () => {
     const SIZE = 10;
-
     return await optionalTokenAPI
       .get(`${SNS_URL}/feeds`, {
         params: {
@@ -27,7 +25,6 @@ export const snsAPI = {
 
   getInfiniteFeed: async (lastId: number) => {
     const SIZE = 10;
-
     return await optionalTokenAPI
       .get(`${SNS_URL}/feeds`, {
         params: {
@@ -77,7 +74,6 @@ export const snsAPI = {
         params,
       }
     );
-
     return response.data;
   },
   getFollowingList: async ({
@@ -89,22 +85,21 @@ export const snsAPI = {
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/get-followings/${nickname}`,
       {
-      }
         params,
+      }
     );
 
     return response.data;
   },
 
-    requiredTokenApi.post(`${SNS_URL}/request-follow`, body),
   follow: (body: FollowAndUnFollowRequestBody) =>
+    requiredTokenApi.post(`${SNS_URL}/request-follow`, body),
 
   unfollow: (body: FollowAndUnFollowRequestBody) =>
     requiredTokenApi.post(`${SNS_URL}/request-unfollow`, body),
 
   //
   // reaction(scrap & reaction)
-
   deleteReaction: (reviewId: number) => {
     return requiredTokenApi.delete(`${SNS_URL}/review-reaction/${reviewId}`);
   },
@@ -119,7 +114,6 @@ export const snsAPI = {
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/profile/${nickname}`
     );
-
     return response.data;
   },
 
@@ -137,14 +131,12 @@ export const snsAPI = {
           reviewId,
         }
       : { size };
-
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/profile/reviews/${nickname}`,
       {
         params,
       }
     );
-
     return response.data;
   },
 
@@ -174,36 +166,5 @@ export const snsAPI = {
     );
 
     return response.data;
-  },
-};
-
-    const response = await optionalTokenAPI.get(`${SNS_URL}/feeds`, { params });
-
-    return response.data[0];
-  },
-
-  getReviewComments: async (reviewId: number) => {
-    const response = await optionalTokenAPI.get(
-      `${SNS_URL}/comments/${reviewId}`
-    );
-    return response.data;
-  },
-
-  postReviewComment: async (
-    reviewId: number,
-    createdComment: { content: string; parentId: number }
-  ) => {
-    const response = await requiredTokenApi.post(
-      `${SNS_URL}/comments/${reviewId}`,
-      createdComment
-    );
-
-    return response.data;
-  },
-
-  getRecentUpdatedUsers: async () => {
-    return await requiredTokenApi
-      .get(`${SNS_URL}/recent-update-users`)
-      .then((res) => res.data);
   },
 };

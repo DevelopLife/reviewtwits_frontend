@@ -16,25 +16,7 @@ const ScrapButton = ({
   reviewId,
   position = 'absolute',
 }: ScrapButtonProps) => {
-  const queryClient = useQueryClient();
-  const { mutate: addScrapMutate } = useMutation(
-    () => snsAPI.addScrap(reviewId),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['useGetInfiniteFeed']);
-        queryClient.invalidateQueries(['review', reviewId]);
-      },
-    }
-  );
-  const { mutate: deleteScrapMutate } = useMutation(
-    () => snsAPI.deleteScrap(reviewId),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['useGetInfiniteFeed']);
-        queryClient.invalidateQueries(['review', reviewId]);
-      },
-    }
-  );
+  const { doScrap, cancelScrap } = useScrap(reviewId);
 
   const handleClickScrapButton = () => {
     isScrapped ? cancelScrap() : doScrap();
