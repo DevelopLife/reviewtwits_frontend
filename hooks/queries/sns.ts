@@ -236,7 +236,7 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
 
 export const useGetInfiniteFeed = () => {
   const selectedUser = useRecoilValue(selectedUserState);
-  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType>({
+  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType, 'reviewId'>({
     queryKey: ['useGetInfiniteFeed', selectedUser],
     getNextPage: (nextRequest) => {
       return selectedUser === ''
