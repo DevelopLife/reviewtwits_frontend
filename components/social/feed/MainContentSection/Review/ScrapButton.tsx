@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { snsAPI } from 'api/sns';
+import useScrap from 'hooks/useScrap';
 
 import BookmarkOutlineIcon from 'public/icons/bookmark_outline.svg';
 import BookmarkFillIcon from 'public/icons/bookmark_fill.svg';
@@ -38,7 +37,7 @@ const ScrapButton = ({
   );
 
   const handleClickScrapButton = () => {
-    isScrapped ? deleteScrapMutate() : addScrapMutate();
+    isScrapped ? cancelScrap() : doScrap();
   };
 
   const props = {

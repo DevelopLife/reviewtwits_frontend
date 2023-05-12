@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import useForm from 'hooks/useForm';
+import React, { useRef } from 'react';
 import Send from 'public/icons/send.svg';
+import { snsAPI } from 'api/sns';
 import { usePostReviewComment } from 'hooks/queries/sns';
 
 interface AddCommentFormProps {
