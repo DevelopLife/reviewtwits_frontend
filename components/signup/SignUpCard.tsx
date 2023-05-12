@@ -131,16 +131,25 @@ const SignUpForm = () => {
 
     if (isSocialSignUp) {
       const provider = getCookie('provider');
+      const birthDate = getCookie('birthDate') || '';
+      const gender = getCookie('gender') || '';
+      const phoneNumber = getCookie('phoneNumber') || '';
 
       initializeForm({
         ...DEFAULT_SOCIAL_SIGN_UP_FORM,
         accountId: email,
         provider,
+        phoneNumber,
+        birthDate,
+        gender,
       });
       setSignUpType('SOCIAL');
 
       removeCookie('email');
       removeCookie('provider');
+      if (birthDate) removeCookie('birthDate');
+      if (gender) removeCookie('gender');
+      if (phoneNumber) removeCookie('phoneNumber');
     }
   }, [initializeForm]);
 
@@ -226,6 +235,7 @@ const SignUpFormView = ({
             <Input
               name={SIGN_UP_FORM_NAMES.PHONE_NUMBER}
               placeholder="숫자만 입력 ('-' 제외)"
+              value={values.phoneNumber}
               handleChange={handleChange}
             />
             {values?.phoneNumber && (
@@ -261,6 +271,7 @@ const SignUpFormView = ({
               <S.DateInput
                 name={SIGN_UP_FORM_NAMES.BIRTHDATE}
                 type="date"
+                value={values.birthDate}
                 onChange={handleChange}
               />
             </S.FormItem>

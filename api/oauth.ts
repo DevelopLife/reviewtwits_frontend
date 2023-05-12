@@ -51,11 +51,28 @@ const naverOauthAPI = {
   getProfileNextAPI: (accessToken: string) => {
     return oauthApi.get(`api/auth/naver?token=${accessToken}`);
   },
+
   getUserDataOrigin: (accessToken: string) => {
     return oauthApi.get('https://openapi.naver.com/v1/nid/me', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+    });
+  },
+
+  naverLogin: async (accessToken: string) => {
+    const headers = {
+      Authorization: accessToken,
+    };
+
+    return authApi.post(`${OAUTH_URL}/naver`, {}, { headers }).then((res) => {
+      if (res.status === 202)
+        return {
+          status: res.status,
+          data: res.data.response,
+        };
+
+      return res;
     });
   },
 };
@@ -66,9 +83,10 @@ const registerAPI = {
       Authorization: token,
     };
 
-    delete values['accountId'];
+    const body = { ...values };
+    delete body['accountId'];
 
-    return authApi.post(`${OAUTH_URL}/register`, values, { headers });
+    return authApi.post(`${OAUTH_URL}/register`, body, { headers });
   },
 };
 

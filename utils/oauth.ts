@@ -12,8 +12,8 @@ const getSignInResult = (
       return googleOauthAPI.googleLogin(providerToken);
     case 'KAKAO':
       return kakaoOauthAPI.kakaoLogin(providerToken);
-    // case 'NAVER':
-    //   return naverOauthAPI.naverLogin(token);
+    case 'NAVER':
+      return naverOauthAPI.naverLogin(providerToken);
     default:
       return null;
   }
@@ -39,6 +39,14 @@ export const doOauthSignIn = async (
     setCookie('email', email);
     setCookie('token', providerToken);
     setCookie('provider', provider);
+
+    if (provider === 'NAVER') {
+      const { mobile, gender, birthyear, birthday } = result.data;
+
+      setCookie('phoneNumber', mobile.replaceAll('-', ''));
+      setCookie('gender', gender === 'F' ? '여자' : '남자');
+      setCookie('birthDate', birthyear + '-' + birthday);
+    }
 
     return (location.href = '/sign-up');
   }
