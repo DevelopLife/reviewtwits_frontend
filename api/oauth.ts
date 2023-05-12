@@ -1,4 +1,7 @@
-import { oauthApi } from 'api/instance';
+import { authApi, oauthApi } from 'api/instance';
+import { UserFormType } from 'typings/account';
+
+const OAUTH_URL = '/oauth';
 
 const kakaoOauthAPI = {
   getToken: async (code: string) => {
@@ -32,12 +35,18 @@ const kakaoOauthAPI = {
 };
 
 const googleOauthAPI = {
-  getProfileNextAPI: (accessToken: string) =>
-    oauthApi.get(`api/auth/google?token=${accessToken}`),
   getUserDataOrigin: (accessToken: string) =>
     oauthApi.get(
       `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`
     ),
+
+  googleLogin: async (accessToken: string) => {
+    const headers = {
+      Authorization: accessToken,
+    };
+
+    return authApi.post(`${OAUTH_URL}/google`, {}, { headers });
+  },
 };
 
 const naverOauthAPI = {
@@ -53,4 +62,16 @@ const naverOauthAPI = {
   },
 };
 
-export { kakaoOauthAPI, googleOauthAPI, naverOauthAPI };
+const registerAPI = {
+  socialSignUp: (token: string, values: UserFormType) => {
+    const headers = {
+      Authorization: token,
+    };
+
+    delete values['accountId'];
+
+    return authApi.post(`${OAUTH_URL}/register`, values, { headers });
+  },
+};
+
+export { kakaoOauthAPI, googleOauthAPI, naverOauthAPI, registerAPI };

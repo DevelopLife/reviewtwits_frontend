@@ -30,6 +30,13 @@ export const DEFAULT_SIGN_UP_FORM: UserFormType = {
   verifyCode: '',
 };
 
+export const DEFAULT_SOCIAL_SIGN_UP_FORM: UserFormType = {
+  phoneNumber: '',
+  birthDate: '',
+  gender: '',
+  provider: '',
+};
+
 export const SIGN_UP_FORM_NAMES = {
   ACCOUND_ID: 'accountId',
   ACCOUNT_PW: 'accountPw',
