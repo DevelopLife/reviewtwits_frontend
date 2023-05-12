@@ -14,7 +14,7 @@ import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
-import { ReviewResponseType } from 'typings/reviews';
+import { CommentResponseType, ReviewResponseType } from 'typings/reviews';
 
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
 
@@ -74,6 +74,28 @@ export const useGetReviewComments = (reviewId: number) => {
   return useQuery(['review', 'comments', reviewId], () =>
     snsAPI.getReviewComments(reviewId)
   );
+};
+
+export const usePostReviewComment = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(
+    ({
+      reviewId,
+      createdComment,
+    }: {
+      reviewId: number;
+      createdComment: { content: string; parentId: number };
+    }) => snsAPI.postReviewComment(reviewId, createdComment),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['review', 'comments', reviewId]);
+      },
+      onError: (err) => {
+        alert(err);
+      },
+    }
+  );
+  return { mutate };
 };
 
 export const useFollowAndUnFollow = () => {
