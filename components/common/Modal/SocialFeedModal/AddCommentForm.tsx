@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 import useForm from 'hooks/useForm';
-import React, { useRef } from 'react';
 import Send from 'public/icons/send.svg';
-import { snsAPI } from 'api/sns';
+import { usePostReviewComment } from 'hooks/queries/sns';
 
 interface AddCommentFormProps {
   reviewId: string;
@@ -26,6 +25,7 @@ const AddCommentForm = ({ reviewId }: AddCommentFormProps) => {
     content: '',
     parentId: 0,
   });
+  const { mutate } = usePostReviewComment(Number(reviewId));
 
   const { content } = values;
 
@@ -35,7 +35,7 @@ const AddCommentForm = ({ reviewId }: AddCommentFormProps) => {
       parentId: 0,
     };
 
-    snsAPI.postReviewComment(Number(reviewId), createdComment);
+    mutate({ reviewId: Number(reviewId), createdComment });
     setValue('content', '');
   };
 
