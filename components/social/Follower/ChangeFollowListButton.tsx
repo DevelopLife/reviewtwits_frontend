@@ -1,13 +1,18 @@
 import styled from '@emotion/styled';
 import { FOLLOW_BUTTON } from 'constants/social';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 type FollowButton = (typeof FOLLOW_BUTTON)[keyof typeof FOLLOW_BUTTON];
 
-const ChangeFollowListButton = () => {
-  const [targettedButton, setTargettedButton] = useState<FollowButton>(
-    FOLLOW_BUTTON.FOLLOWER
-  );
+interface ChangeFollowListButtonProps {
+  targettedButton: FollowButton;
+  setTargettedButton: Dispatch<SetStateAction<FollowButton>>;
+}
+
+const ChangeFollowListButton = ({
+  targettedButton,
+  setTargettedButton,
+}: ChangeFollowListButtonProps) => {
   const onFollowButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
     value === FOLLOW_BUTTON.FOLLOWER
