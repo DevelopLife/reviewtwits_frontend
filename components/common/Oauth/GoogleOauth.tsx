@@ -32,12 +32,11 @@ export const GoogleLoginButton = () => {
         }
 
         if (loginResult?.status === 202) {
-          const { email, name } = loginResult.data;
+          const { email } = loginResult.data;
 
           setCookie('email', email);
           setCookie('token', accessToken);
           setCookie('provider', 'GOOGLE');
-          if (name) setCookie('name', name);
 
           return (location.href = '/sign-up');
         }
