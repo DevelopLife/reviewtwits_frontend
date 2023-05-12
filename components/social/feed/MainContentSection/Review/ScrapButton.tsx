@@ -22,7 +22,8 @@ const ScrapButton = ({
     () => snsAPI.addScrap(reviewId),
     {
       onSuccess: () => {
-        return queryClient.invalidateQueries(['feed']); //
+        queryClient.invalidateQueries(['useGetInfiniteFeed']);
+        queryClient.invalidateQueries(['review', reviewId]);
       },
     }
   );
@@ -30,7 +31,8 @@ const ScrapButton = ({
     () => snsAPI.deleteScrap(reviewId),
     {
       onSuccess: () => {
-        return queryClient.invalidateQueries(['feed']); //
+        queryClient.invalidateQueries(['useGetInfiniteFeed']);
+        queryClient.invalidateQueries(['review', reviewId]);
       },
     }
   );
