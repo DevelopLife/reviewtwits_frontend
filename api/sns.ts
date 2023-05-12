@@ -37,6 +37,7 @@ export const snsAPI = {
     optionalTokenAPI
       .get(`${SNS_URL}/recommend-product`)
       .then((res) => res.data),
+
   toggleReaction: (reviewId: number, reaction: ReactionType) => {
     const params = { reaction };
 
@@ -142,7 +143,6 @@ export const snsAPI = {
       `${SNS_URL}/comments/${reviewId}`,
       createdComment
     );
-    console.log(response.data, '리턴값이어떻게');
 
     return response.data;
   },
