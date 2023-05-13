@@ -19,6 +19,7 @@ import { ReviewResponseType } from 'typings/reviews';
 import { selectedUserState } from 'states/reviews';
 
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
+export const FOLLOW_SUGGESTION_KEY = ['followSuggestion'];
 
 export const useGetFollowerList = (nickname: string) => {
   const followerListInfiniteQuery = useInfiniteScrollQuery({
@@ -112,6 +113,19 @@ export const useGetUserReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
+const getNewSuggestArray = (array: FollowType[], nickname: string) => {
+  return array.map((data) => {
+    if (data.nickname === nickname) {
+      return {
+        ...data,
+        isFollowed: !data.isFollowed,
+      };
+    }
+
+    return data;
+  });
+};
+
 export const useGetOneReview = (nickname: string, reviewId: number) => {
   return useQuery(['review', nickname, reviewId], () =>
     snsAPI.getOneReview(nickname, reviewId)
@@ -129,6 +143,9 @@ export const useFollowAndUnFollow = () => {
   const originFollowingDictionary = queryClient.getQueryData(
     FOLLOWING_DICTIONARY_KEY
   ) as FollowingDictionary;
+  const originFollowSuggestion = queryClient.getQueryData(
+    FOLLOW_SUGGESTION_KEY
+  ) as FollowType[];
 
   const onFollowOptimisticUpdate = (targetUserNickname: string) => {
     optimisticUpdateByReactQuery({
@@ -138,6 +155,12 @@ export const useFollowAndUnFollow = () => {
         ...originFollowingDictionary,
         [targetUserNickname]: {},
       },
+    });
+
+    optimisticUpdateByReactQuery({
+      queryClient,
+      queryKey: FOLLOW_SUGGESTION_KEY,
+      newData: getNewSuggestArray(originFollowSuggestion, targetUserNickname),
     });
   };
 
@@ -149,6 +172,12 @@ export const useFollowAndUnFollow = () => {
       queryClient,
       queryKey: FOLLOWING_DICTIONARY_KEY,
       newData: restIsFollowingDictionary,
+    });
+
+    optimisticUpdateByReactQuery({
+      queryClient,
+      queryKey: FOLLOW_SUGGESTION_KEY,
+      newData: getNewSuggestArray(originFollowSuggestion, targetUserNickname),
     });
   };
 
@@ -260,4 +289,14 @@ export const useGetRecentUpdatedUsers = () => {
   );
 
   return recentUpdatedUserQuery;
+};
+
+export const useGetFollowSuggestion = () => {
+  return useQuery<FollowType[]>(
+    ['followSuggestion'],
+    () => snsAPI.getFollowSuggestion(),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 };
