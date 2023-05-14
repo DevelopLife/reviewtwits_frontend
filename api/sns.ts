@@ -1,6 +1,5 @@
 import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { SocialProfile, SocialReview } from 'typings/social';
-
 import { ReactionType } from 'typings/reviews';
 import type {
   FollowAndUnFollowRequestBody,
@@ -15,7 +14,6 @@ export const snsAPI = {
   // feed(home)
   getFeed: async () => {
     const SIZE = 10;
-
     return await optionalTokenAPI
       .get(`${SNS_URL}/feeds`, {
         params: {
@@ -27,7 +25,6 @@ export const snsAPI = {
 
   getInfiniteFeed: async (lastId: number) => {
     const SIZE = 10;
-
     return await optionalTokenAPI
       .get(`${SNS_URL}/feeds`, {
         params: {
@@ -42,6 +39,7 @@ export const snsAPI = {
     optionalTokenAPI
       .get(`${SNS_URL}/recommend-product`)
       .then((res) => res.data),
+
   toggleReaction: (reviewId: number, reaction: ReactionType) => {
     const params = { reaction };
 
@@ -76,7 +74,6 @@ export const snsAPI = {
         params,
       }
     );
-
     return response.data;
   },
   getFollowingList: async ({
@@ -103,7 +100,6 @@ export const snsAPI = {
 
   //
   // reaction(scrap & reaction)
-
   deleteReaction: (reviewId: number) => {
     return requiredTokenApi.delete(`${SNS_URL}/review-reaction/${reviewId}`);
   },
@@ -118,7 +114,6 @@ export const snsAPI = {
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/profile/${nickname}`
     );
-
     return response.data;
   },
 
@@ -136,27 +131,22 @@ export const snsAPI = {
           reviewId,
         }
       : { size };
-
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/profile/reviews/${nickname}`,
       {
         params,
       }
     );
-
     return response.data;
   },
 
   //
   // modal
-  getOneReview: async (nickname: string, reviewId: number) => {
-    const size = 10;
-    // 1로 했을 때 imageUrl, emotion을 하나씩만 받아오는 버그가 있어서 백 수정 전까지는  10으로 임의 사용
-    const params = { size, reviewId: reviewId + 1 };
-
-    const response = await optionalTokenAPI.get(`${SNS_URL}/feeds`, { params });
-
-    return response.data[0];
+  getOneReview: async (reviewId: number) => {
+    const response = await optionalTokenAPI.get(
+      `${SNS_URL}/reviews/${reviewId}`
+    );
+    return response.data;
   },
 
   getReviewComments: async (reviewId: number) => {

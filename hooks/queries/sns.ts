@@ -15,7 +15,7 @@ import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
-import { ReviewResponseType } from 'typings/reviews';
+import { CommentResponseType, ReviewResponseType } from 'typings/reviews';
 import { selectedUserState } from 'states/reviews';
 
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
@@ -126,16 +126,36 @@ const getNewSuggestArray = (array: FollowType[], nickname: string) => {
   });
 };
 
-export const useGetOneReview = (nickname: string, reviewId: number) => {
-  return useQuery(['review', nickname, reviewId], () =>
-    snsAPI.getOneReview(nickname, reviewId)
-  );
+export const useGetOneReview = (reviewId: number) => {
+  return useQuery(['review', reviewId], () => snsAPI.getOneReview(reviewId));
 };
 
 export const useGetReviewComments = (reviewId: number) => {
   return useQuery(['review', 'comments', reviewId], () =>
     snsAPI.getReviewComments(reviewId)
   );
+};
+
+export const usePostReviewComment = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(
+    ({
+      reviewId,
+      createdComment,
+    }: {
+      reviewId: number;
+      createdComment: { content: string; parentId: number };
+    }) => snsAPI.postReviewComment(reviewId, createdComment),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['review', 'comments', reviewId]);
+      },
+      onError: (err) => {
+        alert(err);
+      },
+    }
+  );
+  return { mutate };
 };
 
 export const useFollowAndUnFollow = () => {
