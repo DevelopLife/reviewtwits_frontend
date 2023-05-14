@@ -167,4 +167,15 @@ export const snsAPI = {
 
     return response.data;
   },
+
+  getFollowSuggestion: () =>
+    requiredTokenApi
+      .get(`${SNS_URL}/suggest-followers`)
+      .then((res) => res.data),
+
+  getRecentUpdatedUsers: async () => {
+    return await requiredTokenApi
+      .get(`${SNS_URL}/recent-update-users`)
+      .then((res) => res.data);
+  },
 };

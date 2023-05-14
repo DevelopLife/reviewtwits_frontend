@@ -17,6 +17,7 @@ const MOCK_USER_LIST: FollowListType = [
     reviewCount: 10,
     followers: 10,
     followings: 10,
+    isFollowed: false,
   },
   {
     userId: 0,
@@ -28,6 +29,7 @@ const MOCK_USER_LIST: FollowListType = [
     reviewCount: 10000000,
     followers: 100000000000,
     followings: 10000000000,
+    isFollowed: false,
   },
 ];
 
