@@ -1,4 +1,4 @@
-import { UserFormType } from 'typings/account';
+import { FindIdType, UserFormType } from 'typings/account';
 
 export const ERROR_MESSAGE = {
   SIGN_UP: {
@@ -43,6 +43,11 @@ export const SIGN_UP_FORM_NAMES = {
 export const GENDER = {
   MALE: '남자',
   FEMALE: '여자',
+};
+
+export const DEFAULT_FIND_ID_FORM: FindIdType = {
+  phoneNumber: '',
+  birthDate: '',
 };
 
 export type ErrorType = typeof ERROR_MESSAGE;
