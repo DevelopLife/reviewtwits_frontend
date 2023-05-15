@@ -42,3 +42,8 @@ export interface UserProfileResponseType {
 }
 
 export type Gender = '남자' | '여자';
+
+export interface FindIdType {
+  phoneNumber?: string;
+  birthDate?: string | '';
+}
