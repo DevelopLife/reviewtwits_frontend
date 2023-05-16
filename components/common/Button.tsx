@@ -8,6 +8,8 @@ import theme from 'styles/theme';
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   color?: Colors;
+  fontColor?: Colors;
+  borderType?: 'none' | 'solid';
   large?: boolean;
   name?: string;
   value?: string;
@@ -38,6 +40,8 @@ const Button = ({
 
 interface ButtonStyleProps {
   color?: Colors;
+  fontColor?: Colors;
+  borderType?: 'none' | 'solid';
   large?: boolean;
   isActive?: boolean;
 }
@@ -50,7 +54,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
   background: ${({ color }) => (color ? theme.colors[color] : 'white')};
   width: 100%;
 
-  ${({ color }) => {
+  ${({ color, borderType, fontColor }) => {
     switch (color) {
       case 'primary':
         return css`
@@ -62,7 +66,8 @@ const StyledButton = styled.button<ButtonStyleProps>`
         `;
       default:
         return css`
-          border: 1px solid black;
+          color: ${fontColor ? fontColor : 'black'};
+          border: ${borderType === 'none' ? borderType : '1px solid black'};
         `;
     }
   }}
