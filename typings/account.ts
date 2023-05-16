@@ -47,3 +47,9 @@ export interface FindIdType {
   phoneNumber?: string;
   birthDate?: string | '';
 }
+
+export interface FindIdResponseType {
+  accountId: string;
+  createdDate: string;
+  nickname: string;
+}
