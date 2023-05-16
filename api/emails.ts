@@ -28,6 +28,7 @@ export const emailsAPI = {
 
   findIds: async (findIdParams: FindIdType) => {
     const params = findIdParams;
-    return await authApi.post(`${url}/find-ids`, params);
+    const { data } = await authApi.post(`${url}/find-ids`, params);
+    return data;
   },
 };
