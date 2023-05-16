@@ -11,6 +11,8 @@ export const ERROR_MESSAGE = {
   },
   SIGN_IN:
     '등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.',
+  FIND_ID:
+    '등록되지 않은 정보입니다. 휴대폰 번호와 생년월일을 다시 입력해주세요.',
 };
 
 export const SUCCESS_MESSAGE = {
