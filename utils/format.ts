@@ -21,3 +21,9 @@ export const formattedLastTime = (pastTimeArr?: number[]): string => {
     ? `${minDiff}m`
     : 'now';
 };
+
+export const formattedCreateDate = (createdDate: string): string => {
+  const dateArr = createdDate?.split('T');
+  const createDateFormat = dateArr[0].split('-');
+  return createDateFormat.join('/');
+};
