@@ -1,4 +1,4 @@
-import { UserFormType } from 'typings/account';
+import { FindIdType, UserFormType } from 'typings/account';
 
 export const ERROR_MESSAGE = {
   SIGN_UP: {
@@ -11,6 +11,8 @@ export const ERROR_MESSAGE = {
   },
   SIGN_IN:
     '등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.',
+  FIND_ID:
+    '등록되지 않은 정보입니다. 휴대폰 번호와 생년월일을 다시 입력해주세요.',
 };
 
 export const SUCCESS_MESSAGE = {
@@ -43,6 +45,11 @@ export const SIGN_UP_FORM_NAMES = {
 export const GENDER = {
   MALE: '남자',
   FEMALE: '여자',
+};
+
+export const DEFAULT_FIND_ID_FORM: FindIdType = {
+  phoneNumber: '',
+  birthDate: '',
 };
 
 export type ErrorType = typeof ERROR_MESSAGE;

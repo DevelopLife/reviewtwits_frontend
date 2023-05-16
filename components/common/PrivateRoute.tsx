@@ -9,6 +9,7 @@ const PUBLIC_URLS = [
   '/',
   '/sign-in',
   '/sign-up',
+  '/find-id',
   '/social',
   '/socual/user',
   '/social/user/[nickname]',
