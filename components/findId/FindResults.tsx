@@ -7,9 +7,9 @@ import Layout from 'components/common/Layout';
 import { DEFAULT_FIND_ID_FORM, SIGN_UP_FORM_NAMES } from 'constants/account';
 import useForm from 'hooks/useForm';
 import Link from 'next/link';
-import React from 'react';
+
 import { useRecoilValue } from 'recoil';
-import foundUserIds from 'states/atomfindUserInfo';
+import foundUserIds from 'states/atomFindUserInfo';
 import { formattedCreateDate } from 'utils/format';
 
 const FindIdResults = () => {

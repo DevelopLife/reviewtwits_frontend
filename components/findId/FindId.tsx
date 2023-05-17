@@ -3,16 +3,15 @@ import { emailsAPI } from 'api/emails';
 import Button from 'components/common/Button';
 import Card from 'components/common/Card';
 import Input from 'components/common/Input';
-import Layout from 'components/common/Layout';
+
 import {
   DEFAULT_FIND_ID_FORM,
   ERROR_MESSAGE,
   SIGN_UP_FORM_NAMES,
 } from 'constants/account';
 import useForm from 'hooks/useForm';
-import React from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import foundUserIds from 'states/atomfindUserInfo';
+import { useSetRecoilState } from 'recoil';
+import foundUserIds from 'states/atomFindUserInfo';
 
 interface FindIdProps {
   handleCardKey: () => void;
