@@ -11,8 +11,8 @@ import {
 } from 'constants/account';
 import useForm from 'hooks/useForm';
 import React from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import foundUserIds from 'states/atomfindUserInfo';
+import { useSetRecoilState } from 'recoil';
+import { foundUserIds } from 'states/atomFindUserInfo';
 
 interface FindIdProps {
   handleCardKey: () => void;
