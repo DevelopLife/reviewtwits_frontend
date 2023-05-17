@@ -1,61 +1,47 @@
 import styled from '@emotion/styled';
-import { emailsAPI } from 'api/emails';
 import Button from 'components/common/Button';
 import Card from 'components/common/Card';
-import Input from 'components/common/Input';
-import Layout from 'components/common/Layout';
-import { DEFAULT_FIND_ID_FORM, SIGN_UP_FORM_NAMES } from 'constants/account';
-import useForm from 'hooks/useForm';
+import { ERROR_MESSAGE } from 'constants/account';
 import Link from 'next/link';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { foundUserIds } from 'states/atomFindUserInfo';
-import { formattedCreateDate } from 'utils/format';
+import { findUserPasswords } from 'states/atomFindUserInfo';
+import { FindPasswordType } from 'typings/account';
 
-const FindIdResults = () => {
-  const foundIds = useRecoilValue(foundUserIds);
+interface FindPasswordResultsProps {
+  handleFindPassword: (params: FindPasswordType) => Promise<number>;
+}
 
-  const handleFindpassword = () => {
-    console.log('비밀번호 찾기 페이지로 이동');
+const FindPasswordResults = ({
+  handleFindPassword,
+}: FindPasswordResultsProps) => {
+  const findPasswordValues = useRecoilValue(findUserPasswords);
+
+  const requestAgain = async () => {
+    const status = await handleFindPassword(findPasswordValues);
+    if (status !== 200) {
+      alert(ERROR_MESSAGE.FIND_PASSWORD);
+      return;
+    }
   };
+
   return (
     <Card>
       <S.CardHeader>
-        <S.CardTitle>총 {foundIds.counts}개의 아이디를 찾았습니다</S.CardTitle>
-        <S.CardDesc>입력하신 개인정보로 가입된 내역을 알려드립니다</S.CardDesc>
+        <S.CardTitle>가입시 입력한 이메일을 확인해주세요</S.CardTitle>
+        <S.CardDesc>
+          {findPasswordValues.accountId}으로 비밀번호 초기화 이메일이
+          전송되었습니다
+        </S.CardDesc>
+        <S.RequestAgain>
+          <S.RequestAgainButton onClick={requestAgain}>
+            이메일이 오지 않았나요? 다시 요청 보내기
+          </S.RequestAgainButton>
+        </S.RequestAgain>
       </S.CardHeader>
-
-      <S.IdsTable>
-        <S.THead>
-          <S.Tr>
-            <S.Th>아이디</S.Th>
-            <S.Th>가입일</S.Th>
-          </S.Tr>
-        </S.THead>
-        <S.TBody>
-          {foundIds.userIds.map(({ accountId, createdDate, nickname }) => (
-            <S.Tr key={createdDate}>
-              <S.Td>{accountId}</S.Td>
-              <S.Td>{formattedCreateDate(createdDate)}</S.Td>
-            </S.Tr>
-          ))}
-        </S.TBody>
-      </S.IdsTable>
+      <S.FormMargin space={400} />
 
       <S.ButtonsContainer>
-        <Link href="/find-password">
-          <Button
-            type="submit"
-            large
-            color="secondary"
-            fontColor="white"
-            borderType="none"
-            handleClick={handleFindpassword}
-          >
-            비밀번호 찾기
-          </Button>
-        </Link>
-
         <Link href="/sign-in">
           <Button type="submit" large color="primary">
             로그인 페이지로 이동
@@ -66,8 +52,13 @@ const FindIdResults = () => {
   );
 };
 
+export default FindPasswordResults;
+
 const S = {
   CardHeader: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
     width: 343px;
     height: 79px;
     font-family: 'Inter';
@@ -84,23 +75,29 @@ const S = {
     font-size: 20px;
     line-height: 24px;
   `,
+  RequestAgain: styled.div`
+    font-size: 16px;
+    line-height: 19px;
 
-  IdsTable: styled.table`
+    display: flex;
+    box-sizing: content-box;
+    margin-left: 0;
+    color: #2f80ed;
+  `,
+
+  RequestAgainButton: styled.p`
+    z-index: 0;
+    cursor: grab;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
+
+  FormContainer: styled.div`
     height: 200px;
     width: 100%;
-    margin-top: 100px;
     margin-bottom: 100px;
-    text-align: left;
-  `,
-
-  THead: styled.thead``,
-  TBody: styled.tbody``,
-  Tr: styled.tr`
-    padding-top: 19px;
-  `,
-  Th: styled.th``,
-  Td: styled.td`
-    padding-top: 19px;
   `,
 
   DivideBox: styled.div`
@@ -198,6 +195,8 @@ const S = {
     flex-direction: column;
     gap: 15px;
   `,
-};
 
-export default FindIdResults;
+  FormMargin: styled.div<{ space: number }>`
+    height: ${({ space }) => space}px;
+  `,
+};

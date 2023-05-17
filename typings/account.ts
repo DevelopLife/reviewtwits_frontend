@@ -53,3 +53,9 @@ export interface FindIdResponseType {
   createdDate: string;
   nickname: string;
 }
+
+export interface FindPasswordType {
+  accountId: string;
+  phoneNumber?: string;
+  birthDate?: string | '';
+}

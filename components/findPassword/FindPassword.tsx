@@ -3,59 +3,90 @@ import { emailsAPI } from 'api/emails';
 import Button from 'components/common/Button';
 import Card from 'components/common/Card';
 import Input from 'components/common/Input';
-import Layout from 'components/common/Layout';
-import { DEFAULT_FIND_ID_FORM, SIGN_UP_FORM_NAMES } from 'constants/account';
+import {
+  DEFAULT_FIND_PASSWORD_FORM,
+  ERROR_MESSAGE,
+  SIGN_UP_FORM_NAMES,
+} from 'constants/account';
 import useForm from 'hooks/useForm';
 import Link from 'next/link';
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { foundUserIds } from 'states/atomFindUserInfo';
-import { formattedCreateDate } from 'utils/format';
+import { useSetRecoilState } from 'recoil';
+import { findUserPasswords } from 'states/atomFindUserInfo';
+import { FindPasswordType } from 'typings/account';
 
-const FindIdResults = () => {
-  const foundIds = useRecoilValue(foundUserIds);
+interface FindPasswordProps {
+  handleFindPassword: (params: FindPasswordType) => Promise<number>;
+}
 
-  const handleFindpassword = () => {
-    console.log('비밀번호 찾기 페이지로 이동');
+const FindPassword = ({ handleFindPassword }: FindPasswordProps) => {
+  const setFindPasswordValues = useSetRecoilState(findUserPasswords);
+
+  const { values, errors, handleChange } = useForm({
+    ...DEFAULT_FIND_PASSWORD_FORM,
+  });
+
+  const onClickFindPassword = async () => {
+    const status = await handleFindPassword(values);
+    if (status !== 200) {
+      alert(ERROR_MESSAGE.FIND_PASSWORD);
+      return;
+    }
+    setFindPasswordValues(values);
   };
   return (
     <Card>
       <S.CardHeader>
-        <S.CardTitle>총 {foundIds.counts}개의 아이디를 찾았습니다</S.CardTitle>
-        <S.CardDesc>입력하신 개인정보로 가입된 내역을 알려드립니다</S.CardDesc>
+        <S.CardTitle>비밀번호를 잊어버리셨나요?</S.CardTitle>
+        <S.CardDesc>가입할 때 작성했던 정보를 입력해주세요</S.CardDesc>
       </S.CardHeader>
+      <S.FormMargin space={63} />
 
-      <S.IdsTable>
-        <S.THead>
-          <S.Tr>
-            <S.Th>아이디</S.Th>
-            <S.Th>가입일</S.Th>
-          </S.Tr>
-        </S.THead>
-        <S.TBody>
-          {foundIds.userIds.map(({ accountId, createdDate, nickname }) => (
-            <S.Tr key={createdDate}>
-              <S.Td>{accountId}</S.Td>
-              <S.Td>{formattedCreateDate(createdDate)}</S.Td>
-            </S.Tr>
-          ))}
-        </S.TBody>
-      </S.IdsTable>
+      <S.FormContainer>
+        <S.FormItem>
+          <S.InputLabel>아이디</S.InputLabel>
+          <Input
+            name={SIGN_UP_FORM_NAMES.ACCOUND_ID}
+            type="email"
+            placeholder="이메일"
+            handleChange={handleChange}
+          />
+          <S.FormMargin space={20} />
+          <S.InputLabel>휴대폰 번호</S.InputLabel>
+          <Input
+            name={SIGN_UP_FORM_NAMES.PHONE_NUMBER}
+            placeholder="숫자만 입력 ('-' 제외)"
+            handleChange={handleChange}
+          />
+          {values?.phoneNumber && (
+            <S.WarnText>{errors?.phoneNumber}</S.WarnText>
+          )}
+        </S.FormItem>
+
+        <S.DivideBox>
+          <S.FormItem>
+            <S.InputLabel>생년월일</S.InputLabel>
+            <S.DateInput
+              name={SIGN_UP_FORM_NAMES.BIRTHDATE}
+              type="date"
+              onChange={handleChange}
+            />
+          </S.FormItem>
+        </S.DivideBox>
+      </S.FormContainer>
+      <S.FormMargin space={20} />
 
       <S.ButtonsContainer>
-        <Link href="/find-password">
-          <Button
-            type="submit"
-            large
-            color="secondary"
-            fontColor="white"
-            borderType="none"
-            handleClick={handleFindpassword}
-          >
-            비밀번호 찾기
-          </Button>
-        </Link>
-
+        <Button
+          type="submit"
+          large
+          color="secondary"
+          fontColor="white"
+          borderType="none"
+          handleClick={onClickFindPassword}
+        >
+          비밀번호 찾기
+        </Button>
         <Link href="/sign-in">
           <Button type="submit" large color="primary">
             로그인 페이지로 이동
@@ -65,6 +96,8 @@ const FindIdResults = () => {
     </Card>
   );
 };
+
+export default FindPassword;
 
 const S = {
   CardHeader: styled.div`
@@ -85,22 +118,10 @@ const S = {
     line-height: 24px;
   `,
 
-  IdsTable: styled.table`
+  FormContainer: styled.div`
     height: 200px;
     width: 100%;
-    margin-top: 100px;
     margin-bottom: 100px;
-    text-align: left;
-  `,
-
-  THead: styled.thead``,
-  TBody: styled.tbody``,
-  Tr: styled.tr`
-    padding-top: 19px;
-  `,
-  Th: styled.th``,
-  Td: styled.td`
-    padding-top: 19px;
   `,
 
   DivideBox: styled.div`
@@ -198,6 +219,8 @@ const S = {
     flex-direction: column;
     gap: 15px;
   `,
-};
 
-export default FindIdResults;
+  FormMargin: styled.div<{ space: number }>`
+    height: ${({ space }) => space}px;
+  `,
+};
