@@ -9,7 +9,7 @@ import useForm from 'hooks/useForm';
 import Link from 'next/link';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import foundUserIds from 'states/atomfindUserInfo';
+import { foundUserIds } from 'states/atomFindUserInfo';
 import { formattedCreateDate } from 'utils/format';
 
 const FindIdResults = () => {
@@ -43,16 +43,19 @@ const FindIdResults = () => {
       </S.IdsTable>
 
       <S.ButtonsContainer>
-        <Button
-          type="submit"
-          large
-          color="secondary"
-          fontColor="white"
-          borderType="none"
-          handleClick={handleFindpassword}
-        >
-          비밀번호 찾기
-        </Button>
+        <Link href="/find-password">
+          <Button
+            type="submit"
+            large
+            color="secondary"
+            fontColor="white"
+            borderType="none"
+            handleClick={handleFindpassword}
+          >
+            비밀번호 찾기
+          </Button>
+        </Link>
+
         <Link href="/sign-in">
           <Button type="submit" large color="primary">
             로그인 페이지로 이동
