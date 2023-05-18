@@ -5,7 +5,7 @@ import {
   useGetFollowSuggestion,
 } from 'hooks/queries/sns';
 import { FollowType } from 'typings/sns';
-import { formattedImageUrl } from 'utils/format';
+import { formattedProfileImageUrl } from 'utils/format';
 
 import styled from '@emotion/styled';
 import Button from './common/Button';
@@ -43,11 +43,7 @@ const RecommendUserListView = ({
             <S.UserImage
               width={40}
               height={40}
-              src={
-                user.profileImageUrl && !user.profileImageUrl.includes('null') //
-                  ? formattedImageUrl(user.profileImageUrl)
-                  : '/images/default_user_profile_img.png'
-              }
+              src={formattedProfileImageUrl(user.profileImageUrl)}
               alt=""
             />
             <S.UserInfoBox>

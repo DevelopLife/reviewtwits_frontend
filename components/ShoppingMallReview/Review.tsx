@@ -4,7 +4,7 @@ import grayStar from 'public/images/empty_star_img.png';
 import thumbsUp from 'public/icons/thumbs_up.png';
 import * as S from './Review.styles';
 import { ShoppingMallReviewDetail } from 'typings/reviews';
-import { formattedImageUrl } from 'utils/format';
+import { formattedImageUrl, formattedProfileImageUrl } from 'utils/format';
 
 interface ReviewProps {
   reviewDetail: ShoppingMallReviewDetail;
@@ -17,10 +17,7 @@ const Review = ({ reviewDetail }: ReviewProps) => {
     <S.Container>
       <S.WriterInfo>
         <S.WriterImage>
-          <Image
-            src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
-            alt=""
-          />
+          <Image src={formattedProfileImageUrl(profileImageUrl)} alt="" />
         </S.WriterImage>
         <S.WriterDesc>
           <S.WriterName>{nickname}</S.WriterName>
