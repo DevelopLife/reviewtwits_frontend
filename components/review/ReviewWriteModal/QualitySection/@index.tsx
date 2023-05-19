@@ -6,8 +6,8 @@ import QualityQuestionBox from './QualityQuestionBox';
 import { ReviewResponseType, ReviewType } from 'typings/reviews';
 import DetailReviewBox from '../QualitySection/DetailReviewBox';
 import ImageUploadBox from 'components/review/common/ImageUploadBox';
-import SurveyBox from './SurveyBox';
 import StarRating from 'components/review/common/StarRating';
+import ProductBox from 'components/review/ReviewWriteModal/QualitySection/ProductBox';
 
 interface QualitySectionProps {
   formValues: ReviewType;
@@ -24,8 +24,13 @@ const QualitySection = ({
 }: QualitySectionProps) => {
   return (
     <S.Section>
-      <QualityQuestionBox />
-      <StarRating initialScore={reviewData?.score} setValue={setValue} />
+      {/* <QualityQuestionBox /> */}
+      <ProductBox
+        imageUrl={reviewData?.productUrl}
+        title={reviewData?.productName}
+      >
+        <StarRating initialScore={reviewData?.score} setValue={setValue} />
+      </ProductBox>
       <DetailReviewBox
         content={formValues?.content}
         handleChange={handleChange}
@@ -35,7 +40,6 @@ const QualitySection = ({
         imageNameList={reviewData?.reviewImageUrlList}
         setValue={setValue}
       />
-      {/* <SurveyBox /> */}
     </S.Section>
   );
 };

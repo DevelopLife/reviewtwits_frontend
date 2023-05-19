@@ -14,8 +14,7 @@ const PUBLIC_URLS = [
   '/social',
   '/socual/user',
   '/social/user/[nickname]',
-  '/shoppingMallReview',
-  '/review/write',
+  '/review',
   '/404',
 ];
 
@@ -34,7 +33,6 @@ const PrivateRoute = ({
   const { isLogined } = usePrivateRouting({
     isRequiredLogin,
     statusCode,
-    redirectURL: undefined,
   });
 
   if (statusCode) {

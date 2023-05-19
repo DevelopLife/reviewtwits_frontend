@@ -78,31 +78,31 @@ const ComprehensiveRates = ({
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />5{' '}
           <S.PrograssBar
-            prograssRange={shoppingmallReviewInfoData.starScoreArray[0]}
+            prograssRange={shoppingmallReviewInfoData.starScoreArray?.[0] || 0}
           />
         </li>
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />4
           <S.PrograssBar
-            prograssRange={shoppingmallReviewInfoData.starScoreArray[1]}
+            prograssRange={shoppingmallReviewInfoData.starScoreArray?.[1] || 0}
           />
         </li>
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />3
           <S.PrograssBar
-            prograssRange={shoppingmallReviewInfoData.starScoreArray[2]}
+            prograssRange={shoppingmallReviewInfoData.starScoreArray?.[2] || 0}
           />
         </li>
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />2
           <S.PrograssBar
-            prograssRange={shoppingmallReviewInfoData.starScoreArray[3]}
+            prograssRange={shoppingmallReviewInfoData.starScoreArray?.[3] || 0}
           />
         </li>
         <li>
           <Image src={grayStar} alt="" width={15} height={15} />1
           <S.PrograssBar
-            prograssRange={shoppingmallReviewInfoData.starScoreArray[4]}
+            prograssRange={shoppingmallReviewInfoData.starScoreArray?.[4] || 0}
           />
         </li>
       </S.OverallRatingDetail>
