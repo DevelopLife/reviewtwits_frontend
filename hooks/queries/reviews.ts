@@ -8,19 +8,13 @@ import {
 } from 'typings/reviews';
 
 export const useGetShoppingMallReviewInfo = () => {
-  return useQuery<
-    AxiosResponse<ShoppingMallReviewInfo>,
-    AxiosError<ResponseError>
-  >(['useGetShoppingMallReviewInfo'], () =>
+  return useQuery(['useGetShoppingMallReviewInfo'], () =>
     shoppingAPI.getShoppingMallReviewInfo()
   );
 };
 
 export const useGetShoppingMallReviewList = () => {
-  return useQuery<
-    AxiosResponse<ShoppingMallReviewDetail[]>,
-    AxiosError<ResponseError>
-  >(['useGetShoppingMallReviewList'], () =>
+  return useQuery(['useGetShoppingMallReviewList'], () =>
     shoppingAPI.getShoppingMallReviewList()
   );
 };
