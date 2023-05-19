@@ -27,21 +27,24 @@ const shoppingAPI = {
   getShoppingMallReviewInfo: async (
     productURL = 'http://www.example.com/123'
   ) => {
-    return await optionalTokenAPI.get(`${SHOPPING_URL}`, {
+    const { data } = await optionalTokenAPI.get(`${SHOPPING_URL}`, {
       headers: {
         productURL: productURL,
       },
     });
+    return data;
   },
 
   getShoppingMallReviewList: async (
     productURL = 'http://www.example.com/123'
   ) => {
-    return await optionalTokenAPI.get(`${SHOPPING_URL}/list`, {
+    const { data } = await optionalTokenAPI.get(`${SHOPPING_URL}/list`, {
       headers: {
         productURL: productURL,
       },
     });
+
+    return data;
   },
 };
 
