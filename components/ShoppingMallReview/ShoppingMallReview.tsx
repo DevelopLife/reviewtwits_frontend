@@ -36,6 +36,7 @@ const ShoppingMallReview = ({
       <S.ReviewsLayout>
         <Reviews shoppingmallReviewList={shoppingmallReviewList} />
       </S.ReviewsLayout>
+      <S.LinkButton href="/review/write">리뷰작성</S.LinkButton>
     </S.Layout>
   );
 };
