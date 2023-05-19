@@ -6,7 +6,7 @@ import {
 } from 'hooks/queries/reviews';
 import { useEffect, useState } from 'react';
 
-const shoppingMallReview = () => {
+const shoppingMallReviewPage = () => {
   const { data: shoppingmallReviewInfoData } = useGetShoppingMallReviewInfo();
   const { data: shoppingmallReviewList } = useGetShoppingMallReviewList();
 
@@ -15,18 +15,18 @@ const shoppingMallReview = () => {
   useEffect(() => {
     setReffer(document?.referrer);
   }, []);
+
   if (!shoppingmallReviewInfoData || !shoppingmallReviewList)
-    // return <h1>데이터가 없습니다</h1>;
     return <h1>{referrer}</h1>;
 
   return (
     <div>
       <ShoppingMallReview
-        shoppingmallReviewInfoData={shoppingmallReviewInfoData?.data}
-        shoppingmallReviewList={shoppingmallReviewList?.data}
+        shoppingmallReviewInfoData={shoppingmallReviewInfoData}
+        shoppingmallReviewList={shoppingmallReviewList}
       />
     </div>
   );
 };
 
-export default shoppingMallReview;
+export default shoppingMallReviewPage;
