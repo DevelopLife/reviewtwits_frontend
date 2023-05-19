@@ -8,6 +8,7 @@ export interface FollowType {
   reviewCount: number;
   followers: number;
   followings: number;
+  isFollowed: boolean;
 }
 export type FollowListType = FollowType[];
 

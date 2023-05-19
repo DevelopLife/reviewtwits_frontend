@@ -15,10 +15,11 @@ import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
-import { ReviewResponseType } from 'typings/reviews';
+import { CommentResponseType, ReviewResponseType } from 'typings/reviews';
 import { selectedUserState } from 'states/reviews';
 
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
+export const FOLLOW_SUGGESTION_KEY = ['followSuggestion'];
 
 export const useGetFollowerList = (nickname: string) => {
   const followerListInfiniteQuery = useInfiniteScrollQuery({
@@ -112,10 +113,21 @@ export const useGetUserReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
-export const useGetOneReview = (nickname: string, reviewId: number) => {
-  return useQuery(['review', nickname, reviewId], () =>
-    snsAPI.getOneReview(nickname, reviewId)
-  );
+const getNewSuggestArray = (array: FollowType[], nickname: string) => {
+  return array.map((data) => {
+    if (data.nickname === nickname) {
+      return {
+        ...data,
+        isFollowed: !data.isFollowed,
+      };
+    }
+
+    return data;
+  });
+};
+
+export const useGetOneReview = (reviewId: number) => {
+  return useQuery(['review', reviewId], () => snsAPI.getOneReview(reviewId));
 };
 
 export const useGetReviewComments = (reviewId: number) => {
@@ -124,11 +136,36 @@ export const useGetReviewComments = (reviewId: number) => {
   );
 };
 
+export const usePostReviewComment = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(
+    ({
+      reviewId,
+      createdComment,
+    }: {
+      reviewId: number;
+      createdComment: { content: string; parentId: number };
+    }) => snsAPI.postReviewComment(reviewId, createdComment),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['review', 'comments', reviewId]);
+      },
+      onError: (err) => {
+        alert(err);
+      },
+    }
+  );
+  return { mutate };
+};
+
 export const useFollowAndUnFollow = () => {
   const queryClient = useQueryClient();
   const originFollowingDictionary = queryClient.getQueryData(
     FOLLOWING_DICTIONARY_KEY
   ) as FollowingDictionary;
+  const originFollowSuggestion = queryClient.getQueryData(
+    FOLLOW_SUGGESTION_KEY
+  ) as FollowType[];
 
   const onFollowOptimisticUpdate = (targetUserNickname: string) => {
     optimisticUpdateByReactQuery({
@@ -138,6 +175,12 @@ export const useFollowAndUnFollow = () => {
         ...originFollowingDictionary,
         [targetUserNickname]: {},
       },
+    });
+
+    optimisticUpdateByReactQuery({
+      queryClient,
+      queryKey: FOLLOW_SUGGESTION_KEY,
+      newData: getNewSuggestArray(originFollowSuggestion, targetUserNickname),
     });
   };
 
@@ -149,6 +192,12 @@ export const useFollowAndUnFollow = () => {
       queryClient,
       queryKey: FOLLOWING_DICTIONARY_KEY,
       newData: restIsFollowingDictionary,
+    });
+
+    optimisticUpdateByReactQuery({
+      queryClient,
+      queryKey: FOLLOW_SUGGESTION_KEY,
+      newData: getNewSuggestArray(originFollowSuggestion, targetUserNickname),
     });
   };
 
@@ -236,7 +285,7 @@ export const useGetInfiniteSocialReviews = (nickname: string) => {
 
 export const useGetInfiniteFeed = () => {
   const selectedUser = useRecoilValue(selectedUserState);
-  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType>({
+  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType, 'reviewId'>({
     queryKey: ['useGetInfiniteFeed', selectedUser],
     getNextPage: (nextRequest) => {
       return selectedUser === ''
@@ -260,4 +309,14 @@ export const useGetRecentUpdatedUsers = () => {
   );
 
   return recentUpdatedUserQuery;
+};
+
+export const useGetFollowSuggestion = () => {
+  return useQuery<FollowType[]>(
+    ['followSuggestion'],
+    () => snsAPI.getFollowSuggestion(),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 };

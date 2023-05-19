@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import React from 'react';
 
 import grayStar from 'public/images/empty_star_img.png';
 import thumbsUp from 'public/icons/thumbs_up.png';
@@ -12,14 +11,14 @@ interface ReviewProps {
 }
 
 const Review = ({ reviewDetail }: ReviewProps) => {
-  const { nickname, profileImage } = reviewDetail.userInfo;
+  const { nickname, profileImageUrl } = reviewDetail.userInfo;
   const { content, reviewImageUrlList } = reviewDetail;
   return (
     <S.Container>
       <S.WriterInfo>
         <S.WriterImage>
           <Image
-            src={profileImage ? formattedImageUrl(profileImage) : ''}
+            src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
             alt=""
           />
         </S.WriterImage>

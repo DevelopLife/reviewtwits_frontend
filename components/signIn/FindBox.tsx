@@ -4,10 +4,12 @@ import styled from '@emotion/styled';
 const FindBox = () => {
   return (
     <S.FindBox>
-      <Link href="/test">
+      <Link href="/find-id">
         <S.FindId>아이디 찾기</S.FindId>
       </Link>
-      <S.FindPassword>비밀번호 찾기</S.FindPassword>
+      <Link href="/find-password">
+        <S.FindPassword>비밀번호 찾기</S.FindPassword>
+      </Link>
     </S.FindBox>
   );
 };
