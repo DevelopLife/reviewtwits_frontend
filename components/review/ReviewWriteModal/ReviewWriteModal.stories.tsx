@@ -7,5 +7,5 @@ export default {
 } as Meta<typeof ReviewWriteModal>;
 
 export const Primary: StoryFn<typeof ReviewWriteModal> = () => (
-  <ReviewWriteModal productURL={''} title={''} />
+  <ReviewWriteModal productURL={''} />
 );
