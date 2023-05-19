@@ -5,6 +5,8 @@ import thumbsUp from 'public/icons/thumbs_up.png';
 import * as S from './Review.styles';
 import { ShoppingMallReviewDetail } from 'typings/reviews';
 import { formattedImageUrl } from 'utils/format';
+import StarBox from 'components/social/feed/MainContentSection/Review/StarBox';
+import Card from 'components/common/Card';
 
 interface ReviewProps {
   reviewDetail: ShoppingMallReviewDetail;
@@ -15,83 +17,68 @@ const Review = ({ reviewDetail }: ReviewProps) => {
   const { content, reviewImageUrlList } = reviewDetail;
   return (
     <S.Container>
-      <S.WriterInfo>
-        <S.WriterImage>
-          <Image
-            src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
-            alt=""
-          />
-        </S.WriterImage>
-        <S.WriterDesc>
-          <S.WriterName>{nickname}</S.WriterName>
-          <S.StarRateWithDate>
-            <S.Stars>
-              <li>
-                <Image src={grayStar} alt="" />
-              </li>
-
-              <li>
-                <Image src={grayStar} alt="" />
-              </li>
-
-              <li>
-                <Image src={grayStar} alt="" />
-              </li>
-
-              <li>
-                <Image src={grayStar} alt="" />
-              </li>
-
-              <li>
-                <Image src={grayStar} alt="" />
-              </li>
-            </S.Stars>
-            <S.WriteDate>2023.03.01</S.WriteDate>
-          </S.StarRateWithDate>
-          <S.SellerName>판매자: 마린 컴퍼니(주)</S.SellerName>
-        </S.WriterDesc>
-      </S.WriterInfo>
-
-      <S.ProductImageBox>
-        <p>마린이 직접만든 리조또, 520g 1팩</p>
-        <S.ProductImages>
-          {reviewImageUrlList?.map((imageURL) => (
+      <Card cardType="reviewCard">
+        <S.WriterInfo>
+          <S.WriterImage>
             <Image
-              src={imageURL ? formattedImageUrl(imageURL) : ''}
+              src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
               alt=""
-              key={imageURL}
-              height={80}
-              width={100}
+              width={50}
+              height={50}
             />
-          ))}
-          <Image src="" alt="" />
-          <Image src="" alt="" />
-          <Image src="" alt="" />
-        </S.ProductImages>
-      </S.ProductImageBox>
+          </S.WriterImage>
+          <S.WriterDesc>
+            <S.WriterName>{nickname}</S.WriterName>
+            <S.StarRateWithDate>
+              <StarBox starSize={18} score={reviewDetail.score} />
+              <S.WriteDate>2023.03.01</S.WriteDate>
+            </S.StarRateWithDate>
+            <S.SellerName>판매자: 마린 컴퍼니(주)</S.SellerName>
+          </S.WriterDesc>
+        </S.WriterInfo>
 
-      <S.ProductDesc>
-        <strong>마린의 손맛이 느껴지는 맛입니다</strong>
-        <p>{content}</p>
-      </S.ProductDesc>
+        <S.ProductImageBox>
+          <p>마린이 직접만든 리조또, 520g 1팩</p>
+          <S.ProductImages>
+            {reviewImageUrlList ? (
+              reviewImageUrlList?.map((imageURL) => (
+                <Image
+                  src={imageURL ? formattedImageUrl(imageURL) : ''}
+                  alt=""
+                  key={imageURL}
+                  height={80}
+                  width={100}
+                />
+              ))
+            ) : (
+              <h1>이미지가 없어요 </h1>
+            )}
+          </S.ProductImages>
+        </S.ProductImageBox>
 
-      <S.Keywords>
-        <S.KeywordDetail>
-          <strong>맛 만족도</strong>
-          <p>예상보다 맛있어요</p>
-        </S.KeywordDetail>
-        <S.KeywordDetail>
-          <strong>간편함</strong>
-          <p>조리가 간편해요</p>
-        </S.KeywordDetail>
-      </S.Keywords>
+        <S.ProductDesc>
+          <strong>마린의 손맛이 느껴지는 맛입니다</strong>
+          <p>{content}</p>
+        </S.ProductDesc>
 
-      <S.HelpfulRates>
-        <p>2명에게 도움이 됨</p>
-        <button>
-          <Image src={thumbsUp} alt=""></Image>
-        </button>
-      </S.HelpfulRates>
+        <S.Keywords>
+          <S.KeywordDetail>
+            <strong>맛 만족도</strong>
+            <p>예상보다 맛있어요</p>
+          </S.KeywordDetail>
+          <S.KeywordDetail>
+            <strong>간편함</strong>
+            <p>조리가 간편해요</p>
+          </S.KeywordDetail>
+        </S.Keywords>
+
+        <S.HelpfulRates>
+          <p>2명에게 도움이 됨</p>
+          <button>
+            <Image src={thumbsUp} alt=""></Image>
+          </button>
+        </S.HelpfulRates>
+      </Card>
     </S.Container>
   );
 };
