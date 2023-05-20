@@ -8,10 +8,7 @@ import {
 } from 'typings/reviews';
 
 export const useGetShoppingMallReviewInfo = (productURL: string) => {
-  return useQuery<
-    AxiosResponse<ShoppingMallReviewInfo>,
-    AxiosError<ResponseError>
-  >(
+  return useQuery(
     ['useGetShoppingMallReviewInfo', productURL],
     () => shoppingAPI.getShoppingMallReviewInfo(encodeURI(productURL)),
     {
@@ -21,10 +18,7 @@ export const useGetShoppingMallReviewInfo = (productURL: string) => {
 };
 
 export const useGetShoppingMallReviewList = (productURL: string) => {
-  return useQuery<
-    AxiosResponse<ShoppingMallReviewDetail[]>,
-    AxiosError<ResponseError>
-  >(
+  return useQuery(
     ['useGetShoppingMallReviewList', productURL],
     () => shoppingAPI.getShoppingMallReviewList(encodeURI(productURL)),
     {
