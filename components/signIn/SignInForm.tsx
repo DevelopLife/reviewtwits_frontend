@@ -20,6 +20,7 @@ import { isLoginState } from 'states/isLogin';
 import Form from 'components/common/Form';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
+import { getSearchParams } from 'utils/searchParams';
 
 const SignInForm = () => {
   const { values, errors, setErrors, handleChange, handleSubmit } = useForm({
@@ -35,7 +36,10 @@ const SignInForm = () => {
       doSignIn(signInResult.accessToken);
       setIsLogined(true);
 
-      window.location.replace('/');
+      const productURL = getSearchParams('productURL');
+      window.location.replace(
+        productURL ? `review?productURL=${productURL}` : '/'
+      );
     }
   };
 

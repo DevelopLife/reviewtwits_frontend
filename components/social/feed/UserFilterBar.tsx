@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import { useGetRecentUpdatedUsers } from 'hooks/queries/sns';
 import { FollowType } from 'typings/sns';
 import { selectedUserState } from 'states/reviews';
-import { formattedImageUrl } from 'utils/format';
+import { formattedProfileImageUrl } from 'utils/format';
 
 const UserFilterBar = () => {
   const [selectedUser, setSelectedUser] = useRecoilState(selectedUserState);
@@ -40,11 +40,7 @@ const UserFilterBarView = ({
             width={92}
             height={92}
             isSelected={selectedUser === user.nickname}
-            src={
-              user.profileImageUrl
-                ? formattedImageUrl(user.profileImageUrl)
-                : '/images/default_user_profile_img.png'
-            }
+            src={formattedProfileImageUrl(user.profileImageUrl)}
             alt=""
           />
           <S.Nickname>{user.nickname}</S.Nickname>

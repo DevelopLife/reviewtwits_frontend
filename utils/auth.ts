@@ -49,7 +49,6 @@ export function doSignIn(token: string) {
 
   setCookie('expireAt', expireAt.toString());
 
-  setLocalStorageExpireAt(1);
   setAuthorizationToken(token);
 }
 

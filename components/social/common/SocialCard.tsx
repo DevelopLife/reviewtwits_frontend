@@ -1,7 +1,7 @@
 import { FOLLOW_UNFOLLOW } from 'constants/social';
 import Image from 'next/image';
 import * as S from './SocialCard.styles';
-import { formattedImageUrl } from 'utils/format';
+import { formattedProfileImageUrl } from 'utils/format';
 
 import SocialFollowAndUnfollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
 
@@ -17,7 +17,7 @@ const SocialCard = ({ imageUrl, nickname, role }: SocialCardProps) => {
       <S.userBox>
         <S.ImageBox>
           <Image
-            src={imageUrl ? formattedImageUrl(imageUrl) : ''}
+            src={formattedProfileImageUrl(imageUrl)}
             alt="userProfile"
             fill
           />
