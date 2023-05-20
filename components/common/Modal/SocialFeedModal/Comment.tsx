@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { CommentResponseType } from 'typings/reviews';
-import { formattedImageUrl } from 'utils/format';
+import { formattedProfileImageUrl } from 'utils/format';
 
 interface CommentProps {
   commentsData: CommentResponseType[] | [];
@@ -14,11 +14,7 @@ const Comment = ({ commentsData }: CommentProps) => {
         <div key={commentId}>
           <S.User>
             <S.UserImage
-              src={
-                userInfo.profileImageUrl
-                  ? formattedImageUrl(userInfo.profileImageUrl)
-                  : '/images/default_user_profile_img.png'
-              }
+              src={formattedProfileImageUrl(userInfo.profileImageUrl)}
               alt=""
               width={40}
               height={40}

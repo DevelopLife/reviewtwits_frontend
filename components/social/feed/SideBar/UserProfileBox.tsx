@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import useUserProfile from 'hooks/queries/users';
-import { formattedImageUrl } from 'utils/format';
+import { formattedProfileImageUrl } from 'utils/format';
 
 import styled from '@emotion/styled';
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
@@ -34,11 +34,7 @@ const UserProfileBoxView = ({
         <S.UserImage
           width={68}
           height={68}
-          src={
-            profileImageUrl
-              ? formattedImageUrl(profileImageUrl)
-              : '/images/default_user_profile_img.png'
-          }
+          src={formattedProfileImageUrl(profileImageUrl)}
           alt="userImg"
         />
       </SocialUserNicknameLink>

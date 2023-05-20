@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import * as S from './Header.styles';
 import UserMenu from './UserMenu';
-import { formattedImageUrl } from 'utils/format';
+import { formattedProfileImageUrl } from 'utils/format';
 import useUserProfile from 'hooks/queries/users';
 import Button from '../Button';
 
@@ -31,9 +31,7 @@ const Header = () => {
             <>
               <S.Profile onClick={toggleMenuOpen}>
                 <Image
-                  src={
-                    profileImageUrl ? formattedImageUrl(profileImageUrl) : ''
-                  }
+                  src={formattedProfileImageUrl(profileImageUrl)}
                   width={40}
                   height={40}
                   alt="userImg"
