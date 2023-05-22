@@ -36,10 +36,7 @@ const SignInForm = () => {
       doSignIn(signInResult.accessToken);
       setIsLogined(true);
 
-      const productURL = getSearchParams('productURL');
-      window.location.replace(
-        productURL ? `review?productURL=${productURL}` : '/'
-      );
+      window.location.href = document.referrer;
     }
   };
 
