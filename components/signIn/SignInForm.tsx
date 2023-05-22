@@ -20,7 +20,6 @@ import { isLoginState } from 'states/isLogin';
 import Form from 'components/common/Form';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
-import { getSearchParams } from 'utils/searchParams';
 
 const SignInForm = () => {
   const { values, errors, setErrors, handleChange, handleSubmit } = useForm({

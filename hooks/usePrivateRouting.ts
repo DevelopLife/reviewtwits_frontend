@@ -4,7 +4,6 @@ import { SetterOrUpdater, useRecoilState } from 'recoil';
 import { isLoginState } from 'states/isLogin';
 import { validateToken } from 'utils/auth';
 import { getCookie } from 'utils/cookies';
-import { getSearchParams } from 'utils/searchParams';
 
 interface UsePrivateRoutingProps {
   isRequiredLogin: boolean;
@@ -60,10 +59,8 @@ export const setIsLoginAtom = (setIsLogined: SetterOrUpdater<boolean>) => {
 export function redirectNotLogin(login: () => void, logout: () => void) {
   const tokenExpireAt = getCookie('expireAt');
   const redirectSignIn = () => {
-    const productURL = getSearchParams('productURL');
-    window.location.replace(
-      productURL ? `/sign-in?productURL=${productURL}` : '/sign-in'
-    );
+    const searchParams = new URLSearchParams(window.location.search);
+    window.location.href = `/sign-in?${searchParams}`;
   };
 
   if (!tokenExpireAt) {
@@ -76,7 +73,7 @@ export function redirectNotLogin(login: () => void, logout: () => void) {
   const isValidToken = validateToken();
 
   if (!isValidToken) {
-    alert('로그인이 필요합니다.');
+    // alert('로그인이 필요합니다.');
     logout();
     redirectSignIn();
     return;
