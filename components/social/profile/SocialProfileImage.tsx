@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { formattedImageUrl } from 'utils/format';
+import { formattedImageUrl, formattedProfileImageUrl } from 'utils/format';
 
 interface SocialProfileImageProps {
   profileImageUrl: string | null;
@@ -17,7 +17,7 @@ const SocialProfileImage = ({ profileImageUrl }: SocialProfileImageProps) => {
         overflow: 'hidden',
         backgroundColor: 'white',
       }}
-      src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
+      src={formattedProfileImageUrl(profileImageUrl)}
       alt={'socialProfileImage'}
     />
   );

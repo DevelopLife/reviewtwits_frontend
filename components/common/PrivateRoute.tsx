@@ -9,13 +9,14 @@ const PUBLIC_URLS = [
   '/',
   '/sign-in',
   '/sign-up',
+  '/find-id',
+  '/find-password',
   '/social',
   '/oauth/callback/kakao',
   '/oauth/callback/naver',
   '/socual/user',
   '/social/user/[nickname]',
-  '/shoppingMallReview',
-  '/review/write',
+  '/review',
   '/404',
 ];
 
@@ -34,7 +35,6 @@ const PrivateRoute = ({
   const { isLogined } = usePrivateRouting({
     isRequiredLogin,
     statusCode,
-    redirectURL: undefined,
   });
 
   if (statusCode) {

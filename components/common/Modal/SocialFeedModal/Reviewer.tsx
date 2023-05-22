@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { formattedImageUrl, formattedLastTime } from 'utils/format';
+import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
 import StarBox from 'components/social/feed/MainContentSection/Review/StarBox';
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 import useModal from 'hooks/useModal';
@@ -23,7 +23,7 @@ const Reviewer = ({
     <S.ReviewInfoBox>
       <SocialUserNicknameLink nickname={nickname}>
         <S.UserImage
-          src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
+          src={formattedProfileImageUrl(profileImageUrl)}
           alt=""
           width={60}
           height={60}

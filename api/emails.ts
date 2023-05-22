@@ -1,3 +1,4 @@
+import { FindIdType, FindPasswordType } from './../typings/account';
 import { authApi } from 'api/instance';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from 'constants/account';
 
@@ -23,5 +24,17 @@ export const emailsAPI = {
 
         return { ok: false };
       });
+  },
+
+  findIds: async (findIdParams: FindIdType) => {
+    const params = findIdParams;
+    const { data } = await authApi.post(`${url}/find-ids`, params);
+    return data;
+  },
+
+  findPasswords: async (findPasswordParams: FindPasswordType) => {
+    const params = findPasswordParams;
+    const { status } = await authApi.post(`${url}/find-password`, params);
+    return status;
   },
 };

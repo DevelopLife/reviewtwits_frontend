@@ -49,6 +49,8 @@ const NavLink = styled.li`
 
 const RightBox = styled.div`
   position: relative;
+  display: flex;
+  gap: 20px;
 `;
 
 const Profile = styled.div`
@@ -104,6 +106,16 @@ const Signup = styled.button`
   color: #ffffff;
 `;
 
+const SNSButton = styled.button`
+  width: 120px;
+  height: 46px;
+
+  background: ${({ theme }) => theme.colors.secondary};
+  color: white;
+  font-size: 18px;
+  border-radius: 12px;
+`;
+
 export {
   Container,
   Header,
@@ -115,4 +127,5 @@ export {
   AuthButtons,
   Login,
   Signup,
+  SNSButton,
 };

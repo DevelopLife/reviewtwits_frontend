@@ -9,7 +9,8 @@ const useScrap = (reviewId: number) => {
     () => snsAPI.addScrap(reviewId),
     {
       onSuccess: () => {
-        return queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
+        queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
+        queryClient.invalidateQueries(['review', reviewId]);
       },
     }
   );
@@ -17,7 +18,8 @@ const useScrap = (reviewId: number) => {
     () => snsAPI.deleteScrap(reviewId),
     {
       onSuccess: () => {
-        return queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
+        queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
+        queryClient.invalidateQueries(['review', reviewId]);
       },
     }
   );
