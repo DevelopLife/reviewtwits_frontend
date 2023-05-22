@@ -20,6 +20,7 @@ const Review = ({ reviewDetail }: ReviewProps) => {
           <Image
             src={profileImageUrl ? formattedImageUrl(profileImageUrl) : ''}
             alt=""
+            fill
           />
         </S.WriterImage>
         <S.WriterDesc>
