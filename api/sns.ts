@@ -1,4 +1,4 @@
-import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
+import { requiredTokenApi, optionalTokenAPI } from './instance';
 import { SocialProfile, SocialReview } from 'typings/social';
 import { ReactionType } from 'typings/reviews';
 import type {
@@ -156,6 +156,9 @@ export const snsAPI = {
     return response.data;
   },
 
+  //
+  // comments
+
   postReviewComment: async (
     reviewId: number,
     createdComment: { content: string; parentId: number }
@@ -166,6 +169,13 @@ export const snsAPI = {
     );
 
     return response.data;
+  },
+
+  postLikeToComment: async (commentId: number) => {
+    const response = await requiredTokenApi.post(
+      `${SNS_URL}/comments-like/${commentId}`
+    );
+    return response;
   },
 
   getFollowSuggestion: () =>
