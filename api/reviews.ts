@@ -44,7 +44,6 @@ const shoppingAPI = {
   //
   // product register
 
-  // TODO: 제품등록 임시 api
   registerProduct: async ({
     projectName,
     body: { productUrl, imageUrl, productName },

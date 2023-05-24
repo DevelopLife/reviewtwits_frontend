@@ -10,6 +10,7 @@ import {
   ShoppingMallReviewDetail,
   ShoppingMallReviewInfo,
 } from 'typings/reviews';
+import { useRouter } from 'next/router';
 
 interface ShoppingMallReviewProps {
   shoppingmallReviewInfoData: ShoppingMallReviewInfo;
@@ -20,6 +21,14 @@ const ShoppingMallReview = ({
   shoppingmallReviewInfoData,
   shoppingmallReviewList,
 }: ShoppingMallReviewProps) => {
+  const router = useRouter();
+  const { projectName, productURL, title, image } = router.query as {
+    projectName: string;
+    productURL: string;
+    title: string;
+    image: string;
+  };
+
   return (
     <S.Layout>
       <S.ComprehensiveRatesLayout>
@@ -36,6 +45,15 @@ const ShoppingMallReview = ({
       <S.ReviewsLayout>
         <Reviews shoppingmallReviewList={shoppingmallReviewList} />
       </S.ReviewsLayout>
+      <S.LinkButton
+        href={{
+          pathname: '/review/write',
+          query: { productURL, title },
+        }}
+        as={`/review/write/${title}`}
+      >
+        리뷰작성
+      </S.LinkButton>
     </S.Layout>
   );
 };

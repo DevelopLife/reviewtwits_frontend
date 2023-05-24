@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  width: 424px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
@@ -50,6 +50,7 @@ const StarRateWithDate = styled.div`
   align-items: center;
   margin-top: 4px;
   margin-bottom: 4px;
+  gap: 8px;
 `;
 
 const WriteDate = styled.p`

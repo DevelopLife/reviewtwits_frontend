@@ -13,17 +13,25 @@ import { replaceUrlProtocool } from 'utils/regExp';
 
 const ShoppingMallReviewPage = () => {
   const router = useRouter();
-  const { projectName, productURL, title, image } = router.query as {
+  const {
+    projectName = '1',
+    productURL = 'http://www.example.com/123',
+    title = '12',
+    image,
+  } = router.query as {
     projectName: string;
     productURL: string;
     title: string;
     image: string;
   };
+  console.log(productURL, router.query);
 
   const { data: shoppingmallReviewInfoData } =
     useGetShoppingMallReviewInfo(productURL);
   const { data: shoppingmallReviewList } =
     useGetShoppingMallReviewList(productURL);
+
+  console.log(shoppingmallReviewInfoData, useGetShoppingMallReviewList);
 
   const { mutateAsync } = useRegisterShoppingMallProduct();
 
