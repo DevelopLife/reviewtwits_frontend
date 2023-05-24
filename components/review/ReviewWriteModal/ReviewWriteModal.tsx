@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 
 import useForm from 'hooks/useForm';
-import { ReviewType } from 'typings/reviews';
+import { ReviewResponseType, ReviewType } from 'typings/reviews';
 import { validateReviewContent, validateReviewScore } from 'utils/validate';
 import { DEFAULT_REVIEW_WRITE_ERRORS, ERROR_MESSAGE } from 'constants/reviews';
 
 import * as S from './ReviewWriteModal.styles';
-import ServiceSection from './ServiceSection/@index';
 import QualitySection from './QualitySection/@index';
 import ReviewCreateButton from '../common/ReviewCreateButton';
 import {
@@ -15,12 +15,44 @@ import {
   useEditShoppingMallReview,
   useGetShoppingMallReview,
 } from 'hooks/queries/shopping';
+import ServiceSection from 'components/review/ReviewWriteModal/ServiceSection/@index';
 
-const ReviewWriteModal = () => {
+// TODO: DELETE
+
+const mockReviewData: ReviewResponseType = {
+  productUrl:
+    'https://thumbnail6.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/290346317532916-57e0ca03-9d04-4aed-b5ec-19442d97c7ac.png',
+  productName: '코멧 사선컷팅 테이프 크리너 핸들 + 거치대 세트',
+  lastModifiedDate: [],
+  reviewId: 0,
+  projectId: 0,
+  starScore: 0,
+  score: 0,
+  content: '',
+  reviewImageUrlList: [],
+  userInfo: {
+    accountId: 'string',
+    birthDate: 'string',
+    gender: 'string',
+    introduceText: 'string',
+    nickname: 'string',
+    phoneNumber: 'string',
+    profileImageUrl: 'string',
+  },
+  isScrapped: false,
+};
+
+export interface ReviewWriteModalProps extends ParsedUrlQuery {
+  productURL: string;
+  title: string;
+}
+
+const ReviewWriteModal = ({ productURL, title }: ReviewWriteModalProps) => {
   const router = useRouter();
-  const reviewId = Number(router?.query?.id);
-  const isEditPage = router?.query?.id;
-  const { data: reviewData, isLoading } = useGetShoppingMallReview(reviewId);
+  const productId = Number(router?.query?.id);
+  const isEditPage = productId ? true : false;
+  const { data: reviewData } = useGetShoppingMallReview(title);
+
   const {
     values,
     isSubmitable,
@@ -30,13 +62,13 @@ const ReviewWriteModal = () => {
     handleChange,
     handleSubmit,
   } = useForm<ReviewType>({
-    productURL: 'http://www.example.com/123',
+    productURL: productURL,
     content: '',
     score: 0,
     newImageFiles: [],
   });
   const { mutate: mutateCreate } = useCreateShoppingMallReview();
-  const { mutate: mutateEdit } = useEditShoppingMallReview(reviewId);
+  const { mutate: mutateEdit } = useEditShoppingMallReview(productId);
 
   const setDataInToFormData = () => {
     const formData = new FormData();
@@ -46,6 +78,7 @@ const ReviewWriteModal = () => {
     formData.append('score', score.toString());
     formData.append('content', content);
     formData.append('productURL', productURL);
+    formData.append('productName', title);
     newImageFiles?.forEach((image) =>
       formData.append('multipartImageFiles', image)
     );
@@ -91,15 +124,16 @@ const ReviewWriteModal = () => {
     }
   }, [reviewData, initializeForm]);
 
-  if (isEditPage && isLoading) return null;
+  // if (!reviewData) return <div>등록되지 않은 상품입니다.</div>;
+
   return (
     <S.Container>
       <S.Title>리뷰 관리</S.Title>
       <S.Form onSubmit={(e) => handleSubmit(e, onValid)}>
         <S.ReviewContent>
-          {/* <ServiceSection /> */}
+          <ServiceSection />
           <QualitySection
-            reviewData={reviewData}
+            reviewData={mockReviewData}
             formValues={values}
             setValue={setValue}
             handleChange={handleChange}

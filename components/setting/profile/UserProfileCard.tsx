@@ -37,11 +37,12 @@ const UserProfileForm = () => {
   const { mutate } = useMutation(
     (data: FormData) => usersAPI.setUserProfile(data),
     {
-      onSuccess: () => {
+      onSuccess: (newname) => {
         window.sessionStorage.clear();
         alert(SUCCESS_MESSAGE.SETTING.PROFILE);
 
         if (pathFrom === 'sign-up') router.push('/');
+        router.push(`/social/user/${newname.data.nickname}`);
       },
       onError: ({ response }) => {
         alert(response?.data[0]?.message);

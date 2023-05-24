@@ -1,18 +1,23 @@
+export type SignUpType = 'COMMON' | 'SOCIAL';
+
+export type SocialProviderType = 'GOOGLE' | 'KAKAO' | 'NAVER';
+
 export interface UserFormType {
-  accountId: string;
-  accountPw: string;
+  accountId?: string;
+  accountPw?: string;
   phoneNumber?: string;
   birthDate?: string | '';
   gender?: Gender | '';
   accountPwCheck?: string;
   verifyCode?: string;
+  provider?: SocialProviderType | '';
 }
 
 export type CodeIssuanceType = 'NOT_ISSUED' | 'IN_PROGRESS' | 'COMPLETE';
 
 export interface SignUpParams {
-  accountId: string;
-  accountPw: string;
+  accountId?: string;
+  accountPw?: string;
   phoneNumber?: string;
   birthDate?: string | '';
   gender?: Gender | '';
@@ -21,8 +26,8 @@ export interface SignUpParams {
 }
 
 export interface SighInParams {
-  accountId: string;
-  accountPw: string;
+  accountId?: string;
+  accountPw?: string;
 }
 
 export interface UserProfileFormType {
@@ -42,3 +47,20 @@ export interface UserProfileResponseType {
 }
 
 export type Gender = '남자' | '여자';
+
+export interface FindIdType {
+  phoneNumber?: string;
+  birthDate?: string | '';
+}
+
+export interface FindIdResponseType {
+  accountId: string;
+  createdDate: string;
+  nickname: string;
+}
+
+export interface FindPasswordType {
+  accountId: string;
+  phoneNumber?: string;
+  birthDate?: string | '';
+}

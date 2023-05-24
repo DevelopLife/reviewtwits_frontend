@@ -18,10 +18,7 @@ const SocialFeedModal = () => {
     return <h1>로딩중...</h1>;
   }
 
-  const { data: reviewData } = useGetOneReview(
-    nickname as string,
-    Number(reviewId) as number
-  );
+  const { data: reviewData } = useGetOneReview(Number(reviewId) as number);
 
   const { data: commentsData } = useGetReviewComments(
     Number(reviewId) as number
@@ -43,13 +40,14 @@ const SocialFeedModal = () => {
         />
         <Contants content={reviewData.content} />
         <S.Line />
-        <Comments commentsData={commentsData} />
-        <S.Line />
         <Reactions
           reviewId={reviewId as string}
           isScrapped={reviewData.isScrapped}
           reactions={reviewData.reactionResponses}
         />
+        <Comments commentsData={commentsData} />
+        <S.Line />
+
         <AddCommentForm reviewId={reviewId as string} />
       </S.DetailDesc>
     </S.FeedDetailContainer>

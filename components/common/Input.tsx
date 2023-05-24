@@ -7,6 +7,7 @@ interface TextInputProps {
   name: string;
   value?: string;
   placeholder: string;
+  disabled?: boolean;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 

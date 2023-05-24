@@ -6,11 +6,13 @@ import EmptyStarImg from 'public/images/empty_star_img.png';
 
 interface StarBoxProps {
   score?: number;
+  starSize?: number;
 }
 
-const StarBox = ({ score }: StarBoxProps) => {
+const StarBox = ({ score, starSize }: StarBoxProps) => {
   const props = {
     score,
+    starSize,
   };
 
   return <StarBoxView {...props} />;
@@ -18,9 +20,10 @@ const StarBox = ({ score }: StarBoxProps) => {
 
 interface StarBoxViewProps {
   score?: number;
+  starSize?: number;
 }
 
-const StarBoxView = ({ score }: StarBoxViewProps) => {
+const StarBoxView = ({ score, starSize }: StarBoxViewProps) => {
   if (!score) return null;
   return (
     <S.Box>
@@ -29,6 +32,7 @@ const StarBoxView = ({ score }: StarBoxViewProps) => {
           key={i}
           src={score <= i ? EmptyStarImg : FullStarImg}
           alt="star"
+          starSize={starSize}
         />
       ))}
     </S.Box>
@@ -43,8 +47,8 @@ const S = {
     gap: 3px;
   `,
 
-  Star: styled(Image)`
-    width: 15px;
-    height: 15px;
+  Star: styled(Image)<Pick<StarBoxViewProps, 'starSize'>>`
+    width: ${({ starSize }) => (starSize ? starSize : 15)}px;
+    height: ${({ starSize }) => (starSize ? starSize : 15)}px;
   `,
 };

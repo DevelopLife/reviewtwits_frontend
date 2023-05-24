@@ -1,10 +1,17 @@
-import { ChangeEvent, FormEvent, MouseEvent, useState, useEffect } from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEvent,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import styled from '@emotion/styled';
 
 import useForm, { ErrorType } from 'hooks/useForm';
 import { usersAPI } from 'api/users';
 import { emailsAPI } from 'api/emails';
-import { UserFormType, CodeIssuanceType } from 'typings/account';
+import { UserFormType, CodeIssuanceType, SignUpType } from 'typings/account';
 import {
   validateEmail,
   validatePassword,
@@ -13,12 +20,16 @@ import {
 } from 'utils/validate';
 import {
   DEFAULT_SIGN_UP_FORM,
+  DEFAULT_SOCIAL_SIGN_UP_FORM,
   ERROR_MESSAGE,
   GENDER,
   SIGN_UP_FORM_NAMES,
 } from 'constants/account';
 
 import { doSignIn } from 'utils/auth';
+import { registerAPI } from 'api/oauth';
+import { getCookie, removeCookie } from 'utils/cookies';
+
 import theme from 'styles/theme';
 import Card from 'components/common/Card';
 import Form from 'components/common/Form';
@@ -26,20 +37,23 @@ import Input from 'components/common/Input';
 import Button from 'components/common/Button';
 
 const SignUpForm = () => {
+  const [signUpType, setSignUpType] = useState<SignUpType>('COMMON');
   const {
     values,
     errors,
     isSubmitable,
     setValue,
     setErrors,
+    initializeForm,
     handleChange,
     handleSubmit,
-  } = useForm({ ...DEFAULT_SIGN_UP_FORM });
+  } = useForm(DEFAULT_SIGN_UP_FORM);
   const { accountId } = values;
   const [codeIssuanceStatus, setCodeIssuanceStatus] =
     useState<CodeIssuanceType>('NOT_ISSUED');
 
   const sendEmailVerifyCode = async () => {
+    if (!values.accountId) return;
     if (errors?.accountId) return alert(ERROR_MESSAGE.SIGN_UP.EMAIL);
     setCodeIssuanceStatus('IN_PROGRESS');
     const result = await emailsAPI.verifyEmail(values.accountId);
@@ -49,52 +63,101 @@ const SignUpForm = () => {
       : setCodeIssuanceStatus('NOT_ISSUED');
   };
 
-  const signUpValidate = (values: UserFormType) => {
-    const { accountId, accountPw, phoneNumber, accountPwCheck } = values;
-    const errors = { ...DEFAULT_SIGN_UP_FORM };
+  const signUpValidate = useCallback(
+    (values: UserFormType) => {
+      const { accountId, accountPw, phoneNumber, accountPwCheck } = values;
+      const errors =
+        signUpType === 'COMMON'
+          ? { ...DEFAULT_SIGN_UP_FORM }
+          : { ...DEFAULT_SOCIAL_SIGN_UP_FORM };
 
-    const isValidEmail = validateEmail(accountId);
-    const isValidPhoneNumber = phoneNumber && validatePhoneNumber(phoneNumber);
-    const isValidPassword = validatePassword(accountPw);
-    const isValidPasswordCheck =
-      accountPwCheck && validatePasswordCheck(accountPw, accountPwCheck);
+      if (signUpType === 'COMMON') {
+        const isValidPassword = accountPw && validatePassword(accountPw);
+        const isValidPasswordCheck =
+          accountPw &&
+          accountPwCheck &&
+          validatePasswordCheck(accountPw, accountPwCheck);
 
-    if (!isValidEmail) errors.accountId = ERROR_MESSAGE.SIGN_UP.EMAIL;
-    if (!isValidPhoneNumber) errors.phoneNumber = ERROR_MESSAGE.SIGN_UP.TEL;
-    if (!isValidPassword) errors.accountPw = ERROR_MESSAGE.SIGN_UP.PASSWORD;
-    if (!isValidPasswordCheck)
-      errors.accountPwCheck = ERROR_MESSAGE.SIGN_UP.PASSWORDCHECK;
+        if (!isValidPassword) errors.accountPw = ERROR_MESSAGE.SIGN_UP.PASSWORD;
+        if (!isValidPasswordCheck)
+          errors.accountPwCheck = ERROR_MESSAGE.SIGN_UP.PASSWORDCHECK;
+      }
 
-    return errors;
-  };
+      const isValidEmail = accountId && validateEmail(accountId);
+      const isValidPhoneNumber =
+        phoneNumber && validatePhoneNumber(phoneNumber);
+
+      if (!isValidEmail) errors.accountId = ERROR_MESSAGE.SIGN_UP.EMAIL;
+      if (!isValidPhoneNumber) errors.phoneNumber = ERROR_MESSAGE.SIGN_UP.TEL;
+
+      return errors;
+    },
+    [signUpType]
+  );
 
   const onValid = async () => {
-    const signUpResult = await usersAPI.signUp(values);
+    const token = getCookie('token');
+    const signUpResult =
+      signUpType === 'SOCIAL'
+        ? await registerAPI.socialSignUp(token, values)
+        : await usersAPI.signUp(values);
 
     if (signUpResult) {
       doSignIn(signUpResult.accessToken);
-      window.sessionStorage.setItem('pathFrom', 'sign-up');
+      sessionStorage.setItem('pathFrom', 'sign-up');
 
-      return window.location.replace('/setting/profile');
+      return location.replace('/setting/profile');
     }
 
     setCodeIssuanceStatus('NOT_ISSUED');
+    if (token) removeCookie('token');
   };
 
   useEffect(() => {
     const newErrors = signUpValidate(values);
     setErrors(newErrors);
-  }, [values, setErrors]);
+  }, [signUpType, values, setErrors, signUpValidate]);
 
   useEffect(() => {
+    if (signUpType === 'SOCIAL' || accountId === '') return;
+
     setCodeIssuanceStatus('NOT_ISSUED');
     setValue('verifyCode', '');
-  }, [accountId, setValue]);
+  }, [signUpType, accountId, setValue]);
+
+  useEffect(() => {
+    const email = getCookie('email');
+    const isSocialSignUp = email ? true : false;
+
+    if (isSocialSignUp) {
+      const provider = getCookie('provider');
+      const birthDate = getCookie('birthDate') || '';
+      const gender = getCookie('gender') || '';
+      const phoneNumber = getCookie('phoneNumber') || '';
+
+      initializeForm({
+        ...DEFAULT_SOCIAL_SIGN_UP_FORM,
+        accountId: email,
+        provider,
+        phoneNumber,
+        birthDate,
+        gender,
+      });
+      setSignUpType('SOCIAL');
+
+      removeCookie('email');
+      removeCookie('provider');
+      if (birthDate) removeCookie('birthDate');
+      if (gender) removeCookie('gender');
+      if (phoneNumber) removeCookie('phoneNumber');
+    }
+  }, [initializeForm]);
 
   const props = {
     values,
     errors,
     disabled: !isSubmitable,
+    isSocialSignUp: signUpType === 'SOCIAL',
     isCodeIssuable: codeIssuanceStatus === 'NOT_ISSUED',
     isCodeIssued: codeIssuanceStatus === 'COMPLETE',
     onValid,
@@ -110,6 +173,7 @@ interface SignUpFormViewProps {
   values: UserFormType;
   errors?: ErrorType;
   disabled: boolean;
+  isSocialSignUp: boolean;
   isCodeIssuable: boolean;
   isCodeIssued: boolean;
   onValid: () => void;
@@ -124,6 +188,7 @@ const SignUpFormView = ({
   values,
   errors,
   disabled,
+  isSocialSignUp,
   isCodeIssuable,
   isCodeIssued,
   sendEmailVerifyCode,
@@ -140,17 +205,21 @@ const SignUpFormView = ({
               <Input
                 name={SIGN_UP_FORM_NAMES.ACCOUND_ID}
                 placeholder="이메일"
+                value={values.accountId}
+                disabled={isSocialSignUp}
                 handleChange={handleChange}
               />
-              <S.VerifyButtonWrap>
-                <Button
-                  disabled={!isCodeIssuable}
-                  color="black"
-                  handleClick={sendEmailVerifyCode}
-                >
-                  인증번호 받기
-                </Button>
-              </S.VerifyButtonWrap>
+              {!isSocialSignUp && (
+                <S.VerifyButtonWrap>
+                  <Button
+                    disabled={!isCodeIssuable}
+                    color="black"
+                    handleClick={sendEmailVerifyCode}
+                  >
+                    인증번호 받기
+                  </Button>
+                </S.VerifyButtonWrap>
+              )}
             </S.EmailBox>
             {isCodeIssued && (
               <Input
@@ -166,37 +235,43 @@ const SignUpFormView = ({
             <Input
               name={SIGN_UP_FORM_NAMES.PHONE_NUMBER}
               placeholder="숫자만 입력 ('-' 제외)"
+              value={values.phoneNumber}
               handleChange={handleChange}
             />
             {values?.phoneNumber && (
               <S.WarnText>{errors?.phoneNumber}</S.WarnText>
             )}
           </S.FormItem>
-          <S.FormItem>
-            <S.InputLabel>비밀번호</S.InputLabel>
-            <Input
-              name={SIGN_UP_FORM_NAMES.ACCOUNT_PW}
-              type="password"
-              placeholder="영문, 숫자, 특수문자 조합 6자리 이상"
-              handleChange={handleChange}
-            />
-            {values?.accountPw && <S.WarnText>{errors?.accountPw}</S.WarnText>}
-            <Input
-              name={SIGN_UP_FORM_NAMES.ACCOUNT_PW_CHECK}
-              type="password"
-              placeholder="비밀번호 재입력"
-              handleChange={handleChange}
-            />
-            {values?.accountPwCheck && (
-              <S.WarnText>{errors?.accountPwCheck}</S.WarnText>
-            )}
-          </S.FormItem>
+          {!isSocialSignUp && (
+            <S.FormItem>
+              <S.InputLabel>비밀번호</S.InputLabel>
+              <Input
+                name={SIGN_UP_FORM_NAMES.ACCOUNT_PW}
+                type="password"
+                placeholder="영문, 숫자, 특수문자 조합 6자리 이상"
+                handleChange={handleChange}
+              />
+              {values?.accountPw && (
+                <S.WarnText>{errors?.accountPw}</S.WarnText>
+              )}
+              <Input
+                name={SIGN_UP_FORM_NAMES.ACCOUNT_PW_CHECK}
+                type="password"
+                placeholder="비밀번호 재입력"
+                handleChange={handleChange}
+              />
+              {values?.accountPwCheck && (
+                <S.WarnText>{errors?.accountPwCheck}</S.WarnText>
+              )}
+            </S.FormItem>
+          )}
           <S.DivideBox>
             <S.FormItem>
               <S.InputLabel>생년월일</S.InputLabel>
               <S.DateInput
                 name={SIGN_UP_FORM_NAMES.BIRTHDATE}
                 type="date"
+                value={values.birthDate}
                 onChange={handleChange}
               />
             </S.FormItem>

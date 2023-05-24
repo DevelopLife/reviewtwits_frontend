@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Colors } from 'styles/theme';
 
 import { ReviewResponseType } from 'typings/reviews';
-import { formattedLastTime, formattedImageUrl } from 'utils/format';
+import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
 
 import Card from '../../Card';
 import ReactionBox from './ReactionBox';
@@ -83,11 +83,7 @@ const ReviewView = ({
               <S.UserImage
                 width={32}
                 height={32}
-                src={
-                  data?.userInfo?.profileImageUrl
-                    ? formattedImageUrl(data.userInfo.profileImageUrl)
-                    : '/images/default_user_profile_img.png'
-                }
+                src={formattedProfileImageUrl(data.userInfo.profileImageUrl)}
                 alt=""
               />
               <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
@@ -175,7 +171,7 @@ const S = {
 
   ReviewText: styled.p`
     display: -webkit-box;
-    height: 90px;
+    height: 100px;
     overflow: hidden;
     margin: 24px 0;
 
@@ -183,7 +179,7 @@ const S = {
     line-height: 1.4;
     word-break: keep-all;
     white-space: normal;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
   `,
 

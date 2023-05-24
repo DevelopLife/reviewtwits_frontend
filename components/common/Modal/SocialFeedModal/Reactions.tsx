@@ -36,12 +36,13 @@ const S = {
   Container: styled.div`
     display: flex;
     flex-direction: row;
+    width: 548px;
+    height: 32px;
 
     align-items: center;
     justify-content: space-between;
 
-    margin-top: 32px;
-    margin-bottom: 40px;
+    margin-top: 24px;
   `,
   Stickers: styled.ul`
     position: relative;
