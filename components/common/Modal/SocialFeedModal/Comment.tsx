@@ -1,36 +1,57 @@
 import styled from '@emotion/styled';
+import { usePostlikeToComment } from 'hooks/queries/sns';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { CommentResponseType } from 'typings/reviews';
 import { formattedProfileImageUrl } from 'utils/format';
 
+import HeartFull from 'public/icons/like-heart-full.svg';
+import HeartEmpty from 'public/icons/like-heart-empty.svg';
+
 interface CommentProps {
-  commentsData: CommentResponseType[] | [];
+  commentData: CommentResponseType;
 }
 
-const Comment = ({ commentsData }: CommentProps) => {
+const Comment = ({ commentData }: CommentProps) => {
+  const router = useRouter();
+
+  const { commentId, userInfo, content, parentCommentId, commentLikeCount } =
+    commentData;
+
+  const { nickname, reviewId } = router.query;
+  const { mutate } = usePostlikeToComment(Number(reviewId));
+
+  const onClickLikeButton = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+
+    mutate({ commentId });
+  };
+  console.log(commentData);
   return (
     <S.Container>
-      {commentsData.map(({ commentId, content, userInfo }) => (
-        <div key={commentId}>
-          <S.User>
-            <S.UserImage
-              src={formattedProfileImageUrl(userInfo.profileImageUrl)}
-              alt=""
-              width={40}
-              height={40}
-            />
-            <S.UserName>{userInfo.nickname}</S.UserName>
-            <S.LikeButton>♡</S.LikeButton>
-          </S.User>
-          <S.ContentBox>
-            <S.Content>{content}</S.Content>
-            <S.ContentInfo>
-              <S.LastTime>1d</S.LastTime>
-              <S.LikeCount>12likes</S.LikeCount>
-            </S.ContentInfo>
-          </S.ContentBox>
-        </div>
-      ))}
+      <div key={commentId}>
+        <S.User>
+          <S.UserImage
+            src={formattedProfileImageUrl(userInfo.profileImageUrl)}
+            alt=""
+            width={40}
+            height={40}
+          />
+          <S.UserName>{userInfo.nickname}</S.UserName>
+
+          <S.LikeButton onClick={onClickLikeButton}>
+            <HeartFull />
+            <HeartEmpty />
+          </S.LikeButton>
+        </S.User>
+        <S.ContentBox>
+          <S.Content>{content}</S.Content>
+          <S.ContentInfo>
+            <S.LastTime>1d</S.LastTime>
+            <S.LikeCount>{commentLikeCount}likes</S.LikeCount>
+          </S.ContentInfo>
+        </S.ContentBox>
+      </div>
     </S.Container>
   );
 };
@@ -64,7 +85,6 @@ const S = {
     line-height: 19px;
   `,
   LikeButton: styled.button`
-    border: 1px solid black;
     width: 20px;
     height: 20px;
   `,
