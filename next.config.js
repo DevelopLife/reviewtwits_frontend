@@ -28,6 +28,11 @@ const nextConfig = {
 };
 
 module.exports = {
+  swcMinify: true,
+  compiler: {
+    removeConsole: true,
+    exclude: ['error'],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
