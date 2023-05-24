@@ -10,14 +10,14 @@ env:
   S3_BUCKET_NAME: reviewtwitsbucket
   CODE_DEPLOY_APPLICATION_NAME: reviewtwits_codedeploy
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: reviewtwits
-  NEXT_PUBLIC_SERVER_URL: ${{secrets.NEXT_PUBLIC_SERVER_URL}}
-  NEXT_PUBLIC_KAKAO_CLIENT_ID: ${{secrets.NEXT_PUBLIC_KAKAO_CLIENT_ID}}
-  NEXT_PUBLIC_KAKAO_CLIENT_SECRET: ${{secrets.NEXT_PUBLIC_KAKAO_CLIENT_SECRET}}
-  NEXT_PUBLIC_KAKAO_REDIRECT_URI: ${{secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI}}
-  NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID}}
-  NEXT_PUBLIC_GOOGLE_CLIENT_SECRET: ${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET}}
-  NEXT_PUBLIC_NAVER_CLIENT_ID: ${{secrets.NEXT_PUBLIC_NAVER_CLIENT_ID}}
-  NEXT_PUBLIC_NAVER_CLIENT_SECRET: ${{secrets.NEXT_PUBLIC_NAVER_CLIENT_SECRET}}
+  # NEXT_PUBLIC_SERVER_URL: ${{secrets.NEXT_PUBLIC_SERVER_URL}}
+  # NEXT_PUBLIC_KAKAO_CLIENT_ID: ${{secrets.NEXT_PUBLIC_KAKAO_CLIENT_ID}}
+  # NEXT_PUBLIC_KAKAO_CLIENT_SECRET: ${{secrets.NEXT_PUBLIC_KAKAO_CLIENT_SECRET}}
+  # NEXT_PUBLIC_KAKAO_REDIRECT_URI: ${{secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI}}
+  # NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID}}
+  # NEXT_PUBLIC_GOOGLE_CLIENT_SECRET: ${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET}}
+  # NEXT_PUBLIC_NAVER_CLIENT_ID: ${{secrets.NEXT_PUBLIC_NAVER_CLIENT_ID}}
+  # NEXT_PUBLIC_NAVER_CLIENT_SECRET: ${{secrets.NEXT_PUBLIC_NAVER_CLIENT_SECRET}}
 
 jobs:
   build:
@@ -26,9 +26,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+
+      - name: Setting .env
+        run: |
+          echo "NEXT_PUBLIC_SERVER_URL=${{secrets.NEXT_PUBLIC_SERVER_URL}}" >> .env
+          echo "NEXT_PUBLIC_KAKAO_CLIENT_ID=${{secrets.NEXT_PUBLIC_KAKAO_CLIENT_ID}}" >> .env
+          echo "NEXT_PUBLIC_KAKAO_CLIENT_SECRET=${{secrets.NEXT_PUBLIC_KAKAO_CLIENT_SECRET}}" >> .env
+          echo "NEXT_PUBLIC_KAKAO_REDIRECT_URI=${{secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI}}" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID}}" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET}}" >> .env
+          echo "NEXT_PUBLIC_NAVER_CLIENT_ID=${{secrets.NEXT_PUBLIC_NAVER_CLIENT_ID}}" >> .env
+          echo "NEXT_PUBLIC_NAVER_CLIENT_SECRET=${{secrets.NEXT_PUBLIC_NAVER_CLIENT_SECRET}}" >> .env
+          # echo "REACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}" >> .env
+          # echo "REACT_APP_API_DOMAIN=${{ secrets.REACT_APP_API_DOMAIN }}" >> .env
+          # echo "REACT_APP_KAKAO_REDIRECT=${{ secrets.REACT_APP_KAKAO_REDIRECT }}" >> .env
+          # echo "REACT_APP_KAKAO_CLIENTID=${{ secrets.REACT_APP_KAKAO_CLIENTID }}" >> .env
+          # echo "REACT_APP_NAVER_REDIRECT=${{ secrets.REACT_APP_NAVER_REDIRECT }}" >> .env
+          # echo "REACT_APP_NAVER_CLIENTID=${{ secrets.REACT_APP_NAVER_CLIENTID }}" >> .env
+          # echo "REACT_APP_NAVER_STATE_STRING=${{ secrets.REACT_APP_NAVER_STATE_STRING }}" >> .env
+          cat .env
 
       - name: Check Node v
         run: node -v
