@@ -26,28 +26,24 @@ const shoppingAPI = {
   },
 
   getShoppingMallReviewInfo: async (productURL: string) => {
-    const { data } = await optionalTokenAPI.get(`${SHOPPING_URL}`, {
+    return await optionalTokenAPI.get(`${SHOPPING_URL}`, {
       headers: {
         productURL: productURL,
       },
     });
-    return data;
   },
 
   getShoppingMallReviewList: async (productURL: string) => {
-    const { data } = await optionalTokenAPI.get(`${SHOPPING_URL}/list`, {
+    return await optionalTokenAPI.get(`${SHOPPING_URL}/list`, {
       headers: {
         productURL: productURL,
       },
     });
-
-    return data;
   },
 
   //
   // product register
 
-  // TODO: 제품등록 임시 api
   registerProduct: async ({
     projectName,
     body: { productUrl, imageUrl, productName },
