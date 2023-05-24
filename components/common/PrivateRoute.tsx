@@ -12,6 +12,8 @@ const PUBLIC_URLS = [
   '/find-id',
   '/find-password',
   '/social',
+  '/oauth/callback/kakao',
+  '/oauth/callback/naver',
   '/socual/user',
   '/social/user/[nickname]',
   '/review',

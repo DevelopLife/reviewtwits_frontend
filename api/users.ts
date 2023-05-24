@@ -1,4 +1,4 @@
-import { authApi, optionalTokenAPI, requiredTokenApi } from 'api/instance';
+import { authApi, requiredTokenApi } from 'api/instance';
 import { ERROR_MESSAGE } from 'constants/account';
 import { SighInParams, SignUpParams, UserFormType } from 'typings/account';
 
@@ -6,6 +6,7 @@ const USERS_URL = '/users';
 
 export const usersAPI = {
   signIn: async (values: UserFormType) => {
+    if (!values.accountId || !values.accountPw) return;
     const body: SighInParams = values;
 
     return await authApi
@@ -20,6 +21,7 @@ export const usersAPI = {
       });
   },
   signUp: async (values: UserFormType) => {
+    if (!values.accountId || !values.accountPw) return;
     const body: SignUpParams = values;
 
     return await authApi

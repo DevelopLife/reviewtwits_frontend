@@ -29,6 +29,7 @@ const SignInForm = () => {
   const setIsLogined = useSetRecoilState(isLoginState);
 
   const onValid = async () => {
+    if (!values.accountId || !values.accountPw) return;
     const signInResult = await usersAPI.signIn(values);
 
     if (signInResult) {
