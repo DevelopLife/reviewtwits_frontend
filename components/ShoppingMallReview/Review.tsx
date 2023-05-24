@@ -17,7 +17,11 @@ const Review = ({ reviewDetail }: ReviewProps) => {
     <S.Container>
       <S.WriterInfo>
         <S.WriterImage>
-          <Image src={formattedProfileImageUrl(profileImageUrl)} alt="" />
+          <Image
+            src={formattedProfileImageUrl(profileImageUrl || '')}
+            alt="reviwer_profile"
+            fill
+          />
         </S.WriterImage>
         <S.WriterDesc>
           <S.WriterName>{nickname}</S.WriterName>
