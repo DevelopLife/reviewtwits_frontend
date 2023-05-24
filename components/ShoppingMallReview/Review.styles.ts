@@ -15,6 +15,7 @@ const WriterInfo = styled.div`
 `;
 
 const WriterImage = styled.div`
+  position: relative;
   width: 50px;
   height: 50px;
 

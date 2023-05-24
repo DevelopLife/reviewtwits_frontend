@@ -6,7 +6,7 @@
     "init-https": "sh init-https.sh",
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "next build & next start",
     "lint": "next lint",
     "jest": "jest --watch",
     "storybook": "storybook dev -p 6006",
