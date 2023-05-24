@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - fix/env
 
 env:
   S3_BUCKET_NAME: reviewtwitsbucket
