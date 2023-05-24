@@ -90,4 +90,5 @@ export interface CommentResponseType {
   userInfo: ShoppingMallUserInfo;
   content: string;
   parentCommentId: number;
+  commentLikeCount: number;
 }
