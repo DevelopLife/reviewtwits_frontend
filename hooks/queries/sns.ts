@@ -158,6 +158,20 @@ export const usePostReviewComment = (reviewId: number) => {
   return { mutate };
 };
 
+export const usePostlikeToComment = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(
+    ({ commentId }: { commentId: number }) =>
+      snsAPI.postLikeToComment(commentId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['review', 'comments', reviewId]);
+      },
+    }
+  );
+  return { mutate };
+};
+
 export const useFollowAndUnFollow = () => {
   const queryClient = useQueryClient();
   const originFollowingDictionary = queryClient.getQueryData(
