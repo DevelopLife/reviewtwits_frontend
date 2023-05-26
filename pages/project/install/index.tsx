@@ -11,18 +11,6 @@ const PLATFORMS = [
     name: 'React',
     Icon: ReactIcon,
   },
-  {
-    name: 'Jekyll',
-    Icon: ReactIcon,
-  },
-  {
-    name: 'Wordpress',
-    Icon: ReactIcon,
-  },
-  {
-    name: 'Blogger',
-    Icon: ReactIcon,
-  },
 ];
 
 const InstallPage = () => {
