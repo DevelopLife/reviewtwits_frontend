@@ -21,7 +21,7 @@ const ReportUserStatistics = () => {
 
     // Request
 
-    setCookie('visited', 'Y');
+    setCookie('visited', 'Y', { maxAge: 60 * 60 * 24 });
   }, []);
 
   return <></>;
