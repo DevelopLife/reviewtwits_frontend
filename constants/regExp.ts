@@ -4,4 +4,9 @@ export const regExp = {
   password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!%*#?&])[A-Za-z\d@!%*#?&]{6,}$/,
   url: /(http(s)?:\/\/)/,
   mobile: /Mobile/i,
+  registerImage: /^\/\//,
 };
+
+export function replaceUrlProtocool(incompletedString: string) {
+  return incompletedString.replace(regExp.registerImage, 'https://');
+}

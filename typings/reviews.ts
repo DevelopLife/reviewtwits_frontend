@@ -57,7 +57,7 @@ export interface ShoppingMallUserInfo {
   nickname: string;
   accountId: string;
   introduceText: string;
-  profileImage: null;
+  profileImageUrl: null;
   detailIntroduce: null;
   reviewCount: number;
   followers: number;
@@ -83,4 +83,11 @@ export interface ShoppingMallReviewDetail {
   score: number;
   reviewImageUrlList: string[];
   exist: boolean;
+}
+
+export interface CommentResponseType {
+  commentId: number;
+  userInfo: ShoppingMallUserInfo;
+  content: string;
+  parentCommentId: number;
 }

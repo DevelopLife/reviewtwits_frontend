@@ -3,36 +3,43 @@ import { ChangeEvent } from 'react';
 import * as S from '../ReviewWriteModal.styles';
 
 import QualityQuestionBox from './QualityQuestionBox';
-import RatingBox from 'components/review/common/RatingBox';
 import { ReviewResponseType, ReviewType } from 'typings/reviews';
 import DetailReviewBox from '../QualitySection/DetailReviewBox';
 import ImageUploadBox from 'components/review/common/ImageUploadBox';
-import SurveyBox from './SurveyBox';
+import StarRating from 'components/review/common/StarRating';
+import ProductBox from 'components/review/ReviewWriteModal/QualitySection/ProductBox';
 
 interface QualitySectionProps {
-  values: ReviewType;
-  data?: ReviewResponseType;
+  formValues: ReviewType;
+  reviewData?: ReviewResponseType;
   setValue: (name: string, value: number | File[] | string[]) => void;
   handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const QualitySection = ({
-  values,
-  data,
+  formValues,
+  reviewData,
   setValue,
   handleChange,
 }: QualitySectionProps) => {
   return (
     <S.Section>
-      <QualityQuestionBox />
-      <RatingBox score={data?.score} setValue={setValue} />
-      <DetailReviewBox content={values?.content} handleChange={handleChange} />
+      {/* <QualityQuestionBox /> */}
+      <ProductBox
+        imageUrl={reviewData?.productUrl}
+        title={reviewData?.productName}
+      >
+        <StarRating initialScore={reviewData?.score} setValue={setValue} />
+      </ProductBox>
+      <DetailReviewBox
+        content={formValues?.content}
+        handleChange={handleChange}
+      />
       <ImageUploadBox
         buttonColor="primary"
-        imageNameList={data?.reviewImageUrlList}
+        imageNameList={reviewData?.reviewImageUrlList}
         setValue={setValue}
       />
-      <SurveyBox />
     </S.Section>
   );
 };

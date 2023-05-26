@@ -8,6 +8,7 @@ import SocialAnotherUserFeedSection from 'components/social/profile/SocialFeedSe
 import SocialMyProfileCard from 'components/social/profile/SocialProfileCard/SocialMyProfileCard';
 import SocialMyFeedSection from 'components/social/profile/SocialFeedSection/SocialMyFeedSection';
 import useUserProfile from 'hooks/queries/users';
+import useStoreagePathInSession from 'hooks/useStoreagePathInSession';
 
 const SocialUserFeedPage = () => {
   const router = useRouter();
@@ -16,6 +17,8 @@ const SocialUserFeedPage = () => {
 
   const userProfile = useUserProfile();
   const isMyFeed = userProfile?.nickname === nickname;
+
+  useStoreagePathInSession();
 
   // TODO: consider not found user case
 

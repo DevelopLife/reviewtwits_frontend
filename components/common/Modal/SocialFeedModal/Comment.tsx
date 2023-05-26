@@ -1,23 +1,36 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import { CommentResponseType } from 'typings/reviews';
+import { formattedProfileImageUrl } from 'utils/format';
 
-const Comment = () => {
+interface CommentProps {
+  commentsData: CommentResponseType[] | [];
+}
+
+const Comment = ({ commentsData }: CommentProps) => {
   return (
     <S.Container>
-      <S.User>
-        <S.UserImage src="" alt="" />
-        <S.UserName>minji_i</S.UserName>
-        <S.LikeButton>♡</S.LikeButton>
-      </S.User>
-      <S.ContentBox>
-        <S.Content>
-          저도 좋아하는 피자인데 ㅎ 다음에 캠핑갈때 쟁여가야겠어요
-        </S.Content>
-        <S.ContentInfo>
-          <S.LastTime>1d</S.LastTime>
-          <S.LikeCount>12likes</S.LikeCount>
-        </S.ContentInfo>
-      </S.ContentBox>
+      {commentsData.map(({ commentId, content, userInfo }) => (
+        <div key={commentId}>
+          <S.User>
+            <S.UserImage
+              src={formattedProfileImageUrl(userInfo.profileImageUrl)}
+              alt=""
+              width={40}
+              height={40}
+            />
+            <S.UserName>{userInfo.nickname}</S.UserName>
+            <S.LikeButton>♡</S.LikeButton>
+          </S.User>
+          <S.ContentBox>
+            <S.Content>{content}</S.Content>
+            <S.ContentInfo>
+              <S.LastTime>1d</S.LastTime>
+              <S.LikeCount>12likes</S.LikeCount>
+            </S.ContentInfo>
+          </S.ContentBox>
+        </div>
+      ))}
     </S.Container>
   );
 };

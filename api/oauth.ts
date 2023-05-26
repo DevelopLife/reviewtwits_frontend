@@ -1,4 +1,7 @@
-import { oauthApi } from 'api/instance';
+import { authApi, oauthApi } from 'api/instance';
+import { UserFormType } from 'typings/account';
+
+const OAUTH_URL = '/oauth';
 
 const kakaoOauthAPI = {
   getToken: async (code: string) => {
@@ -20,30 +23,35 @@ const kakaoOauthAPI = {
       .then((res) => res.data);
   },
 
-  getUserData: async (accessToken: string) => {
-    const headers = { Authorization: `Bearer ${accessToken}` };
+  kakaoLogin: async (accessToken: string) => {
+    const headers = {
+      Authorization: accessToken,
+    };
 
-    return await oauthApi
-      .get('https://kapi.kakao.com/v2/user/me', {
-        headers,
-      })
-      .then((res) => res.data);
+    return authApi.post(`${OAUTH_URL}/kakao`, {}, { headers });
   },
 };
 
 const googleOauthAPI = {
-  getProfileNextAPI: (accessToken: string) =>
-    oauthApi.get(`api/auth/google?token=${accessToken}`),
   getUserDataOrigin: (accessToken: string) =>
     oauthApi.get(
       `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`
     ),
+
+  googleLogin: async (accessToken: string) => {
+    const headers = {
+      Authorization: accessToken,
+    };
+
+    return authApi.post(`${OAUTH_URL}/google`, {}, { headers });
+  },
 };
 
 const naverOauthAPI = {
   getProfileNextAPI: (accessToken: string) => {
     return oauthApi.get(`api/auth/naver?token=${accessToken}`);
   },
+
   getUserDataOrigin: (accessToken: string) => {
     return oauthApi.get('https://openapi.naver.com/v1/nid/me', {
       headers: {
@@ -51,6 +59,35 @@ const naverOauthAPI = {
       },
     });
   },
+
+  naverLogin: async (accessToken: string) => {
+    const headers = {
+      Authorization: accessToken,
+    };
+
+    return authApi.post(`${OAUTH_URL}/naver`, {}, { headers }).then((res) => {
+      if (res.status === 202)
+        return {
+          status: res.status,
+          data: res.data.response,
+        };
+
+      return res;
+    });
+  },
 };
 
-export { kakaoOauthAPI, googleOauthAPI, naverOauthAPI };
+const registerAPI = {
+  socialSignUp: (token: string, values: UserFormType) => {
+    const headers = {
+      Authorization: token,
+    };
+
+    const body = { ...values };
+    delete body['accountId'];
+
+    return authApi.post(`${OAUTH_URL}/register`, body, { headers });
+  },
+};
+
+export { kakaoOauthAPI, googleOauthAPI, naverOauthAPI, registerAPI };

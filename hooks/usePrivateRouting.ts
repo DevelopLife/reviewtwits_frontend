@@ -8,13 +8,11 @@ import { getCookie } from 'utils/cookies';
 interface UsePrivateRoutingProps {
   isRequiredLogin: boolean;
   statusCode?: number;
-  redirectURL?: string;
 }
 
 export const usePrivateRouting = ({
   isRequiredLogin,
   statusCode,
-  redirectURL,
 }: UsePrivateRoutingProps) => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginState);
   const setFalseIsLogined = useCallback(
@@ -30,13 +28,12 @@ export const usePrivateRouting = ({
   useEffect(() => {
     if (statusCode === 404) return;
     if (isRequiredLogin) {
-      return redirectNotLogin(setTrueIsLogined, setFalseIsLogined, redirectURL);
+      return redirectNotLogin(setTrueIsLogined, setFalseIsLogined);
     }
 
     setIsLoginAtom(setIsLogined);
   }, [
     isRequiredLogin,
-    redirectURL,
     setFalseIsLogined,
     setIsLogined,
     setTrueIsLogined,
@@ -59,14 +56,12 @@ export const setIsLoginAtom = (setIsLogined: SetterOrUpdater<boolean>) => {
   }
 };
 
-export function redirectNotLogin(
-  login: () => void,
-  logout: () => void,
-  redirectURL?: string
-) {
+export function redirectNotLogin(login: () => void, logout: () => void) {
   const tokenExpireAt = getCookie('expireAt');
-  const redirectSignIn = () =>
-    (window.location.href = redirectURL ? redirectURL : '/sign-in');
+  const redirectSignIn = () => {
+    const searchParams = new URLSearchParams(window.location.search);
+    window.location.href = `/sign-in?${searchParams}`;
+  };
 
   if (!tokenExpireAt) {
     alert('로그인이 필요합니다.');
@@ -78,7 +73,7 @@ export function redirectNotLogin(
   const isValidToken = validateToken();
 
   if (!isValidToken) {
-    alert('로그인이 필요합니다.');
+    // alert('로그인이 필요합니다.');
     logout();
     redirectSignIn();
     return;

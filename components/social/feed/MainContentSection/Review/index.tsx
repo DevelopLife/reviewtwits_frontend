@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Colors } from 'styles/theme';
 
 import { ReviewResponseType } from 'typings/reviews';
-import { formattedLastTime, formattedImageUrl } from 'utils/format';
+import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
 
 import Card from '../../Card';
 import ReactionBox from './ReactionBox';
@@ -14,10 +14,9 @@ import ImageList from './ImageList';
 import AddReactionBox from './AddReactionBox';
 import ScrapButton from './ScrapButton';
 import CommentIcon from 'public/icons/comment.svg';
-import useModal from 'hooks/useModal';
 
-import MODAL_LIST from 'constants/modal';
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
+import useRouteModalPage from 'hooks/useOpenModal';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -25,7 +24,10 @@ interface ReviewProps {
 
 const Review = ({ data }: ReviewProps) => {
   const router = useRouter();
-  const modal = useModal();
+  const routeModalPage = useRouteModalPage(
+    data?.userInfo.nickname,
+    data?.reviewId
+  );
 
   const goProductPage = () => data && router.push(data.productUrl);
 
@@ -34,7 +36,7 @@ const Review = ({ data }: ReviewProps) => {
     data && router.push(`/product?name=${data.productName}`);
 
   const handleOpenModal = () => {
-    modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
+    routeModalPage();
   };
 
   const props = {
@@ -81,11 +83,7 @@ const ReviewView = ({
               <S.UserImage
                 width={32}
                 height={32}
-                src={
-                  data?.userInfo?.profileImageUrl
-                    ? formattedImageUrl(data.userInfo.profileImageUrl)
-                    : '/images/default_user_profile_img.png'
-                }
+                src={formattedProfileImageUrl(data.userInfo.profileImageUrl)}
                 alt=""
               />
               <S.Nickname>{data?.userInfo?.nickname}</S.Nickname>
@@ -173,7 +171,7 @@ const S = {
 
   ReviewText: styled.p`
     display: -webkit-box;
-    height: 90px;
+    height: 100px;
     overflow: hidden;
     margin: 24px 0;
 
@@ -181,7 +179,7 @@ const S = {
     line-height: 1.4;
     word-break: keep-all;
     white-space: normal;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
   `,
 

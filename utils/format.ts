@@ -1,6 +1,9 @@
 export const formattedImageUrl = (url: string) =>
   `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`;
 
+export const formattedProfileImageUrl = (url?: string | null) =>
+  url ? formattedImageUrl(url) : '/images/default_user_profile_img.png';
+
 export const formattedLastTime = (pastTimeArr?: number[]): string => {
   if (!pastTimeArr) return '';
 
@@ -20,4 +23,10 @@ export const formattedLastTime = (pastTimeArr?: number[]): string => {
     : minDiff > 0
     ? `${minDiff}m`
     : 'now';
+};
+
+export const formattedCreateDate = (createdDate: string): string => {
+  const dateArr = createdDate?.split('T');
+  const createDateFormat = dateArr[0].split('-');
+  return createDateFormat.join('/');
 };
