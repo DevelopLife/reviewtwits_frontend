@@ -51,4 +51,11 @@ export const REACT_INSTALL_GUIDES: InstallGuild[] = [
       export default YourProductPage
       `,
   },
+  {
+    TEXT: `4. ReviewTwits 서비스는 meta tag의 og:title, og:image property attributes를 기반으로 
+    상품자동등록을 진행하기 때문에 필수로 og:title, og:image property attribute를 가진 meta tag가 존재해야합니다.`,
+    CODE: `
+      // meta tag 추가를 위한 코드도 제공해줄 예정
+      `,
+  },
 ];
