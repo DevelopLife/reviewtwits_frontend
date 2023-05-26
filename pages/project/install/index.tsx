@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
-
 import ReactIcon from 'public/icons/react.svg';
 
 const PLATFORMS = [

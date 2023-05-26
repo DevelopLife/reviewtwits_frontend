@@ -12,7 +12,7 @@ const Video = ({ srcs, guideMessage }: VideoProps) => {
   return (
     <S.Video controls>
       {srcs.map((src) => (
-        <S.Source key={src} src={src} />
+        <S.Source key={src} src={src} type="video/mov" />
       ))}
       {guideMessage ? guideMessage : VIDEO_GUIDE_MESSAGE}
     </S.Video>

@@ -1,4 +1,4 @@
-import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
+import { optionalTokenAPI, publicAPI, requiredTokenApi } from 'api/instance';
 import { ReviewResponseType } from 'typings/reviews';
 import type { RegisterProjectParams } from 'typings/register';
 
@@ -48,7 +48,7 @@ const shoppingAPI = {
     projectName,
     body: { productUrl, imageUrl, productName },
   }: RegisterProjectParams) => {
-    return await requiredTokenApi.post(`/products/register/${projectName}`, {
+    return await publicAPI.post(`/products/register/${projectName}`, {
       productUrl,
       imageUrl,
       productName,
