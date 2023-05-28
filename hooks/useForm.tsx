@@ -27,6 +27,7 @@ const useForm = <T extends object>(initialValues: T) => {
     const emptyValues = keys.filter((name) => {
       const value = values[name];
 
+      if (value === null || value === undefined) return false;
       switch (typeof value) {
         case 'object':
           return !(values[name] as File[]).length;

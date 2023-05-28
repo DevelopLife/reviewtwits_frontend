@@ -1,30 +1,22 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-import HighlightCDN from 'components/common/HighlightCDN';
-import Video from 'components/common/Video/Video';
 import {
   CodeParagraph,
   InstallPageButtons,
 } from 'components/Project/install/@index';
+import HighlightCDN from 'components/common/HighlightCDN';
+import Video from 'components/common/Video/Video';
 import Margin from 'components/Dashboard/common/Margin';
 import CommonButton from 'components/Project/install/common/Button';
 
-const MOCK_CODE = `
-<span class="_1syGnXOL _3VkgqBXB" data-clk="dropbanner1b" style="padding-right: 20px; font-size: 17px; color: black">
-  <span>매일 쓰는 브라우저 보안이 걱정된다면, </span>
-  <strong>안전하고 빠른 최신 브라우저 웨일로 업데이트 하세요.</strong>
-</span>
-`;
-
-const INSTALL_GUIDE_MESSAGES = {
-  ONE: '1. 서비스가 로드 될 수 있도록 자신의 사이트 소스코드에 해당 코드를 리뷰가 삽입되고 싶은 위치에 넣어주세요',
-  TWO: '2. 리뷰에 대한 별점이 표시되게 하고 싶은 경우 해당 스크립트를 추가해주세요',
-};
+import { REACT_INSTALL_GUIDES } from 'constants/install_guides/react';
 
 const InstallDetailPage = () => {
+  console.log('adfs');
   const router = useRouter();
   const redirectPrevHistory = () => router.back();
+  const reactGuideoVideo = '/videos/react_guide.mov';
 
   return (
     <>
@@ -34,10 +26,11 @@ const InstallDetailPage = () => {
           <S.InstallTitle>코드 설치하는 방법</S.InstallTitle>
         </Margin>
         <Margin marginBottom={50}>
-          <Video srcs={['https://']} />
+          <Video srcs={[reactGuideoVideo]} />
         </Margin>
-        <CodeParagraph text={INSTALL_GUIDE_MESSAGES.ONE} code={MOCK_CODE} />
-        <CodeParagraph text={INSTALL_GUIDE_MESSAGES.TWO} code={MOCK_CODE} />
+        {REACT_INSTALL_GUIDES.map(({ TEXT, CODE }) => (
+          <CodeParagraph key={CODE} text={TEXT} code={CODE} />
+        ))}
         <InstallPageButtons>
           <CommonButton
             styleAttributes={{

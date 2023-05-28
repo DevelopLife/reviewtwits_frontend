@@ -49,22 +49,12 @@ export const useCreateShoppingMallReview = () => {
 
 // TODO: 제품등록 임시 query hook
 export const useRegisterShoppingMallProduct = () => {
-  return useMutation(
-    (params: RegisterProjectParams) => {
-      return shoppingAPI.registerProduct({
-        projectName: params.projectName,
-        body: params.body,
-      });
-    },
-    {
-      onSuccess: ({ status }) => {
-        alert('성공');
-      },
-      onError: ({ response }) => {
-        alert(response.data[0]?.message);
-      },
-    }
-  );
+  return useMutation((params: RegisterProjectParams) => {
+    return shoppingAPI.registerProduct({
+      projectName: params.projectName,
+      body: params.body,
+    });
+  });
 };
 
 export const useEditShoppingMallReview = (reviewId: number) => {

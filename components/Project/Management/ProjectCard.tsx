@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import Link from 'next/link';
 
 import {
   ProjectCardCommon,
@@ -7,6 +8,7 @@ import {
 } from 'components/Project/Management/ProjectCardCommon';
 import { ProjectDto } from 'typings/project';
 import { GetProjectsResponseData } from 'api/projects';
+import Button from 'components/common/Button';
 
 interface ProjectCardProps {
   project: GetProjectsResponseData;
@@ -74,6 +76,33 @@ export const ProjectCardView = ({
               <S.ContentItem>리뷰 : {review}</S.ContentItem>
             </S.SubTitle>
             <S.Description>{description}</S.Description>
+
+            {
+              // TODO: 임시
+            }
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button>
+                <Link
+                  href={{
+                    pathname: '/project/install',
+                    query: { projectName: name },
+                  }}
+                  style={{ color: 'black' }}
+                >
+                  설치가이드
+                </Link>
+              </Button>
+              <Button>
+                <Link href={'/project/install'} style={{ color: 'black' }}>
+                  수정
+                </Link>
+              </Button>
+              <Button>
+                <Link href={'/project/install'} style={{ color: 'black' }}>
+                  설정
+                </Link>
+              </Button>
+            </div>
           </S.ContentWrap>
         )}
       </S.BehindContent>

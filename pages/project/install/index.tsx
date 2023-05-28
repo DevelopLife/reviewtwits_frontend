@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
-import Link from 'next/link';
-
 import ReactIcon from 'public/icons/react.svg';
 
 const PLATFORMS = [
@@ -11,21 +12,12 @@ const PLATFORMS = [
     name: 'React',
     Icon: ReactIcon,
   },
-  {
-    name: 'Jekyll',
-    Icon: ReactIcon,
-  },
-  {
-    name: 'Wordpress',
-    Icon: ReactIcon,
-  },
-  {
-    name: 'Blogger',
-    Icon: ReactIcon,
-  },
 ];
 
 const InstallPage = () => {
+  const router = useRouter();
+  const query = router.query as { projectName: string };
+
   return (
     <ProjectPageLayout>
       <ProjectCreateLayout title={PROJECT_TITLE}>
@@ -33,7 +25,7 @@ const InstallPage = () => {
           <S.ProjectSelectPlatformList>
             {PLATFORMS.map(({ name, Icon }) => (
               <Link
-                href={{ pathname: `install/${name}` }}
+                href={{ pathname: `install/${name}`, query }}
                 key={name}
                 style={{ textDecoration: 'none', color: '#3D3D3D' }}
               >
