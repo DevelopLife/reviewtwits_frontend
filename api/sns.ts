@@ -192,6 +192,19 @@ export const snsAPI = {
     return response;
   },
 
+  patchComment: async (commentId: number) => {
+    const content = '새로운새로운';
+    const response = await requiredTokenApi.patch(
+      `${SNS_URL}/comments/${commentId}`,
+      {
+        query: {
+          content: content,
+        },
+      }
+    );
+    return response;
+  },
+
   getFollowSuggestion: () =>
     requiredTokenApi
       .get(`${SNS_URL}/suggest-followers`)
