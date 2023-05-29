@@ -91,4 +91,6 @@ export interface CommentResponseType {
   content: string;
   parentCommentId: number;
   commentLikeCount: number;
+  createdDate: number[];
+  isCommentLiked: boolean;
 }
