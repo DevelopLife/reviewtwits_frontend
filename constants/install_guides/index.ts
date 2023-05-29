@@ -1,4 +1,6 @@
-interface InstallGuild {
+import type { PlatformUppercases } from 'typings/platforms';
+
+interface InstallGuide {
   TEXT: string;
   CODE: string;
 }
@@ -6,7 +8,7 @@ interface InstallGuild {
 const projectname =
   global && new URLSearchParams(global?.location?.search).get('projectName');
 
-export const REACT_INSTALL_GUIDES: InstallGuild[] = [
+export const REACT_INSTALL_GUIDES: InstallGuide[] = [
   {
     TEXT: '1. 리액트용 ReviewTwits 필수 패키지를 설치합니다.',
     CODE: `
@@ -59,3 +61,25 @@ export const REACT_INSTALL_GUIDES: InstallGuild[] = [
       `,
   },
 ];
+
+export const HTML_INSTALL_GUIDES = [
+  {
+    TEXT: `HTML용 script tag를 부착합니다. 리뷰화면을 표시하고싶은 곳에는 id값으로 review_twits_thread를 할당해주고
+    리뷰 작성 팝업을 open하고 싶은 버튼에는 review_twits_write id값을 할당해주세요 `,
+    CODE: `
+      <body>
+        <div id="review_twits_thread" style="width: 100%; height: 100px"></div>
+        <button id="review_twits_write">리뷰작성</button>
+
+        <script src="https://developlife.github.io/reviewtwits-js/bundle.js"></script>
+      </body>
+    `,
+  },
+];
+
+const INSTALL_GUIDES: Record<PlatformUppercases, InstallGuide[]> = {
+  REACT: REACT_INSTALL_GUIDES,
+  HTML: HTML_INSTALL_GUIDES,
+};
+
+export default INSTALL_GUIDES;
