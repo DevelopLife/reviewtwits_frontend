@@ -7,6 +7,9 @@ import { formattedProfileImageUrl } from 'utils/format';
 
 import HeartFull from 'public/icons/like-heart-full.svg';
 import HeartEmpty from 'public/icons/like-heart-empty.svg';
+import { snsAPI } from 'api/sns';
+import { useState } from 'react';
+import { formattedLastTime } from 'utils/format';
 
 interface CommentProps {
   commentData: CommentResponseType;
@@ -15,18 +18,31 @@ interface CommentProps {
 const Comment = ({ commentData }: CommentProps) => {
   const router = useRouter();
 
-  const { commentId, userInfo, content, parentCommentId, commentLikeCount } =
-    commentData;
-
+  const {
+    commentId,
+    userInfo,
+    content,
+    parentCommentId,
+    commentLikeCount,
+    createdDate,
+    isCommentLiked,
+  } = commentData;
   const { nickname, reviewId } = router.query;
-  const { mutate } = usePostlikeToComment(Number(reviewId));
+
+  const [likedComment, setLikedComment] = useState<boolean>(isCommentLiked);
 
   const onClickLikeButton = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-
-    mutate({ commentId });
+    likedComment ? setUnlike(commentId) : setLike(commentId);
+    setLikedComment((prev) => !prev);
   };
-  console.log(commentData);
+
+  const setUnlike = (commentId: number) => {
+    snsAPI.deleteLikeToComment(commentId);
+  };
+  const setLike = (commentId: number) => {
+    snsAPI.postLikeToComment(commentId);
+  };
+
   return (
     <S.Container>
       <div key={commentId}>
@@ -40,14 +56,15 @@ const Comment = ({ commentData }: CommentProps) => {
           <S.UserName>{userInfo.nickname}</S.UserName>
 
           <S.LikeButton onClick={onClickLikeButton}>
-            <HeartFull />
-            <HeartEmpty />
+            {likedComment ? <HeartFull /> : <HeartEmpty />}
           </S.LikeButton>
+          <button>수정</button>
+          <button>삭제</button>
         </S.User>
         <S.ContentBox>
           <S.Content>{content}</S.Content>
           <S.ContentInfo>
-            <S.LastTime>1d</S.LastTime>
+            <S.LastTime>{formattedLastTime(createdDate)}</S.LastTime>
             <S.LikeCount>{commentLikeCount}likes</S.LikeCount>
           </S.ContentInfo>
         </S.ContentBox>

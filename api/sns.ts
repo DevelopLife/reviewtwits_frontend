@@ -149,15 +149,15 @@ export const snsAPI = {
     return response.data;
   },
 
+  //
+  // comments
+
   getReviewComments: async (reviewId: number) => {
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/comments/${reviewId}`
     );
     return response.data;
   },
-
-  //
-  // comments
 
   postReviewComment: async (
     reviewId: number,
@@ -173,6 +173,13 @@ export const snsAPI = {
 
   postLikeToComment: async (commentId: number) => {
     const response = await requiredTokenApi.post(
+      `${SNS_URL}/comments-like/${commentId}`
+    );
+    return response;
+  },
+
+  deleteLikeToComment: async (commentId: number) => {
+    const response = await requiredTokenApi.delete(
       `${SNS_URL}/comments-like/${commentId}`
     );
     return response;
