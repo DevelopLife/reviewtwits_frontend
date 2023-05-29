@@ -158,14 +158,19 @@ export const usePostReviewComment = (reviewId: number) => {
   return { mutate };
 };
 
-export const usePostlikeToComment = (reviewId: number) => {
+export const usePostlikeToComment = (reviewId: number, commentId: number) => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
     ({ commentId }: { commentId: number }) =>
       snsAPI.postLikeToComment(commentId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(['review', 'comments', reviewId]);
+        queryClient.invalidateQueries([
+          'review',
+          'comment',
+          reviewId,
+          commentId,
+        ]);
       },
     }
   );
