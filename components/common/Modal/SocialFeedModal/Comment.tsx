@@ -10,6 +10,7 @@ import HeartEmpty from 'public/icons/like-heart-empty.svg';
 import { snsAPI } from 'api/sns';
 import { useState } from 'react';
 import { formattedLastTime } from 'utils/format';
+import useUserProfile from 'hooks/queries/users';
 
 interface CommentProps {
   commentData: CommentResponseType;
@@ -29,7 +30,13 @@ const Comment = ({ commentData }: CommentProps) => {
   } = commentData;
   const { nickname, reviewId } = router.query;
 
+  const { accountId: loggedUserAccountId } = useUserProfile();
+
   const [likedComment, setLikedComment] = useState<boolean>(isCommentLiked);
+  const [likedCount, setLikedCount] = useState<number>(commentLikeCount);
+  const [deletedComment, setDeletedComment] = useState<boolean>(
+    commentData ? false : true
+  );
 
   const onClickLikeButton = () => {
     likedComment ? setUnlike(commentId) : setLike(commentId);
@@ -38,13 +45,24 @@ const Comment = ({ commentData }: CommentProps) => {
 
   const setUnlike = (commentId: number) => {
     snsAPI.deleteLikeToComment(commentId);
+    setLikedCount((prev) => prev - 1);
   };
   const setLike = (commentId: number) => {
     snsAPI.postLikeToComment(commentId);
+    setLikedCount((prev) => prev + 1);
+  };
+
+  const deleteComment = () => {
+    snsAPI.deleteComment(commentId);
+    setDeletedComment((prev) => !prev);
+  };
+
+  const patchComment = () => {
+    snsAPI.patchComment(commentId);
   };
 
   return (
-    <S.Container>
+    <S.Container deletedComment={deletedComment}>
       <div key={commentId}>
         <S.User>
           <S.UserImage
@@ -58,14 +76,18 @@ const Comment = ({ commentData }: CommentProps) => {
           <S.LikeButton onClick={onClickLikeButton}>
             {likedComment ? <HeartFull /> : <HeartEmpty />}
           </S.LikeButton>
-          <button>수정</button>
-          <button>삭제</button>
+          {loggedUserAccountId === userInfo.accountId && (
+            <>
+              <button onClick={patchComment}>수정</button>
+              <button onClick={deleteComment}>삭제</button>
+            </>
+          )}
         </S.User>
         <S.ContentBox>
           <S.Content>{content}</S.Content>
           <S.ContentInfo>
             <S.LastTime>{formattedLastTime(createdDate)}</S.LastTime>
-            <S.LikeCount>{commentLikeCount}likes</S.LikeCount>
+            <S.LikeCount>{likedCount}likes</S.LikeCount>
           </S.ContentInfo>
         </S.ContentBox>
       </div>
@@ -74,12 +96,14 @@ const Comment = ({ commentData }: CommentProps) => {
 };
 
 const S = {
-  Container: styled.div`
+  Container: styled.div<{ deletedComment: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 8px;
 
     width: 500px;
+    margin-bottom: 16px;
+    display: ${({ deletedComment }) => (deletedComment ? 'none' : 'inherit')};
   `,
   User: styled.div`
     display: flex;
@@ -107,6 +131,7 @@ const S = {
   `,
   ContentBox: styled.div`
     display: flex;
+    margin-left: 50px;
   `,
   Content: styled.p`
     font-family: ' Pretendard';
