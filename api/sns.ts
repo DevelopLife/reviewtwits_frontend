@@ -110,15 +110,15 @@ export const snsAPI = {
     return requiredTokenApi.delete(`${SNS_URL}/scrap-reviews/${reviewId}`);
   },
 
+  //
+  // Profile
+
   getProfile: async (nickname: string): Promise<SocialProfile> => {
     const response = await optionalTokenAPI.get(
       `${SNS_URL}/profile/${nickname}`
     );
     return response.data;
   },
-
-  //
-  // Profile
 
   getUserReviews: async (
     nickname: string,
@@ -181,6 +181,13 @@ export const snsAPI = {
   deleteLikeToComment: async (commentId: number) => {
     const response = await requiredTokenApi.delete(
       `${SNS_URL}/comments-like/${commentId}`
+    );
+    return response;
+  },
+
+  deleteComment: async (commentId: number) => {
+    const response = await requiredTokenApi.delete(
+      `${SNS_URL}/comments/${commentId}`
     );
     return response;
   },
