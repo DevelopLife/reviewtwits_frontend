@@ -74,7 +74,7 @@ const Line = styled.div`
   border: 1px solid #ffffff;
 `;
 
-const BoxContainer = styled.ul`
+const SocialButtonContainer = styled.ul`
   display: flex;
   width: 601px;
   justify-content: space-between;
@@ -109,7 +109,7 @@ export {
   RightLists,
   AppName,
   List,
-  BoxContainer,
+  SocialButtonContainer,
   Box,
   RightInfo,
   Line,
