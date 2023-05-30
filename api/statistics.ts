@@ -1,4 +1,4 @@
-import { authApi } from 'api/instance';
+import { optionalTokenAPI } from 'api/instance';
 import { DeviceType } from 'typings/statistics';
 
 const STATISTICS_URL = '/statistics';
@@ -15,6 +15,6 @@ export const statisticsAPI = {
       device,
     };
 
-    return await authApi.post(`${STATISTICS_URL}/visited-info`, body);
+    return await optionalTokenAPI.post(`${STATISTICS_URL}/visited-info`, body);
   },
 };
