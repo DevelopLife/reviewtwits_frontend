@@ -11,6 +11,7 @@ import { snsAPI } from 'api/sns';
 import { useState } from 'react';
 import { formattedLastTime } from 'utils/format';
 import useUserProfile from 'hooks/queries/users';
+import useForm from 'hooks/useForm';
 
 interface CommentProps {
   commentData: CommentResponseType;
@@ -30,6 +31,8 @@ const Comment = ({ commentData }: CommentProps) => {
   } = commentData;
   const { nickname, reviewId } = router.query;
 
+  const { values, handleChange, handleSubmit } = useForm({ content });
+
   const { accountId: loggedUserAccountId } = useUserProfile();
 
   const [likedComment, setLikedComment] = useState<boolean>(isCommentLiked);
@@ -37,6 +40,8 @@ const Comment = ({ commentData }: CommentProps) => {
   const [deletedComment, setDeletedComment] = useState<boolean>(
     commentData ? false : true
   );
+  const [isPatching, setIsPatching] = useState<boolean>(false);
+  const [commentContent, setCommentContent] = useState<string>(content);
 
   const onClickLikeButton = () => {
     likedComment ? setUnlike(commentId) : setLike(commentId);
@@ -57,8 +62,14 @@ const Comment = ({ commentData }: CommentProps) => {
     setDeletedComment((prev) => !prev);
   };
 
-  const patchComment = () => {
-    snsAPI.patchComment(commentId);
+  const handleRetouchComment = () => {
+    setIsPatching((prev) => !prev);
+  };
+
+  const onPatchedContentSubmit = () => {
+    snsAPI.patchComment(commentId, values);
+    setIsPatching((prev) => !prev);
+    setCommentContent((prev) => values.content);
   };
 
   return (
@@ -78,13 +89,31 @@ const Comment = ({ commentData }: CommentProps) => {
           </S.LikeButton>
           {loggedUserAccountId === userInfo.accountId && (
             <>
-              <button onClick={patchComment}>수정</button>
+              <button onClick={handleRetouchComment}>수정</button>
               <button onClick={deleteComment}>삭제</button>
             </>
           )}
         </S.User>
         <S.ContentBox>
-          <S.Content>{content}</S.Content>
+          <S.Content>
+            {isPatching ? (
+              <form
+                action="submit"
+                onSubmit={(e) => handleSubmit(e, onPatchedContentSubmit)}
+              >
+                <input
+                  type="text"
+                  placeholder={commentContent}
+                  onChange={handleChange}
+                  name="content"
+                />
+                <button>수정 완료</button>
+              </form>
+            ) : (
+              commentContent
+            )}
+          </S.Content>
+
           <S.ContentInfo>
             <S.LastTime>{formattedLastTime(createdDate)}</S.LastTime>
             <S.LikeCount>{likedCount}likes</S.LikeCount>
