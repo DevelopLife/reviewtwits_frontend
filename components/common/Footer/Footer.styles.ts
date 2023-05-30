@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Navbar = styled.div`
   display: flex;
-  width: 1156px;
+  width: 800px;
   justify-content: space-between;
 
   margin-top: 113px;
@@ -32,14 +32,14 @@ const Navbar = styled.div`
 const LeftLists = styled.ul`
   display: flex;
   padding: 0;
-  width: 300px;
+  width: 200px;
   justify-content: space-between;
 `;
 
 const RightLists = styled.ul`
   display: flex;
   padding: 0;
-  width: 300px;
+  width: 200px;
   justify-content: space-between;
 `;
 
@@ -47,8 +47,8 @@ const List = styled.li`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 300;
-  font-size: 30px;
-  line-height: 36px;
+  font-size: 14px;
+  line-height: 1;
 
   color: #ffffff;
 `;
@@ -62,7 +62,7 @@ const AppName = styled.h3`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 50px;
+  font-size: 26px;
   line-height: 61px;
 
   color: #ffffff;
@@ -76,17 +76,11 @@ const Line = styled.div`
 
 const SocialButtonContainer = styled.ul`
   display: flex;
-  width: 601px;
+  width: 401px;
   justify-content: space-between;
 
   margin-top: 35px;
   margin-bottom: 34px;
-`;
-
-const Box = styled.li`
-  width: 100px;
-  height: 100px;
-  background-color: lightgray;
 `;
 
 const RightInfo = styled.p`
@@ -96,8 +90,9 @@ const RightInfo = styled.p`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 300;
-  font-size: 30px;
+  font-size: 14px;
   line-height: 36px;
+  text-align: center;
 
   color: #ffffff;
 `;
@@ -110,7 +105,6 @@ export {
   AppName,
   List,
   SocialButtonContainer,
-  Box,
   RightInfo,
   Line,
 };
