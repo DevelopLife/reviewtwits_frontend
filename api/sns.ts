@@ -192,15 +192,13 @@ export const snsAPI = {
     return response;
   },
 
-  patchComment: async (commentId: number) => {
-    const content = '새로운새로운';
+  patchComment: async (commentId: number, values: { content: string }) => {
+    const params = values;
+
     const response = await requiredTokenApi.patch(
       `${SNS_URL}/comments/${commentId}`,
-      {
-        query: {
-          content: content,
-        },
-      }
+      null,
+      { params }
     );
     return response;
   },
