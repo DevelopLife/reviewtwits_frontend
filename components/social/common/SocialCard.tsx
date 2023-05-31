@@ -4,6 +4,7 @@ import * as S from './SocialCard.styles';
 import { formattedProfileImageUrl } from 'utils/format';
 
 import SocialFollowAndUnfollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
+import { useRouter } from 'next/router';
 
 interface SocialCardProps {
   imageUrl: string | null;
@@ -12,9 +13,15 @@ interface SocialCardProps {
 }
 
 const SocialCard = ({ imageUrl, nickname, role }: SocialCardProps) => {
+  const router = useRouter();
+
+  const onUserClick = () => {
+    router.push(`/social/user/${nickname}`);
+  };
+
   return (
     <S.Container>
-      <S.userBox>
+      <S.userBox onClick={onUserClick}>
         <S.ImageBox>
           <Image
             src={formattedProfileImageUrl(imageUrl)}
