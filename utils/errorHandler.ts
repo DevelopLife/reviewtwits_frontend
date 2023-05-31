@@ -22,10 +22,12 @@ export function redirectErrorHandler(err: AxiosError<ResponseError, any>) {
     window.location.href = REDIRECT_URL;
     return;
   }
-  if (status === 404) {
-    window.location.href = '/404';
-    return;
-  }
+
+  // TODO: delete
+  // if (status === 404) {
+  //   window.location.href = '/404';
+  //   return;
+  // }
 
   throw err;
 }
