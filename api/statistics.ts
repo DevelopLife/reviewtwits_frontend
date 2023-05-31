@@ -1,5 +1,12 @@
-import { optionalTokenAPI } from 'api/instance';
-import { DeviceType } from 'typings/statistics';
+import { AxiosResponse } from 'axios';
+
+import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
+import type {
+  DailyVisitGraphInfos,
+  DeviceType,
+  RecentVisitCounts,
+  VisitGraphInfos,
+} from 'typings/statistics';
 
 const STATISTICS_URL = '/statistics';
 
@@ -16,5 +23,32 @@ export const statisticsAPI = {
     };
 
     return await optionalTokenAPI.post(`${STATISTICS_URL}/visited-info`, body);
+  },
+  dailyVisitGraphInfos: async (params: {
+    projectId: string;
+    range: string;
+  }): Promise<AxiosResponse<DailyVisitGraphInfos>> => {
+    return await requiredTokenApi.get(
+      `${STATISTICS_URL}/daily-visit-graph-infos`,
+      {
+        params,
+      }
+    );
+  },
+  recentVisitCounts: async (params: {
+    projectId: string;
+  }): Promise<AxiosResponse<RecentVisitCounts>> => {
+    return await requiredTokenApi.get(`${STATISTICS_URL}/recent-visit-counts`, {
+      params,
+    });
+  },
+  visitGraphInfos: async (params: {
+    projectId: string;
+    range: string;
+    interval: string;
+  }): Promise<AxiosResponse<VisitGraphInfos>> => {
+    return await requiredTokenApi.get(`${STATISTICS_URL}/visit-graph-infos`, {
+      params,
+    });
   },
 };
