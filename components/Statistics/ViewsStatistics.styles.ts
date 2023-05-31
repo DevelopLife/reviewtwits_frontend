@@ -26,6 +26,21 @@ const StatisticsTitle = styled.h3`
   color: #181818;
 `;
 
+const StatisticsSubTitle = styled.h4`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
+
+  color: #181818;
+`;
+
+const StatisticsHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const GraphBox = styled.div`
   width: 1360px;
   height: 577.15px;
@@ -33,4 +48,10 @@ const GraphBox = styled.div`
   border: 1px solid black;
 `;
 
-export { Container, StatisticsTitle, GraphBox };
+export {
+  Container,
+  StatisticsTitle,
+  StatisticsSubTitle,
+  StatisticsHeader,
+  GraphBox,
+};
