@@ -28,7 +28,9 @@ const Comments = ({ commentsData }: CommentsProps) => {
         {commentsData.length == 0 ? (
           <h1>댓글이 없어요😭💦</h1>
         ) : (
-          <Comment commentsData={commentsData} />
+          commentsData.map((commentData) => (
+            <Comment key={commentData.commentId} commentData={commentData} />
+          ))
         )}
       </div>
     </S.Container>
