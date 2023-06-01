@@ -7,33 +7,42 @@ import { useGetRecentUpdatedUsers } from 'hooks/queries/sns';
 import { FollowType } from 'typings/sns';
 import { selectedUserState } from 'states/reviews';
 import { formattedProfileImageUrl } from 'utils/format';
+import useHorizontalScroll from 'hooks/useHorizontalScroll';
 
 const UserFilterBar = () => {
   const [selectedUser, setSelectedUser] = useRecoilState(selectedUserState);
   const { data: users } = useGetRecentUpdatedUsers();
+  const scrollRef = useHorizontalScroll();
 
   const filterReview = (nickname: string) => {
     selectedUser === nickname ? setSelectedUser('') : setSelectedUser(nickname);
   };
 
-  const props = { users, selectedUser, handleClickUserImg: filterReview };
+  const props = {
+    scrollRef,
+    users,
+    selectedUser,
+    handleClickUserImg: filterReview,
+  };
 
   return <UserFilterBarView {...props} />;
 };
 
 interface UserFilterBarViewProps {
+  scrollRef: React.RefObject<HTMLDivElement>;
   users?: FollowType[];
   selectedUser: string;
   handleClickUserImg: (nickname: string) => void;
 }
 
 const UserFilterBarView = ({
+  scrollRef,
   users,
   selectedUser,
   handleClickUserImg,
 }: UserFilterBarViewProps) => {
   return (
-    <S.Bar>
+    <S.Bar ref={scrollRef}>
       {users?.map((user, i) => (
         <S.UserBox key={i} onClick={() => handleClickUserImg(user.nickname)}>
           <S.UserImage
@@ -56,6 +65,17 @@ const S = {
   Bar: styled.div`
     display: flex;
     gap: 30px;
+
+    width: 510px;
+    min-height: 120px;
+    overflow-x: scroll;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   `,
 
   UserBox: styled.div`
