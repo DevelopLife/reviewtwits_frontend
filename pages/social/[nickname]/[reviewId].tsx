@@ -13,6 +13,10 @@ const ReviewModalPage = () => {
   const storage = globalThis?.sessionStorage;
   const lastpath = storage.prevPath.split('/').at(-1);
 
+  window.addEventListener('popstate', () => {
+    modal.hide();
+  });
+
   useEffect(() => {
     modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
   }, [modal, route.pathname, route.query]);
