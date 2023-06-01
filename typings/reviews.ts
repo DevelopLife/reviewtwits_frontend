@@ -29,6 +29,7 @@ export interface ReviewType {
 }
 
 export interface ReviewResponseType {
+  createdDate: number[];
   lastModifiedDate: number[];
   reviewId: number;
   projectId: number;
