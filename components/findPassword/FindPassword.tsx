@@ -8,6 +8,7 @@ import {
   ERROR_MESSAGE,
   SIGN_UP_FORM_NAMES,
 } from 'constants/account';
+import { PAGE_LIST } from 'constants/routers';
 import useForm from 'hooks/useForm';
 import Link from 'next/link';
 import React from 'react';
@@ -87,7 +88,7 @@ const FindPassword = ({ handleFindPassword }: FindPasswordProps) => {
         >
           비밀번호 찾기
         </Button>
-        <Link href="/sign-in">
+        <Link href={PAGE_LIST.SIGN_IN}>
           <Button type="submit" large color="primary">
             로그인 페이지로 이동
           </Button>

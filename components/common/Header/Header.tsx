@@ -44,7 +44,7 @@ const Header = () => {
             </>
           ) : (
             <S.AuthButtons>
-              <Link href="/sign-in">
+              <Link href={PAGE_LIST.SIGN_IN}>
                 <S.Login>로그인</S.Login>
               </Link>
               <Link href="/sign-up">

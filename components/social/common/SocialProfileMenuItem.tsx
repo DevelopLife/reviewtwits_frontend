@@ -9,7 +9,7 @@ const SocialProfileMenuItem = ({ children }: WrapProps) => {
   const userProfile = useUserProfile();
   const router = useRouter();
   const { nickname } = router.query;
-  const notLoginedHref = '/sign-in';
+  const notLoginedHref = PAGE_LIST.SIGN_IN;
   const loginedHref = `${PAGE_LIST.SOCIAL_PROFILE}/${userProfile?.nickname}`;
 
   if (!userProfile?.nickname) {

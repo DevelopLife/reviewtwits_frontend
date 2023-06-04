@@ -5,6 +5,7 @@ import Card from 'components/common/Card';
 import Input from 'components/common/Input';
 import Layout from 'components/common/Layout';
 import { DEFAULT_FIND_ID_FORM, SIGN_UP_FORM_NAMES } from 'constants/account';
+import { PAGE_LIST } from 'constants/routers';
 import useForm from 'hooks/useForm';
 import Link from 'next/link';
 import React from 'react';
@@ -56,7 +57,7 @@ const FindIdResults = () => {
           </Button>
         </Link>
 
-        <Link href="/sign-in">
+        <Link href={PAGE_LIST.SIGN_IN}>
           <Button type="submit" large color="primary">
             로그인 페이지로 이동
           </Button>

@@ -1,3 +1,4 @@
+import { PAGE_LIST } from 'constants/routers';
 import { useCallback, useEffect } from 'react';
 import { SetterOrUpdater, useRecoilState } from 'recoil';
 
@@ -60,7 +61,7 @@ export function redirectNotLogin(login: () => void, logout: () => void) {
   const tokenExpireAt = getCookie('expireAt');
   const redirectSignIn = () => {
     const searchParams = new URLSearchParams(window.location.search);
-    window.location.href = `/sign-in?${searchParams}`;
+    window.location.href = `${PAGE_LIST.SIGN_IN}?${searchParams}`;
   };
 
   if (!tokenExpireAt) {

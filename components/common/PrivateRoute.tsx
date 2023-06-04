@@ -8,7 +8,7 @@ import { PAGE_LIST } from 'constants/routers';
 // TODO: public url을 추가해주세요
 const PUBLIC_URLS = [
   PAGE_LIST.HOME,
-  '/sign-in',
+  PAGE_LIST.SIGN_IN,
   '/sign-up',
   '/find-id',
   '/find-password',
