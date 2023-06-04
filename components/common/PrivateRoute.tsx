@@ -3,10 +3,11 @@ import { ReactElement } from 'react';
 
 import { usePrivateRouting } from 'hooks/usePrivateRouting';
 import type { PageProps } from 'pages/_app';
+import { PAGE_LIST } from 'constants/routers';
 
 // TODO: public url을 추가해주세요
 const PUBLIC_URLS = [
-  '/',
+  PAGE_LIST.HOME,
   '/sign-in',
   '/sign-up',
   '/find-id',

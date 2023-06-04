@@ -42,7 +42,7 @@ const UserProfileForm = () => {
         window.sessionStorage.clear();
         alert(SUCCESS_MESSAGE.SETTING.PROFILE);
 
-        if (pathFrom === 'sign-up') router.push('/');
+        if (pathFrom === 'sign-up') router.push(PAGE_LIST.HOME);
         router.push(`${PAGE_LIST.SOCIAL_PROFILE}/${newname.data.nickname}`);
       },
       onError: ({ response }) => {
@@ -89,7 +89,7 @@ const UserProfileForm = () => {
 
   const setProfileLater = () => {
     window.sessionStorage.clear();
-    pathFrom === 'sign-up' ? router.push('/') : router.back();
+    pathFrom === 'sign-up' ? router.push(PAGE_LIST.HOME) : router.back();
   };
 
   useEffect(() => {

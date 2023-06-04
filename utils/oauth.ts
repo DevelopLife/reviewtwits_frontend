@@ -1,4 +1,5 @@
 import { googleOauthAPI, kakaoOauthAPI, naverOauthAPI } from 'api/oauth';
+import { PAGE_LIST } from 'constants/routers';
 import { SocialProviderType } from 'typings/account';
 import { doSignIn } from 'utils/auth';
 import { setCookie } from 'utils/cookies';
@@ -30,7 +31,7 @@ export const doOauthSignIn = async (
   if (result.status === 200) {
     doSignIn(result.data.accessToken);
 
-    return location.replace('/');
+    return location.replace(PAGE_LIST.HOME);
   }
 
   if (result.status === 202) {
