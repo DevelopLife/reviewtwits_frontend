@@ -49,6 +49,6 @@ export const doOauthSignIn = async (
       setCookie('birthDate', birthyear + '-' + birthday);
     }
 
-    return (location.href = '/sign-up');
+    return (location.href = PAGE_LIST.SIGN_UP);
   }
 };

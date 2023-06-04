@@ -102,7 +102,7 @@ const SignInFormView = ({ handleChange, ...rest }: SignInFormViewProps) => (
         <Button type="submit" large color="primary">
           로그인
         </Button>
-        <Link href="/sign-up">
+        <Link href={PAGE_LIST.SIGN_UP}>
           <Button large color="black">
             이메일로 회원가입
           </Button>

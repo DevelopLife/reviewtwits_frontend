@@ -9,7 +9,7 @@ import { PAGE_LIST } from 'constants/routers';
 const PUBLIC_URLS = [
   PAGE_LIST.HOME,
   PAGE_LIST.SIGN_IN,
-  '/sign-up',
+  PAGE_LIST.SIGN_UP,
   '/find-id',
   '/find-password',
   '/social',
