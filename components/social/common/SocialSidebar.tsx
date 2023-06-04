@@ -23,7 +23,11 @@ const USER_FEED_URL = `${SOCIAL_URL}/user`;
 const MENUS = [
   { href: `${PAGE_LIST.SOCIAL_HOME}`, text: 'Home', Icon: HomeIcon },
   { href: `${PAGE_LIST.SOCIAL_CREATE}`, text: 'Create', Icon: FolderIcon },
-  { href: `${SOCIAL_URL}/follower`, text: 'Follower', Icon: FullHeartIcon },
+  {
+    href: `${PAGE_LIST.SOCIAL_FOLLOWER}`,
+    text: 'Follower',
+    Icon: FullHeartIcon,
+  },
   { href: USER_FEED_URL, text: 'Profile', Icon: UserIcon },
 ];
 
