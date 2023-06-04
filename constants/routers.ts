@@ -11,4 +11,5 @@ export const PAGE_LIST = {
   SOCIAL_CREATE: '/social/review/write',
   SOCIAL_FOLLOWER: '/social/follower',
   SOCIAL_PROFILE: '/social/user',
+  NOT_FOUND_404: '/404',
 };

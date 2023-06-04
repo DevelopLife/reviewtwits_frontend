@@ -22,7 +22,7 @@ export function redirectErrorHandler(err: AxiosError<ResponseError, any>) {
     return;
   }
   if (status === 404) {
-    window.location.href = '/404';
+    window.location.href = PAGE_LIST.NOT_FOUND_404;
     return;
   }
 

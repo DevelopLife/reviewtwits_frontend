@@ -18,7 +18,7 @@ const PUBLIC_URLS = [
   '/socual/user',
   '/social/user/[nickname]',
   '/review',
-  '/404',
+  PAGE_LIST.NOT_FOUND_404,
 ];
 
 const PrivateRoute = ({
