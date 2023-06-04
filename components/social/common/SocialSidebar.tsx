@@ -13,6 +13,7 @@ import UserIcon from 'public/icons/user.svg';
 
 import theme from 'styles/theme';
 import * as S from './SocialSidebar.styles';
+import { PAGE_LIST } from 'constants/routers';
 
 const SERVICE_TITLE = 'ReviewTwits';
 
@@ -32,7 +33,7 @@ const SnsSidebar = () => {
 
   return (
     <S.SidebarLayout>
-      <SidebarTitle href="/social/home">{SERVICE_TITLE}</SidebarTitle>
+      <SidebarTitle href={PAGE_LIST.SOCIAL_HOME}>{SERVICE_TITLE}</SidebarTitle>
       <SearchBar />
       <SocialMenus>
         {MENUS.map(({ href, text, Icon }) => {

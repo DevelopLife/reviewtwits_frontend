@@ -7,6 +7,7 @@ import * as S from './Header.styles';
 import UserMenu from './UserMenu';
 import { formattedProfileImageUrl } from 'utils/format';
 import useUserProfile from 'hooks/queries/users';
+import { PAGE_LIST } from 'constants/routers';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -37,7 +38,7 @@ const Header = () => {
                 />
               </S.Profile>
               {isMenuOpen && <UserMenu closeMenu={closeMenu} />}
-              <Link href="/social/home">
+              <Link href={PAGE_LIST.SOCIAL_HOME}>
                 <S.SNSButton color="secondary">내 SNS</S.SNSButton>
               </Link>
             </>
