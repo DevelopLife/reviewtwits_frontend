@@ -44,7 +44,7 @@ const FindIdResults = () => {
       </S.IdsTable>
 
       <S.ButtonsContainer>
-        <Link href="/find-password">
+        <Link href={PAGE_LIST.FIND_PASSWORD}>
           <Button
             type="submit"
             large

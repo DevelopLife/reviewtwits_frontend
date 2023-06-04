@@ -11,7 +11,7 @@ const PUBLIC_URLS = [
   PAGE_LIST.SIGN_IN,
   PAGE_LIST.SIGN_UP,
   PAGE_LIST.FIND_ID,
-  '/find-password',
+  PAGE_LIST.FIND_PASSWORD,
   '/social',
   '/oauth/callback/kakao',
   '/oauth/callback/naver',

@@ -8,7 +8,7 @@ const FindBox = () => {
       <Link href={PAGE_LIST.FIND_ID}>
         <S.FindId>아이디 찾기</S.FindId>
       </Link>
-      <Link href="/find-password">
+      <Link href={PAGE_LIST.FIND_PASSWORD}>
         <S.FindPassword>비밀번호 찾기</S.FindPassword>
       </Link>
     </S.FindBox>
