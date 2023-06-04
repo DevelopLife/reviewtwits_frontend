@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Image from 'next/image';
 
 const Container = styled.div`
   width: 100%;
@@ -14,13 +15,13 @@ const WriterInfo = styled.div`
   gap: 8px;
 `;
 
-const WriterImage = styled.div`
+const ProfileImage = styled(Image)`
   position: relative;
   width: 50px;
   height: 50px;
 
   background: #d9d9d9;
-  border-radius: 90px;
+  border-radius: 50%;
 `;
 
 const WriterDesc = styled.div`
@@ -195,7 +196,7 @@ const HelpfulRates = styled.div`
 export {
   Container,
   WriterInfo,
-  WriterImage,
+  ProfileImage,
   WriterDesc,
   WriterName,
   SellerName,
