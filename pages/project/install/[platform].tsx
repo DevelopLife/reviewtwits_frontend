@@ -13,7 +13,6 @@ import CommonButton from 'components/Project/install/common/Button';
 import { REACT_INSTALL_GUIDES } from 'constants/install_guides/react';
 
 const InstallDetailPage = () => {
-  console.log('adfs');
   const router = useRouter();
   const redirectPrevHistory = () => router.back();
   const reactGuideoVideo = '/videos/react_guide.mov';
