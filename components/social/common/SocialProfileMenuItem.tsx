@@ -3,13 +3,14 @@ import { useRouter } from 'next/router';
 import SocialMenuItem from 'components/social/common/SocialMenuItem';
 import useUserProfile from 'hooks/queries/users';
 import { WrapProps } from 'typings/wrapperProps';
+import { PAGE_LIST } from 'constants/routers';
 
 const SocialProfileMenuItem = ({ children }: WrapProps) => {
   const userProfile = useUserProfile();
   const router = useRouter();
   const { nickname } = router.query;
   const notLoginedHref = '/sign-in';
-  const loginedHref = `/social/user/${userProfile?.nickname}`;
+  const loginedHref = `${PAGE_LIST.SOCIAL_PROFILE}/${userProfile?.nickname}`;
 
   if (!userProfile?.nickname) {
     return (

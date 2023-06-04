@@ -24,6 +24,7 @@ import Form from 'components/common/Form';
 import Button from 'components/common/Button';
 import Input from 'components/common/Input';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
+import { PAGE_LIST } from 'constants/routers';
 
 const UserProfileForm = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ const UserProfileForm = () => {
         alert(SUCCESS_MESSAGE.SETTING.PROFILE);
 
         if (pathFrom === 'sign-up') router.push('/');
-        router.push(`/social/user/${newname.data.nickname}`);
+        router.push(`${PAGE_LIST.SOCIAL_PROFILE}/${newname.data.nickname}`);
       },
       onError: ({ response }) => {
         alert(response?.data[0]?.message);

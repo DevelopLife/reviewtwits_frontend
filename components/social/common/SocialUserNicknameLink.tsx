@@ -1,3 +1,4 @@
+import { PAGE_LIST } from 'constants/routers';
 import Link from 'next/link';
 
 import { WrapProps } from 'typings/wrapperProps';
@@ -10,7 +11,7 @@ export const SocialUserNicknameLink = ({
   children,
   nickname,
 }: SocialUserNicknameLinkProps) => {
-  const href = `/social/user/${nickname}`;
+  const href = `${PAGE_LIST.SOCIAL_PROFILE}/${nickname}`;
 
   return <Link href={href}>{children}</Link>;
 };
