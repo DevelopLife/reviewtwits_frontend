@@ -10,7 +10,7 @@ const PUBLIC_URLS = [
   PAGE_LIST.HOME,
   PAGE_LIST.SIGN_IN,
   PAGE_LIST.SIGN_UP,
-  '/find-id',
+  PAGE_LIST.FIND_ID,
   '/find-password',
   '/social',
   '/oauth/callback/kakao',
