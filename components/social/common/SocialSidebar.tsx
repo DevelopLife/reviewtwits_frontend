@@ -28,7 +28,7 @@ const MENUS = [
     text: 'Follower',
     Icon: FullHeartIcon,
   },
-  { href: USER_FEED_URL, text: 'Profile', Icon: UserIcon },
+  { href: PAGE_LIST.SOCIAL_PROFILE, text: 'Profile', Icon: UserIcon },
 ];
 
 const SnsSidebar = () => {
