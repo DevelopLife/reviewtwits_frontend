@@ -7,11 +7,13 @@ import {
 import Margin from 'components/Statistics/common/Margin';
 import StatisticsPageLayout from 'components/Statistics/common/StatisticsPageLayout';
 import SimpleBarChart from 'components/common/Charts/BarChart';
+import useVisitChart from 'components/common/Charts/BarChartState';
 import useStatistics from 'hooks/queries/statistics';
 import React from 'react';
 
 const ProjectStatisticsPage = () => {
   const {
+    initialRecentVisitCountsQuery,
     recentVisitCountsQuery,
     dailyVisitGraphInfosQuery,
     visitGraphInfosQuery,
@@ -21,9 +23,17 @@ const ProjectStatisticsPage = () => {
     // interval,
   });
 
+  const { data: initialRecentVisitCounts } = initialRecentVisitCountsQuery;
   const { data: recentVisitCounts } = recentVisitCountsQuery;
   const { data: dailyVisitGraphInfos } = dailyVisitGraphInfosQuery;
   const { data: visitGraphInfos } = visitGraphInfosQuery;
+
+  const { origin, handleSelectedValueOnClick } = useVisitChart({
+    createInitialStateParams: {
+      interval: 7,
+      elementCount: 20,
+    },
+  });
 
   return (
     <StatisticsPageLayout>
@@ -31,8 +41,16 @@ const ProjectStatisticsPage = () => {
         <VisitorStatistics {...recentVisitCounts?.data} />
       </Margin>
       <Margin marginTop={40}>
-        <ViewsStatistics>
-          <SimpleBarChart data={dailyVisitGraphInfos?.data?.visitInfo} />
+        <ViewsStatistics onClick={handleSelectedValueOnClick}>
+          {initialRecentVisitCounts ||
+          dailyVisitGraphInfos?.data?.visitInfo.length ? (
+            <SimpleBarChart
+              data={
+                (initialRecentVisitCounts && initialRecentVisitCounts) ||
+                dailyVisitGraphInfos?.data?.visitInfo
+              }
+            />
+          ) : null}
         </ViewsStatistics>
       </Margin>
       <Margin marginTop={48}>
