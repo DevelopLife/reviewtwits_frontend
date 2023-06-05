@@ -12,8 +12,8 @@ export type DailyVisitGraphInfos = {
 };
 
 export type RecentVisitCounts = {
-  presentVisit: number;
-  previousVisit: number;
+  todayVisit: number;
+  yesterdayVisit: number;
   totalVisit: number;
 };
 
