@@ -76,10 +76,6 @@ export const ProjectCardView = ({
               <S.ContentItem>리뷰 : {review}</S.ContentItem>
             </S.SubTitle>
             <S.Description>{description}</S.Description>
-
-            {
-              // TODO: 임시
-            }
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Button>
                 <Link
@@ -93,12 +89,21 @@ export const ProjectCardView = ({
                 </Link>
               </Button>
               <Button>
-                <Link href={'/project/install'} style={{ color: 'black' }}>
+                {
+                  // Todo: replace modify
+                }
+                <Link href={'/project/create'} style={{ color: 'black' }}>
                   수정
                 </Link>
               </Button>
               <Button>
-                <Link href={'/project/install'} style={{ color: 'black' }}>
+                <Link
+                  href={{
+                    pathname: '/statistics/project',
+                    query: { projectName: name },
+                  }}
+                  style={{ color: 'black' }}
+                >
                   설정
                 </Link>
               </Button>
