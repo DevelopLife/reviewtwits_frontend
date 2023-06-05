@@ -1,4 +1,4 @@
-import { regExp } from './regExp';
+import { regExp } from '../constants/regExp';
 
 export const validateEmail = (email: string) => regExp.email.test(email);
 export const validatePhoneNumber = (tel: string) => !isNaN(Number(tel));
@@ -12,3 +12,5 @@ export const validatePasswordCheck = (
 export const validateReviewScore = (score: number) => score > 0 && score <= 5;
 export const validateReviewContent = (content: string) => content?.length >= 10;
 export const validateURL = (url: string) => regExp.url.test(url);
+
+export const validateMobile = (agent: string) => regExp.mobile.test(agent);

@@ -1,8 +1,16 @@
-import { APP_NAME } from 'constants/index';
 import { RefObject } from 'react';
+import Image from 'next/image';
+
+import { APP_NAME } from 'constants/index';
 import { scrollIntoTarget } from 'utils/scrollIntoTarget';
 
+import GithubIcon from 'public/icons/github.svg';
+import InstagramIcon from 'public/icons/instagram.svg';
+import TwitterIcon from 'public/icons/twitter.svg';
+import YoutubeIcon from 'public/icons/youtube.svg';
+
 import * as S from './Footer.styles';
+import Link from 'next/link';
 
 export interface FooterProps {
   mainHomeRef: RefObject<HTMLDivElement>;
@@ -37,12 +45,28 @@ const Footer = ({
         </S.RightLists>
       </S.Navbar>
       <S.Line />
-      <S.BoxContainer>
-        <S.Box>box</S.Box>
-        <S.Box>box</S.Box>
-        <S.Box>box</S.Box>
-        <S.Box>box</S.Box>
-      </S.BoxContainer>
+      <S.SocialButtonContainer>
+        <Link href="https://github.com/DevelopLife" target="_blank">
+          <button>
+            <GithubIcon />
+          </button>
+        </Link>
+        <Link href="/" target="_blank">
+          <button>
+            <InstagramIcon />
+          </button>
+        </Link>
+        <Link href="/" target="_blank">
+          <button>
+            <TwitterIcon />
+          </button>
+        </Link>
+        <Link href="/" target="_blank">
+          <button>
+            <YoutubeIcon />
+          </button>
+        </Link>
+      </S.SocialButtonContainer>
       <S.RightInfo>©2023 ReviewTwits Inc | All Rights Reserved</S.RightInfo>
     </S.Container>
   );

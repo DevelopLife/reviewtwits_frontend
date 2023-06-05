@@ -1,47 +1,138 @@
 import styled from '@emotion/styled';
+import { usePostlikeToComment } from 'hooks/queries/sns';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { CommentResponseType } from 'typings/reviews';
 import { formattedProfileImageUrl } from 'utils/format';
 
+import HeartFull from 'public/icons/like-heart-full.svg';
+import HeartEmpty from 'public/icons/like-heart-empty.svg';
+import { snsAPI } from 'api/sns';
+import { useState } from 'react';
+import { formattedLastTime } from 'utils/format';
+import useUserProfile from 'hooks/queries/users';
+import useForm from 'hooks/useForm';
+
 interface CommentProps {
-  commentsData: CommentResponseType[] | [];
+  commentData: CommentResponseType;
 }
 
-const Comment = ({ commentsData }: CommentProps) => {
+const Comment = ({ commentData }: CommentProps) => {
+  const router = useRouter();
+
+  const {
+    commentId,
+    userInfo,
+    content,
+    parentCommentId,
+    commentLikeCount,
+    createdDate,
+    isCommentLiked,
+  } = commentData;
+  const { nickname, reviewId } = router.query;
+
+  const { values, handleChange, handleSubmit } = useForm({ content });
+
+  const { accountId: loggedUserAccountId } = useUserProfile();
+
+  const [likedComment, setLikedComment] = useState<boolean>(isCommentLiked);
+  const [likedCount, setLikedCount] = useState<number>(commentLikeCount);
+  const [deletedComment, setDeletedComment] = useState<boolean>(
+    commentData ? false : true
+  );
+  const [isPatching, setIsPatching] = useState<boolean>(false);
+  const [commentContent, setCommentContent] = useState<string>(content);
+
+  const onClickLikeButton = () => {
+    likedComment ? setUnlike(commentId) : setLike(commentId);
+    setLikedComment((prev) => !prev);
+  };
+
+  const setUnlike = (commentId: number) => {
+    snsAPI.deleteLikeToComment(commentId);
+    setLikedCount((prev) => prev - 1);
+  };
+  const setLike = (commentId: number) => {
+    snsAPI.postLikeToComment(commentId);
+    setLikedCount((prev) => prev + 1);
+  };
+
+  const deleteComment = () => {
+    snsAPI.deleteComment(commentId);
+    setDeletedComment((prev) => !prev);
+  };
+
+  const handleRetouchComment = () => {
+    setIsPatching((prev) => !prev);
+  };
+
+  const onPatchedContentSubmit = () => {
+    snsAPI.patchComment(commentId, values);
+    setIsPatching((prev) => !prev);
+    setCommentContent((prev) => values.content);
+  };
+
   return (
-    <S.Container>
-      {commentsData.map(({ commentId, content, userInfo }) => (
-        <div key={commentId}>
-          <S.User>
-            <S.UserImage
-              src={formattedProfileImageUrl(userInfo.profileImageUrl)}
-              alt=""
-              width={40}
-              height={40}
-            />
-            <S.UserName>{userInfo.nickname}</S.UserName>
-            <S.LikeButton>♡</S.LikeButton>
-          </S.User>
-          <S.ContentBox>
-            <S.Content>{content}</S.Content>
-            <S.ContentInfo>
-              <S.LastTime>1d</S.LastTime>
-              <S.LikeCount>12likes</S.LikeCount>
-            </S.ContentInfo>
-          </S.ContentBox>
-        </div>
-      ))}
+    <S.Container deletedComment={deletedComment}>
+      <div key={commentId}>
+        <S.User>
+          <S.UserImage
+            src={formattedProfileImageUrl(userInfo.profileImageUrl)}
+            alt=""
+            width={40}
+            height={40}
+          />
+          <S.UserName>{userInfo.nickname}</S.UserName>
+
+          <S.LikeButton onClick={onClickLikeButton}>
+            {likedComment ? <HeartFull /> : <HeartEmpty />}
+          </S.LikeButton>
+          {loggedUserAccountId === userInfo.accountId && (
+            <>
+              <button onClick={handleRetouchComment}>수정</button>
+              <button onClick={deleteComment}>삭제</button>
+            </>
+          )}
+        </S.User>
+        <S.ContentBox>
+          <S.Content>
+            {isPatching ? (
+              <form
+                action="submit"
+                onSubmit={(e) => handleSubmit(e, onPatchedContentSubmit)}
+              >
+                <input
+                  type="text"
+                  placeholder={commentContent}
+                  onChange={handleChange}
+                  name="content"
+                />
+                <button>수정 완료</button>
+              </form>
+            ) : (
+              commentContent
+            )}
+          </S.Content>
+
+          <S.ContentInfo>
+            <S.LastTime>{formattedLastTime(createdDate)}</S.LastTime>
+            <S.LikeCount>{likedCount}likes</S.LikeCount>
+          </S.ContentInfo>
+        </S.ContentBox>
+      </div>
     </S.Container>
   );
 };
 
 const S = {
-  Container: styled.div`
+  Container: styled.div<{ deletedComment: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 8px;
 
     width: 500px;
+    margin-bottom: 16px;
+    display: ${({ deletedComment }) => (deletedComment ? 'none' : 'inherit')};
   `,
   User: styled.div`
     display: flex;
@@ -64,12 +155,12 @@ const S = {
     line-height: 19px;
   `,
   LikeButton: styled.button`
-    border: 1px solid black;
     width: 20px;
     height: 20px;
   `,
   ContentBox: styled.div`
     display: flex;
+    margin-left: 50px;
   `,
   Content: styled.p`
     font-family: ' Pretendard';
