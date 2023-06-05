@@ -104,7 +104,7 @@ export const ProjectCardView = ({
                   }}
                   style={{ color: 'black' }}
                 >
-                  설정
+                  통계
                 </Link>
               </Button>
             </div>
