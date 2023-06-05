@@ -41,7 +41,7 @@ const InstallPage = () => {
             ))}
           </S.ProjectSelectPlatformList>
           <S.InstallGlobalCode>
-            <Link href={`./install/html`}>
+            <Link href={{ pathname: `install/html`, query }}>
               {`내가 생각하는 플랫폼이 없습니다.
               글로벌 코드로 설치하겠습니다`}
             </Link>
