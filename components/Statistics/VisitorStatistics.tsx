@@ -6,8 +6,8 @@ import { RecentVisitCounts } from 'typings/statistics';
 type VisitorStatisticsProps = Partial<RecentVisitCounts>;
 
 const VisitorStatistics = ({
-  presentVisit = 0,
-  previousVisit = 0,
+  todayVisit = 0,
+  yesterdayVisit = 0,
   totalVisit = 0,
 }: VisitorStatisticsProps) => {
   return (
@@ -15,11 +15,11 @@ const VisitorStatistics = ({
       <S.Container>
         <S.VisitorInfoBox>
           <S.VisitorInfo>오늘 방문자수</S.VisitorInfo>
-          <S.VisitorTotalNumber>{presentVisit}</S.VisitorTotalNumber>
+          <S.VisitorTotalNumber>{todayVisit}</S.VisitorTotalNumber>
         </S.VisitorInfoBox>
         <S.VisitorInfoBox>
           <S.VisitorInfo>어제 방문수</S.VisitorInfo>
-          <S.VisitorTotalNumber>{previousVisit}</S.VisitorTotalNumber>
+          <S.VisitorTotalNumber>{yesterdayVisit}</S.VisitorTotalNumber>
         </S.VisitorInfoBox>
         <S.VisitorInfoBox>
           <S.VisitorInfo>누적 방문수</S.VisitorInfo>
