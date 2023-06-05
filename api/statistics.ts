@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
+import { publicAPI, requiredTokenApi } from 'api/instance';
 import type {
   DailyVisitGraphInfos,
   DeviceType,
@@ -22,7 +22,7 @@ export const statisticsAPI = {
       device,
     };
 
-    return await optionalTokenAPI.post(`${STATISTICS_URL}/visited-info`, body);
+    return await publicAPI.post(`${STATISTICS_URL}/visited-info`, body);
   },
   dailyVisitGraphInfos: async (params: {
     projectId: string;
