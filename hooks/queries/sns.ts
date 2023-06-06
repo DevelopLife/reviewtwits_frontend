@@ -309,7 +309,7 @@ export const useGetInfiniteFeed = () => {
     getNextPage: (nextRequest) => {
       return selectedUser === ''
         ? snsAPI.getInfiniteFeed(nextRequest)
-        : snsAPI.getUserReviews(selectedUser, nextRequest);
+        : snsAPI.getFilteredReviews(selectedUser, nextRequest);
     },
     nextRequest: 'reviewId',
   });
