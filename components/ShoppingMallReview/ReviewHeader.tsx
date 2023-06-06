@@ -1,13 +1,26 @@
 import React from 'react';
 import * as S from './ReviewHeader.styles';
+import { useRecoilState } from 'recoil';
 
-const ReviewHeader = () => {
+interface ReviewHeaderProps {
+  handleSetSearchOption: (selectingOption: 'best' | 'new') => void;
+}
+
+const ReviewHeader = ({ handleSetSearchOption }: ReviewHeaderProps) => {
+  const handleClickBestReview = () => {
+    handleSetSearchOption('best');
+  };
+
+  const handleClickNewReview = () => {
+    handleSetSearchOption('new');
+  };
+
   return (
     <S.Container>
       <S.SortReviewOptions>
-        <S.BestReview>베스트순</S.BestReview>
+        <S.BestReview onClick={handleClickBestReview}>베스트순</S.BestReview>
         <S.Line></S.Line>
-        <S.LatestReview>최신순</S.LatestReview>
+        <S.LatestReview onClick={handleClickNewReview}>최신순</S.LatestReview>
       </S.SortReviewOptions>
 
       <S.SearchAndRateOptions>
