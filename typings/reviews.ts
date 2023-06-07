@@ -29,6 +29,7 @@ export interface ReviewType {
 }
 
 export interface ReviewResponseType {
+  createdDate: number[];
   lastModifiedDate: number[];
   reviewId: number;
   projectId: number;
@@ -90,4 +91,7 @@ export interface CommentResponseType {
   userInfo: ShoppingMallUserInfo;
   content: string;
   parentCommentId: number;
+  commentLikeCount: number;
+  createdDate: number[];
+  isCommentLiked: boolean;
 }

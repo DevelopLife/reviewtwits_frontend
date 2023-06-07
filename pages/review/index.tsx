@@ -9,7 +9,7 @@ import {
 import { useRegisterShoppingMallProduct } from 'hooks/queries/shopping';
 import ShoppingMallReview from 'components/ShoppingMallReview/ShoppingMallReview';
 import { RegisterProjectParams } from 'typings/register';
-import { replaceUrlProtocool } from 'utils/regExp';
+import { replaceUrlProtocool } from 'constants/regExp';
 
 const ShoppingMallReviewPage = () => {
   const router = useRouter();
@@ -24,14 +24,11 @@ const ShoppingMallReviewPage = () => {
     title: string;
     image: string;
   };
-  console.log(productURL, router.query);
 
   const { data: shoppingmallReviewInfoData } =
     useGetShoppingMallReviewInfo(productURL);
   const { data: shoppingmallReviewList } =
     useGetShoppingMallReviewList(productURL);
-
-  console.log(shoppingmallReviewInfoData, useGetShoppingMallReviewList);
 
   const { mutateAsync } = useRegisterShoppingMallProduct();
 

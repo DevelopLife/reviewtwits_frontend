@@ -158,6 +158,25 @@ export const usePostReviewComment = (reviewId: number) => {
   return { mutate };
 };
 
+export const usePostlikeToComment = (reviewId: number, commentId: number) => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(
+    ({ commentId }: { commentId: number }) =>
+      snsAPI.postLikeToComment(commentId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          'review',
+          'comment',
+          reviewId,
+          commentId,
+        ]);
+      },
+    }
+  );
+  return { mutate };
+};
+
 export const useFollowAndUnFollow = () => {
   const queryClient = useQueryClient();
   const originFollowingDictionary = queryClient.getQueryData(
@@ -290,7 +309,7 @@ export const useGetInfiniteFeed = () => {
     getNextPage: (nextRequest) => {
       return selectedUser === ''
         ? snsAPI.getInfiniteFeed(nextRequest)
-        : snsAPI.getUserReviews(selectedUser, nextRequest);
+        : snsAPI.getFilteredReviews(selectedUser, nextRequest);
     },
     nextRequest: 'reviewId',
   });

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import Link from 'next/link';
 
 import {
   ProjectCardCommon,
@@ -7,6 +8,8 @@ import {
 } from 'components/Project/Management/ProjectCardCommon';
 import { ProjectDto } from 'typings/project';
 import { GetProjectsResponseData } from 'api/projects';
+import Button from 'components/common/Button';
+import cssUtils from 'utils/css';
 
 interface ProjectCardProps {
   project: GetProjectsResponseData;
@@ -74,6 +77,38 @@ export const ProjectCardView = ({
               <S.ContentItem>리뷰 : {review}</S.ContentItem>
             </S.SubTitle>
             <S.Description>{description}</S.Description>
+            <S.DetailButtons>
+              <Button>
+                <Link
+                  href={{
+                    pathname: '/project/install',
+                    query: { projectName: name },
+                  }}
+                  style={{ color: 'black' }}
+                >
+                  설치가이드
+                </Link>
+              </Button>
+              <Button>
+                {
+                  // Todo: replace modify
+                }
+                <Link href={'/project/create'} style={{ color: 'black' }}>
+                  수정
+                </Link>
+              </Button>
+              <Button>
+                <Link
+                  href={{
+                    pathname: '/statistics/project',
+                    query: { projectName: name },
+                  }}
+                  style={{ color: 'black' }}
+                >
+                  통계
+                </Link>
+              </Button>
+            </S.DetailButtons>
           </S.ContentWrap>
         )}
       </S.BehindContent>
@@ -120,13 +155,12 @@ const S = {
   `,
   ContentItem: styled.div``,
   Description: styled.p`
-    height: 63px;
-
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-word;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    ${cssUtils.cssTextEllipsis(3)}
+  `,
+  DetailButtons: styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px 0;
   `,
 };

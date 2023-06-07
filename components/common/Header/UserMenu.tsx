@@ -19,6 +19,9 @@ const UserMenu = ({ closeMenu }: UserMenuProps) => {
     <S.Box>
       <S.Menu onClick={() => onClickMenu('/')}>홈</S.Menu>
       <S.Menu onClick={() => onClickMenu('/setting/profile')}>프로필</S.Menu>
+      <S.Menu onClick={() => onClickMenu('/project/management')}>
+        프로젝트
+      </S.Menu>
       <S.Menu onClick={() => onClickMenu('/dashboard')}>서비스</S.Menu>
       <S.Menu onClick={doSignOut}>로그아웃</S.Menu>
     </S.Box>

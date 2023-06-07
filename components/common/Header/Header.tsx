@@ -7,7 +7,6 @@ import * as S from './Header.styles';
 import UserMenu from './UserMenu';
 import { formattedProfileImageUrl } from 'utils/format';
 import useUserProfile from 'hooks/queries/users';
-import Button from '../Button';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

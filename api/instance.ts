@@ -17,6 +17,11 @@ export const optionalTokenAPI = axios.create({
   withCredentials: true,
 });
 
+export const publicAPI = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  withCredentials: true,
+});
+
 export const authApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
   withCredentials: true,

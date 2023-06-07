@@ -1,39 +1,39 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
-import Link from 'next/link';
-
 import ReactIcon from 'public/icons/react.svg';
+import type { Platforms } from 'typings/platforms';
 
-const PLATFORMS = [
+const platforms: {
+  name: Platforms;
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+}[] = [
   {
     name: 'React',
     Icon: ReactIcon,
   },
   {
-    name: 'Jekyll',
-    Icon: ReactIcon,
-  },
-  {
-    name: 'Wordpress',
-    Icon: ReactIcon,
-  },
-  {
-    name: 'Blogger',
+    name: 'HTML',
     Icon: ReactIcon,
   },
 ];
 
 const InstallPage = () => {
+  const router = useRouter();
+  const query = router.query as { projectName: string };
+
   return (
     <ProjectPageLayout>
       <ProjectCreateLayout title={PROJECT_TITLE}>
         <S.ProjectSelectPlatform>
           <S.ProjectSelectPlatformList>
-            {PLATFORMS.map(({ name, Icon }) => (
+            {platforms.map(({ name, Icon }) => (
               <Link
-                href={{ pathname: `install/${name}` }}
+                href={{ pathname: `install/${name.toLowerCase()}`, query }}
                 key={name}
                 style={{ textDecoration: 'none', color: '#3D3D3D' }}
               >
@@ -44,12 +44,6 @@ const InstallPage = () => {
               </Link>
             ))}
           </S.ProjectSelectPlatformList>
-          <S.InstallGlobalCode>
-            <Link href={'./install/global'}>
-              {`내가 생각하는 플랫폼이 없습니다.
-              글로벌 코드로 설치하겠습니다`}
-            </Link>
-          </S.InstallGlobalCode>
         </S.ProjectSelectPlatform>
       </ProjectCreateLayout>
     </ProjectPageLayout>

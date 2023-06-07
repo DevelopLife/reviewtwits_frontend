@@ -6,12 +6,12 @@ import { ProjectCreateContent } from 'components/Project/Create/ProjectCreateCon
 import { ProjectCreateTabItem } from 'components/Project/Create/ProjectCreateTapItem';
 import { ProjectPageButton } from 'components/Project/common/ProjectPageButton';
 
-type ProjectPathnames = 'create' | 'plans' | 'platform';
+type ProjectPathnames = 'create' | 'plans' | 'install';
 
 const SIDEBAR_MENUS: Record<ProjectPathnames, string> = {
   create: '등록정보 입력',
   plans: '플랜선택',
-  platform: '설치 플랫폼 선택',
+  install: '설치 플랫폼 선택',
 };
 
 interface ProjectCreateLayoutProps {
