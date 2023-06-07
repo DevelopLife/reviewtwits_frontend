@@ -25,6 +25,8 @@ const userBox = styled.div`
 
   width: 175px;
   height: 72px;
+
+  cursor: pointer;
 `;
 
 const ImageBox = styled.div`

@@ -31,6 +31,8 @@ const SortReviewOptions = styled.div`
   line-height: 19px;
 
   cursor: pointer;
+
+  color: #ffffff;
 `;
 
 const BestReview = styled.div<{ isSelected: boolean }>`
