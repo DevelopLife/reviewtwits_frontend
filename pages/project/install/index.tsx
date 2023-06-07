@@ -16,6 +16,10 @@ const platforms: {
     name: 'React',
     Icon: ReactIcon,
   },
+  {
+    name: 'HTML',
+    Icon: ReactIcon,
+  },
 ];
 
 const InstallPage = () => {
@@ -40,12 +44,6 @@ const InstallPage = () => {
               </Link>
             ))}
           </S.ProjectSelectPlatformList>
-          <S.InstallGlobalCode>
-            <Link href={{ pathname: `install/html`, query }}>
-              {`내가 생각하는 플랫폼이 없습니다.
-              글로벌 코드로 설치하겠습니다`}
-            </Link>
-          </S.InstallGlobalCode>
         </S.ProjectSelectPlatform>
       </ProjectCreateLayout>
     </ProjectPageLayout>
