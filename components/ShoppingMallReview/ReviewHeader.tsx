@@ -1,12 +1,16 @@
 import React from 'react';
 import * as S from './ReviewHeader.styles';
 import { useRecoilState } from 'recoil';
+import { atomReviewSortButtonState } from 'states/atomReveiw';
 
-interface ReviewHeaderProps {
-  handleSetSearchOption: (selectingOption: 'BEST' | 'NEWEST') => void;
-}
+const ReviewHeader = () => {
+  const [searchOption, setSearchOption] = useRecoilState(
+    atomReviewSortButtonState
+  );
 
-const ReviewHeader = ({ handleSetSearchOption }: ReviewHeaderProps) => {
+  const handleSetSearchOption = (selectingOption: 'BEST' | 'NEWEST') => {
+    setSearchOption({ selected: selectingOption });
+  };
   const handleClickBestReview = () => {
     handleSetSearchOption('BEST');
   };
@@ -18,9 +22,19 @@ const ReviewHeader = ({ handleSetSearchOption }: ReviewHeaderProps) => {
   return (
     <S.Container>
       <S.SortReviewOptions>
-        <S.BestReview onClick={handleClickBestReview}>베스트순</S.BestReview>
+        <S.BestReview
+          onClick={handleClickBestReview}
+          isSelected={searchOption.selected === 'BEST'}
+        >
+          베스트순
+        </S.BestReview>
         <S.Line></S.Line>
-        <S.LatestReview onClick={handleClickNewReview}>최신순</S.LatestReview>
+        <S.LatestReview
+          onClick={handleClickNewReview}
+          isSelected={searchOption.selected === 'NEWEST'}
+        >
+          최신순
+        </S.LatestReview>
       </S.SortReviewOptions>
 
       <S.SearchAndRateOptions>
