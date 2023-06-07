@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ComprehensiveRates,
   KeywordRates,
@@ -22,11 +22,16 @@ const ShoppingMallReview = ({
   shoppingmallReviewList,
 }: ShoppingMallReviewProps) => {
   const router = useRouter();
+  const [searchOption, setSearchOption] = useState<'best' | 'new'>('new');
   const { projectName, productURL, title, image } = router.query as {
     projectName: string;
     productURL: string;
     title: string;
     image: string;
+  };
+
+  const handleSetSearchOption = (selectingOption: 'best' | 'new') => {
+    setSearchOption((prev) => selectingOption);
   };
 
   return (
@@ -40,7 +45,7 @@ const ShoppingMallReview = ({
         <KeywordRates />
       </S.KeywordRatesLayout>
       <S.ReviewHeaderLayout>
-        <ReviewHeader />
+        <ReviewHeader handleSetSearchOption={handleSetSearchOption} />
       </S.ReviewHeaderLayout>
       <S.ReviewsLayout>
         <Reviews shoppingmallReviewList={shoppingmallReviewList} />

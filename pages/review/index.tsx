@@ -24,14 +24,11 @@ const ShoppingMallReviewPage = () => {
     title: string;
     image: string;
   };
-  console.log(productURL, router.query);
 
   const { data: shoppingmallReviewInfoData } =
     useGetShoppingMallReviewInfo(productURL);
   const { data: shoppingmallReviewList } =
     useGetShoppingMallReviewList(productURL);
-
-  console.log(shoppingmallReviewInfoData, useGetShoppingMallReviewList);
 
   const { mutateAsync } = useRegisterShoppingMallProduct();
 
