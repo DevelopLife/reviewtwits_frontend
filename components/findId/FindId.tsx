@@ -3,7 +3,7 @@ import { emailsAPI } from 'api/emails';
 import Button from 'components/common/Button';
 import Card from 'components/common/Card';
 import Input from 'components/common/Input';
-import Layout from 'components/common/Layout';
+
 import {
   DEFAULT_FIND_ID_FORM,
   ERROR_MESSAGE,

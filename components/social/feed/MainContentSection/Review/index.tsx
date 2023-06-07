@@ -90,7 +90,7 @@ const ReviewView = ({
             </S.UserInfo>
           </SocialUserNicknameLink>
           <StarBox score={data?.score} />
-          <S.LastTime>{formattedLastTime(data?.lastModifiedDate)}</S.LastTime>
+          <S.LastTime>{formattedLastTime(data?.createdDate)}</S.LastTime>
         </S.ReviewInfoBox>
         <S.ReviewText onClick={openModal}>{data?.content}</S.ReviewText>
         <ImageList

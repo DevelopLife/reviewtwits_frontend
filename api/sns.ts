@@ -1,6 +1,6 @@
 import { requiredTokenApi, optionalTokenAPI } from './instance';
 import { SocialProfile, SocialReview } from 'typings/social';
-import { ReactionType } from 'typings/reviews';
+import { ReactionType, ReviewResponseType } from 'typings/reviews';
 import type {
   FollowAndUnFollowRequestBody,
   FollowListType,
@@ -137,6 +137,24 @@ export const snsAPI = {
         params,
       }
     );
+    return response.data;
+  },
+
+  getFilteredReviews: async (
+    nickname: string,
+    reviewId?: number
+  ): Promise<ReviewResponseType[]> => {
+    const size = 10;
+    const params = reviewId
+      ? {
+          size,
+          nickname,
+          reviewId,
+        }
+      : { size, nickname };
+    const response = await requiredTokenApi.get(`${SNS_URL}/feeds/filter`, {
+      params,
+    });
     return response.data;
   },
 

@@ -6,8 +6,12 @@ import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
 import ReactIcon from 'public/icons/react.svg';
+import type { Platforms } from 'typings/platforms';
 
-const PLATFORMS = [
+const platforms: {
+  name: Platforms;
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+}[] = [
   {
     name: 'React',
     Icon: ReactIcon,
@@ -23,9 +27,9 @@ const InstallPage = () => {
       <ProjectCreateLayout title={PROJECT_TITLE}>
         <S.ProjectSelectPlatform>
           <S.ProjectSelectPlatformList>
-            {PLATFORMS.map(({ name, Icon }) => (
+            {platforms.map(({ name, Icon }) => (
               <Link
-                href={{ pathname: `install/${name}`, query }}
+                href={{ pathname: `install/${name.toLowerCase()}`, query }}
                 key={name}
                 style={{ textDecoration: 'none', color: '#3D3D3D' }}
               >
@@ -37,7 +41,7 @@ const InstallPage = () => {
             ))}
           </S.ProjectSelectPlatformList>
           <S.InstallGlobalCode>
-            <Link href={'./install/global'}>
+            <Link href={{ pathname: `install/html`, query }}>
               {`내가 생각하는 플랫폼이 없습니다.
               글로벌 코드로 설치하겠습니다`}
             </Link>
