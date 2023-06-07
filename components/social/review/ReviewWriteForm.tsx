@@ -132,6 +132,8 @@ const ReviewWriteFormView = ({
     <S.Form onSubmit={(e) => handleSubmit(e, onValid)}>
       <S.FormTitle>리뷰 작성</S.FormTitle>
       <S.FormContent>
+        <S.ReviewFor>상품 검색</S.ReviewFor>
+        <SearchBox productName={values.productName} setValue={setValue} />
         <S.ReviewFor>상품 URL</S.ReviewFor>
         <S.Input
           type="text"
@@ -139,8 +141,6 @@ const ReviewWriteFormView = ({
           onChange={handleChange}
           value={values.productURL}
         />
-        <S.ReviewFor>상품 검색</S.ReviewFor>
-        <SearchBox productName={values.productName} setValue={setValue} />
         <S.ReviewFor>상세 리뷰</S.ReviewFor>
         <ReviewTextArea content={values?.content} handleChange={handleChange} />
         <S.ImageUploadBoxWrap>
