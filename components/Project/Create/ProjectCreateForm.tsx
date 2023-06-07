@@ -6,13 +6,20 @@ import { useCreateProject } from 'hooks/useCreateProject';
 import { ProjectCreateSelect } from 'components/Project/Create/ProjectCreateSelect';
 
 import { ColorPickerTrigger } from 'components/common/ColorPicker/ColorPickerTrigger';
+import { CreateProjectForm } from 'states/createProjectForm';
 
-export const ProjectCreateForm = () => {
+interface ProjectCreateFormProps {
+  referenceProjectData?: CreateProjectForm;
+}
+
+export const ProjectCreateForm = ({
+  referenceProjectData,
+}: ProjectCreateFormProps) => {
   const {
     createProjectForm,
     changeCreateProjectFormByInput,
     changeProjectColor,
-  } = useCreateProject();
+  } = useCreateProject(referenceProjectData);
 
   return (
     <ProjectCreateFormView

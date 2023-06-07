@@ -1,15 +1,24 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { PricePlan, UppercasePricePlan } from 'api/projects';
 import { useBoolean } from 'hooks/useBoolean';
-import { createProjectFormState } from 'states/createProjectForm';
+import {
+  CreateProjectForm,
+  createProjectFormState,
+} from 'states/createProjectForm';
 import { projectPlanState } from 'states/projectPlan';
 
-export const useCreateProject = () => {
+export const useCreateProject = (referenceProjectData?: CreateProjectForm) => {
   const [createProjectForm, setCreateProjectForm] = useRecoilState(
     createProjectFormState
   );
+
+  useEffect(() => {
+    referenceProjectData &&
+      setCreateProjectForm((prev) => ({ ...prev, ...referenceProjectData }));
+  }, [referenceProjectData, setCreateProjectForm]);
+
   const [projectPlan, setProjectPlan] = useRecoilState<UppercasePricePlan | ''>(
     projectPlanState
   );

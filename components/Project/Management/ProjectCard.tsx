@@ -93,7 +93,13 @@ export const ProjectCardView = ({
                 </Link>
               </Button>
               <Button>
-                <Link href={'/project/install'} style={{ color: 'black' }}>
+                <Link
+                  href={{
+                    pathname: '/project/modify',
+                    query: { projectId: id },
+                  }}
+                  style={{ color: 'black' }}
+                >
                   수정
                 </Link>
               </Button>
