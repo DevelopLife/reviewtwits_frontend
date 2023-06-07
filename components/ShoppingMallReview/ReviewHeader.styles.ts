@@ -31,11 +31,23 @@ const SortReviewOptions = styled.div`
   line-height: 19px;
 
   cursor: pointer;
-
-  color: #ffffff;
 `;
 
-const BestReview = styled.div``;
+const BestReview = styled.div<{ isSelected: boolean }>`
+  &:hover {
+    scale: 1.05;
+  }
+  color: ${({ isSelected, theme }) =>
+    isSelected ? theme.colors.secondary : theme.colors.white};
+`;
+
+const LatestReview = styled.div<{ isSelected: boolean }>`
+  &:hover {
+    scale: 1.05;
+  }
+  color: ${({ isSelected, theme }) =>
+    isSelected ? theme.colors.secondary : theme.colors.white};
+`;
 
 const Line = styled.div`
   width: 0px;
@@ -43,8 +55,6 @@ const Line = styled.div`
 
   border: 1px solid #878d91;
 `;
-
-const LatestReview = styled.div``;
 
 const SearchAndRateOptions = styled.div`
   width: 570px;
