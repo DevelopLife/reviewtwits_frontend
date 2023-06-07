@@ -2,28 +2,28 @@ import {
   VisitorStatistics,
   ViewsStatistics,
   LeadTimeRate,
-  // ProductStatistics,
 } from 'components/Statistics/@index';
 import Margin from 'components/Statistics/common/Margin';
 import StatisticsPageLayout from 'components/Statistics/common/StatisticsPageLayout';
 import SimpleBarChart from 'components/common/Charts/BarChart';
 import useVisitChart from 'components/common/Charts/BarChartState';
 import useStatistics from 'hooks/queries/statistics';
-import React from 'react';
+import { useRouter } from 'next/router';
 
 const ProjectStatisticsPage = () => {
+  const router = useRouter();
+  const { projectName } = router.query as { projectName: string };
+
   const {
-    initialRecentVisitCountsQuery,
     recentVisitCountsQuery,
     dailyVisitGraphInfosQuery,
     visitGraphInfosQuery,
   } = useStatistics({
-    projectId: '25020',
+    projectId: projectName || '25020',
     // range,
     // interval,
   });
 
-  const { data: initialRecentVisitCounts } = initialRecentVisitCountsQuery;
   const { data: recentVisitCounts } = recentVisitCountsQuery;
   const { data: dailyVisitGraphInfos } = dailyVisitGraphInfosQuery;
   const { data: visitGraphInfos } = visitGraphInfosQuery;
@@ -42,14 +42,8 @@ const ProjectStatisticsPage = () => {
       </Margin>
       <Margin marginTop={40}>
         <ViewsStatistics onClick={handleSelectedValueOnClick}>
-          {initialRecentVisitCounts ||
-          dailyVisitGraphInfos?.data?.visitInfo.length ? (
-            <SimpleBarChart
-              data={
-                (initialRecentVisitCounts && initialRecentVisitCounts) ||
-                dailyVisitGraphInfos?.data?.visitInfo
-              }
-            />
+          {dailyVisitGraphInfos?.data?.visitInfo.length ? (
+            <SimpleBarChart data={dailyVisitGraphInfos?.data?.visitInfo} />
           ) : null}
         </ViewsStatistics>
       </Margin>
@@ -59,6 +53,7 @@ const ProjectStatisticsPage = () => {
           dataKey={'previousVisit'}
         />
       </Margin>
+
       <Margin marginTop={32}>{/* <ProductStatistics /> */}</Margin>
       <Margin marginBottom={60} />
     </StatisticsPageLayout>
