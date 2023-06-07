@@ -3,16 +3,16 @@ import * as S from './ReviewHeader.styles';
 import { useRecoilState } from 'recoil';
 
 interface ReviewHeaderProps {
-  handleSetSearchOption: (selectingOption: 'best' | 'new') => void;
+  handleSetSearchOption: (selectingOption: 'BEST' | 'NEWEST') => void;
 }
 
 const ReviewHeader = ({ handleSetSearchOption }: ReviewHeaderProps) => {
   const handleClickBestReview = () => {
-    handleSetSearchOption('best');
+    handleSetSearchOption('BEST');
   };
 
   const handleClickNewReview = () => {
-    handleSetSearchOption('new');
+    handleSetSearchOption('NEWEST');
   };
 
   return (
