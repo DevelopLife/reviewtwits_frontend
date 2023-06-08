@@ -1,11 +1,22 @@
-import type { BarProps } from 'recharts';
+import { SVGAttributes } from 'react';
 
-export interface CustomBarProps extends BarProps {
+declare type RectangleShapeProps = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  value: any;
+  payload: any;
+  background: any;
+  tooltipPayload: object[];
+  tooltipPosition: { x: number; y: number };
+} & SVGAttributes<SVGRectElement>;
+
+export type CustomBarProps = RectangleShapeProps & {
   payload: { timeStamp: string };
   focusedDate: Date;
   onClick: (date: Date) => void;
-}
-
+};
 const CustomBar = (props: CustomBarProps) => {
   const { x, y, width, height, onClick, fill, focusedDate, payload } = props;
   const { timeStamp } = payload;
