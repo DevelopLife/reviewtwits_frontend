@@ -29,14 +29,21 @@ const Table = styled.table`
   width: 1348px;
   height: 283px;
 
-  border: 1px solid black;
+  margin: 1rem;
 `;
 
-const TableHeader = styled.th``;
+const TableHeader = styled.th`
+  text-align: left;
+  padding-bottom: 1.5rem;
+`;
 
 const TableRow = styled.tr``;
 
-const TableData = styled.td``;
+const TableData = styled.td`
+  vertical-align: middle;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.gray_1}`};
+  padding: 1rem 0;
+`;
 
 const Margin = styled.div`
   height: 40px;
