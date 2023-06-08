@@ -6,7 +6,7 @@ const Container = styled.div`
   gap: 16px;
 
   width: 1360px;
-  height: auto;
+  height: 100%;
 
   padding-top: 52px;
   padding-left: 40px;
@@ -43,9 +43,7 @@ const StatisticsHeader = styled.div`
 
 const GraphBox = styled.div`
   width: 1360px;
-  height: 577.15px;
-
-  border: 1px solid black;
+  flex: 1;
 `;
 
 export {
