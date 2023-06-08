@@ -1,18 +1,82 @@
-import React from 'react';
-import Button from './common/Button';
 import Shadow from './common/Shadow';
 import * as S from './OrderData.styles';
 
-const OrderData = () => {
+interface OrderDataProps {
+  projectId: string;
+}
+
+type ProductStatisticsList = ProductStatistics[];
+
+type ProductStatistics = {
+  productId: number;
+  productName: string;
+  viewCount: number;
+  reviewCount: number;
+  mainGender: '남성' | '여성';
+  mainAgeGroup: number;
+  averageRating: number;
+};
+interface TableProps {
+  heads: string[];
+  datas: ProductStatisticsList;
+}
+
+const Table = ({ heads, datas }: TableProps) => {
+  return (
+    <S.Table>
+      <thead>
+        <S.TableRow>
+          {heads.map((head) => (
+            <S.TableHeader key={head}>{head}</S.TableHeader>
+          ))}
+        </S.TableRow>
+      </thead>
+      <tbody>
+        {datas.map((data) => (
+          <S.TableRow key={data.productId}>
+            {Object.entries(data).map(
+              ([key, value]) =>
+                key !== 'productId' && (
+                  <S.TableData key={key}>{value}</S.TableData>
+                )
+            )}
+          </S.TableRow>
+        ))}
+      </tbody>
+    </S.Table>
+  );
+};
+
+const OrderData = ({ projectId }: OrderDataProps) => {
+  // TODO: call productStatistics custom hooks
+
   return (
     <Shadow boxSize="LARGE">
       <S.Container>
         <S.OrderHeader>
-          <S.Title>Recent Orders</S.Title>
-          <Button>배송 통계</Button>
+          <S.Title>상품별 통계정보</S.Title>
         </S.OrderHeader>
         <S.Margin />
-        <S.Table>
+        <Table
+          heads={[
+            '상품명',
+            '조회수',
+            '리뷰수',
+            '주연령대',
+            '주성별',
+            '평균평점',
+          ]}
+          datas={Array.from({ length: 10 }, (_, index) => ({
+            productId: 0,
+            productName: `상품명${index}`,
+            viewCount: 0,
+            reviewCount: 0,
+            mainAgeGroup: 20,
+            mainGender: '남성',
+            averageRating: 4,
+          }))}
+        />
+        {/* <S.Table>
           <thead>
             <tr>
               <S.TableHeader>주문목록</S.TableHeader>
@@ -62,7 +126,7 @@ const OrderData = () => {
               <S.TableData>리뷰완료</S.TableData>
             </S.TableRow>
           </tbody>
-        </S.Table>
+        </S.Table> */}
       </S.Container>
     </Shadow>
   );
