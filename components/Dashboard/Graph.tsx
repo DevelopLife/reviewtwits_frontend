@@ -1,19 +1,20 @@
-import React from 'react';
 import GraphHeader from './GraphHeader';
 import GraphBody from './GraphBody';
-import GraphSide from './GraphSide';
+// import GraphSide from './GraphSide';
 import Shadow from './common/Shadow';
 
 import * as S from './Graph.styles';
 
 const Graph = () => {
+  // TODO: call use Query
+
   return (
     <S.Container>
       <Shadow boxSize="MEDIUM">
         <GraphHeader />
         <GraphBody />
       </Shadow>
-      <GraphSide />
+      {/* <GraphSide /> */}
     </S.Container>
   );
 };
