@@ -30,7 +30,7 @@ const nextConfig = {
 module.exports = {
   swcMinify: true,
   compiler: {
-    removeConsole: true,
+    removeConsole: process.env.NODE_ENV === 'production',
     exclude: ['error'],
   },
   webpack(config) {

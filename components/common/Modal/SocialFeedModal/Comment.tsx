@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { usePostlikeToComment } from 'hooks/queries/sns';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { CommentResponseType } from 'typings/reviews';
@@ -71,7 +70,6 @@ const Comment = ({ commentData }: CommentProps) => {
     setIsPatching((prev) => !prev);
     setCommentContent((prev) => values.content);
   };
-
   return (
     <S.Container deletedComment={deletedComment}>
       <div key={commentId}>
@@ -95,24 +93,22 @@ const Comment = ({ commentData }: CommentProps) => {
           )}
         </S.User>
         <S.ContentBox>
-          <S.Content>
-            {isPatching ? (
-              <form
-                action="submit"
-                onSubmit={(e) => handleSubmit(e, onPatchedContentSubmit)}
-              >
-                <input
-                  type="text"
-                  placeholder={commentContent}
-                  onChange={handleChange}
-                  name="content"
-                />
-                <button>수정 완료</button>
-              </form>
-            ) : (
-              commentContent
-            )}
-          </S.Content>
+          {isPatching ? (
+            <form
+              action="submit"
+              onSubmit={(e) => handleSubmit(e, onPatchedContentSubmit)}
+            >
+              <input
+                type="text"
+                placeholder={commentContent}
+                onChange={handleChange}
+                name="content"
+              />
+              <button>수정 완료</button>
+            </form>
+          ) : (
+            <S.Content>{commentContent}</S.Content>
+          )}
 
           <S.ContentInfo>
             <S.LastTime>{formattedLastTime(createdDate)}</S.LastTime>

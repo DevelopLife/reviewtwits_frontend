@@ -29,7 +29,7 @@ const WriterDesc = styled.div`
   font-style: normal;
   font-weight: 500;
 
-  p:first-child {
+  p:first-of-type {
     font-family: 'Inter';
     font-size: 18px;
     line-height: 22px;
