@@ -10,8 +10,11 @@ import { useRegisterShoppingMallProduct } from 'hooks/queries/shopping';
 import ShoppingMallReview from 'components/ShoppingMallReview/ShoppingMallReview';
 import { RegisterProjectParams } from 'typings/register';
 import { replaceUrlProtocool } from 'constants/regExp';
+import { useRecoilValue } from 'recoil';
+import { atomReviewSortButtonState } from 'states/atomReveiw';
 
 const ShoppingMallReviewPage = () => {
+  // const selectedSortButton = useRecoilValue(atomReviewSortButtonState);
   const router = useRouter();
   const {
     projectName = '1',
@@ -24,58 +27,55 @@ const ShoppingMallReviewPage = () => {
     title: string;
     image: string;
   };
-  console.log(productURL, router.query);
 
-  const { data: shoppingmallReviewInfoData } =
-    useGetShoppingMallReviewInfo(productURL);
-  const { data: shoppingmallReviewList } =
-    useGetShoppingMallReviewList(productURL);
+  // const { data: shoppingmallReviewInfoData } =
+  //   useGetShoppingMallReviewInfo(productURL);
+  // const { data: shoppingmallReviewList } = useGetShoppingMallReviewList(
+  //   productURL,
+  //   selectedSortButton.selected
+  // );
 
-  console.log(shoppingmallReviewInfoData, useGetShoppingMallReviewList);
+  // const { mutateAsync } = useRegisterShoppingMallProduct();
 
-  const { mutateAsync } = useRegisterShoppingMallProduct();
+  // useEffect(() => {
+  //   if (
+  //     shoppingmallReviewInfoData?.status === 202 &&
+  //     router.query.projectName &&
+  //     router.query.productURL &&
+  //     router.query.title &&
+  //     router.query.image
+  //   ) {
+  //     const params: RegisterProjectParams = {
+  //       projectName: projectName,
+  //       body: {
+  //         productUrl: productURL,
+  //         productName: title,
+  //         imageUrl: replaceUrlProtocool(image),
+  //       },
+  //     };
 
-  useEffect(() => {
-    if (
-      shoppingmallReviewInfoData?.status === 202 &&
-      router.query.projectName &&
-      router.query.productURL &&
-      router.query.title &&
-      router.query.image
-    ) {
-      const params: RegisterProjectParams = {
-        projectName: projectName,
-        body: {
-          productUrl: productURL,
-          productName: title,
-          imageUrl: replaceUrlProtocool(image),
-        },
-      };
+  //     mutateAsync(params);
+  //   }
+  // }, [
+  //   shoppingmallReviewInfoData?.status,
+  //   router.query,
+  //   mutateAsync,
+  //   projectName,
+  //   productURL,
+  //   title,
+  //   image,
+  // ]);
 
-      mutateAsync(params);
-    }
-  }, [
-    shoppingmallReviewInfoData?.status,
-    router.query,
-    mutateAsync,
-    projectName,
-    productURL,
-    title,
-    image,
-  ]);
-
-  if (shoppingmallReviewInfoData?.data && shoppingmallReviewList?.data) {
-    return (
-      <div>
-        <ShoppingMallReview
-          shoppingmallReviewInfoData={shoppingmallReviewInfoData?.data}
-          shoppingmallReviewList={shoppingmallReviewList?.data}
-        />
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <div>
+      <ShoppingMallReview
+        projectName={projectName}
+        productURL={productURL}
+        title={title}
+        image={image}
+      />
+    </div>
+  );
 };
 
 export default ShoppingMallReviewPage;

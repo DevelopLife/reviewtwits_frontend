@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ComprehensiveRates,
   KeywordRates,
@@ -6,44 +6,45 @@ import {
   Reviews,
 } from './@index';
 import * as S from './ShoppingMallReview.styles';
-import {
-  ShoppingMallReviewDetail,
-  ShoppingMallReviewInfo,
-} from 'typings/reviews';
-import { useRouter } from 'next/router';
 
 interface ShoppingMallReviewProps {
-  shoppingmallReviewInfoData: ShoppingMallReviewInfo;
-  shoppingmallReviewList: ShoppingMallReviewDetail[];
+  projectName: string;
+  productURL: string;
+  title: string;
+  image: string;
 }
 
 const ShoppingMallReview = ({
-  shoppingmallReviewInfoData,
-  shoppingmallReviewList,
+  projectName,
+  productURL,
+  title,
+  image,
 }: ShoppingMallReviewProps) => {
-  const router = useRouter();
-  const { projectName, productURL, title, image } = router.query as {
-    projectName: string;
-    productURL: string;
-    title: string;
-    image: string;
-  };
-
   return (
     <S.Layout>
       <S.ComprehensiveRatesLayout>
         <ComprehensiveRates
-          shoppingmallReviewInfoData={shoppingmallReviewInfoData}
+          projectName={projectName}
+          productURL={productURL}
+          title={title}
+          image={image}
         />
       </S.ComprehensiveRatesLayout>
       <S.KeywordRatesLayout>
         <KeywordRates />
       </S.KeywordRatesLayout>
       <S.ReviewHeaderLayout>
-        <ReviewHeader />
+        <ReviewHeader
+        // handleSetSearchOption={handleSetSearchOption}
+        />
       </S.ReviewHeaderLayout>
       <S.ReviewsLayout>
-        <Reviews shoppingmallReviewList={shoppingmallReviewList} />
+        <Reviews
+          projectName={projectName}
+          productURL={productURL}
+          title={title}
+          image={image}
+        />
       </S.ReviewsLayout>
       <S.LinkButton
         href={{

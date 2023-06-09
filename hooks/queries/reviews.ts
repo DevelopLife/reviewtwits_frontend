@@ -1,11 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { shoppingAPI } from 'api/reviews';
-import { AxiosError, AxiosResponse } from 'axios';
-import { ResponseError } from 'typings/error';
-import {
-  ShoppingMallReviewDetail,
-  ShoppingMallReviewInfo,
-} from 'typings/reviews';
 
 export const useGetShoppingMallReviewInfo = (productURL: string) => {
   return useQuery(
@@ -17,10 +11,13 @@ export const useGetShoppingMallReviewInfo = (productURL: string) => {
   );
 };
 
-export const useGetShoppingMallReviewList = (productURL: string) => {
+export const useGetShoppingMallReviewList = (
+  productURL: string,
+  sort: 'BEST' | 'NEWEST'
+) => {
   return useQuery(
-    ['useGetShoppingMallReviewList', productURL],
-    () => shoppingAPI.getShoppingMallReviewList(encodeURI(productURL)),
+    ['useGetShoppingMallReviewList', productURL, sort],
+    () => shoppingAPI.getShoppingMallReviewList(encodeURI(productURL), sort),
     {
       enabled: !!productURL,
     }

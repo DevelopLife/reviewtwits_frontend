@@ -29,6 +29,7 @@ export interface ReviewType {
 }
 
 export interface ReviewResponseType {
+  createdDate: number[];
   lastModifiedDate: number[];
   reviewId: number;
   projectId: number;
@@ -72,7 +73,7 @@ export interface ShoppingMallReviewInfo {
 }
 
 export interface ShoppingMallReviewDetail {
-  createdDate: number[];
+  createdDate: [number, number, number];
   lastModifiedDate: number[];
   reviewId: number;
   userInfo: ShoppingMallUserInfo;

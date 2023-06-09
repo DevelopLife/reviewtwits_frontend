@@ -14,12 +14,7 @@ const SocialFeedModal = () => {
 
   const { nickname, reviewId } = router.query;
 
-  if (!nickname || !reviewId) {
-    return <h1>로딩중...</h1>;
-  }
-
   const { data: reviewData } = useGetOneReview(Number(reviewId) as number);
-
   const { data: commentsData } = useGetReviewComments(
     Number(reviewId) as number
   );
