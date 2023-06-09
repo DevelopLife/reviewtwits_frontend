@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { formattedLastTime } from 'utils/format';
 import useUserProfile from 'hooks/queries/users';
 import useForm from 'hooks/useForm';
+import useModal from 'hooks/useModal';
 
 interface CommentProps {
   commentData: CommentResponseType;
@@ -18,6 +19,8 @@ interface CommentProps {
 
 const Comment = ({ commentData }: CommentProps) => {
   const router = useRouter();
+  const modal = useModal();
+  const [isHover, setIsHover] = useState(false);
 
   const {
     commentId,
@@ -47,6 +50,9 @@ const Comment = ({ commentData }: CommentProps) => {
     setLikedComment((prev) => !prev);
   };
 
+  const handleMouseEnter = () => setIsHover((prev) => true);
+  const handleMouseLeave = () => setIsHover((prev) => false);
+
   const setUnlike = (commentId: number) => {
     snsAPI.deleteLikeToComment(commentId);
     setLikedCount((prev) => prev - 1);
@@ -70,26 +76,36 @@ const Comment = ({ commentData }: CommentProps) => {
     setIsPatching((prev) => !prev);
     setCommentContent((prev) => values.content);
   };
+
+  const onUserClick = () => {
+    router.push(`/social/user/${userInfo.nickname}`);
+    modal.hide();
+  };
   return (
-    <S.Container deletedComment={deletedComment}>
-      <div key={commentId}>
+    <S.Container
+      deletedComment={deletedComment}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <S.UserImage
+        src={formattedProfileImageUrl(userInfo.profileImageUrl)}
+        alt=""
+        width={40}
+        height={40}
+        onClick={onUserClick}
+      />
+      <S.CommentBox key={commentId}>
         <S.User>
-          <S.UserImage
-            src={formattedProfileImageUrl(userInfo.profileImageUrl)}
-            alt=""
-            width={40}
-            height={40}
-          />
-          <S.UserName>{userInfo.nickname}</S.UserName>
+          <S.UserName onClick={onUserClick}>{userInfo.nickname}</S.UserName>
 
           <S.LikeButton onClick={onClickLikeButton}>
             {likedComment ? <HeartFull /> : <HeartEmpty />}
           </S.LikeButton>
           {loggedUserAccountId === userInfo.accountId && (
-            <>
+            <S.DealButtonBox isHover={isHover}>
               <button onClick={handleRetouchComment}>수정</button>
               <button onClick={deleteComment}>삭제</button>
-            </>
+            </S.DealButtonBox>
           )}
         </S.User>
         <S.ContentBox>
@@ -115,7 +131,7 @@ const Comment = ({ commentData }: CommentProps) => {
             <S.LikeCount>{likedCount}likes</S.LikeCount>
           </S.ContentInfo>
         </S.ContentBox>
-      </div>
+      </S.CommentBox>
     </S.Container>
   );
 };
@@ -123,18 +139,33 @@ const Comment = ({ commentData }: CommentProps) => {
 const S = {
   Container: styled.div<{ deletedComment: boolean }>`
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
 
     width: 500px;
     margin-bottom: 16px;
-    display: ${({ deletedComment }) => (deletedComment ? 'none' : 'inherit')};
+    display: ${({ deletedComment }) => (deletedComment ? 'none' : 'flex')};
+  `,
+  CommentBox: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+  DealButtonBox: styled.div<{ isHover: boolean }>`
+    display: flex;
+    position: absolute;
+    gap: 8px;
+    right: 10px;
+    opacity: ${({ isHover }) => (isHover ? 1 : 0)};
+    pointer-events: ${({ isHover }) => (isHover ? 'visible' : 'none')};
   `,
   User: styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
+    margin-bottom: 5px;
   `,
   UserImage: styled(Image)`
     width: 40px;
@@ -156,7 +187,6 @@ const S = {
   `,
   ContentBox: styled.div`
     display: flex;
-    margin-left: 50px;
   `,
   Content: styled.p`
     font-family: ' Pretendard';
