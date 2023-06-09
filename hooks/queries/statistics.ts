@@ -25,37 +25,40 @@ const useStatistics = ({
   range = '3mo',
   interval = '3d',
 }: useStatisticsProps) => {
-  const recentVisitCountsQuery = useQuery({
-    queryKey: ['recentVisitCounts', projectId],
-    queryFn: () =>
-      statisticsAPI.recentVisitCounts({
-        projectId,
-      }),
-  });
+  const useRecentVisitCountsQuery = () =>
+    useQuery({
+      queryKey: ['recentVisitCounts', projectId],
+      queryFn: () =>
+        statisticsAPI.recentVisitCounts({
+          projectId,
+        }),
+    });
 
-  const dailyVisitGraphInfosQuery = useQuery({
-    queryKey: ['dailyVisitGraphInfos', projectId],
-    queryFn: () =>
-      statisticsAPI.dailyVisitGraphInfos({
-        projectId,
-        range,
-      }),
-  });
+  const useDailyVisitGraphInfosQuery = () =>
+    useQuery({
+      queryKey: ['dailyVisitGraphInfos', projectId],
+      queryFn: () =>
+        statisticsAPI.dailyVisitGraphInfos({
+          projectId,
+          range,
+        }),
+    });
 
-  const visitGraphInfosQuery = useQuery({
-    queryKey: ['visitGraphInfos', projectId],
-    queryFn: () =>
-      statisticsAPI.visitGraphInfos({
-        projectId,
-        range,
-        interval,
-      }),
-  });
+  const useVisitGraphInfosQuery = () =>
+    useQuery({
+      queryKey: ['visitGraphInfos', projectId],
+      queryFn: () =>
+        statisticsAPI.visitGraphInfos({
+          projectId,
+          range,
+          interval,
+        }),
+    });
 
   return {
-    recentVisitCountsQuery,
-    dailyVisitGraphInfosQuery,
-    visitGraphInfosQuery,
+    useRecentVisitCountsQuery,
+    useDailyVisitGraphInfosQuery,
+    useVisitGraphInfosQuery,
   };
 };
 
