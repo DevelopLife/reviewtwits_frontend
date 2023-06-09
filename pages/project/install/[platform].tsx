@@ -10,12 +10,18 @@ import Video from 'components/common/Video/Video';
 import Margin from 'components/Dashboard/common/Margin';
 import CommonButton from 'components/Project/install/common/Button';
 
-import { REACT_INSTALL_GUIDES } from 'constants/install_guides/react';
+import INSTALL_GUIDES from 'constants/install_guides';
+import type { PlatformUppercases, Platforms } from 'typings/platforms';
 
 const InstallDetailPage = () => {
-  console.log('adfs');
   const router = useRouter();
   const redirectPrevHistory = () => router.back();
+  const { platform } = router.query as {
+    platform: Lowercase<Platforms>;
+  };
+  const platformUppercase = platform?.toUpperCase() as PlatformUppercases;
+  const installGuides = INSTALL_GUIDES[platformUppercase];
+
   const reactGuideoVideo = '/videos/react_guide.mov';
 
   return (
@@ -28,7 +34,7 @@ const InstallDetailPage = () => {
         <Margin marginBottom={50}>
           <Video srcs={[reactGuideoVideo]} />
         </Margin>
-        {REACT_INSTALL_GUIDES.map(({ TEXT, CODE }) => (
+        {installGuides?.map(({ TEXT, CODE }) => (
           <CodeParagraph key={CODE} text={TEXT} code={CODE} />
         ))}
         <InstallPageButtons>

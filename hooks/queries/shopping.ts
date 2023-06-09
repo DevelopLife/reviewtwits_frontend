@@ -32,8 +32,10 @@ export const useCreateShoppingMallReview = () => {
             // eslint-disable-next-line no-case-declarations
             const productURL = getSearchParams('productURL');
             alert(SUCCESS_MESSAGE.CREATE);
-            router.push(`/review?productURL=${productURL}`);
-            break;
+
+            window.opener
+              ? window.close()
+              : router.push(`/review?productURL=${productURL}`);
         }
       },
       onError: ({ response }) => {
