@@ -6,7 +6,7 @@ const Container = styled.div`
   gap: 16px;
 
   width: 1360px;
-  height: auto;
+  height: 100%;
 
   padding-top: 52px;
   padding-left: 40px;
@@ -26,11 +26,30 @@ const StatisticsTitle = styled.h3`
   color: #181818;
 `;
 
-const GraphBox = styled.div`
-  width: 1360px;
-  height: 577.15px;
+const StatisticsSubTitle = styled.h4`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
 
-  border: 1px solid black;
+  color: #181818;
 `;
 
-export { Container, StatisticsTitle, GraphBox };
+const StatisticsHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const GraphBox = styled.div`
+  width: 1360px;
+  flex: 1;
+`;
+
+export {
+  Container,
+  StatisticsTitle,
+  StatisticsSubTitle,
+  StatisticsHeader,
+  GraphBox,
+};
