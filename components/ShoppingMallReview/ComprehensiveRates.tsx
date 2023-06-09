@@ -5,7 +5,7 @@ import risingArray from 'public/images/rising_array.png';
 import grayStar from 'public/images/empty_star_img.png';
 import * as S from './ComprehensiveRates.styles';
 import { ShoppingMallReviewInfo } from 'typings/reviews';
-import StarBox from 'components/social/feed/MainContentSection/Review/StarBox';
+import StarBox from 'components/social/common/Review/StarBox';
 
 interface ComprehensiveRatesProps {
   shoppingmallReviewInfoData: ShoppingMallReviewInfo;

@@ -7,7 +7,7 @@ import { Colors } from 'styles/theme';
 import { ReviewResponseType } from 'typings/reviews';
 import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
 
-import Card from '../../Card';
+import Card from '../../feed/Card';
 import ReactionBox from './ReactionBox';
 import StarBox from './StarBox';
 import ImageList from './ImageList';

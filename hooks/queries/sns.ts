@@ -322,6 +322,21 @@ export const useGetInfiniteFeed = () => {
   };
 };
 
+export const useGetInfiniteScrapList = () => {
+  const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType, 'reviewId'>({
+    queryKey: ['useGetInfiniteScrapList'],
+    getNextPage: (nextRequest) => snsAPI.getInfiniteFeed(nextRequest),
+    nextRequest: 'reviewId',
+  });
+
+  const targetRef = useIntersectionObserver(infiniteQuery.fetchNextPage);
+  const data = linkageInfiniteScrollData(infiniteQuery?.data);
+  return {
+    targetRef,
+    data,
+  };
+};
+
 export const useGetRecentUpdatedUsers = () => {
   const recentUpdatedUserQuery = useQuery(['recentUpdatedUser'], () =>
     snsAPI.getRecentUpdatedUsers()

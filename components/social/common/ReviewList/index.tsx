@@ -2,25 +2,24 @@ import styled from '@emotion/styled';
 
 import { ReviewResponseType } from 'typings/reviews';
 
-import Review from './Review';
-import { useGetInfiniteFeed } from 'hooks/queries/sns';
+import Review from '../Review';
 import { RefObject } from 'react';
 
-const MainContentSection = () => {
-  const { targetRef, data } = useGetInfiniteFeed();
+interface ReviewListProps {
+  targetRef: RefObject<HTMLDivElement>;
+  data?: ReviewResponseType[];
+}
 
-  return <MainContentSectionView targetRef={targetRef} reviewData={data} />;
+const ReviewList = ({ targetRef, data }: ReviewListProps) => {
+  return <ReviewListView targetRef={targetRef} reviewData={data} />;
 };
 
-interface MainContentSectionViewProps {
+interface ReviewListViewProps {
   reviewData?: ReviewResponseType[];
   targetRef: RefObject<HTMLDivElement>;
 }
 
-const MainContentSectionView = ({
-  targetRef,
-  reviewData,
-}: MainContentSectionViewProps) => {
+const ReviewListView = ({ targetRef, reviewData }: ReviewListViewProps) => {
   return (
     <S.Section ref={targetRef}>
       {reviewData?.map((data: ReviewResponseType, i) => (
@@ -30,7 +29,7 @@ const MainContentSectionView = ({
   );
 };
 
-export default MainContentSection;
+export default ReviewList;
 
 const S = {
   Section: styled.div`
