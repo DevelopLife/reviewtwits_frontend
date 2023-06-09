@@ -47,6 +47,13 @@ const shoppingAPI = {
     });
   },
 
+  postLikeToReview: async (reviewId: number) => {
+    const response = await requiredTokenApi.post(
+      `${SHOPPING_URL}/like/${reviewId}`
+    );
+    return response;
+  },
+
   //
   // product register
 
