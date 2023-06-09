@@ -7,6 +7,7 @@ import SidebarTitle from 'components/social/common/SidebarTitle';
 import SearchBar from 'components/social/common/SearchBar';
 
 import HomeIcon from 'public/icons/home.svg';
+import ScrapIcon from 'public/icons/scrap.svg';
 import FolderIcon from 'public/icons/folder.svg';
 import FullHeartIcon from 'public/icons/full-heart.svg';
 import UserIcon from 'public/icons/user.svg';
@@ -21,6 +22,7 @@ const USER_FEED_URL = `${SOCIAL_URL}/user`;
 
 const MENUS = [
   { href: `${SOCIAL_URL}/home`, text: 'Home', Icon: HomeIcon },
+  { href: `${SOCIAL_URL}/scrap`, text: 'Scrap', Icon: ScrapIcon },
   { href: `${SOCIAL_URL}/review/write`, text: 'Create', Icon: FolderIcon },
   { href: `${SOCIAL_URL}/follower`, text: 'Follower', Icon: FullHeartIcon },
   { href: USER_FEED_URL, text: 'Profile', Icon: UserIcon },
