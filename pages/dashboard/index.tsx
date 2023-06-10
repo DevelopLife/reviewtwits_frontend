@@ -17,7 +17,7 @@ const DashboardPage = () => {
       <Margin marginTop={60} marginBottom={51}>
         <ComprehensiveData projectId={projectId} />
       </Margin>
-      <Graph />
+      <Graph projectId={projectId} />
       <Margin marginTop={70.58} marginBottom={60}>
         <OrderData projectId={projectId} />
       </Margin>
