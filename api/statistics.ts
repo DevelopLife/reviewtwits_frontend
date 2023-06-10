@@ -9,6 +9,7 @@ import type {
 } from 'typings/statistics';
 
 const STATISTICS_URL = '/statistics';
+const DASHBOARD_URL = '/dashboard';
 
 export const statisticsAPI = {
   reportVisitorInfo: async (
@@ -50,5 +51,35 @@ export const statisticsAPI = {
     return await requiredTokenApi.get(`${STATISTICS_URL}/visit-graph-infos`, {
       params,
     });
+  },
+  simpleProjectInfo: async (projectId: string) => {
+    const { data } = await requiredTokenApi.get(
+      `${STATISTICS_URL}${DASHBOARD_URL}/simple-project-info`,
+      {
+        params: { projectId },
+      }
+    );
+
+    return data;
+  },
+  productStatistics: async (projectId: string) => {
+    const { data } = await requiredTokenApi.get(
+      `${STATISTICS_URL}${DASHBOARD_URL}/product-statistics`,
+      {
+        params: { projectId },
+      }
+    );
+
+    return data;
+  },
+  rquestInflowInfos: async (projectId: string) => {
+    const { data } = await requiredTokenApi.get(
+      `${STATISTICS_URL}${DASHBOARD_URL}/request-inflow-infos`,
+      {
+        params: { projectId },
+      }
+    );
+
+    return data;
   },
 };
