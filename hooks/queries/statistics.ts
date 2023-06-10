@@ -25,6 +25,11 @@ const useStatistics = ({
   range = '1mo',
   interval = '1d',
 }: useStatisticsProps) => {
+  const queryOptions = {
+    enabled: !!projectId,
+    retry: 0,
+  };
+
   const useRecentVisitCountsQuery = () =>
     useQuery({
       queryKey: ['recentVisitCounts', projectId],
@@ -61,10 +66,34 @@ const useStatistics = ({
       retry: 0,
     });
 
+  const useSimpleProjectInfo = () =>
+    useQuery(
+      ['simpleProjectInfo', projectId],
+      () => statisticsAPI.simpleProjectInfo(projectId),
+      queryOptions
+    );
+
+  const useProductStatistics = () =>
+    useQuery(
+      ['productStatistics', projectId],
+      () => statisticsAPI.productStatistics(projectId),
+      queryOptions
+    );
+  const useRequestInflowInfos = () => {
+    useQuery(
+      ['requestInflowInfos', projectId],
+      () => statisticsAPI.requestInflowInfos(projectId),
+      queryOptions
+    );
+  };
+
   return {
     useRecentVisitCountsQuery,
     useDailyVisitGraphInfosQuery,
     useVisitGraphInfosQuery,
+    useSimpleProjectInfo,
+    useProductStatistics,
+    useRequestInflowInfos,
   };
 };
 
