@@ -51,11 +51,11 @@ const Review = ({ reviewDetail }: ReviewProps) => {
           {/* <p>마린이 직접만든 리조또, 520g 1팩</p> */}
           <S.ProductImages>
             {reviewImageUrlList ? (
-              reviewImageUrlList?.map((imageURL) => (
+              reviewImageUrlList?.map((imageURL, idx) => (
                 <Image
                   src={imageURL ? formattedImageUrl(imageURL) : ''}
                   alt=""
-                  key={imageURL}
+                  key={imageURL + idx}
                   height={80}
                   width={100}
                 />

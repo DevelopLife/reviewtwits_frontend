@@ -14,6 +14,7 @@ import UserIcon from 'public/icons/user.svg';
 
 import theme from 'styles/theme';
 import * as S from './SocialSidebar.styles';
+import { PAGE_LIST } from 'constants/routers';
 
 const SERVICE_TITLE = 'ReviewTwits';
 
@@ -21,11 +22,15 @@ const SOCIAL_URL = '/social';
 const USER_FEED_URL = `${SOCIAL_URL}/user`;
 
 const MENUS = [
-  { href: `${SOCIAL_URL}/home`, text: 'Home', Icon: HomeIcon },
-  { href: `${SOCIAL_URL}/scrap`, text: 'Scrap', Icon: ScrapIcon },
-  { href: `${SOCIAL_URL}/review/write`, text: 'Create', Icon: FolderIcon },
-  { href: `${SOCIAL_URL}/follower`, text: 'Follower', Icon: FullHeartIcon },
-  { href: USER_FEED_URL, text: 'Profile', Icon: UserIcon },
+  { href: `${PAGE_LIST.SOCIAL_HOME}`, text: 'Home', Icon: HomeIcon },
+  { href: `${PAGE_LIST.SOCIAL_SCRAP}`, text: 'Scrap', Icon: ScrapIcon },
+  { href: `${PAGE_LIST.SOCIAL_CREATE}`, text: 'Create', Icon: FolderIcon },
+  {
+    href: `${PAGE_LIST.SOCIAL_FOLLOWER}`,
+    text: 'Follower',
+    Icon: FullHeartIcon,
+  },
+  { href: PAGE_LIST.SOCIAL_PROFILE, text: 'Profile', Icon: UserIcon },
 ];
 
 const SnsSidebar = () => {
@@ -34,7 +39,7 @@ const SnsSidebar = () => {
 
   return (
     <S.SidebarLayout>
-      <SidebarTitle href="/social/home">{SERVICE_TITLE}</SidebarTitle>
+      <SidebarTitle href={PAGE_LIST.SOCIAL_HOME}>{SERVICE_TITLE}</SidebarTitle>
       <SearchBar />
       <SocialMenus>
         {MENUS.map(({ href, text, Icon }) => {

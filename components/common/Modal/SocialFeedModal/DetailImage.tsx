@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { formattedImageUrl } from 'utils/format';
 
 import Backward from 'public/icons/backward.svg';
@@ -12,6 +12,8 @@ interface DetailImageProps {
 
 const DetailImage = ({ reviewImageUrlList }: DetailImageProps) => {
   const [selectedImageIdx, setSelectedImageIdx] = useState<number>(0);
+  const scrollRef = useRef<number>(0);
+  const currentRef = useRef<HTMLImageElement>(null);
 
   const onImageClick = (idx: number) => {
     setSelectedImageIdx((prev) => idx);
@@ -23,6 +25,7 @@ const DetailImage = ({ reviewImageUrlList }: DetailImageProps) => {
       return;
     }
     setSelectedImageIdx((prev) => prev + 1);
+    currentRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const onSelectBeforeImage = () => {
@@ -32,8 +35,36 @@ const DetailImage = ({ reviewImageUrlList }: DetailImageProps) => {
     }
     setSelectedImageIdx((prev) => prev - 1);
   };
+
+  const onWheelOnImage = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (e.deltaY > 0) {
+      scrollRef.current = scrollRef.current + 1;
+    } else if (e.deltaY < 0) {
+      scrollRef.current = scrollRef.current - 1;
+    }
+    scrollImage();
+  };
+
+  const scrollImage = () => {
+    if (scrollRef.current >= 3) {
+      scrollRef.current = 0;
+      onSelectNextImage();
+    } else if (scrollRef.current <= -3) {
+      scrollRef.current = 0;
+      onSelectBeforeImage();
+    }
+  };
+
+  const scrollIntoView = () => {
+    currentRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollIntoView();
+  }, [selectedImageIdx]);
+
   return (
-    <S.Container>
+    <S.Container onWheel={(e) => onWheelOnImage(e)}>
       <S.Backward onClick={onSelectBeforeImage}>
         <Backward />
       </S.Backward>
@@ -57,6 +88,7 @@ const DetailImage = ({ reviewImageUrlList }: DetailImageProps) => {
               height={160}
               onClick={() => onImageClick(idx)}
               isActiveImage={selectedImageIdx === idx}
+              ref={selectedImageIdx === idx ? currentRef : null}
             />
           ))}
         </S.ImagePaginators>
@@ -118,6 +150,12 @@ const S = {
 
     overflow-x: scroll;
     overflow-y: hidden;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   `,
   ImagePaginator: styled(Image)<{ isActiveImage: boolean }>`
     width: 160px;

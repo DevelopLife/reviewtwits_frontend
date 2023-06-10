@@ -1,4 +1,5 @@
 import { AuthrizationRouteProps } from 'components/common/AuthorizationRoute';
+import { PAGE_LIST } from 'constants/routers';
 import { useEffect } from 'react';
 import { checkPreviousHostnameEqualMyHostName } from 'utils/checkFrom';
 
@@ -27,5 +28,5 @@ export function redirectNotAuthoriztion(redirectURL?: string) {
     return window.history.back();
   }
 
-  window.location.href = redirectURL ? redirectURL : '/';
+  window.location.href = redirectURL ? redirectURL : PAGE_LIST.HOME;
 }

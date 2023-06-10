@@ -219,7 +219,7 @@ const S = {
     color: white;
     border-radius: 15px;
 
-    :first-child {
+    :first-of-type {
       width: 70%;
     }
 
