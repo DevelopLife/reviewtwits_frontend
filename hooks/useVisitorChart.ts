@@ -10,20 +10,20 @@ const useVisitorChart = () => {
     changeReferenceDateIntoNextReferenceDate,
   } = useDates();
 
-  const { visitGraphInfosQuery } = useStatistics({
+  const { useVisitGraphInfosQuery } = useStatistics({
     projectId: '25020',
     // TODO: referenceDate를 이용하여 api 요청하도록 변경
     // referenceDate
   });
 
-  const visitInfos = visitGraphInfosQuery.data?.data?.visitInfo.map(
+  const visitInfos = useVisitGraphInfosQuery().data?.data?.visitInfo.map(
     ({ timeStamp }) => new Date(timeStamp)
   );
 
   return {
     referenceDate,
     focusedDate,
-    visitInfos: visitGraphInfosQuery.data?.data?.visitInfo,
+    visitInfos: useVisitGraphInfosQuery().data?.data?.visitInfo,
     onClickBar: changeFocusedDate,
     onClickPrevButton: () =>
       visitInfos?.length &&

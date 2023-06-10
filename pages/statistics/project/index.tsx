@@ -14,22 +14,22 @@ const ProjectStatisticsPage = () => {
   const { projectName } = router.query as { projectName: string };
 
   const {
-    recentVisitCountsQuery,
-    dailyVisitGraphInfosQuery,
-    visitGraphInfosQuery,
+    useRecentVisitCountsQuery,
+    useDailyVisitGraphInfosQuery,
+    useVisitGraphInfosQuery,
   } = useStatistics({
     projectId: projectName || '25020',
     // range,
     // interval,
   });
 
-  const { data: dailyVisitGraphInfos } = dailyVisitGraphInfosQuery;
-  const { data: visitGraphInfos } = visitGraphInfosQuery;
+  const { data: dailyVisitGraphInfos } = useDailyVisitGraphInfosQuery();
+  const { data: visitGraphInfos } = useVisitGraphInfosQuery();
 
   return (
     <StatisticsPageLayout>
       <Margin marginTop={60}>
-        <VisitorStatistics getRecentVisitCounts={recentVisitCountsQuery} />
+        <VisitorStatistics getRecentVisitCounts={useRecentVisitCountsQuery()} />
       </Margin>
       <Margin marginTop={40}>
         <ViewsStatistics />
