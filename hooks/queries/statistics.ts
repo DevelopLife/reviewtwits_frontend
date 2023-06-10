@@ -22,8 +22,8 @@ interface useStatisticsProps {
 
 const useStatistics = ({
   projectId,
-  range = '3mo',
-  interval = '3d',
+  range = '1mo',
+  interval = '1d',
 }: useStatisticsProps) => {
   const useRecentVisitCountsQuery = () =>
     useQuery({
@@ -32,6 +32,8 @@ const useStatistics = ({
         statisticsAPI.recentVisitCounts({
           projectId,
         }),
+      enabled: !!projectId,
+      retry: 0,
     });
 
   const useDailyVisitGraphInfosQuery = () =>
@@ -42,6 +44,8 @@ const useStatistics = ({
           projectId,
           range,
         }),
+      enabled: !!projectId,
+      retry: 0,
     });
 
   const useVisitGraphInfosQuery = () =>
@@ -53,6 +57,8 @@ const useStatistics = ({
           range,
           interval,
         }),
+      enabled: !!projectId,
+      retry: 0,
     });
 
   return {
