@@ -16,7 +16,7 @@ const LeadTimeRate = ({ chartDatas, dataKey }: ViewsStatisticsProps) => {
           <SimpleLineChart
             data={chartDatas || []}
             dataKeys={[dataKey]}
-            xKey={'timeStamp'}
+            xKeys={['timeStamp']}
             strokeColors={[]}
           />
         </S.GraphBox>
