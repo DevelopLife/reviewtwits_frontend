@@ -1,12 +1,12 @@
-import {
-  ComprehensiveData,
-  OrderData,
-  Graph,
-} from 'components/Dashboard/@index';
+import { useRouter } from 'next/router';
+
 import DashboardPageLayout from 'components/Dashboard/common/DashboardPageLayout';
 import Margin from 'components/Dashboard/common/Margin';
-// import VisitorStatistics from 'components/Statistics/VisitorStatistics';
-import { useRouter } from 'next/router';
+import {
+  ComprehensiveDataSection,
+  ProductStatisticsSection,
+  VisitSection,
+} from 'components/Dashboard/@index';
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -15,11 +15,11 @@ const DashboardPage = () => {
   return (
     <DashboardPageLayout>
       <Margin marginTop={60} marginBottom={51}>
-        <ComprehensiveData projectId={projectId} />
+        <ComprehensiveDataSection projectId={projectId} />
       </Margin>
-      <Graph projectId={projectId} />
+      <VisitSection projectId={projectId} />
       <Margin marginTop={70.58} marginBottom={60}>
-        <OrderData projectId={projectId} />
+        <ProductStatisticsSection projectId={projectId} />
       </Margin>
     </DashboardPageLayout>
   );

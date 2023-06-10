@@ -1,11 +1,10 @@
 import type { FC, SVGProps } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import styled from '@emotion/styled';
 
 import OnePeopleIcon from 'public/icons/one-people.svg';
 import MultiPeopleIcon from 'public/icons/multi-people.svg';
-import { statisticsAPI } from 'api/statistics';
-import Shadow from './common/Shadow';
-import * as S from './ComprehensiveData.styles';
+import useStatistics from 'hooks/queries/statistics';
+import DataCard from 'components/Dashboard/Card/DataCard';
 
 type ProjectCountingInformations = {
   monthlyVisitCount: number;
@@ -33,28 +32,15 @@ const COUNTING_INFORMATIONS = {
   registeredProductCount: { Icon: OnePeopleIcon, title: '등록된 상품수' },
 };
 
-interface ComprehensiveDataProps {
+interface ComprehensiveDataSectionProps {
   projectId: string;
 }
 
-const ComprehensiveData = ({ projectId }: ComprehensiveDataProps) => {
-  // TODO: useHooks
-
-  const { data } = useQuery(
-    ['simpleProjectInfo', projectId],
-    () => statisticsAPI.simpleProjectInfo(projectId),
-    { enabled: !!projectId }
-  );
-  const { data: data1 } = useQuery(
-    ['productStatistics', projectId],
-    () => statisticsAPI.productStatistics(projectId),
-    { enabled: !!projectId }
-  );
-  const { data: data2 } = useQuery(
-    ['requestInflowInfos', projectId],
-    () => statisticsAPI.requestInflowInfos(projectId),
-    { enabled: !!projectId }
-  );
+const ComprehensiveDataSection = ({
+  projectId,
+}: ComprehensiveDataSectionProps) => {
+  const { useSimpleProjectInfo } = useStatistics({ projectId });
+  const { data: simpleProjectData } = useSimpleProjectInfo();
 
   const countingInformations = Object.entries(
     COUNTING_INFORMATIONS
@@ -62,21 +48,29 @@ const ComprehensiveData = ({ projectId }: ComprehensiveDataProps) => {
 
   return (
     <S.Container>
-      {data && countingInformations.length
+      {simpleProjectData && countingInformations.length
         ? countingInformations.map(([key, { Icon, title }]) => (
-            <Shadow boxSize="SMALL" key={title}>
-              <S.Card>
-                <Icon />
-                <div>
-                  <S.CardTitle>{title}</S.CardTitle>
-                  <S.CardDesc>{data[key] || 0}</S.CardDesc>
-                </div>
-              </S.Card>
-            </Shadow>
+            <DataCard
+              key={key}
+              Icon={Icon}
+              title={title}
+              data={simpleProjectData[key]}
+            />
           ))
         : null}
     </S.Container>
   );
 };
 
-export default ComprehensiveData;
+export default ComprehensiveDataSection;
+
+const S = {
+  Container: styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 24px;
+
+    width: 1440px;
+  `,
+};
