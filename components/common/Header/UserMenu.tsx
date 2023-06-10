@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { doSignOut } from 'utils/auth';
 
 import styled from '@emotion/styled';
+import { PAGE_LIST } from 'constants/routers';
 
 interface UserMenuProps {
   closeMenu: () => void;
@@ -17,12 +18,14 @@ const UserMenu = ({ closeMenu }: UserMenuProps) => {
 
   return (
     <S.Box>
-      <S.Menu onClick={() => onClickMenu('/')}>홈</S.Menu>
-      <S.Menu onClick={() => onClickMenu('/setting/profile')}>프로필</S.Menu>
-      <S.Menu onClick={() => onClickMenu('/project/management')}>
+      <S.Menu onClick={() => onClickMenu(PAGE_LIST.HOME)}>홈</S.Menu>
+      <S.Menu onClick={() => onClickMenu(PAGE_LIST.PROFILE_SETTING)}>
+        프로필
+      </S.Menu>
+      <S.Menu onClick={() => onClickMenu(PAGE_LIST.PROJECT_MANAGEMENT)}>
         프로젝트
       </S.Menu>
-      <S.Menu onClick={() => onClickMenu('/dashboard')}>서비스</S.Menu>
+      <S.Menu onClick={() => onClickMenu(PAGE_LIST.DASTHBOARD)}>서비스</S.Menu>
       <S.Menu onClick={doSignOut}>로그아웃</S.Menu>
     </S.Box>
   );
