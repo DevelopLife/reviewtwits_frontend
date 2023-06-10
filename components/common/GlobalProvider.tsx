@@ -3,7 +3,7 @@ import {
   QueryClient,
   Hydrate,
 } from '@tanstack/react-query';
-import type { DehydratedState } from '@tanstack/react-query';
+
 import { Global, ThemeProvider } from '@emotion/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
