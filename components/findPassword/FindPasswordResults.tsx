@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Button from 'components/common/Button';
 import Card from 'components/common/Card';
 import { ERROR_MESSAGE } from 'constants/account';
+import { PAGE_LIST } from 'constants/routers';
 import Link from 'next/link';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
@@ -42,7 +43,7 @@ const FindPasswordResults = ({
       <S.FormMargin space={400} />
 
       <S.ButtonsContainer>
-        <Link href="/sign-in">
+        <Link href={PAGE_LIST.SIGN_IN}>
           <Button type="submit" large color="primary">
             로그인 페이지로 이동
           </Button>

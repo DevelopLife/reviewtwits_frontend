@@ -4,6 +4,7 @@ import { optionalTokenAPI, requiredTokenApi } from 'api/instance';
 import { getCookie, removeCookie, setCookie } from './cookies';
 import { usersAPI } from 'api/users';
 import { LOCAL_STORAGE_KEYS } from 'constants/localStorage';
+import { PAGE_LIST } from 'constants/routers';
 
 export function validateToken() {
   const now = new Date();
@@ -71,7 +72,7 @@ export function doSignOut() {
   usersAPI.signOut().then(() => {
     removeCookie('expireAt');
     setAuthorizationToken();
-    window.location.href = '/';
+    window.location.href = PAGE_LIST.HOME;
   });
 }
 

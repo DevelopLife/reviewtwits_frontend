@@ -33,10 +33,16 @@ const shoppingAPI = {
     });
   },
 
-  getShoppingMallReviewList: async (productURL: string) => {
+  getShoppingMallReviewList: async (
+    productURL: string,
+    sort: 'BEST' | 'NEWEST'
+  ) => {
     return await optionalTokenAPI.get(`${SHOPPING_URL}/list`, {
       headers: {
         productURL: productURL,
+      },
+      params: {
+        sort: sort,
       },
     });
   },

@@ -1,11 +1,10 @@
 import type { AxiosError } from 'axios';
+import { PAGE_LIST } from 'constants/routers';
 
 import type { ResponseError } from 'typings/error';
 
-const SIGN_IN = '/sign-in';
-
 export function redirectErrorHandler(err: AxiosError<ResponseError, any>) {
-  const REDIRECT_URL = `${window?.location.origin}/${SIGN_IN}`;
+  const REDIRECT_URL = `${window?.location.origin}/${PAGE_LIST.SIGN_IN}`;
   const status = err.response?.status;
 
   if (!status) {
@@ -22,12 +21,6 @@ export function redirectErrorHandler(err: AxiosError<ResponseError, any>) {
     window.location.href = REDIRECT_URL;
     return;
   }
-
-  // TODO: delete
-  // if (status === 404) {
-  //   window.location.href = '/404';
-  //   return;
-  // }
 
   throw err;
 }

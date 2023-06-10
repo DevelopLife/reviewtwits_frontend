@@ -3,21 +3,22 @@ import { ReactElement } from 'react';
 
 import { usePrivateRouting } from 'hooks/usePrivateRouting';
 import type { PageProps } from 'pages/_app';
+import { PAGE_LIST } from 'constants/routers';
 
 // TODO: public url을 추가해주세요
 const PUBLIC_URLS = [
-  '/',
-  '/sign-in',
-  '/sign-up',
-  '/find-id',
-  '/find-password',
+  PAGE_LIST.HOME,
+  PAGE_LIST.SIGN_IN,
+  PAGE_LIST.SIGN_UP,
+  PAGE_LIST.FIND_ID,
+  PAGE_LIST.FIND_PASSWORD,
   '/social',
   '/oauth/callback/kakao',
   '/oauth/callback/naver',
   '/socual/user',
   '/social/user/[nickname]',
   '/review',
-  '/404',
+  PAGE_LIST.NOT_FOUND_404,
 ];
 
 const PrivateRoute = ({

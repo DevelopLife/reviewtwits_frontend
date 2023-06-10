@@ -31,7 +31,9 @@ export const formattedCreateDate = (createdDate: string): string => {
   return createDateFormat.join('/');
 };
 
-export const formattedCreateDateArr = (createdDate: number[]): string => {
+export const formattedCreateDateArr = (
+  createdDate: [number, number, number]
+): string => {
   const [year, month, day] = createdDate;
 
   const createDateFormat = [

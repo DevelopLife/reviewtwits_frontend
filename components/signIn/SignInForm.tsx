@@ -20,6 +20,7 @@ import { isLoginState } from 'states/isLogin';
 import Form from 'components/common/Form';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
+import { PAGE_LIST } from 'constants/routers';
 
 const SignInForm = () => {
   const { values, errors, setErrors, handleChange, handleSubmit } = useForm({
@@ -102,7 +103,7 @@ const SignInFormView = ({ handleChange, ...rest }: SignInFormViewProps) => (
         <Button type="submit" large color="primary">
           로그인
         </Button>
-        <Link href="/sign-up">
+        <Link href={PAGE_LIST.SIGN_UP}>
           <Button large color="black">
             이메일로 회원가입
           </Button>

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { PAGE_LIST } from 'constants/routers';
 import Link from 'next/link';
 
 import { Colors } from 'styles/theme';
@@ -6,7 +7,7 @@ import { WrapProps } from 'typings/wrapperProps';
 
 const EditProfileButton = () => {
   return (
-    <EditProfileButtonView href="/setting/profile" color="secondary">
+    <EditProfileButtonView href={PAGE_LIST.PROFILE_SETTING} color="secondary">
       Edit Profile
     </EditProfileButtonView>
   );
