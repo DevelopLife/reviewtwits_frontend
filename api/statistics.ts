@@ -72,7 +72,7 @@ export const statisticsAPI = {
 
     return data;
   },
-  rquestInflowInfos: async (projectId: string) => {
+  requestInflowInfos: async (projectId: string) => {
     const { data } = await requiredTokenApi.get(
       `${STATISTICS_URL}${DASHBOARD_URL}/request-inflow-infos`,
       {
