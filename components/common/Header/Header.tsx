@@ -9,6 +9,16 @@ import { formattedProfileImageUrl } from 'utils/format';
 import useUserProfile from 'hooks/queries/users';
 import { PAGE_LIST } from 'constants/routers';
 
+const NAV_MENUS = [
+  { href: `${PAGE_LIST.PROJECT_MANAGEMENT}`, text: '프로젝트 생성' },
+  { href: `${PAGE_LIST.DASTHBOARD}`, text: '서비스' },
+  {
+    href: `${PAGE_LIST.SOCIAL_FOLLOWER}`,
+    text: '팔로워',
+  },
+  { href: PAGE_LIST.SOCIAL_PROFILE, text: '프로필' },
+];
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const { isLogin, profileImageUrl } = useUserProfile();
@@ -19,12 +29,16 @@ const Header = () => {
   return (
     <S.Container>
       <S.Header>
-        <S.Title>{APP_NAME}</S.Title>
+        <S.Title href={PAGE_LIST.HOME}>{APP_NAME}</S.Title>
         <S.Navbar>
-          <S.NavLink>서비스 소개</S.NavLink>
-          <S.NavLink>메뉴얼</S.NavLink>
+          {NAV_MENUS.map(({ href, text }) => (
+            <S.NavLink href={href} key={text}>
+              {text}
+            </S.NavLink>
+          ))}
+          {/* <S.NavLink>메뉴얼</S.NavLink>
           <S.NavLink>가격</S.NavLink>
-          <S.NavLink>Docs</S.NavLink>
+          <S.NavLink>Docs</S.NavLink> */}
         </S.Navbar>
         <S.RightBox>
           {isLogin ? (

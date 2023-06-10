@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const Container = styled.div`
   width: ${({ theme }) => theme.devices.desktop}px;
@@ -20,7 +21,7 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const Title = styled.h3`
+const Title = styled(Link)`
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
@@ -33,16 +34,18 @@ const Title = styled.h3`
 const Navbar = styled.div`
   display: flex;
   list-style: none;
-  width: 307px;
+  width: 25%;
   justify-content: space-between;
 `;
 
-const NavLink = styled.li`
+const NavLink = styled(Link)`
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  padding-left: 7px;
+  padding-right: 7px;
 
   color: #000000;
 `;
