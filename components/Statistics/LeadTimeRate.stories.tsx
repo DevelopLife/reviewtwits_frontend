@@ -5,4 +5,4 @@ export default {
   component: LeadTimeRate,
 };
 
-export const Basic = () => <LeadTimeRate />;
+export const Basic = () => <LeadTimeRate dataKey={''} />;

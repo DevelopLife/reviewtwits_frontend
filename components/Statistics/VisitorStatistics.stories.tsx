@@ -5,4 +5,5 @@ export default {
   component: VisitorStatistics,
 };
 
-export const Basic = () => <VisitorStatistics />;
+export const Basic = () => void 0;
+// (<VisitorStatistics getRecentVisitCounts={undefined} />);
