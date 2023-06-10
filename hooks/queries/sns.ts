@@ -325,7 +325,7 @@ export const useGetInfiniteFeed = () => {
 export const useGetInfiniteScrapList = () => {
   const infiniteQuery = useInfiniteScrollQuery<ReviewResponseType, 'reviewId'>({
     queryKey: ['useGetInfiniteScrapList'],
-    getNextPage: (nextRequest) => snsAPI.getInfiniteFeed(nextRequest),
+    getNextPage: (nextRequest) => snsAPI.getInfiniteScrapList(nextRequest),
     nextRequest: 'reviewId',
   });
 
