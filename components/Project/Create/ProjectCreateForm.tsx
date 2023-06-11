@@ -6,7 +6,7 @@ import { CreateProjectRequestBody } from 'api/projects';
 import { useCreateProject } from 'hooks/useCreateProject';
 import useUserProfile from 'hooks/queries/users';
 import { ProjectCreateSelect } from 'components/Project/Create/ProjectCreateSelect';
-import { ColorPickerTrigger } from 'components/common/ColorPicker/ColorPickerTrigger';
+import { ColorPickerTrigger } from 'components/common/Color/ColorPickerTrigger';
 import { CreateProjectForm } from 'states/createProjectForm';
 import { formattedProfileImageUrl } from 'utils/format';
 
@@ -123,7 +123,12 @@ export const ProjectCreateFormView = ({
           />
         </ProjectCreateItem>
         <ProjectCreateItem label="프로젝트 색깔">
-          <ColorPickerTrigger onChangeColor={onChangeColor} />
+          <ColorPickerTrigger
+            onChangeColor={onChangeColor}
+            colorPickerOptions={{
+              showPalatte: true,
+            }}
+          />
         </ProjectCreateItem>
       </S.CreateProjectForm>
     </S.CreateProjectFormContainer>

@@ -1,26 +1,41 @@
 import styled from '@emotion/styled';
-import { ColorPicker } from 'components/common/ColorPicker/ColorPicker';
+import { useEffect, useState } from 'react';
+
+import ColorPalatte from 'components/common/Color/ColorPalatte';
 import { useBoolean } from 'hooks/useBoolean';
-import { useState } from 'react';
 import { DEFAULT_PROJECT_COLOR } from 'states/createProjectForm';
+import { PRESET_COLORS } from 'constants/presetColors';
+
+type ColorPickerOptions = {
+  showPalatte: boolean;
+};
 
 interface ColorPickerTriggerProps {
   onChangeColor: (color: string) => void;
+  colorPickerOptions?: ColorPickerOptions;
 }
 
 export const ColorPickerTrigger = ({
   onChangeColor,
+  colorPickerOptions,
 }: ColorPickerTriggerProps) => {
   const { isOpen, setToggle } = useBoolean(false);
   const [color, setColor] = useState(DEFAULT_PROJECT_COLOR);
 
-  const onMouseUp = () => onChangeColor(color);
+  useEffect(() => {
+    onChangeColor(color);
+  }, [color, onChangeColor]);
 
   return (
     <S.Picker>
       <S.Trigger color={color} onClick={setToggle} />
       {isOpen && (
-        <ColorPicker color={color} onClick={setColor} onMouseUp={onMouseUp} />
+        <ColorPalatte
+          color={color}
+          onClick={setColor}
+          presetColors={PRESET_COLORS}
+          {...colorPickerOptions}
+        />
       )}
     </S.Picker>
   );
