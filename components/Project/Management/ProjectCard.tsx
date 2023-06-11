@@ -9,6 +9,7 @@ import {
 import { ProjectDto } from 'typings/project';
 import { GetProjectsResponseData } from 'api/projects';
 import Button from 'components/common/Button';
+import cssUtils from 'utils/css';
 
 interface ProjectCardProps {
   project: GetProjectsResponseData;
@@ -76,11 +77,7 @@ export const ProjectCardView = ({
               <S.ContentItem>리뷰 : {review}</S.ContentItem>
             </S.SubTitle>
             <S.Description>{description}</S.Description>
-
-            {
-              // TODO: 임시
-            }
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <S.DetailButtons>
               <Button>
                 <Link
                   href={{
@@ -104,11 +101,17 @@ export const ProjectCardView = ({
                 </Link>
               </Button>
               <Button>
-                <Link href={'/project/install'} style={{ color: 'black' }}>
-                  설정
+                <Link
+                  href={{
+                    pathname: '/statistics/project',
+                    query: { projectName: name },
+                  }}
+                  style={{ color: 'black' }}
+                >
+                  통계
                 </Link>
               </Button>
-            </div>
+            </S.DetailButtons>
           </S.ContentWrap>
         )}
       </S.BehindContent>
@@ -155,13 +158,12 @@ const S = {
   `,
   ContentItem: styled.div``,
   Description: styled.p`
-    height: 63px;
-
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-word;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    ${cssUtils.cssTextEllipsis(3)}
+  `,
+  DetailButtons: styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px 0;
   `,
 };

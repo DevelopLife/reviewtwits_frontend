@@ -45,6 +45,12 @@ const S = {
     margin-bottom: 16px;
 
     overflow-y: scroll;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   `,
   Title: styled.h4`
     margin-bottom: 8px;

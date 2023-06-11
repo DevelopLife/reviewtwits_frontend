@@ -13,16 +13,22 @@ const ReviewModalPage = () => {
   const storage = globalThis?.sessionStorage;
   const lastpath = storage.prevPath.split('/').at(-1);
 
+  window.addEventListener('popstate', () => {
+    modal.hide();
+  });
+
   useEffect(() => {
     modal.show({ key: MODAL_LIST.SOCIAL_FEED_DETAIL });
   }, [modal, route.pathname, route.query]);
 
+  let backgroundPage = <div>값이 없습니다</div>;
+
   if (storage.prevPath.split('/').includes('home') && lastpath === 'home') {
-    return <SNSExplorePage />;
+    backgroundPage = <SNSExplorePage />;
   } else if (storage.prevPath.split('/').includes('user')) {
-    return <SocialUserFeedPage />;
+    backgroundPage = <SocialUserFeedPage />;
   }
-  return <div>값이 없습니다</div>;
+  return backgroundPage;
 };
 
 export default ReviewModalPage;

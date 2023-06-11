@@ -24,6 +24,7 @@ import Form from 'components/common/Form';
 import Button from 'components/common/Button';
 import Input from 'components/common/Input';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
+import { PAGE_LIST } from 'constants/routers';
 
 const UserProfileForm = () => {
   const router = useRouter();
@@ -41,8 +42,8 @@ const UserProfileForm = () => {
         window.sessionStorage.clear();
         alert(SUCCESS_MESSAGE.SETTING.PROFILE);
 
-        if (pathFrom === 'sign-up') router.push('/');
-        router.push(`/social/user/${newname.data.nickname}`);
+        if (pathFrom === 'sign-up') router.push(PAGE_LIST.HOME);
+        router.push(`${PAGE_LIST.SOCIAL_PROFILE}/${newname.data.nickname}`);
       },
       onError: ({ response }) => {
         alert(response?.data[0]?.message);
@@ -88,7 +89,7 @@ const UserProfileForm = () => {
 
   const setProfileLater = () => {
     window.sessionStorage.clear();
-    pathFrom === 'sign-up' ? router.push('/') : router.back();
+    pathFrom === 'sign-up' ? router.push(PAGE_LIST.HOME) : router.back();
   };
 
   useEffect(() => {

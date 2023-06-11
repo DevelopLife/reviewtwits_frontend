@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import useUserProfile from 'hooks/queries/users';
 import SocialLayout from 'components/social/common/SocialLayout';
 import { SocialTitleSection } from 'components/social/common/SocialTitleSection.styles';
+import { PAGE_LIST } from 'constants/routers';
 
 const UserPage = () => {
   const userProfile = useUserProfile();
@@ -11,7 +12,7 @@ const UserPage = () => {
 
   useEffect(() => {
     if (userProfile?.nickname) {
-      router.replace(`/social/user/${userProfile?.nickname}`);
+      router.replace(`${PAGE_LIST.SOCIAL_PROFILE}/${userProfile?.nickname}`);
     }
   }, [router, userProfile]);
 

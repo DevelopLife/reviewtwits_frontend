@@ -35,6 +35,7 @@ import Card from 'components/common/Card';
 import Form from 'components/common/Form';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
+import { PAGE_LIST } from 'constants/routers';
 
 const SignUpForm = () => {
   const [signUpType, setSignUpType] = useState<SignUpType>('COMMON');
@@ -106,7 +107,7 @@ const SignUpForm = () => {
       doSignIn(signUpResult.accessToken);
       sessionStorage.setItem('pathFrom', 'sign-up');
 
-      return location.replace('/setting/profile');
+      return location.replace(PAGE_LIST.PROFILE_SETTING);
     }
 
     setCodeIssuanceStatus('NOT_ISSUED');

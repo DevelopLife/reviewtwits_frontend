@@ -23,6 +23,7 @@ const mockReviewData: ReviewResponseType = {
   productUrl:
     'https://thumbnail6.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/290346317532916-57e0ca03-9d04-4aed-b5ec-19442d97c7ac.png',
   productName: '코멧 사선컷팅 테이프 크리너 핸들 + 거치대 세트',
+  createdDate: [],
   lastModifiedDate: [],
   reviewId: 0,
   projectId: 0,
