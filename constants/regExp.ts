@@ -5,6 +5,7 @@ export const regExp = {
   url: /(http(s)?:\/\/)/,
   mobile: /Mobile/i,
   registerImage: /^\/\//,
+  english: /[a-zA-Z]/g,
 };
 
 export function replaceUrlProtocool(incompletedString: string) {

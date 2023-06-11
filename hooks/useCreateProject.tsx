@@ -8,6 +8,7 @@ import {
   createProjectFormState,
 } from 'states/createProjectForm';
 import { projectPlanState } from 'states/projectPlan';
+import { regExp } from 'constants/regExp';
 
 export const useCreateProject = (referenceProjectData?: CreateProjectForm) => {
   const [createProjectForm, setCreateProjectForm] = useRecoilState(
@@ -45,6 +46,15 @@ export const useCreateProject = (referenceProjectData?: CreateProjectForm) => {
   const changeCreateProjectFormByInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    if (name === 'projectName') {
+      const filteredValue = filterOnlyEnglish(value);
+
+      return setCreateProjectForm((pre) => ({
+        ...pre,
+        ...{ [name]: filteredValue },
+      }));
+    }
+
     setCreateProjectForm((pre) => ({ ...pre, ...{ [name]: value } }));
   };
 
@@ -57,6 +67,10 @@ export const useCreateProject = (referenceProjectData?: CreateProjectForm) => {
     const upperCasePlan = plan.toUpperCase() as Uppercase<PricePlan>;
 
     setProjectPlan(`${upperCasePlan}_PLAN`);
+  };
+
+  const filterOnlyEnglish = (value: string) => {
+    return value.match(regExp.english)?.join('') || '';
   };
 
   const changeProjectColor = (color: string) => {
