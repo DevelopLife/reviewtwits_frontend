@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 import { ChangeEvent, ReactNode } from 'react';
+import Image from 'next/image';
 
 import { CreateProjectRequestBody } from 'api/projects';
 import { useCreateProject } from 'hooks/useCreateProject';
+import useUserProfile from 'hooks/queries/users';
 import { ProjectCreateSelect } from 'components/Project/Create/ProjectCreateSelect';
-
 import { ColorPickerTrigger } from 'components/common/ColorPicker/ColorPickerTrigger';
 import { CreateProjectForm } from 'states/createProjectForm';
+import { formattedProfileImageUrl } from 'utils/format';
 
 interface ProjectCreateFormProps {
   referenceProjectData?: CreateProjectForm;
@@ -21,23 +23,34 @@ export const ProjectCreateForm = ({
     changeProjectColor,
   } = useCreateProject(referenceProjectData);
 
+  const { nickname, profileImageUrl } = useUserProfile();
+
+  const userProfile = {
+    nickname: nickname || '',
+    profileImageURL: formattedProfileImageUrl(profileImageUrl),
+  };
+
   return (
     <ProjectCreateFormView
       form={createProjectForm}
+      userProfile={userProfile}
       onChangeByInput={changeCreateProjectFormByInput}
       onChangeColor={changeProjectColor}
     />
   );
 };
 
+type UserProfile = { nickname: string; profileImageURL: string };
 interface ProjectCreateFormViewProps {
   form: CreateProjectRequestBody;
+  userProfile: UserProfile;
   onChangeByInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeColor: (color: string) => void;
 }
 
 export const ProjectCreateFormView = ({
   form,
+  userProfile,
   onChangeColor,
   onChangeByInput,
 }: ProjectCreateFormViewProps) => {
@@ -45,7 +58,15 @@ export const ProjectCreateFormView = ({
     <S.CreateProjectFormContainer>
       <S.CreateProjectForm>
         <ProjectCreateItem label="사이트 소유주">
-          <div>이미지</div>
+          <S.SiteOner>
+            <S.SiteOnerImage
+              width={30}
+              height={30}
+              src={userProfile?.profileImageURL}
+              alt="profileImageUrl"
+            />
+            <span>{userProfile?.nickname}</span>
+          </S.SiteOner>
         </ProjectCreateItem>
         <ProjectCreateItem label="프로젝트 이름">
           <S.ItemWrap>
@@ -58,6 +79,7 @@ export const ProjectCreateFormView = ({
             />
             <S.GuideMessage>
               당신의 서비스 URL은 {form.projectName}.reviewtwits.com 입니다.
+              (영어만 입력가능)
             </S.GuideMessage>
           </S.ItemWrap>
         </ProjectCreateItem>
@@ -160,5 +182,12 @@ const S = {
     font-size: 14px;
     line-height: 20px;
   `,
+  SiteOner: styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+  `,
+  SiteOnerImage: styled(Image)``,
   ColorPickerTrigger: styled.div``,
 };
