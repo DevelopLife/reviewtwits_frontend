@@ -13,7 +13,8 @@ const ModalContainer = () => {
 
   const { key, isVisible } = modalState;
 
-  const ModalContent = key ? modals[key] : React.Fragment;
+  const ModalContent = key ? modals['SocialReviewCreateModal'] : React.Fragment;
+  // const ModalContent = key ? modals[key] : React.Fragment;
   const onOutsideClick = ({ target, currentTarget }: React.MouseEvent) => {
     if (target !== currentTarget) {
       return;
