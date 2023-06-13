@@ -1,17 +1,43 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import Shadow from './common/Shadow';
 import * as S from './ViewsStatistics.styles';
 
 import SimpleBarChart from 'components/common/Charts/SimpleBarChart';
 import useVisitorChart from 'hooks/useVisitorChart';
 
+const INTERVAL_BUTTONS = [
+  {
+    name: 'daily',
+    text: '일간',
+  },
+  {
+    name: 'weekly',
+    text: '주간',
+  },
+  {
+    name: 'monthly',
+    text: '월간',
+  },
+];
+
+const;
+
 const ViewsStatistics = () => {
   // TODO: 하루 간격 한달 범위
-  const [mo, setMo] = useState({
-    range: '1mo',
-    interval: '1d',
-  });
+  const [interval, setInterval] = useState('daily');
 
+  const onClickTriggerButton = (e: MouseEvent<HTMLButtonElement>) => {
+    const { name } = e.currentTarget;
+    setInterval(name || 'daily');
+  };
+
+  const intervalButtonDatas = INTERVAL_BUTTONS.map(({ name, text }) => ({
+    name,
+    text,
+    isFocus: interval === name,
+  }));
+
+  // TODO: interval key 값을 가진 value를 api 요청 시 params로 할당
   const {
     referenceDate,
     focusedDate,
@@ -29,14 +55,19 @@ const ViewsStatistics = () => {
           <S.StatisticsSubTitle>
             {focusedDate.toLocaleDateString()}
           </S.StatisticsSubTitle>
-          <div onClick={() => void 0}>
-            {
-              //TODO: 버튼 클릭 시 간격 state 조정하기
-            }
-            <button name="day">일간</button>
-            <button name="week">주간</button>
-            <button name="month">월간</button>
-          </div>
+          <S.IntervalButtonWrap>
+            {intervalButtonDatas.map(({ name, text, isFocus }) => (
+              <S.IntervalButton
+                type="button"
+                key={name}
+                name={name}
+                isFocus={isFocus}
+                onClick={onClickTriggerButton}
+              >
+                {text}
+              </S.IntervalButton>
+            ))}
+          </S.IntervalButtonWrap>
         </S.StatisticsHeader>
         <S.GraphBox>
           {visitInfos?.length ? (

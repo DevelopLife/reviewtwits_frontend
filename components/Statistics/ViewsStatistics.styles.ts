@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
@@ -46,10 +47,35 @@ const GraphBox = styled.div`
   flex: 1;
 `;
 
+const IntervalButtonWrap = styled.div``;
+
+const IntervalButton = styled.button<{ isFocus: boolean }>`
+  width: 70px;
+  height: 40px;
+
+  ${({ theme, isFocus }) => {
+    return css`
+      background-color: ${isFocus ? theme.colors.gray_6 : theme.colors.white};
+      color: ${isFocus ? theme.colors.white : theme.colors.gray_6};
+      border: 1px solid ${theme.colors.gray_6};
+
+      &:first-child {
+        border-radius: 10px 0 0 10px;
+      }
+
+      &:last-child {
+        border-radius: 0 10px 10px 0;
+      }
+    `;
+  }}
+`;
+
 export {
   Container,
   StatisticsTitle,
   StatisticsSubTitle,
   StatisticsHeader,
   GraphBox,
+  IntervalButtonWrap,
+  IntervalButton,
 };
