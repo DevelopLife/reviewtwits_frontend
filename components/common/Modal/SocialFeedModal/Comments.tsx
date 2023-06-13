@@ -24,7 +24,7 @@ const Comments = ({ commentsData }: CommentsProps) => {
   return (
     <S.Container>
       <S.Title>댓글</S.Title>
-      <div ref={scrollRef}>
+      <S.CommentContainer ref={scrollRef}>
         {commentsData.length == 0 ? (
           <h1>댓글이 없어요😭💦</h1>
         ) : (
@@ -32,7 +32,7 @@ const Comments = ({ commentsData }: CommentsProps) => {
             <Comment key={commentData.commentId} commentData={commentData} />
           ))
         )}
-      </div>
+      </S.CommentContainer>
     </S.Container>
   );
 };
@@ -54,6 +54,11 @@ const S = {
   `,
   Title: styled.h4`
     margin-bottom: 8px;
+  `,
+  CommentContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   `,
 };
 
