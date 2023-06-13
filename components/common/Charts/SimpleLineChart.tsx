@@ -4,10 +4,16 @@ import {
   XAxis,
   Tooltip,
   CartesianGrid,
-  // YAxis,
-  // Legend,
   ResponsiveContainer,
 } from 'recharts';
+import dateChartTickFormatter from 'utils/charts';
+
+const margin = {
+  top: 30,
+  right: 30,
+  left: 20,
+  bottom: 5,
+};
 
 interface SimpleLineChartProps {
   data: any[];
@@ -19,56 +25,28 @@ interface SimpleLineChartProps {
 const SimpleLineChart = ({
   data,
   dataKeys,
-  // xKeys,
   strokeColors,
 }: SimpleLineChartProps) => {
-  const margin = {
-    top: 30,
-    right: 30,
-    left: 20,
-    bottom: 5,
-  };
-
-  // const renderCustomTick = (value: string, index: number) => {
-  //   const { isDifferenceMonth, timeStamp } = data[index] as {
-  //     isDifferenceMonth: boolean;
-  //     timeStamp: string;
-  //   };
-
-  //   return isDifferenceMonth ? `${new Date(timeStamp).getMonth() + 1}월` : '';
-  // };
-
-  const tickFormatter = {
-    date: (value: Date) => new Date(value).getDate().toString(),
-    month: (value: string, index: number) => {
-      const { isDifferenceMonth, timeStamp } = data[index] as {
-        isDifferenceMonth: boolean;
-        timeStamp: string;
-      };
-
-      return isDifferenceMonth ? `${new Date(timeStamp).getMonth() + 1}월` : '';
-    },
-  };
-
   return (
     <ResponsiveContainer width="100%" height="90%">
-      <LineChart width={500} height={300} data={data} margin={margin}>
+      <LineChart data={data} margin={margin}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           interval={0}
           dataKey="timeStamp"
-          tickFormatter={(value) => tickFormatter.date(value)}
+          tickFormatter={(value) => dateChartTickFormatter.date(value)}
         />
         <XAxis
-          xAxisId="quarter"
+          xAxisId="second"
           dataKey="timeStamp"
           axisLine={false}
           tickLine={false}
           interval={0}
-          tickFormatter={(value, index) => tickFormatter.month(value, index)}
+          tickFormatter={(value, index) =>
+            dateChartTickFormatter.month(value, index, data)
+          }
         />
         <Tooltip />
-        {/* <Legend /> */}
         {dataKeys.map((key, index) => (
           <Line
             key={key + index}

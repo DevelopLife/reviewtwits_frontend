@@ -15,16 +15,16 @@ const ProjectStatisticsPage = () => {
 
   const {
     useRecentVisitCountsQuery,
-    useDailyVisitGraphInfosQuery,
-    useVisitGraphInfosQuery,
+    // useDailyVisitGraphInfosQuery,
+    // useVisitGraphInfosQuery,
   } = useStatistics({
     projectId: projectName || '25020',
     // range,
     // interval,
   });
 
-  const { data: dailyVisitGraphInfos } = useDailyVisitGraphInfosQuery();
-  const { data: visitGraphInfos } = useVisitGraphInfosQuery();
+  // const { data: dailyVisitGraphInfos } = useDailyVisitGraphInfosQuery();
+  // const { data: visitGraphInfos } = useVisitGraphInfosQuery();
 
   return (
     <StatisticsPageLayout>

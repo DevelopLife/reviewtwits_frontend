@@ -6,6 +6,10 @@ export type VisitInfo = {
   previousCompare: number;
 };
 
+export type VisitGraphData = {
+  isDifference: boolean;
+} & VisitInfo;
+
 export type DailyVisitGraphInfos = {
   range: string;
   visitInfo: VisitInfo[];

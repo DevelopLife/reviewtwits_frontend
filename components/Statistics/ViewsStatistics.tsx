@@ -4,6 +4,7 @@ import * as S from './ViewsStatistics.styles';
 
 import SimpleBarChart from 'components/common/Charts/SimpleBarChart';
 import useVisitorChart from 'hooks/useVisitorChart';
+import { transformData } from 'utils/charts';
 
 const INTERVAL_BUTTONS = [
   {
@@ -19,8 +20,6 @@ const INTERVAL_BUTTONS = [
     text: '월간',
   },
 ];
-
-const;
 
 const ViewsStatistics = () => {
   // TODO: 하루 간격 한달 범위
@@ -47,6 +46,8 @@ const ViewsStatistics = () => {
     onClickBar,
   } = useVisitorChart();
 
+  const transformedData = visitInfos ? transformData(visitInfos) : [];
+
   return (
     <Shadow boxWidth={1440} boxHeight={710}>
       <S.Container>
@@ -70,9 +71,9 @@ const ViewsStatistics = () => {
           </S.IntervalButtonWrap>
         </S.StatisticsHeader>
         <S.GraphBox>
-          {visitInfos?.length ? (
+          {transformedData?.length ? (
             <SimpleBarChart
-              data={visitInfos}
+              data={transformedData}
               focusedDate={focusedDate}
               onClickLeftButton={onClickPrevButton}
               onClickRightButton={onClickNextButton}

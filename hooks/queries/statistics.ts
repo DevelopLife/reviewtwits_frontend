@@ -79,13 +79,12 @@ const useStatistics = ({
       () => statisticsAPI.productStatistics(projectId),
       queryOptions
     );
-  const useRequestInflowInfos = () => {
+  const useRequestInflowInfos = () =>
     useQuery(
       ['requestInflowInfos', projectId],
       () => statisticsAPI.requestInflowInfos(projectId),
       queryOptions
     );
-  };
 
   return {
     useRecentVisitCountsQuery,

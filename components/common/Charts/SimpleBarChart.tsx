@@ -1,13 +1,14 @@
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
 import styled from '@emotion/styled';
 
-import type { VisitInfo } from 'typings/statistics';
+import type { VisitGraphData } from 'typings/statistics';
 
 import CustomBar from 'components/chart/CustomBar';
 import CustomTooltip from 'components/chart/CustomTootip';
+import dateChartTickFormatter from 'utils/charts';
 
-interface BarChartProps {
-  data: VisitInfo[] | undefined;
+interface SimpleBarChartProps {
+  data: VisitGraphData[];
   focusedDate: Date;
   onClickBar: (date: Date) => void;
   onClickLeftButton: () => void;
@@ -20,7 +21,7 @@ const SimpleBarChart = ({
   onClickBar,
   onClickLeftButton,
   onClickRightButton,
-}: BarChartProps) => {
+}: SimpleBarChartProps) => {
   if (data) {
     return (
       <S.SimpleBarChartContainer>
@@ -29,10 +30,20 @@ const SimpleBarChart = ({
           <ResponsiveContainer>
             <BarChart data={data}>
               <XAxis
-                xAxisId="0"
-                dataKey="timeStamp"
                 interval={0}
                 tickSize={10}
+                dataKey="timeStamp"
+                tickFormatter={(value) => dateChartTickFormatter.date(value)}
+              />
+              <XAxis
+                xAxisId="second"
+                dataKey="timeStamp"
+                axisLine={false}
+                tickLine={false}
+                interval={0}
+                tickFormatter={(value, index) =>
+                  dateChartTickFormatter.month(value, index, data)
+                }
               />
               <Tooltip content={<CustomTooltip />} />
               <Bar

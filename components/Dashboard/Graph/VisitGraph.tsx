@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 
 import Shadow from 'components/Dashboard/common/Shadow';
 import SimpleLineChart from 'components/common/Charts/SimpleLineChart';
+import SimpleBarChart from 'components/common/Charts/SimpleBarChart';
 import useStatistics from 'hooks/queries/statistics';
 import { BOX_SIZES } from 'constants/dashboard';
-import type { VisitInfo } from 'typings/statistics';
-import SimpleBarChart from 'components/common/Charts/SimpleBarChart';
+import { transformData } from 'utils/charts';
 
 type BoxSize = keyof typeof BOX_SIZES;
 type BoxSizeProps = { boxSize: BoxSize };
@@ -24,7 +24,15 @@ const VisitGraph = ({ projectId, boxSize, graphType }: VisitGraphProps) => {
   const { data } = useVisitGraphInfosQuery();
   const chartData = data?.data.visitInfo;
 
-  const transformedData = chartData && transformData(chartData);
+  const transformedData = chartData ? transformData(chartData) : [];
+
+  if (!transformData.length) {
+    return (
+      <Shadow>
+        <S.Container boxSize={boxSize} />
+      </Shadow>
+    );
+  }
 
   if (graphType === 'bar') {
     return (
@@ -70,22 +78,3 @@ const S = {
     height: ${({ boxSize }) => BOX_SIZES[boxSize].height}px;
   `,
 };
-
-function transformData(datas: VisitInfo[]) {
-  return datas.reduce((acc, cur, index) => {
-    const { timeStamp } = cur;
-    const previousVisitInfo = acc[index - 1];
-
-    if (previousVisitInfo) {
-      const { timeStamp: previouseTimeStamp } = acc[index - 1];
-
-      const isDifferenceMonth =
-        new Date(timeStamp).getMonth() !==
-        new Date(previouseTimeStamp).getMonth();
-
-      return [...acc, { ...cur, isDifferenceMonth }];
-    }
-
-    return [...acc, { ...cur, isDifferenceMonth: false }];
-  }, [] as VisitInfo[]);
-}

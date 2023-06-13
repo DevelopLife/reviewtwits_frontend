@@ -16,14 +16,18 @@ const mockData = Array.from({ length: 5 }, (_, index) => ({
 }));
 
 const ProductStatisticsTable = ({ projectId }: ProductStatisticsTableProps) => {
-  const { useProductStatistics } = useStatistics({ projectId });
+  const { useProductStatistics, useRequestInflowInfos } = useStatistics({
+    projectId,
+  });
 
-  const { data } = useProductStatistics();
+  const { data: productStatisticsData } = useProductStatistics();
+  // TODO: after DEL check success reqeust
+  const { data: requestInflowInfosData } = useRequestInflowInfos();
 
-  return data ? (
+  return productStatisticsData ? (
     <Table
       heads={['상품명', '조회수', '리뷰수', '주연령대', '주성별', '평균평점']}
-      datas={data ? data : mockData}
+      datas={productStatisticsData ? productStatisticsData : mockData}
     />
   ) : (
     <div>표시할 데이터가 없습니다.</div>
