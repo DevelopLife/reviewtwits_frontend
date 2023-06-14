@@ -15,7 +15,6 @@ const PUBLIC_URLS = [
   '/social',
   '/oauth/callback/kakao',
   '/oauth/callback/naver',
-  '/socual/user',
   '/social/user/[nickname]',
   '/review',
   PAGE_LIST.NOT_FOUND_404,
