@@ -10,7 +10,7 @@ import {
   formattedImageUrl,
   formattedLastTime,
 } from 'utils/format';
-import StarBox from 'components/social/feed/MainContentSection/Review/StarBox';
+import StarBox from 'components/social/common/Review/StarBox';
 import Card from 'components/common/Card';
 import { Router, useRouter } from 'next/router';
 
