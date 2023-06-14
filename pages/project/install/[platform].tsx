@@ -12,6 +12,7 @@ import CommonButton from 'components/Project/install/common/Button';
 
 import INSTALL_GUIDES from 'constants/install_guides';
 import type { PlatformUppercases, Platforms } from 'typings/platforms';
+import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
 
 const InstallDetailPage = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const InstallDetailPage = () => {
   const reactGuideoVideo = '/videos/react_guide.mov';
 
   return (
-    <>
+    <ProjectPageLayout>
       <HighlightCDN />
       <S.InstallDetailPageContainer>
         <Margin marginBottom={35}>
@@ -62,7 +63,7 @@ const InstallDetailPage = () => {
           </CommonButton>
         </InstallPageButtons>
       </S.InstallDetailPageContainer>
-    </>
+    </ProjectPageLayout>
   );
 };
 
