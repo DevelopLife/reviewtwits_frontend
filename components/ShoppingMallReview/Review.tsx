@@ -36,18 +36,21 @@ const Review = ({ reviewDetail }: ReviewProps) => {
     likedComment
       ? setUnlike(reviewDetail.reviewId)
       : setLike(reviewDetail.reviewId);
-    setLikedComment((prev) => !prev);
   };
 
-  const setUnlike = (reviewId: number) => {
-    // shoppingAPI.deleteLikeToReview(reviewId);
-
-    setLikedCount((prev) => prev - 1);
+  const setUnlike = async (reviewId: number) => {
+    const { status } = await shoppingAPI.postReviewLikeUnLike(reviewId);
+    if (status === 200) {
+      setLikedCount((prev) => prev - 1);
+      setLikedComment((prev) => !prev);
+    }
   };
-  const setLike = (reviewId: number) => {
-    shoppingAPI.postLikeToReview(reviewId);
-
-    setLikedCount((prev) => prev + 1);
+  const setLike = async (reviewId: number) => {
+    const { status } = await shoppingAPI.postReviewLikeUnLike(reviewId);
+    if (status === 200) {
+      setLikedCount((prev) => prev + 1);
+      setLikedComment((prev) => !prev);
+    }
   };
 
   const { nickname, profileImageUrl } = reviewDetail.userInfo;
