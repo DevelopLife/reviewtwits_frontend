@@ -5,6 +5,7 @@ import {
   useRef,
   RefObject,
   useEffect,
+  useCallback,
 } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
@@ -60,6 +61,11 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
     setSearchValue(selectedProduct);
   };
 
+  const changeProductUrl = useCallback(() => {
+    if (!(productInfo && productInfo.productUrl)) return;
+    setValue('productURL', productInfo.productUrl);
+  }, [productInfo, setValue]);
+
   useEffect(() => {
     document.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
@@ -67,6 +73,10 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
       if (!searchRef.current?.contains(target)) setIsSearchFocused(false);
     });
   }, []);
+
+  useEffect(() => {
+    changeProductUrl();
+  }, [productInfo, changeProductUrl]);
 
   const props = {
     searchRef,

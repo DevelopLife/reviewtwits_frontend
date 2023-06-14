@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import { PAGE_LIST } from 'constants/routers';
 
 const FindBox = () => {
   return (
     <S.FindBox>
-      <Link href="/find-id">
+      <Link href={PAGE_LIST.FIND_ID}>
         <S.FindId>아이디 찾기</S.FindId>
       </Link>
-      <Link href="/find-password">
+      <Link href={PAGE_LIST.FIND_PASSWORD}>
         <S.FindPassword>비밀번호 찾기</S.FindPassword>
       </Link>
     </S.FindBox>

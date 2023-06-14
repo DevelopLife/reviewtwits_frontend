@@ -7,6 +7,7 @@ import { formattedProfileImageUrl } from 'utils/format';
 import styled from '@emotion/styled';
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 import Button from './common/Button';
+import { PAGE_LIST } from 'constants/routers';
 
 const UserProfileBox = () => {
   const { nickname, profileImageUrl } = useUserProfile();
@@ -40,7 +41,7 @@ const UserProfileBoxView = ({
       </SocialUserNicknameLink>
       <S.UserInfoBox>
         <S.UserNickname>{nickname}</S.UserNickname>
-        <Link href="/setting/profile">
+        <Link href={PAGE_LIST.PROFILE_SETTING}>
           <Button color="primary">수정하기</Button>
         </Link>
       </S.UserInfoBox>
