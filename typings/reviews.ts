@@ -84,6 +84,8 @@ export interface ShoppingMallReviewDetail {
   score: number;
   reviewImageUrlList: string[];
   exist: boolean;
+  reactionCount: number;
+  isLiked: boolean;
 }
 
 export interface CommentResponseType {
