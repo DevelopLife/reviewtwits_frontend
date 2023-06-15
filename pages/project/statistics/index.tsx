@@ -1,36 +1,28 @@
-import { useRouter } from 'next/router';
-
 import {
-  VisitorStatistics,
   ViewsStatistics,
+  VisitorStatistics,
 } from 'components/Statistics/@index';
 import Margin from 'components/Statistics/common/Margin';
 import StatisticsPageLayout from 'components/Statistics/common/StatisticsPageLayout';
-
-import useStatistics from 'hooks/queries/statistics';
+import { useRouter } from 'next/router';
 
 const ProjectStatisticsPage = () => {
   const router = useRouter();
-  const { projectName } = router.query as { projectName: string };
-
-  const { useRecentVisitCountsQuery } = useStatistics(projectName);
-
-  // const { data: dailyVisitGraphInfos } = useDailyVisitGraphInfosQuery();
-  // const { data: visitGraphInfos } = useVisitGraphInfosQuery();
+  const { projectId } = router.query as { projectId: string };
 
   return (
     <StatisticsPageLayout>
       <Margin marginTop={60}>
-        <VisitorStatistics getRecentVisitCounts={useRecentVisitCountsQuery()} />
+        <VisitorStatistics projectId={projectId} />
       </Margin>
       <Margin marginTop={40}>
-        <ViewsStatistics />
+        <ViewsStatistics projectId={projectId} />
       </Margin>
       <Margin marginTop={48}>
         {/* <LeadTimeRate
-          chartDatas={visitGraphInfos?.data}
-          dataKey={'previousVisit'}
-        /> */}
+            chartDatas={visitGraphInfos?.data}
+            dataKey={'previousVisit'}
+          /> */}
       </Margin>
 
       <Margin marginTop={32}>{/* <ProductStatistics /> */}</Margin>
