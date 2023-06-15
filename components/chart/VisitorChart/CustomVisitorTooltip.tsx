@@ -5,7 +5,7 @@ import type {
   NameType,
 } from 'recharts/types/component/DefaultTooltipContent';
 
-const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
+const CustomVisitorTooltip = (props: TooltipProps<ValueType, NameType>) => {
   const { active, payload } = props;
 
   if (active && payload && payload.length) {
@@ -21,7 +21,7 @@ const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
   return null;
 };
 
-export default CustomTooltip;
+export default CustomVisitorTooltip;
 
 const S = {
   CustomTootipItem: styled.div`
