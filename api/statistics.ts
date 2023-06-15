@@ -52,6 +52,16 @@ export const statisticsAPI = {
       params,
     });
   },
+  requestInflowInfos: async (projectId: string) => {
+    const { data } = await requiredTokenApi.get(
+      `${STATISTICS_URL}/request-inflow-infos`,
+      {
+        params: { projectId },
+      }
+    );
+
+    return data;
+  },
   simpleProjectInfo: async (projectId: string) => {
     const { data } = await requiredTokenApi.get(
       `${STATISTICS_URL}${DASHBOARD_URL}/simple-project-info`,
@@ -65,16 +75,6 @@ export const statisticsAPI = {
   productStatistics: async (projectId: string) => {
     const { data } = await requiredTokenApi.get(
       `${STATISTICS_URL}${DASHBOARD_URL}/product-statistics`,
-      {
-        params: { projectId },
-      }
-    );
-
-    return data;
-  },
-  requestInflowInfos: async (projectId: string) => {
-    const { data } = await requiredTokenApi.get(
-      `${STATISTICS_URL}${DASHBOARD_URL}/request-inflow-infos`,
       {
         params: { projectId },
       }
