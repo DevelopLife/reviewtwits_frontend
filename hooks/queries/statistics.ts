@@ -14,57 +14,31 @@ type StatisticsRange =
   | '3y'
   | '5y';
 
-interface useStatisticsProps {
-  projectId: string;
-  range?: StatisticsRange;
-  interval?: StatisticsRange;
+interface useVisitGraphInfosQueryProps {
+  // projectId?: string;
+  range: StatisticsRange;
+  interval: StatisticsRange;
+  referenceData?: Date;
 }
 
-const useStatistics = ({
-  projectId,
-  range = '1mo',
-  interval = '1d',
-}: useStatisticsProps) => {
+interface useDailyVisitGraphInfosQueryProps {
+  range: StatisticsRange;
+}
+
+// projectId만 여기서 할당해주고 나머지 개별 props는 각자 호출하는쪽까지 내려간다.
+//
+const useStatistics = (projectId: string) => {
   const queryOptions = {
     enabled: !!projectId,
     retry: 0,
   };
 
   const useRecentVisitCountsQuery = () =>
-    useQuery({
-      queryKey: ['recentVisitCounts', projectId],
-      queryFn: () =>
-        statisticsAPI.recentVisitCounts({
-          projectId,
-        }),
-      enabled: !!projectId,
-      retry: 0,
-    });
-
-  const useDailyVisitGraphInfosQuery = () =>
-    useQuery({
-      queryKey: ['dailyVisitGraphInfos', projectId],
-      queryFn: () =>
-        statisticsAPI.dailyVisitGraphInfos({
-          projectId,
-          range,
-        }),
-      enabled: !!projectId,
-      retry: 0,
-    });
-
-  const useVisitGraphInfosQuery = () =>
-    useQuery({
-      queryKey: ['visitGraphInfos', projectId],
-      queryFn: () =>
-        statisticsAPI.visitGraphInfos({
-          projectId,
-          range,
-          interval,
-        }),
-      enabled: !!projectId,
-      retry: 0,
-    });
+    useQuery(
+      ['recentVisitCounts', projectId],
+      () => statisticsAPI.recentVisitCounts({ projectId }),
+      queryOptions
+    );
 
   const useSimpleProjectInfo = () =>
     useQuery(
@@ -77,7 +51,12 @@ const useStatistics = ({
     useQuery(
       ['productStatistics', projectId],
       () => statisticsAPI.productStatistics(projectId),
-      queryOptions
+      {
+        ...queryOptions,
+        ...{
+          onSuccess: (res) => console.log(res),
+        },
+      }
     );
   const useRequestInflowInfos = () =>
     useQuery(
@@ -86,13 +65,42 @@ const useStatistics = ({
       queryOptions
     );
 
+  const useDailyVisitGraphInfosQuery = ({
+    range,
+  }: useDailyVisitGraphInfosQueryProps) =>
+    useQuery(
+      ['dailyVisitGraphInfos', projectId],
+      () =>
+        statisticsAPI.dailyVisitGraphInfos({
+          projectId,
+          range,
+        }),
+      queryOptions
+    );
+
+  const useVisitGraphInfosQuery = ({
+    range,
+    interval,
+  }: useVisitGraphInfosQueryProps) => {
+    return useQuery(
+      ['visitGraphInfos', projectId],
+      () =>
+        statisticsAPI.visitGraphInfos({
+          projectId: projectId,
+          range,
+          interval,
+        }),
+      { ...queryOptions, ...{ enabled: !!projectId && !!range && !!interval } }
+    );
+  };
+
   return {
     useRecentVisitCountsQuery,
-    useDailyVisitGraphInfosQuery,
-    useVisitGraphInfosQuery,
     useSimpleProjectInfo,
     useProductStatistics,
     useRequestInflowInfos,
+    useDailyVisitGraphInfosQuery,
+    useVisitGraphInfosQuery,
   };
 };
 
