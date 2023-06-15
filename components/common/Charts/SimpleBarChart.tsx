@@ -4,12 +4,12 @@ import styled from '@emotion/styled';
 import type { VisitGraphData } from 'typings/statistics';
 
 import CustomBar from 'components/chart/CustomBar';
-import CustomTooltip from 'components/chart/CustomTootip';
+import CustomTooltip from 'components/chart/VisitorChart/CustomVisitorTooltip';
 import dateChartTickFormatter from 'utils/charts';
 
 interface SimpleBarChartProps {
   data: VisitGraphData[];
-  focusedDate: Date;
+  focusedBarIndex: number;
   onClickBar: (date: Date) => void;
   onClickLeftButton: () => void;
   onClickRightButton: () => void;
@@ -17,7 +17,7 @@ interface SimpleBarChartProps {
 
 const SimpleBarChart = ({
   data,
-  focusedDate,
+  focusedBarIndex,
   onClickBar,
   onClickLeftButton,
   onClickRightButton,
@@ -53,7 +53,7 @@ const SimpleBarChart = ({
                   <CustomBar
                     {...props}
                     onClick={onClickBar}
-                    focusedDate={focusedDate}
+                    focusedBarIndex={focusedBarIndex}
                   />
                 )}
               />

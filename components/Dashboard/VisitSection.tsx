@@ -1,22 +1,24 @@
 import styled from '@emotion/styled';
 
-import VisitGraph from 'components/Dashboard/Graph/VisitGraph';
+// import VisitGraph from 'components/Dashboard/Graph/VisitGraph';
 import VisitCount from 'components/Dashboard/VisitCount';
+import VisitorChart from 'components/chart/VisitorChart/VisitorChart';
 
 interface VisitSectionProps {
   projectId: string;
 }
 
-const VisitSection = ({ projectId }: VisitSectionProps) => {
+const DashBoardVisitSection = ({ projectId }: VisitSectionProps) => {
   return (
     <S.Container>
       <VisitCount projectId={projectId} />
-      <VisitGraph projectId={projectId} boxSize="MEDIUM" graphType="line" />
+      <VisitorChart projectId={projectId} type="bar" />
+      {/* <VisitGraph projectId={projectId} boxSize="MEDIUM" graphType="line" /> */}
     </S.Container>
   );
 };
 
-export default VisitSection;
+export default DashBoardVisitSection;
 
 const S = {
   Container: styled.div`

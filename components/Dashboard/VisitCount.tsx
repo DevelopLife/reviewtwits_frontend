@@ -15,11 +15,12 @@ const VisitCount = ({ projectId }: VisitCountProps) => {
   const router = useRouter();
   const { query } = router;
 
-  const { useVisitGraphInfosQuery } = useStatistics({
-    projectId,
-  });
+  const { useVisitGraphInfosQuery } = useStatistics(projectId);
 
-  const { data } = useVisitGraphInfosQuery();
+  const { data } = useVisitGraphInfosQuery({
+    range: '1mo',
+    interval: '1d',
+  });
   const visitCountData = data?.data;
 
   return (
