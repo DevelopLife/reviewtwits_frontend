@@ -1,5 +1,7 @@
 import { SVGAttributes } from 'react';
 
+import theme from 'styles/theme';
+
 declare type RectangleShapeProps = {
   x: number;
   y: number;
@@ -14,19 +16,28 @@ declare type RectangleShapeProps = {
 
 export type CustomBarProps = RectangleShapeProps & {
   payload: { timeStamp: string };
-  focusedDate: Date;
-  onClick: (date: Date) => void;
+  index: number;
+  focusedBarIndex: number;
+  onClick: (index: number) => void;
 };
 const CustomBar = (props: CustomBarProps) => {
-  const { x, y, width, height, onClick, fill, focusedDate, payload } = props;
-  const { timeStamp } = payload;
+  const {
+    x,
+    y,
+    width,
+    height,
+    onClick,
+    fill,
+    focusedBarIndex,
+    // payload,
+    index,
+  } = props;
 
   const handleBarClick = () => {
-    onClick(new Date(timeStamp));
+    onClick(index);
   };
 
-  const isFocused =
-    focusedDate.getTime() === new Date(timeStamp).getTime() ? true : false;
+  const isFocused = index === focusedBarIndex;
 
   return (
     <g>
@@ -37,7 +48,7 @@ const CustomBar = (props: CustomBarProps) => {
         height={height}
         onClick={handleBarClick}
         opacity={isFocused ? 1 : 0.5}
-        fill={isFocused ? 'red' : fill}
+        fill={isFocused ? theme.colors.red_dark : fill}
       />
     </g>
   );
