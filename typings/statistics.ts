@@ -26,3 +26,14 @@ export type VisitGraphInfos = {
   range: '3mo';
   visitInfo: VisitInfo[];
 } & RecentVisitCounts;
+
+export type InflowInfos = {
+  total: number;
+  naver: number;
+  daum: number;
+  google: number;
+  zoom: number;
+  bing: number;
+  yahoo: number;
+  etc: number;
+};

@@ -1,14 +1,9 @@
 import { VisitGraphData, VisitInfo } from 'typings/statistics';
 
-type Data = {
-  timeStamp: Date;
-  isDifference: boolean;
-};
-
 // TODO: Refactoring 중복코드 제거
 const dateChartTickFormatter = {
   date: (value: Date) => new Date(value).getDate().toString(),
-  month: (value: string, index: number, data: Data[]) => {
+  month: (value: string, index: number, data: VisitGraphData[]) => {
     const { isDifference, timeStamp } = data[index];
 
     return isDifference ? `${new Date(timeStamp).getMonth() + 1}월` : '';
@@ -16,7 +11,7 @@ const dateChartTickFormatter = {
     // 기준이 될 키를 넣어주면 그 기준으로 boolean으로 해결한다.
     // return isDifferenceMonth ? `${new Date(timeStamp).getMonth() + 1}월` : '';
   },
-  year: (value: string, index: number, data: Data[]) => {
+  year: (value: string, index: number, data: VisitGraphData[]) => {
     const { isDifference, timeStamp } = data[index];
 
     return isDifference ? `${new Date(timeStamp).getFullYear()}년` : '';
