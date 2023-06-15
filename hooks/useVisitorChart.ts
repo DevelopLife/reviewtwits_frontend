@@ -1,7 +1,18 @@
 import useStatistics from 'hooks/queries/statistics';
 import useDates from 'hooks/useDates';
+import type { StatisticsRange } from 'typings/chart';
 
-const useVisitorChart = () => {
+interface useVisitorChartProps {
+  projectId: string;
+  range: StatisticsRange;
+  interval: StatisticsRange;
+}
+
+const useVisitorChart = ({
+  projectId,
+  range,
+  interval,
+}: useVisitorChartProps) => {
   const {
     referenceDate,
     focusedDate,
@@ -10,20 +21,18 @@ const useVisitorChart = () => {
     changeReferenceDateIntoNextReferenceDate,
   } = useDates();
 
-  const { useVisitGraphInfosQuery } = useStatistics({
-    projectId: '25020',
-    // TODO: referenceDate를 이용하여 api 요청하도록 변경
-    // referenceDate
-  });
+  const { useVisitGraphInfosQuery } = useStatistics(projectId);
 
-  const visitInfos = useVisitGraphInfosQuery().data?.data?.visitInfo.map(
-    ({ timeStamp }) => new Date(timeStamp)
-  );
+  const visitInfos = useVisitGraphInfosQuery({
+    range,
+    interval,
+  }).data?.data?.visitInfo.map(({ timeStamp }) => new Date(timeStamp));
 
   return {
     referenceDate,
     focusedDate,
-    visitInfos: useVisitGraphInfosQuery().data?.data?.visitInfo,
+    visitInfos: useVisitGraphInfosQuery({ range, interval }).data?.data
+      ?.visitInfo,
     onClickBar: changeFocusedDate,
     onClickPrevButton: () =>
       visitInfos?.length &&

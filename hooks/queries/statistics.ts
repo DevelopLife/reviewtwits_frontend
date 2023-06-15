@@ -1,18 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { statisticsAPI } from 'api/statistics';
-
-type StatisticsRange =
-  | '1d'
-  | '3d'
-  | '5d'
-  | '7d'
-  | '15d'
-  | '1mo'
-  | '3mo'
-  | '6mo'
-  | '1y'
-  | '3y'
-  | '5y';
+import type { StatisticsRange } from 'typings/chart';
 
 interface useVisitGraphInfosQueryProps {
   // projectId?: string;
@@ -69,7 +57,7 @@ const useStatistics = (projectId: string) => {
     range,
   }: useDailyVisitGraphInfosQueryProps) =>
     useQuery(
-      ['dailyVisitGraphInfos', projectId],
+      ['dailyVisitGraphInfos', projectId, range],
       () =>
         statisticsAPI.dailyVisitGraphInfos({
           projectId,
@@ -83,7 +71,7 @@ const useStatistics = (projectId: string) => {
     interval,
   }: useVisitGraphInfosQueryProps) => {
     return useQuery(
-      ['visitGraphInfos', projectId],
+      ['visitGraphInfos', projectId, range, interval],
       () =>
         statisticsAPI.visitGraphInfos({
           projectId: projectId,

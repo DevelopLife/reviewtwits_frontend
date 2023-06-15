@@ -17,22 +17,26 @@ import CustomVisitorTooltip from 'components/chart/VisitorChart/CustomVisitorToo
 import CustomBar from 'components/chart/CustomBar';
 import useStatistics from 'hooks/queries/statistics';
 import dateChartTickFormatter, { transformData } from 'utils/charts';
+import type { ChartType, Intervals, TimePeriod } from 'typings/chart';
 
-type ChartType = 'bar' | 'line';
+const intervals: Intervals = {
+  daily: { range: '1mo', interval: '1d' },
+  weekly: { range: '3mo', interval: '7d' },
+  monthly: { range: '1y', interval: '1mo' },
+};
 
 interface VisitorChartProps {
   projectId: string;
   type: ChartType;
+  timePeriod: TimePeriod;
 }
 
-const VisitorChart = ({ projectId, type }: VisitorChartProps) => {
+const VisitorChart = ({ projectId, type, timePeriod }: VisitorChartProps) => {
   // DEL: projectId만을 받고 나머지는 개별 useQueryHooks 에서 받도록 하자.
   const { useVisitGraphInfosQuery } = useStatistics(projectId);
+  const timePeriodParams = intervals[timePeriod];
 
-  const { data } = useVisitGraphInfosQuery({
-    range: '1mo',
-    interval: '1d',
-  });
+  const { data } = useVisitGraphInfosQuery(timePeriodParams);
 
   const visitInfos = data?.data.visitInfo;
   const transformedVisitInfo = transformData(visitInfos || []);
@@ -112,7 +116,7 @@ const VisitorChartView = (props: VisitorChartViewProps) => {
 
 const S = {
   VisitorChartContainer: styled.section`
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
   `,
 };

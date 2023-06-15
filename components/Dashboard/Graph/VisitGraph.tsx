@@ -6,6 +6,7 @@ import SimpleBarChart from 'components/common/Charts/SimpleBarChart';
 import useStatistics from 'hooks/queries/statistics';
 import { BOX_SIZES } from 'constants/dashboard';
 import { transformData } from 'utils/charts';
+import type { ChartType } from 'typings/chart';
 
 type BoxSize = keyof typeof BOX_SIZES;
 type BoxSizeProps = { boxSize: BoxSize };
@@ -13,15 +14,16 @@ type BoxSizeProps = { boxSize: BoxSize };
 interface VisitGraphProps {
   projectId: string;
   boxSize: BoxSize;
-  graphType: 'line' | 'bar';
+  graphType: ChartType;
 }
 
 const VisitGraph = ({ projectId, boxSize, graphType }: VisitGraphProps) => {
-  const { useVisitGraphInfosQuery } = useStatistics({
-    projectId,
-  });
+  const { useVisitGraphInfosQuery } = useStatistics(projectId);
 
-  const { data } = useVisitGraphInfosQuery();
+  const { data } = useVisitGraphInfosQuery({
+    range: '1mo',
+    interval: '1d',
+  });
   const chartData = data?.data.visitInfo;
 
   const transformedData = chartData ? transformData(chartData) : [];
