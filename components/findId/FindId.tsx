@@ -9,7 +9,9 @@ import {
   ERROR_MESSAGE,
   SIGN_UP_FORM_NAMES,
 } from 'constants/account';
+import { PAGE_LIST } from 'constants/routers';
 import useForm from 'hooks/useForm';
+import Link from 'next/link';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { foundUserIds } from 'states/atomFindUserInfo';
@@ -77,9 +79,11 @@ const FindId = ({ handleCardKey }: FindIdProps) => {
         >
           아이디 찾기
         </Button>
-        <Button type="submit" large color="primary">
-          로그인 페이지로 이동
-        </Button>
+        <Link href={PAGE_LIST.SIGN_IN}>
+          <Button type="submit" large color="primary">
+            로그인 페이지로 이동
+          </Button>
+        </Link>
       </S.ButtonsContainer>
     </Card>
   );
