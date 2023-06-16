@@ -7,7 +7,6 @@ import { PAGE_LIST } from 'constants/routers';
 
 // TODO: public url을 추가해주세요
 const PUBLIC_URLS = [
-  PAGE_LIST.HOME,
   PAGE_LIST.SIGN_IN,
   PAGE_LIST.SIGN_UP,
   PAGE_LIST.FIND_ID,
@@ -20,6 +19,8 @@ const PUBLIC_URLS = [
   PAGE_LIST.NOT_FOUND_404,
 ];
 
+const OPTIONAL_PUBLIC_URLS = [PAGE_LIST.HOME];
+
 const PrivateRoute = ({
   pageProps,
   children,
@@ -29,11 +30,13 @@ const PrivateRoute = ({
 }) => {
   const router = useRouter();
   const { pathname } = router;
-  const isRequiredLogin = !PUBLIC_URLS.includes(pathname);
+  const isOptionalLogin = Boolean(OPTIONAL_PUBLIC_URLS.includes(pathname));
+  const isRequiredLogin = !PUBLIC_URLS.includes(pathname) && !isOptionalLogin;
   const statusCode = pageProps.statusCode;
 
   const { isLogined } = usePrivateRouting({
     isRequiredLogin,
+    isOptionalLogin,
     statusCode,
   });
 
