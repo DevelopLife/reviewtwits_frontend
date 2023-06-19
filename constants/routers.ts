@@ -8,6 +8,7 @@ export const PAGE_LIST = {
   PROJECT_MANAGEMENT: '/project/management',
   DASTHBOARD: '/dashboard',
   SOCIAL_HOME: '/social/home',
+  SOCIAL_SCRAP: '/social/scrap',
   SOCIAL_CREATE: '/social/review/write',
   SOCIAL_FOLLOWER: '/social/follower',
   SOCIAL_PROFILE: '/social/user',

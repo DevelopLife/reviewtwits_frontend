@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
-import StarBox from 'components/social/feed/MainContentSection/Review/StarBox';
+import StarBox from 'components/social/common/Review/StarBox';
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 import useModal from 'hooks/useModal';
 

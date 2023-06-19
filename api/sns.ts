@@ -35,6 +35,18 @@ export const snsAPI = {
       .then((res) => res.data);
   },
 
+  getInfiniteScrapList: async (lastId: number) => {
+    const SIZE = 10;
+    return await requiredTokenApi
+      .get(`${SNS_URL}/scrap-reviews`, {
+        params: {
+          size: SIZE,
+          reviewId: lastId,
+        },
+      })
+      .then((res) => res.data);
+  },
+
   getTrendyProducts: () =>
     optionalTokenAPI
       .get(`${SNS_URL}/recommend-product`)

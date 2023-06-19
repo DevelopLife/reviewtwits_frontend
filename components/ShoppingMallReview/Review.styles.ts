@@ -161,7 +161,8 @@ const KeywordDetail = styled.div`
 `;
 
 const HelpfulRates = styled.div`
-  width: 128px;
+  width: 50%;
+  max-width: 128px;
 
   margin-top: 21px;
   margin-bottom: 28px;
@@ -170,8 +171,6 @@ const HelpfulRates = styled.div`
   flex-direction: row;
 
   p {
-    width: 100px;
-
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 500;
@@ -192,6 +191,10 @@ const HelpfulRates = styled.div`
     }
   }
 `;
+const LikeButton = styled.button`
+  width: 20px;
+  height: 20px;
+`;
 
 export {
   Container,
@@ -209,4 +212,5 @@ export {
   Keywords,
   KeywordDetail,
   HelpfulRates,
+  LikeButton,
 };

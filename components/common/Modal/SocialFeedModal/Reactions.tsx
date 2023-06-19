@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
 import styled from '@emotion/styled';
-import AddReactionBox from 'components/social/feed/MainContentSection/Review/AddReactionBox';
+import AddReactionBox from 'components/social/common/Review/AddReactionBox';
 import CommentIcon from 'public/icons/comment.svg';
-import ScrapButton from 'components/social/feed/MainContentSection/Review/ScrapButton';
+import ScrapButton from 'components/social/common/Review/ScrapButton';
 import { ReactionResponseType } from 'typings/reviews';
-import ReactionBox from 'components/social/feed/MainContentSection/Review/ReactionBox';
+import ReactionBox from 'components/social/common/Review/ReactionBox';
 
 interface ReactionsProps {
   reviewId: string;

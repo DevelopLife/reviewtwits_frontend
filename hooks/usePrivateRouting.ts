@@ -3,16 +3,19 @@ import { useCallback, useEffect } from 'react';
 import { SetterOrUpdater, useRecoilState } from 'recoil';
 
 import { isLoginState } from 'states/isLogin';
-import { validateToken } from 'utils/auth';
+import { setAuthorizationToken, validateToken } from 'utils/auth';
 import { getCookie } from 'utils/cookies';
+import { usersAPI } from 'api/users';
 
 interface UsePrivateRoutingProps {
   isRequiredLogin: boolean;
+  isOptionalLogin: boolean;
   statusCode?: number;
 }
 
 export const usePrivateRouting = ({
   isRequiredLogin,
+  isOptionalLogin,
   statusCode,
 }: UsePrivateRoutingProps) => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginState);
@@ -26,8 +29,10 @@ export const usePrivateRouting = ({
     [setIsLogined]
   );
 
-  useEffect(() => {
+  const conditionalSignInHandler = useCallback(() => {
     if (statusCode === 404) return;
+    if (isOptionalLogin)
+      return validateRefreshToken(setTrueIsLogined, setFalseIsLogined);
     if (isRequiredLogin) {
       return redirectNotLogin(setTrueIsLogined, setFalseIsLogined);
     }
@@ -35,11 +40,16 @@ export const usePrivateRouting = ({
     setIsLoginAtom(setIsLogined);
   }, [
     isRequiredLogin,
+    isOptionalLogin,
     setFalseIsLogined,
     setIsLogined,
     setTrueIsLogined,
     statusCode,
   ]);
+
+  useEffect(() => {
+    conditionalSignInHandler();
+  }, [conditionalSignInHandler]);
 
   return {
     isLogined,
@@ -55,6 +65,16 @@ export const setIsLoginAtom = (setIsLogined: SetterOrUpdater<boolean>) => {
   } else {
     setIsLogined(false);
   }
+};
+
+export const validateRefreshToken = (login: () => void, logout: () => void) => {
+  usersAPI
+    .reissueToken()
+    .then((data) => {
+      setAuthorizationToken(data.accessToken);
+      return login();
+    })
+    .catch(() => logout());
 };
 
 export function redirectNotLogin(login: () => void, logout: () => void) {

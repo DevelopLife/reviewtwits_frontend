@@ -1,5 +1,8 @@
 import Image from 'next/image';
 
+import HeartFull from 'public/icons/like-heart-full.svg';
+import HeartEmpty from 'public/icons/like-heart-empty.svg';
+
 import grayStar from 'public/images/empty_star_img.png';
 import thumbsUp from 'public/icons/thumbs_up.png';
 import * as S from './Review.styles';
@@ -10,9 +13,11 @@ import {
   formattedImageUrl,
   formattedLastTime,
 } from 'utils/format';
-import StarBox from 'components/social/feed/MainContentSection/Review/StarBox';
+import StarBox from 'components/social/common/Review/StarBox';
 import Card from 'components/common/Card';
 import { Router, useRouter } from 'next/router';
+import { useState } from 'react';
+import { shoppingAPI } from 'api/reviews';
 
 interface ReviewProps {
   reviewDetail: ShoppingMallReviewDetail;
@@ -20,6 +25,34 @@ interface ReviewProps {
 
 const Review = ({ reviewDetail }: ReviewProps) => {
   const router = useRouter();
+  const [likedComment, setLikedComment] = useState<boolean>(
+    reviewDetail.isLiked
+  );
+  const [likedCount, setLikedCount] = useState<number>(
+    reviewDetail.reactionCount
+  );
+
+  const onClickLikeButton = () => {
+    likedComment
+      ? setUnlike(reviewDetail.reviewId)
+      : setLike(reviewDetail.reviewId);
+  };
+
+  const setUnlike = async (reviewId: number) => {
+    const { status } = await shoppingAPI.postReviewLikeUnLike(reviewId);
+    if (status === 200) {
+      setLikedCount((prev) => prev - 1);
+      setLikedComment((prev) => !prev);
+    }
+  };
+  const setLike = async (reviewId: number) => {
+    const { status } = await shoppingAPI.postReviewLikeUnLike(reviewId);
+    if (status === 200) {
+      setLikedCount((prev) => prev + 1);
+      setLikedComment((prev) => !prev);
+    }
+  };
+
   const { nickname, profileImageUrl } = reviewDetail.userInfo;
   const { content, reviewImageUrlList, createdDate, lastModifiedDate } =
     reviewDetail;
@@ -83,9 +116,12 @@ const Review = ({ reviewDetail }: ReviewProps) => {
         </S.Keywords> */}
 
         <S.HelpfulRates>
-          <p>2명에게 도움이 됨</p>
+          <p>{likedCount}명에게 도움이 됨</p>
           <button>
             <Image src={thumbsUp} alt=""></Image>
+            <S.LikeButton onClick={onClickLikeButton}>
+              {likedComment ? <HeartFull /> : <HeartEmpty />}
+            </S.LikeButton>
           </button>
         </S.HelpfulRates>
       </Card>

@@ -15,7 +15,7 @@ export const usersAPI = {
       .catch(({ response }) => {
         switch (response?.status) {
           case 401:
-            alert(ERROR_MESSAGE.SIGN_IN);
+            alert(response.data[0].message);
             break;
         }
       });
