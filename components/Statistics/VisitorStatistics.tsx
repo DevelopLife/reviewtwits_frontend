@@ -4,7 +4,7 @@ import * as S from './VisitorStatistics.styles';
 import useStatistics from 'hooks/queries/statistics';
 
 interface VisitorStatisticsProps {
-  projectId: string;
+  projectName: string;
 }
 
 interface RecentCountDatas {
@@ -13,8 +13,8 @@ interface RecentCountDatas {
   pointColor?: Colors;
 }
 
-const VisitorStatistics = ({ projectId }: VisitorStatisticsProps) => {
-  const { useRecentVisitCountsQuery } = useStatistics(projectId);
+const VisitorStatistics = ({ projectName }: VisitorStatisticsProps) => {
+  const { useRecentVisitCountsQuery } = useStatistics(projectName);
   const { data: recentVisitCounts, isLoading } = useRecentVisitCountsQuery();
 
   //TODO: Suspense

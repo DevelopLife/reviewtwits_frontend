@@ -33,13 +33,13 @@ const COUNTING_INFORMATIONS = {
 };
 
 interface ComprehensiveDataSectionProps {
-  projectId: string;
+  projectName: string;
 }
 
 const ComprehensiveDataSection = ({
-  projectId,
+  projectName,
 }: ComprehensiveDataSectionProps) => {
-  const { useSimpleProjectInfo } = useStatistics({ projectId });
+  const { useSimpleProjectInfo } = useStatistics(projectName);
   const { data: simpleProjectData } = useSimpleProjectInfo();
 
   const countingInformations = Object.entries(

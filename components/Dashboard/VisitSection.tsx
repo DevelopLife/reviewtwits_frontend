@@ -5,15 +5,14 @@ import VisitCount from 'components/Dashboard/VisitCount';
 import VisitorChart from 'components/chart/VisitorChart/VisitorChart';
 
 interface VisitSectionProps {
-  projectId: string;
+  projectName: string;
 }
 
-const DashBoardVisitSection = ({ projectId }: VisitSectionProps) => {
+const DashBoardVisitSection = ({ projectName }: VisitSectionProps) => {
   return (
     <S.Container>
-      <VisitCount projectId={projectId} />
-      <VisitorChart projectId={projectId} type="bar" />
-      {/* <VisitGraph projectId={projectId} boxSize="MEDIUM" graphType="line" /> */}
+      <VisitCount projectName={projectName} />
+      <VisitorChart projectName={projectName} type="bar" timePeriod={'daily'} />
     </S.Container>
   );
 };

@@ -101,7 +101,7 @@ export const ProjectCardView = ({
                 <Link
                   href={{
                     pathname: '/project/statistics',
-                    query: { projectId: id },
+                    query: { projectName: name },
                   }}
                   style={{ color: 'black' }}
                 >

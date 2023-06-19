@@ -4,11 +4,11 @@ import ProductStatisticsTable from 'components/Dashboard/Table/ProductStatistics
 import Shadow from 'components/Dashboard/common/Shadow';
 
 interface ProductStatisticsSectionProps {
-  projectId: string;
+  projectName: string;
 }
 
 const ProductStatisticsSection = ({
-  projectId,
+  projectName,
 }: ProductStatisticsSectionProps) => {
   return (
     <Shadow>
@@ -16,7 +16,7 @@ const ProductStatisticsSection = ({
         <S.OrderHeader>
           <S.Title>상품별 통계정보</S.Title>
         </S.OrderHeader>
-        <ProductStatisticsTable projectId={projectId} />
+        <ProductStatisticsTable projectName={projectName} />
       </S.Container>
     </Shadow>
   );

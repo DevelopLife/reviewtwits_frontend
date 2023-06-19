@@ -3,7 +3,7 @@ import { statisticsAPI } from 'api/statistics';
 import type { StatisticsRange } from 'typings/chart';
 
 interface useVisitGraphInfosQueryProps {
-  // projectId?: string;
+  // projectName?: string;
   range: StatisticsRange;
   interval: StatisticsRange;
   referenceData?: Date;
@@ -15,30 +15,30 @@ interface useDailyVisitGraphInfosQueryProps {
 
 // projectId만 여기서 할당해주고 나머지 개별 props는 각자 호출하는쪽까지 내려간다.
 //
-const useStatistics = (projectId: string) => {
+const useStatistics = (projectName: string) => {
   const queryOptions = {
-    enabled: !!projectId,
+    enabled: !!projectName,
     retry: 0,
   };
 
   const useRecentVisitCountsQuery = () =>
     useQuery(
-      ['recentVisitCounts', projectId],
-      () => statisticsAPI.recentVisitCounts({ projectId }),
+      ['recentVisitCounts', projectName],
+      () => statisticsAPI.recentVisitCounts({ projectName }),
       queryOptions
     );
 
   const useSimpleProjectInfo = () =>
     useQuery(
-      ['simpleProjectInfo', projectId],
-      () => statisticsAPI.simpleProjectInfo(projectId),
+      ['simpleProjectInfo', projectName],
+      () => statisticsAPI.simpleProjectInfo(projectName),
       queryOptions
     );
 
   const useProductStatistics = () =>
     useQuery(
-      ['productStatistics', projectId],
-      () => statisticsAPI.productStatistics(projectId),
+      ['productStatistics', projectName],
+      () => statisticsAPI.productStatistics(projectName),
       {
         ...queryOptions,
         ...{
@@ -48,8 +48,8 @@ const useStatistics = (projectId: string) => {
     );
   const useRequestInflowInfos = () =>
     useQuery(
-      ['requestInflowInfos', projectId],
-      () => statisticsAPI.requestInflowInfos(projectId),
+      ['requestInflowInfos', projectName],
+      () => statisticsAPI.requestInflowInfos(projectName),
       queryOptions
     );
 
@@ -57,10 +57,10 @@ const useStatistics = (projectId: string) => {
     range,
   }: useDailyVisitGraphInfosQueryProps) =>
     useQuery(
-      ['dailyVisitGraphInfos', projectId, range],
+      ['dailyVisitGraphInfos', projectName, range],
       () =>
         statisticsAPI.dailyVisitGraphInfos({
-          projectId,
+          projectName,
           range,
         }),
       queryOptions
@@ -71,14 +71,17 @@ const useStatistics = (projectId: string) => {
     interval,
   }: useVisitGraphInfosQueryProps) => {
     return useQuery(
-      ['visitGraphInfos', projectId, range, interval],
+      ['visitGraphInfos', projectName, range, interval],
       () =>
         statisticsAPI.visitGraphInfos({
-          projectId: projectId,
+          projectName: projectName,
           range,
           interval,
         }),
-      { ...queryOptions, ...{ enabled: !!projectId && !!range && !!interval } }
+      {
+        ...queryOptions,
+        ...{ enabled: !!projectName && !!range && !!interval },
+      }
     );
   };
 

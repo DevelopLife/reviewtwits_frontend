@@ -8,14 +8,14 @@ import Shadow from 'components/Dashboard/common/Shadow';
 import Button from '../common/Button';
 
 interface VisitCountProps {
-  projectId: string;
+  projectName: string;
 }
 
-const VisitCount = ({ projectId }: VisitCountProps) => {
+const VisitCount = ({ projectName }: VisitCountProps) => {
   const router = useRouter();
   const { query } = router;
 
-  const { useVisitGraphInfosQuery } = useStatistics(projectId);
+  const { useVisitGraphInfosQuery } = useStatistics(projectName);
 
   const { data } = useVisitGraphInfosQuery({
     range: '1mo',

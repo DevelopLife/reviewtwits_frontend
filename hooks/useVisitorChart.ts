@@ -3,13 +3,13 @@ import useDates from 'hooks/useDates';
 import type { StatisticsRange } from 'typings/chart';
 
 interface useVisitorChartProps {
-  projectId: string;
+  projectName: string;
   range: StatisticsRange;
   interval: StatisticsRange;
 }
 
 const useVisitorChart = ({
-  projectId,
+  projectName,
   range,
   interval,
 }: useVisitorChartProps) => {
@@ -21,7 +21,7 @@ const useVisitorChart = ({
     changeReferenceDateIntoNextReferenceDate,
   } = useDates();
 
-  const { useVisitGraphInfosQuery } = useStatistics(projectId);
+  const { useVisitGraphInfosQuery } = useStatistics(projectName);
 
   const visitInfos = useVisitGraphInfosQuery({
     range,

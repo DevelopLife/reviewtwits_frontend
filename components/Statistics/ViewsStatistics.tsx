@@ -25,10 +25,10 @@ const TIME_PEROID_BUTTONS = [
 ];
 
 interface ViewsStatisticsProps {
-  projectId: string;
+  projectName: string;
 }
 
-const ViewsStatistics = ({ projectId }: ViewsStatisticsProps) => {
+const ViewsStatistics = ({ projectName }: ViewsStatisticsProps) => {
   // TODO: 하루 간격 한달 범위
   const [timePeroid, setTimePeroid] = useState<TimePeriod>('daily');
 
@@ -51,7 +51,7 @@ const ViewsStatistics = ({ projectId }: ViewsStatisticsProps) => {
   // onClickPrevButton,
   // onClickNextButton,
   // onClickBar,
-  // } = useVisitorChart({ projectId, ...intervals[interval] });
+  // } = useVisitorChart({ projectName, ...intervals[interval] });
   // const transformedData = visitInfos ? transformData(visitInfos) : [];
 
   // const focusedDateString = focusedDate.toLocaleDateString();
@@ -78,7 +78,7 @@ const ViewsStatistics = ({ projectId }: ViewsStatisticsProps) => {
         </S.StatisticsHeader>
         <S.GraphBox>
           <VisitorChart
-            projectId={projectId}
+            projectName={projectName}
             type="bar"
             timePeriod={timePeroid}
           />

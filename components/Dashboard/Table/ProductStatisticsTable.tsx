@@ -2,7 +2,7 @@ import Table from 'components/Dashboard/common/Table';
 import useStatistics from 'hooks/queries/statistics';
 
 interface ProductStatisticsTableProps {
-  projectId: string;
+  projectName: string;
 }
 
 const mockData = Array.from({ length: 5 }, (_, index) => ({
@@ -15,10 +15,11 @@ const mockData = Array.from({ length: 5 }, (_, index) => ({
   averageRating: '',
 }));
 
-const ProductStatisticsTable = ({ projectId }: ProductStatisticsTableProps) => {
-  const { useProductStatistics, useRequestInflowInfos } = useStatistics({
-    projectId,
-  });
+const ProductStatisticsTable = ({
+  projectName,
+}: ProductStatisticsTableProps) => {
+  const { useProductStatistics, useRequestInflowInfos } =
+    useStatistics(projectName);
 
   const { data: productStatisticsData } = useProductStatistics();
   // TODO: after DEL check success reqeust

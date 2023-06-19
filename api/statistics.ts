@@ -26,7 +26,7 @@ export const statisticsAPI = {
     return await publicAPI.post(`${STATISTICS_URL}/visited-info`, body);
   },
   dailyVisitGraphInfos: async (params: {
-    projectId: string;
+    projectName: string;
     range: string;
   }): Promise<AxiosResponse<DailyVisitGraphInfos>> => {
     return await requiredTokenApi.get(
@@ -37,14 +37,14 @@ export const statisticsAPI = {
     );
   },
   recentVisitCounts: async (params: {
-    projectId: string;
+    projectName: string;
   }): Promise<AxiosResponse<RecentVisitCounts>> => {
     return await requiredTokenApi.get(`${STATISTICS_URL}/recent-visit-counts`, {
       params,
     });
   },
   visitGraphInfos: async (params: {
-    projectId: string;
+    projectName: string;
     range: string;
     interval: string;
   }): Promise<AxiosResponse<VisitGraphInfos>> => {
@@ -52,31 +52,31 @@ export const statisticsAPI = {
       params,
     });
   },
-  requestInflowInfos: async (projectId: string) => {
+  requestInflowInfos: async (projectName: string) => {
     const { data } = await requiredTokenApi.get(
       `${STATISTICS_URL}/request-inflow-infos`,
       {
-        params: { projectId },
+        params: { projectName },
       }
     );
 
     return data;
   },
-  simpleProjectInfo: async (projectId: string) => {
+  simpleProjectInfo: async (projectName: string) => {
     const { data } = await requiredTokenApi.get(
       `${STATISTICS_URL}${DASHBOARD_URL}/simple-project-info`,
       {
-        params: { projectId },
+        params: { projectName },
       }
     );
 
     return data;
   },
-  productStatistics: async (projectId: string) => {
+  productStatistics: async (projectName: string) => {
     const { data } = await requiredTokenApi.get(
       `${STATISTICS_URL}${DASHBOARD_URL}/product-statistics`,
       {
-        params: { projectId },
+        params: { projectName },
       }
     );
 

@@ -26,14 +26,14 @@ const intervals: Intervals = {
 };
 
 interface VisitorChartProps {
-  projectId: string;
+  projectName: string;
   type: ChartType;
   timePeriod: TimePeriod;
 }
 
-const VisitorChart = ({ projectId, type, timePeriod }: VisitorChartProps) => {
-  // DEL: projectId만을 받고 나머지는 개별 useQueryHooks 에서 받도록 하자.
-  const { useVisitGraphInfosQuery } = useStatistics(projectId);
+const VisitorChart = ({ projectName, type, timePeriod }: VisitorChartProps) => {
+  // DEL: projectName만을 받고 나머지는 개별 useQueryHooks 에서 받도록 하자.
+  const { useVisitGraphInfosQuery } = useStatistics(projectName);
   const timePeriodParams = intervals[timePeriod];
 
   const { data } = useVisitGraphInfosQuery(timePeriodParams);

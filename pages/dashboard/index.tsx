@@ -10,16 +10,16 @@ import {
 
 const DashboardPage = () => {
   const router = useRouter();
-  const { projectId } = router.query as { projectId: string };
+  const { projectName } = router.query as { projectName: string };
 
   return (
     <DashboardPageLayout>
       <Margin marginTop={60} marginBottom={51}>
-        <ComprehensiveDataSection projectId={projectId} />
+        <ComprehensiveDataSection projectName={projectName} />
       </Margin>
-      <VisitSection projectId={projectId} />
+      <VisitSection projectName={projectName} />
       <Margin marginTop={70.58} marginBottom={60}>
-        <ProductStatisticsSection projectId={projectId} />
+        <ProductStatisticsSection projectName={projectName} />
       </Margin>
     </DashboardPageLayout>
   );

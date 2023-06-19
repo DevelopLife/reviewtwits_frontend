@@ -8,15 +8,15 @@ import { useRouter } from 'next/router';
 
 const ProjectStatisticsPage = () => {
   const router = useRouter();
-  const { projectId } = router.query as { projectId: string };
+  const { projectName } = router.query as { projectName: string };
 
   return (
     <StatisticsPageLayout>
       <Margin marginTop={60}>
-        <VisitorStatistics projectId={projectId} />
+        <VisitorStatistics projectName={projectName} />
       </Margin>
       <Margin marginTop={40}>
-        <ViewsStatistics projectId={projectId} />
+        <ViewsStatistics projectName={projectName} />
       </Margin>
       <Margin marginTop={48}>
         {/* <LeadTimeRate

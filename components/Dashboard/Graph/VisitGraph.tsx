@@ -12,13 +12,13 @@ type BoxSize = keyof typeof BOX_SIZES;
 type BoxSizeProps = { boxSize: BoxSize };
 
 interface VisitGraphProps {
-  projectId: string;
+  projectName: string;
   boxSize: BoxSize;
   graphType: ChartType;
 }
 
-const VisitGraph = ({ projectId, boxSize, graphType }: VisitGraphProps) => {
-  const { useVisitGraphInfosQuery } = useStatistics(projectId);
+const VisitGraph = ({ projectName, boxSize, graphType }: VisitGraphProps) => {
+  const { useVisitGraphInfosQuery } = useStatistics(projectName);
 
   const { data } = useVisitGraphInfosQuery({
     range: '1mo',
