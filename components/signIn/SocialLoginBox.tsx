@@ -1,4 +1,5 @@
 import * as S from './SocialLoginBox.styles';
+
 import { GoogleOauth } from 'components/common/Oauth/GoogleOauth';
 import { KakaoOauth } from 'components/common/Oauth/KakaoOauth';
 import { NaverOauth } from 'components/common/Oauth/NaverOauth';
