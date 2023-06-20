@@ -1,19 +1,12 @@
 import Shadow from './common/Shadow';
 import * as S from './LeadTimeRate.styles';
-// import SimpleLineChart from 'components/common/Charts/SimpleLineChart';
 import useStatistics from 'hooks/queries/statistics';
-import CustomBarChart from 'components/chart/CustomBarChart';
+import CommonLineChart from 'components/chart/CommonLineChart';
 interface ViewsStatisticsProps {
   projectName: string;
-  // chartDatas?: object[];
-  // dataKey: string;
 }
 
-const LeadTimeInfoSection = ({
-  projectName,
-}: // chartDatas,
-// dataKey,
-ViewsStatisticsProps) => {
+const LeadTimeInfoSection = ({ projectName }: ViewsStatisticsProps) => {
   const { useLeadTimeInfo } = useStatistics(projectName);
   const { data } = useLeadTimeInfo();
 
@@ -27,19 +20,12 @@ ViewsStatisticsProps) => {
       <S.Container>
         <S.LeadTimeTitle>시간별 리드타임 비율</S.LeadTimeTitle>
         <S.GraphBox>
-          {/* TODO: change line chart */}
-          <CustomBarChart
-            xAxisList={[
-              {
-                dataKey: 'time',
-              },
-            ]}
+          <CommonLineChart
             data={chartData}
-            barPropsList={[
-              {
-                dataKey: 'count',
-              },
-            ]}
+            chartKeys={{
+              xKey: ['time'],
+              tickKey: ['count'],
+            }}
           />
         </S.GraphBox>
       </S.Container>

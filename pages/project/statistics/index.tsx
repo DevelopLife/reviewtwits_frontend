@@ -20,11 +20,7 @@ const ProjectStatisticsPage = () => {
         <ViewsStatistics projectName={projectName} />
       </Margin>
       <Margin marginTop={48}>
-        <LeadTimeInfoSection
-          projectName={projectName}
-          // chartDatas={visitGraphInfos?.data}
-          // dataKey={'previousVisit'}
-        />
+        <LeadTimeInfoSection projectName={projectName} />
       </Margin>
 
       <Margin marginTop={32}>{/* <ProductStatistics /> */}</Margin>
