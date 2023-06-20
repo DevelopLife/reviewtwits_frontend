@@ -4,58 +4,61 @@ import type {
   BarProps,
   XAxisProps,
   YAxisProps,
+  LineProps,
 } from 'recharts';
 import {
   ResponsiveContainer,
-  BarChart,
   Legend,
   Tooltip,
   XAxis,
   YAxis,
-  Bar,
+  LineChart,
+  Line,
 } from 'recharts';
 import {
   NameType,
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
 
-interface CustomBarChartProps {
+interface CustomLineChartProps {
   data: object[];
   xAxisList?: XAxisProps[];
   yAxisList?: YAxisProps[];
   tooltipProps?: TooltipProps<ValueType, NameType>;
   legendProps?: LegendProps;
-  barPropsList: BarProps[];
+  linePropsList: LineProps[];
 }
 
-const CustomBarChart = ({
+const CustomLineChart = ({
   data,
   xAxisList,
   yAxisList,
   tooltipProps,
   legendProps,
-  barPropsList,
-}: CustomBarChartProps) => {
+  linePropsList,
+}: CustomLineChartProps) => {
   return (
     <ResponsiveContainer>
-      <BarChart data={data}>
-        {xAxisList?.map((props, index) => (
-          <XAxis key={`x-${index}`} {...props} />
-        ))}
-        {yAxisList?.map((props, index) => (
-          <YAxis key={`y-${index}`} {...props} />
-        ))}
+      <LineChart data={data}>
+        {xAxisList?.map(
+          (props, index) =>
+            props.dataKey && <XAxis key={`x-${index}`} {...props} />
+        )}
+        {yAxisList?.map(
+          (props, index) =>
+            props.dataKey && <YAxis key={`y-${index}`} {...props} />
+        )}
         {tooltipProps && <Tooltip {...tooltipProps} />}
         {legendProps && fixRefType(Legend, legendProps)}
-        {barPropsList.map((props, index) => fixRefType(Bar, props, index))}
-      </BarChart>
+        {linePropsList.map((props, index) => fixRefType(Line, props, index))}
+      </LineChart>
     </ResponsiveContainer>
   );
 };
 
 const fixRefType = (
   Element: any,
-  props: LegendProps | BarProps,
+  props: LegendProps | BarProps | LineProps,
   index?: number
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -63,6 +66,6 @@ const fixRefType = (
   return <Element key={index} {...restProps} />;
 };
 
-export default CustomBarChart;
+export default CustomLineChart;
 
 const S = {};
