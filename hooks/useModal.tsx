@@ -1,6 +1,7 @@
 import { useSetRecoilState } from 'recoil';
-import atomModal from 'states/AtomModal';
+
 import * as modals from '../components/common/Modal/modals';
+import atomModal from 'states/AtomModal';
 
 interface ShowModalProps {
   key: keyof typeof modals;
