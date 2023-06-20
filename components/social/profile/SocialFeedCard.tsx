@@ -5,6 +5,7 @@ import { useBoolean } from 'hooks/useBoolean';
 import MessageIcon from 'public/icons/message.svg';
 import SmileIcon from 'public/icons/smile.svg';
 import useRouteModalPage from 'hooks/useOpenModal';
+import { PAGE_LIST } from 'constants/routers';
 
 type FeedCardStyles = {
   width: number;
@@ -38,7 +39,11 @@ export const SocialFeedCard = ({
 }: SocialFeedCardProps) => {
   const { isOpen: isHover, setTrue, setFalse } = useBoolean(false);
 
-  const routeModalPage = useRouteModalPage(nickname, reviewId);
+  const routeModalPage = useRouteModalPage({
+    nickname,
+    reviewId,
+    page: PAGE_LIST.SOCIAL_PROFILE,
+  });
 
   const openModal = () => {
     routeModalPage();
