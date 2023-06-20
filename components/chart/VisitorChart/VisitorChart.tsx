@@ -10,15 +10,17 @@ import type {
   NameType,
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 import CustomBarChart from 'components/chart/CustomBarChart';
 import CustomVisitorTooltip from 'components/chart/VisitorChart/CustomVisitorTooltip';
 import CustomBar from 'components/chart/CustomBar';
+import Shadow from 'components/Dashboard/common/Shadow';
 import useStatistics from 'hooks/queries/statistics';
 import dateChartTickFormatter, { transformData } from 'utils/charts';
+import { isFocusedTimeStampAtom } from 'states/isFocusedTimeStamp';
 import type { ChartType, Intervals, TimePeriod } from 'typings/chart';
-import Shadow from 'components/Dashboard/common/Shadow';
 
 const intervals: Intervals = {
   daily: { range: '1mo', interval: '1d' },
@@ -33,17 +35,27 @@ interface VisitorChartProps {
 }
 
 const VisitorChart = ({ projectName, type, timePeriod }: VisitorChartProps) => {
-  // DEL: projectName만을 받고 나머지는 개별 useQueryHooks 에서 받도록 하자.
   const { useVisitGraphInfosQuery } = useStatistics(projectName);
   const timePeriodParams = intervals[timePeriod];
 
   const { data } = useVisitGraphInfosQuery(timePeriodParams);
-
   const visitInfos = data?.data.visitInfo;
   const transformedVisitInfo = transformData(visitInfos || []);
 
-  const [focusedBarIndex, setFocusedBarIndex] = useState(-1);
+  const setFocusedTimeStamp = useSetRecoilState(isFocusedTimeStampAtom);
+  const lastIndex = transformedVisitInfo.length - 1;
+  const [focusedBarIndex, setFocusedBarIndex] = useState(lastIndex);
+  const focusedBarTimeStamp = visitInfos?.[focusedBarIndex]?.timeStamp;
+
   const onClick = (index: number) => setFocusedBarIndex(index);
+
+  useEffect(() => {
+    focusedBarTimeStamp && setFocusedTimeStamp(focusedBarTimeStamp);
+  }, [focusedBarTimeStamp, setFocusedTimeStamp]);
+
+  useEffect(() => {
+    setFocusedBarIndex(lastIndex);
+  }, [lastIndex]);
 
   if (visitInfos) {
     return (
