@@ -1,8 +1,8 @@
-import LeadTimeRate from './LeadTimeRate';
+import LeadTimeInfoSection from './LeadTimeInfoSection';
 
 export default {
-  title: 'ServiceManagement/Statistics/LeadTimeRate',
-  component: LeadTimeRate,
+  title: 'ServiceManagement/Statistics/LeadTimeInfoSection',
+  component: LeadTimeInfoSection,
 };
 
-export const Basic = () => <LeadTimeRate dataKey={''} />;
+export const Basic = () => <LeadTimeInfoSection projectName="testtest" />;

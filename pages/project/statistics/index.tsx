@@ -1,4 +1,5 @@
 import {
+  LeadTimeInfoSection,
   ViewsStatistics,
   VisitorStatistics,
 } from 'components/Statistics/@index';
@@ -19,10 +20,11 @@ const ProjectStatisticsPage = () => {
         <ViewsStatistics projectName={projectName} />
       </Margin>
       <Margin marginTop={48}>
-        {/* <LeadTimeRate
-            chartDatas={visitGraphInfos?.data}
-            dataKey={'previousVisit'}
-          /> */}
+        <LeadTimeInfoSection
+          projectName={projectName}
+          // chartDatas={visitGraphInfos?.data}
+          // dataKey={'previousVisit'}
+        />
       </Margin>
 
       <Margin marginTop={32}>{/* <ProductStatistics /> */}</Margin>
