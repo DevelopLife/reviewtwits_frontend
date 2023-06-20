@@ -1,7 +1,7 @@
 {
   "Print to Console": {
     "prefix": "cl",
-    "body": "console.log('$1');",
+    "body": "console.log($1);",
     "description": "Log output to console"
   },
   "Function Component": {
