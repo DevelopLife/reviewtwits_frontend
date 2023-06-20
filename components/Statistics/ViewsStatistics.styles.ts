@@ -59,7 +59,7 @@ const IntervalButton = styled.button<{ isFocus: boolean }>`
       color: ${isFocus ? theme.colors.white : theme.colors.gray_6};
       border: 1px solid ${theme.colors.gray_6};
 
-      &:first-child {
+      &:first-of-type {
         border-radius: 10px 0 0 10px;
       }
 
