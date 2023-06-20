@@ -4,6 +4,7 @@ import { publicAPI, requiredTokenApi } from 'api/instance';
 import type {
   DailyVisitGraphInfos,
   DeviceType,
+  LeadTimeInfo,
   RecentVisitCounts,
   VisitGraphInfos,
 } from 'typings/statistics';
@@ -78,6 +79,15 @@ export const statisticsAPI = {
       {
         params: { projectName },
       }
+    );
+
+    return data;
+  },
+
+  readTimeInfo: async (projectName: string): Promise<LeadTimeInfo> => {
+    const { data } = await requiredTokenApi.get(
+      `${STATISTICS_URL}/readtime-info`,
+      { params: { projectName } }
     );
 
     return data;

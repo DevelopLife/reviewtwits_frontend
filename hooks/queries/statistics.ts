@@ -85,6 +85,14 @@ const useStatistics = (projectName: string) => {
     );
   };
 
+  const useLeadTimeInfo = () => {
+    return useQuery(
+      ['useLeadTimeInfo', projectName],
+      () => statisticsAPI.readTimeInfo(projectName),
+      queryOptions
+    );
+  };
+
   return {
     useRecentVisitCountsQuery,
     useSimpleProjectInfo,
@@ -92,6 +100,7 @@ const useStatistics = (projectName: string) => {
     useRequestInflowInfos,
     useDailyVisitGraphInfosQuery,
     useVisitGraphInfosQuery,
+    useLeadTimeInfo,
   };
 };
 
