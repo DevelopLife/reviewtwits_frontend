@@ -26,5 +26,6 @@ const S = {
     gap: 46px;
 
     width: 1200px;
+    height: 1000px;
   `,
 };

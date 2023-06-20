@@ -24,35 +24,37 @@ const VisitCount = ({ projectName }: VisitCountProps) => {
   const visitCountData = data?.data;
 
   return (
-    <Shadow>
-      <S.Container>
-        <S.Datas>
-          <S.Data>
-            <S.DataTitle>오늘 방문수</S.DataTitle>
-            <S.DataDesc>{visitCountData?.todayVisit || 0}</S.DataDesc>
-          </S.Data>
-          <S.Data>
-            <S.DataTitle>어제 방문수</S.DataTitle>
-            <S.DataDesc>{visitCountData?.yesterdayVisit || 0}</S.DataDesc>
-          </S.Data>
-          <S.Data>
-            <S.DataTitle>누적 방문수</S.DataTitle>
-            <S.DataDesc>{visitCountData?.totalVisit || 0}</S.DataDesc>
-          </S.Data>
-        </S.Datas>
-        <Link
-          href={{
-            pathname: '/statistics/project',
-            query,
-          }}
-        >
-          <Button>
-            방문 통계
-            <Image width={30} height={30} src="" alt="mock" />
-          </Button>
-        </Link>
-      </S.Container>
-    </Shadow>
+    <S.Container>
+      <Shadow>
+        <S.Flex>
+          <S.Datas>
+            <S.Data>
+              <S.DataTitle>오늘 방문수</S.DataTitle>
+              <S.DataDesc>{visitCountData?.todayVisit || 0}</S.DataDesc>
+            </S.Data>
+            <S.Data>
+              <S.DataTitle>어제 방문수</S.DataTitle>
+              <S.DataDesc>{visitCountData?.yesterdayVisit || 0}</S.DataDesc>
+            </S.Data>
+            <S.Data>
+              <S.DataTitle>누적 방문수</S.DataTitle>
+              <S.DataDesc>{visitCountData?.totalVisit || 0}</S.DataDesc>
+            </S.Data>
+          </S.Datas>
+          <Link
+            href={{
+              pathname: '/statistics/project',
+              query,
+            }}
+          >
+            <Button>
+              방문 통계
+              <Image width={30} height={30} src="" alt="mock" />
+            </Button>
+          </Link>
+        </S.Flex>
+      </Shadow>
+    </S.Container>
   );
 };
 
@@ -61,21 +63,14 @@ export default VisitCount;
 const S = {
   Container: styled.div`
     width: 1200px;
-    height: 129px;
-
     margin: auto;
-    padding-left: 35px;
-    padding-right: 35px;
-
+  `,
+  Flex: styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
-    background: #ffffff;
-
-    box-shadow: 4px 4px 23px rgba(0, 0, 0, 0.14);
-    border-radius: 15px;
+    padding: 35px;
   `,
 
   Datas: styled.div`

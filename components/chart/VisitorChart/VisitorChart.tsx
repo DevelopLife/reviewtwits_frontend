@@ -18,6 +18,7 @@ import CustomBar from 'components/chart/CustomBar';
 import useStatistics from 'hooks/queries/statistics';
 import dateChartTickFormatter, { transformData } from 'utils/charts';
 import type { ChartType, Intervals, TimePeriod } from 'typings/chart';
+import Shadow from 'components/Dashboard/common/Shadow';
 
 const intervals: Intervals = {
   daily: { range: '1mo', interval: '1d' },
@@ -102,9 +103,11 @@ interface VisitorChartViewProps {
 const VisitorChartView = (props: VisitorChartViewProps) => {
   if (props.type === 'bar') {
     return (
-      <S.VisitorChartContainer>
-        <CustomBarChart {...props} />
-      </S.VisitorChartContainer>
+      <Shadow>
+        <S.VisitorChartContainer>
+          <CustomBarChart {...props} />
+        </S.VisitorChartContainer>
+      </Shadow>
     );
   }
   if (props.type === 'line') {
