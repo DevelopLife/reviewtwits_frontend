@@ -22,7 +22,6 @@ const ProjectStatisticsPage = () => {
       <Margin marginTop={48}>
         <LeadTimeInfoSection projectName={projectName} />
       </Margin>
-
       <Margin marginTop={32}>{/* <ProductStatistics /> */}</Margin>
       <Margin marginBottom={60} />
     </StatisticsPageLayout>

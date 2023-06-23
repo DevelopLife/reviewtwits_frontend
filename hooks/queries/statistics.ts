@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { statisticsAPI } from 'api/statistics';
 import type { StatisticsRange } from 'typings/chart';
+import type { VisitTimeStamp } from 'typings/statistics';
 
 interface useVisitGraphInfosQueryProps {
-  // projectName?: string;
   range: StatisticsRange;
   interval: StatisticsRange;
-  referenceData?: Date;
+  endDate?: VisitTimeStamp;
 }
 
 interface useDailyVisitGraphInfosQueryProps {
@@ -69,6 +69,7 @@ const useStatistics = (projectName: string) => {
   const useVisitGraphInfosQuery = ({
     range,
     interval,
+    endDate,
   }: useVisitGraphInfosQueryProps) => {
     return useQuery(
       ['visitGraphInfos', projectName, range, interval],
@@ -77,6 +78,7 @@ const useStatistics = (projectName: string) => {
           projectName: projectName,
           range,
           interval,
+          endDate,
         }),
       {
         ...queryOptions,

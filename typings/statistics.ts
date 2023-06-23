@@ -1,7 +1,7 @@
 export type DeviceType = 'MOBILE' | 'PC';
 
 export type VisitInfo = {
-  timeStamp: string;
+  timeStamp: VisitTimeStamp;
   visitCount: number;
   previousCompare: number;
 };
@@ -20,6 +20,10 @@ export type RecentVisitCounts = {
   yesterdayVisit: number;
   totalVisit: number;
 };
+
+export type VisitTimeStamp = `${number}${number}${number}${number}-${
+  | 0
+  | 1}${number}-${0 | 1 | 2 | 3}${number}`;
 
 export type VisitGraphInfos = {
   interval: '3d';

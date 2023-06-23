@@ -7,6 +7,7 @@ import type {
   LeadTimeInfo,
   RecentVisitCounts,
   VisitGraphInfos,
+  VisitTimeStamp,
 } from 'typings/statistics';
 
 const STATISTICS_URL = '/statistics';
@@ -48,6 +49,7 @@ export const statisticsAPI = {
     projectName: string;
     range: string;
     interval: string;
+    endDate?: VisitTimeStamp;
   }): Promise<AxiosResponse<VisitGraphInfos>> => {
     return await requiredTokenApi.get(`${STATISTICS_URL}/visit-graph-infos`, {
       params,
