@@ -7,14 +7,12 @@ import {
   useEffect,
   useCallback,
 } from 'react';
-import { useQuery } from '@tanstack/react-query';
 
-import { ProductInfoType, ProductSearchResultType } from 'typings/product';
+import { ProductSearchResultType } from 'typings/product';
 
 import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
 import RatingBox from 'components/review/common/RatingBox';
-import itemsAPI from 'api/items';
 import { useGetProductInfo, useGetSearchResult } from 'hooks/queries/items';
 
 interface SearchBoxProps {
