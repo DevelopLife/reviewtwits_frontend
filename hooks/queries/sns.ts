@@ -277,6 +277,14 @@ export const useFollowAndUnFollow = () => {
   };
 };
 
+export const useIsFollowingDictionary = () => {
+  const data = useQuery<FollowingDictionary>(FOLLOWING_DICTIONARY_KEY, {
+    networkMode: 'offlineFirst',
+  });
+
+  return data;
+};
+
 export const useGetSocialProfile = (nickname: string) => {
   const socialProfileQuery = useQuery(
     ['socialProfile'],
