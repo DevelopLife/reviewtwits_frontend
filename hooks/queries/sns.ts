@@ -15,7 +15,11 @@ import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
-import { CommentResponseType, ReviewResponseType } from 'typings/reviews';
+import {
+  CommentResponseType,
+  ProductType,
+  ReviewResponseType,
+} from 'typings/reviews';
 import { selectedUserState } from 'states/reviews';
 
 export const FOLLOWING_DICTIONARY_KEY = ['FollowingDictionary'];
@@ -353,4 +357,11 @@ export const useGetFollowSuggestion = () => {
       refetchOnWindowFocus: false,
     }
   );
+};
+
+export const useTrandyProductsContent = () => {
+  const data = useQuery<ProductType[]>(['trend'], () =>
+    snsAPI.getTrendyProducts()
+  );
+  return data;
 };

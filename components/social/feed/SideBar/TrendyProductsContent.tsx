@@ -1,16 +1,11 @@
 import styled from '@emotion/styled';
 
-import { useQuery } from '@tanstack/react-query';
-import { snsAPI } from 'api/sns';
-import { ProductType } from 'typings/reviews';
-
 import Card from '../Card';
 import Product from './Product';
+import { useTrandyProductsContent } from 'hooks/queries/sns';
 
 const TrendyProductsContent = () => {
-  const { data: products } = useQuery<ProductType[]>(['trend'], () =>
-    snsAPI.getTrendyProducts()
-  );
+  const { data: products } = useTrandyProductsContent();
 
   return (
     <Card color="text_black_100">
