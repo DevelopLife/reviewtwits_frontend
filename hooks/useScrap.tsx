@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { snsAPI } from 'api/sns';
-
-const INFINITE_FEED_QUERY_KEY = 'useGetInfiniteFeed';
+import { queryKey } from 'hooks/queries';
 
 const useScrap = (reviewId: number) => {
   const queryClient = useQueryClient();
@@ -9,8 +8,8 @@ const useScrap = (reviewId: number) => {
     () => snsAPI.addScrap(reviewId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
-        queryClient.invalidateQueries(['review', reviewId]);
+        queryClient.invalidateQueries(queryKey.socialInfiniteFeed());
+        queryClient.invalidateQueries(queryKey.review(reviewId));
       },
     }
   );
@@ -18,8 +17,8 @@ const useScrap = (reviewId: number) => {
     () => snsAPI.deleteScrap(reviewId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
-        queryClient.invalidateQueries(['review', reviewId]);
+        queryClient.invalidateQueries(queryKey.socialInfiniteFeed());
+        queryClient.invalidateQueries(queryKey.review(reviewId));
       },
     }
   );
