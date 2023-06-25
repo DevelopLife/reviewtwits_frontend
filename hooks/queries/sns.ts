@@ -272,7 +272,7 @@ export const useFollowAndUnFollow = () => {
 
 export const useGetSocialProfile = (nickname: string) => {
   const socialProfileQuery = useQuery(
-    queryKey.socialProfile(),
+    queryKey.socialUserProfile(),
     () => snsAPI.getProfile(nickname),
     {
       enabled: !!nickname,

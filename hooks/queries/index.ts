@@ -9,6 +9,7 @@ type ProductName = string | undefined;
 type SearchValue = string;
 
 export const queryKey = {
+  myProfile: (isLogin: boolean) => ['myProfile', isLogin],
   /*
 
     shoppingMall
@@ -36,7 +37,7 @@ export const queryKey = {
 
   */
 
-  socialProfile: () => ['socialProfile'],
+  socialUserProfile: () => ['socialProfile'],
 
   // social follow
   followingList: () => ['followingList'],
@@ -45,6 +46,7 @@ export const queryKey = {
   followerSuggestion: () => ['followSuggestion'],
 
   // social home
+  socialtTrendProducts: () => ['socialTrendProucts'],
   socialInfiniteFeed: () => ['useSocialInfiniteFeed'],
   userReviews: (nickname: Nickname) => ['userReviews', nickname],
   userOneReview: (reviewId: ReviewId) => ['userOneReview', reviewId],
