@@ -68,13 +68,6 @@ const ViewsStatistics = ({ projectName }: ViewsStatisticsProps) => {
             type="bar"
             timePeriod={timePeroid}
           />
-          {/* <SimpleBarChart
-            data={transformedData}
-            focusedDate={focusedDate}
-            onClickLeftButton={onClickPrevButton}
-            onClickRightButton={onClickNextButton}
-            onClickBar={onClickBar}
-          /> */}
         </S.GraphBox>
       </S.Container>
     </Shadow>

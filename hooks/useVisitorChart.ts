@@ -1,46 +1,85 @@
-import useStatistics from 'hooks/queries/statistics';
-import useDates from 'hooks/useDates';
-import type { StatisticsRange } from 'typings/chart';
+import { useEffect } from 'react';
 
-interface useVisitorChartProps {
+import useStatistics from 'hooks/queries/statistics';
+import useEndDate from 'hooks/useEndDate';
+import useChartState from 'hooks/useChartState';
+import { transformData } from 'utils/charts';
+import type { ChartType, TimePeriod } from 'typings/chart';
+import { intervals } from 'constants/chart';
+
+interface VisitorChartProps {
   projectName: string;
-  range: StatisticsRange;
-  interval: StatisticsRange;
+  type: ChartType;
+  timePeriod: TimePeriod;
 }
 
-const useVisitorChart = ({
+// 여기서는 직접적으로 visitorChart관련된 로직
+export const useVisitorChart = ({
   projectName,
-  range,
-  interval,
-}: useVisitorChartProps) => {
-  const {
-    referenceDate,
-    focusedDate,
-    changeFocusedDate,
-    changeReferenceDateIntoPreviousReferenceDate,
-    changeReferenceDateIntoNextReferenceDate,
-  } = useDates();
-
+  timePeriod,
+}: VisitorChartProps) => {
+  const { chartStates, changeDate, changeIndex } = useChartState({
+    chartName: 'visitorChart',
+  });
+  // api 호출위한 부분
+  const timePeriodParams = intervals[timePeriod];
+  // api 호출하는 부분
   const { useVisitGraphInfosQuery } = useStatistics(projectName);
+  const { data } = useVisitGraphInfosQuery({
+    ...timePeriodParams,
+    endDate: chartStates.visitorChart.endDate,
+  });
 
-  const visitInfos = useVisitGraphInfosQuery({
-    range,
-    interval,
-  }).data?.data?.visitInfo.map(({ timeStamp }) => new Date(timeStamp));
+  // 차트에서 쓰려고 변환하는 부분
+  const visitInfos = data?.data.visitInfo;
+  const transformedVisitInfo = transformData(visitInfos || []);
+
+  const focusedBarTimeStamp =
+    visitInfos?.[chartStates.visitorChart.focusedElementIndex]?.timeStamp;
+
+  // index가 변경이 되면 data의 index로 접근해서 state를 변경하는 부분
+  useEffect(() => {
+    focusedBarTimeStamp && changeDate(focusedBarTimeStamp);
+  }, [changeDate, focusedBarTimeStamp]);
+
+  const { buttonStates, onClickPrevChartButton, onClickNextChartButton } =
+    useVisitorChartChage(transformedVisitInfo, timePeriod);
 
   return {
-    referenceDate,
-    focusedDate,
-    visitInfos: useVisitGraphInfosQuery({ range, interval }).data?.data
-      ?.visitInfo,
-    onClickBar: changeFocusedDate,
-    onClickPrevButton: () =>
-      visitInfos?.length &&
-      changeReferenceDateIntoPreviousReferenceDate(visitInfos),
-    onClickNextButton: () =>
-      visitInfos?.length &&
-      changeReferenceDateIntoNextReferenceDate(visitInfos),
+    chartState: chartStates,
+    chartButtonState: buttonStates,
+    chartData: transformedVisitInfo,
+    onClickBar: changeIndex,
+    onClickPrevButton: onClickPrevChartButton,
+    onClickNextButton: onClickNextChartButton,
   };
 };
 
-export default useVisitorChart;
+export const useVisitorChartChage = (
+  data: { timeStamp: string }[],
+  timePeriod: TimePeriod
+) => {
+  const { changeDate } = useChartState({ chartName: 'visitorChart' });
+  const endVisitTimeStamp = data[data.length - 1]?.timeStamp;
+  const firstVisitTimeStamp = data[0]?.timeStamp;
+
+  const firstVisitDate = new Date(firstVisitTimeStamp);
+  const lastVisitDate = new Date(endVisitTimeStamp);
+
+  const timePeriodParams = intervals[timePeriod];
+
+  const { buttonStates, onClickPrevChartButton, onClickNextChartButton } =
+    useEndDate({
+      firstDate: firstVisitDate,
+      lastDate: lastVisitDate,
+      interval: timePeriodParams.interval,
+      range: timePeriodParams.range,
+      refetch: changeDate,
+    });
+
+  return {
+    buttonStates,
+    onClickPrevChartButton,
+    onClickNextChartButton,
+  };
+};

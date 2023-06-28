@@ -72,14 +72,16 @@ const useStatistics = (projectName: string) => {
     endDate,
   }: useVisitGraphInfosQueryProps) => {
     return useQuery(
-      ['visitGraphInfos', projectName, range, interval],
-      () =>
-        statisticsAPI.visitGraphInfos({
+      ['visitGraphInfos', projectName, range, interval, endDate],
+      () => {
+        return statisticsAPI.visitGraphInfos({
           projectName: projectName,
           range,
           interval,
           endDate,
-        }),
+        });
+      },
+
       {
         ...queryOptions,
         ...{ enabled: !!projectName && !!range && !!interval },

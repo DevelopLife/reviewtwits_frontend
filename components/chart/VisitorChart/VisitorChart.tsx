@@ -10,23 +10,15 @@ import type {
   NameType,
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
-import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import type { ReactNode } from 'react';
 
+import type { ChartType, TimePeriod } from 'typings/chart';
 import CustomBarChart from 'components/chart/CustomBarChart';
 import CustomVisitorTooltip from 'components/chart/VisitorChart/CustomVisitorTooltip';
 import CustomBar from 'components/chart/CustomBar';
-import Shadow from 'components/Dashboard/common/Shadow';
-import useStatistics from 'hooks/queries/statistics';
-import dateChartTickFormatter, { transformData } from 'utils/charts';
-import { isFocusedTimeStampAtom } from 'states/isFocusedTimeStamp';
-import type { ChartType, Intervals, TimePeriod } from 'typings/chart';
-
-const intervals: Intervals = {
-  daily: { range: '1mo', interval: '1d' },
-  weekly: { range: '3mo', interval: '7d' },
-  monthly: { range: '1y', interval: '1mo' },
-};
+import VisitorChartButton from 'components/chart/VisitorChart/VisitorChartButton';
+import dateChartTickFormatter from 'utils/charts';
+import { useVisitorChart } from 'hooks/useVisitorChart';
 
 interface VisitorChartProps {
   projectName: string;
@@ -35,33 +27,24 @@ interface VisitorChartProps {
 }
 
 const VisitorChart = ({ projectName, type, timePeriod }: VisitorChartProps) => {
-  const { useVisitGraphInfosQuery } = useStatistics(projectName);
-  const timePeriodParams = intervals[timePeriod];
+  const {
+    chartState,
+    chartButtonState,
+    chartData,
+    onClickBar,
+    onClickPrevButton,
+    onClickNextButton,
+  } = useVisitorChart({
+    projectName,
+    timePeriod,
+    type,
+  });
 
-  const { data } = useVisitGraphInfosQuery(timePeriodParams);
-  const visitInfos = data?.data.visitInfo;
-  const transformedVisitInfo = transformData(visitInfos || []);
-
-  const setFocusedTimeStamp = useSetRecoilState(isFocusedTimeStampAtom);
-  const lastIndex = transformedVisitInfo.length - 1;
-  const [focusedBarIndex, setFocusedBarIndex] = useState(lastIndex);
-  const focusedBarTimeStamp = visitInfos?.[focusedBarIndex]?.timeStamp;
-
-  const onClick = (index: number) => setFocusedBarIndex(index);
-
-  useEffect(() => {
-    focusedBarTimeStamp && setFocusedTimeStamp(focusedBarTimeStamp);
-  }, [focusedBarTimeStamp, setFocusedTimeStamp]);
-
-  useEffect(() => {
-    setFocusedBarIndex(lastIndex);
-  }, [lastIndex]);
-
-  if (visitInfos) {
+  if (chartData) {
     return (
       <VisitorChartView
         type={type}
-        data={transformedVisitInfo}
+        data={chartData}
         xAxisList={[
           {
             dataKey: 'timeStamp',
@@ -73,7 +56,7 @@ const VisitorChart = ({ projectName, type, timePeriod }: VisitorChartProps) => {
             axisLine: false,
             tickLine: false,
             tickFormatter: (value, index) =>
-              dateChartTickFormatter.month(value, index, transformedVisitInfo),
+              dateChartTickFormatter.month(value, index, chartData),
           },
         ]}
         tooltipProps={{
@@ -84,13 +67,29 @@ const VisitorChart = ({ projectName, type, timePeriod }: VisitorChartProps) => {
             dataKey: 'visitCount',
             shape: (props) => (
               <CustomBar
-                onClick={onClick}
-                focusedBarIndex={focusedBarIndex}
+                onClick={onClickBar}
+                focusedBarIndex={chartState.visitorChart.focusedElementIndex}
                 {...props}
               />
             ),
           },
         ]}
+        buttons={{
+          left: (
+            <VisitorChartButton
+              direction={'left'}
+              disabled={chartButtonState.left}
+              onClick={onClickPrevButton}
+            />
+          ),
+          right: (
+            <VisitorChartButton
+              direction={'right'}
+              disabled={chartButtonState.right}
+              onClick={onClickNextButton}
+            />
+          ),
+        }}
       />
     );
   }
@@ -110,16 +109,19 @@ interface VisitorChartViewProps {
   tooltipProps?: TooltipProps<ValueType, NameType>;
   legendProps?: LegendProps;
   barPropsList: BarProps[];
+  buttons: { left: ReactNode; right: ReactNode };
 }
 
 const VisitorChartView = (props: VisitorChartViewProps) => {
   if (props.type === 'bar') {
     return (
-      <Shadow>
-        <S.VisitorChartContainer>
-          <CustomBarChart {...props} />
-        </S.VisitorChartContainer>
-      </Shadow>
+      <S.VisitorChartContainer>
+        <CustomBarChart {...props} />
+        <S.ChartButtonWrap>
+          {props.buttons.left && props.buttons.left}
+          {props.buttons.right && props.buttons.right}
+        </S.ChartButtonWrap>
+      </S.VisitorChartContainer>
     );
   }
   if (props.type === 'line') {
@@ -131,7 +133,16 @@ const VisitorChartView = (props: VisitorChartViewProps) => {
 
 const S = {
   VisitorChartContainer: styled.section`
+    position: relative;
     width: 100%;
     height: 100%;
+  `,
+  ChartButtonWrap: styled.div`
+    position: absolute;
+    display: flex;
+    left: -3%;
+    right: -3%;
+    bottom: 5%;
+    justify-content: space-between;
   `,
 };

@@ -17,8 +17,6 @@ const VisitorStatistics = ({ projectName }: VisitorStatisticsProps) => {
   const { useRecentVisitCountsQuery } = useStatistics(projectName);
   const { data: recentVisitCounts, isLoading } = useRecentVisitCountsQuery();
 
-  //TODO: Suspense
-
   const recentCountDatas: RecentCountDatas[] = [
     {
       text: '오늘 방문수',

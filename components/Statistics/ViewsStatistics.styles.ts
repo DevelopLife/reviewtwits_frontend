@@ -6,13 +6,10 @@ const Container = styled.div`
   flex-direction: column;
   gap: 16px;
 
-  width: 1360px;
+  width: 100%;
   height: 100%;
 
-  padding-top: 52px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 31.85px;
+  padding: 50px 40px;
 `;
 
 const StatisticsTitle = styled.h3`
@@ -43,8 +40,9 @@ const StatisticsHeader = styled.div`
 `;
 
 const GraphBox = styled.div`
-  width: 1360px;
-  flex: 1;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
 `;
 
 const IntervalButtonWrap = styled.div``;
