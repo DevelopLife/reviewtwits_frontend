@@ -19,14 +19,21 @@ import CustomBar from 'components/chart/CustomBar';
 import VisitorChartButton from 'components/chart/VisitorChart/VisitorChartButton';
 import dateChartTickFormatter from 'utils/charts';
 import { useVisitorChart } from 'hooks/useVisitorChart';
+import CustomLineChart from 'components/chart/CustomLineChart';
 
 interface VisitorChartProps {
   projectName: string;
   type: ChartType;
+  isButton: boolean;
   timePeriod: TimePeriod;
 }
 
-const VisitorChart = ({ projectName, type, timePeriod }: VisitorChartProps) => {
+const VisitorChart = ({
+  projectName,
+  type,
+  isButton,
+  timePeriod,
+}: VisitorChartProps) => {
   const {
     chartState,
     chartButtonState,
@@ -74,22 +81,26 @@ const VisitorChart = ({ projectName, type, timePeriod }: VisitorChartProps) => {
             ),
           },
         ]}
-        buttons={{
-          left: (
-            <VisitorChartButton
-              direction={'left'}
-              disabled={chartButtonState.left}
-              onClick={onClickPrevButton}
-            />
-          ),
-          right: (
-            <VisitorChartButton
-              direction={'right'}
-              disabled={chartButtonState.right}
-              onClick={onClickNextButton}
-            />
-          ),
-        }}
+        buttons={
+          isButton
+            ? {
+                left: (
+                  <VisitorChartButton
+                    direction={'left'}
+                    disabled={chartButtonState.left}
+                    onClick={onClickPrevButton}
+                  />
+                ),
+                right: (
+                  <VisitorChartButton
+                    direction={'right'}
+                    disabled={chartButtonState.right}
+                    onClick={onClickNextButton}
+                  />
+                ),
+              }
+            : null
+        }
       />
     );
   }
@@ -109,7 +120,7 @@ interface VisitorChartViewProps {
   tooltipProps?: TooltipProps<ValueType, NameType>;
   legendProps?: LegendProps;
   barPropsList: BarProps[];
-  buttons: { left: ReactNode; right: ReactNode };
+  buttons: { left: ReactNode; right: ReactNode } | null;
 }
 
 const VisitorChartView = (props: VisitorChartViewProps) => {
@@ -118,14 +129,22 @@ const VisitorChartView = (props: VisitorChartViewProps) => {
       <S.VisitorChartContainer>
         <CustomBarChart {...props} />
         <S.ChartButtonWrap>
-          {props.buttons.left && props.buttons.left}
-          {props.buttons.right && props.buttons.right}
+          {props.buttons?.left && props.buttons?.left}
+          {props.buttons?.right && props.buttons?.right}
         </S.ChartButtonWrap>
       </S.VisitorChartContainer>
     );
   }
   if (props.type === 'line') {
-    return <div>{props.type}</div>;
+    return (
+      <S.VisitorChartContainer>
+        <CustomLineChart {...props} linePropsList={props.barPropsList} />
+        <S.ChartButtonWrap>
+          {props.buttons?.left && props.buttons.left}
+          {props.buttons?.right && props.buttons.right}
+        </S.ChartButtonWrap>
+      </S.VisitorChartContainer>
+    );
   }
 
   return null;

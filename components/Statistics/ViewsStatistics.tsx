@@ -65,8 +65,9 @@ const ViewsStatistics = ({ projectName }: ViewsStatisticsProps) => {
         <S.GraphBox>
           <VisitorChart
             projectName={projectName}
-            type="bar"
             timePeriod={timePeroid}
+            type="bar"
+            isButton
           />
         </S.GraphBox>
       </S.Container>

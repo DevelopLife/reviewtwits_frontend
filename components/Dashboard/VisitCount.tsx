@@ -43,7 +43,7 @@ const VisitCount = ({ projectName }: VisitCountProps) => {
           </S.Datas>
           <Link
             href={{
-              pathname: '/statistics/project',
+              pathname: '/project/statistics',
               query,
             }}
           >

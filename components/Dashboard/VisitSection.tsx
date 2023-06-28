@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 // import VisitGraph from 'components/Dashboard/Graph/VisitGraph';
 import VisitCount from 'components/Dashboard/VisitCount';
+import Shadow from 'components/Dashboard/common/Shadow';
 import VisitorChart from 'components/chart/VisitorChart/VisitorChart';
 
 interface VisitSectionProps {
@@ -12,7 +13,14 @@ const DashBoardVisitSection = ({ projectName }: VisitSectionProps) => {
   return (
     <S.Container>
       <VisitCount projectName={projectName} />
-      <VisitorChart projectName={projectName} type="bar" timePeriod={'daily'} />
+      <Shadow>
+        <VisitorChart
+          projectName={projectName}
+          type="line"
+          isButton={false}
+          timePeriod={'daily'}
+        />
+      </Shadow>
     </S.Container>
   );
 };
