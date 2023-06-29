@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import useModal from 'hooks/useModal';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import atomModal from 'states/AtomModal';
+import atomModal from 'states/atomModal';
 import * as modals from './modals';
 import { useRouter } from 'next/router';
 

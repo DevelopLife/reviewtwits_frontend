@@ -4,13 +4,12 @@ import { UserProfileResponseType } from 'typings/account';
 
 import { isLoginState } from 'states/isLogin';
 import { useRecoilValue } from 'recoil';
-
-const USER_PROFILE_QUERY = 'userProfile';
+import { queryKey } from 'hooks/queries';
 
 export const useUserProfile = () => {
   const isLogin = useRecoilValue(isLoginState);
   const { data: userData } = useQuery<UserProfileResponseType>(
-    [USER_PROFILE_QUERY, isLogin],
+    queryKey.myProfile(isLogin),
     usersAPI.getUserProfile,
     {
       enabled: !!isLogin,
