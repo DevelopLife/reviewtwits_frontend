@@ -47,8 +47,6 @@ export default Table;
 
 const S = {
   Table: styled.table`
-    width: 1348px;
-    height: 283px;
     margin: 1rem;
   `,
   TableHeader: styled.th`
@@ -58,7 +56,8 @@ const S = {
   TableRow: styled.tr``,
   TableData: styled.td`
     vertical-align: middle;
-    border-bottom: ${({ theme }) => `1px solid ${theme.colors.gray_1}`};
-    padding: 1rem 0;
+
+    border-bottom: ${({ theme }) => `1px solid ${theme.colors.gray_3}`};
+    padding: 2rem 0;
   `,
 };

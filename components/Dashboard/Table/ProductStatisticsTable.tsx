@@ -22,8 +22,6 @@ const ProductStatisticsTable = ({
     useStatistics(projectName);
 
   const { data: productStatisticsData } = useProductStatistics();
-  // TODO: after DEL check success reqeust
-  const { data: requestInflowInfosData } = useRequestInflowInfos();
 
   return productStatisticsData ? (
     <Table
