@@ -117,6 +117,22 @@ export const useGetUserReviews = (nickname: string, reviewId?: number) => {
   );
 };
 
+export const usePostReview = (afterSuccessPost: () => void) => {
+  const mutate = useMutation((data: FormData) => snsAPI.createReview(data), {
+    onSuccess: () => {
+      afterSuccessPost();
+    },
+    onError: ({ response }) => {
+      switch (response?.status) {
+        case 400:
+          alert(response.data[0].message);
+          break;
+      }
+    },
+  });
+  return mutate;
+};
+
 const getNewSuggestArray = (array: FollowType[], nickname: string) => {
   return array.map((data) => {
     if (data.nickname === nickname) {
