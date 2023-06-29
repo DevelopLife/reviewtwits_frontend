@@ -18,6 +18,7 @@ import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 import {
   CommentResponseType,
   ProductType,
+  ReactionType,
   ReviewResponseType,
 } from 'typings/reviews';
 import { selectedUserState } from 'states/reviews';
@@ -411,5 +412,20 @@ export const useDeleteScrap = (reviewId: number) => {
       queryClient.invalidateQueries(['review', reviewId]);
     },
   });
+  return mutate;
+};
+
+export const useToggleReaction = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const mutate = useMutation(
+    (reaction: ReactionType) => snsAPI.toggleReaction(reviewId, reaction),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['useGetInfiniteFeed']);
+        queryClient.invalidateQueries(['review', reviewId]);
+      },
+    }
+  );
+
   return mutate;
 };

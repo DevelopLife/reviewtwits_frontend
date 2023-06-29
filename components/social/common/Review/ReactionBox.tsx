@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
 import { ReactionResponseType, ReactionType } from 'typings/reviews';
-import useReaction from 'hooks/useReaction';
+import { useToggleReaction } from 'hooks/queries/sns';
 
 interface ReactionBoxProps {
   reviewId: number;
@@ -12,7 +12,7 @@ interface ReactionBoxProps {
 }
 
 const ReactionBox = ({ reviewId, reactions }: ReactionBoxProps) => {
-  const { doReact } = useReaction(reviewId);
+  const { mutate: doReact } = useToggleReaction(reviewId);
 
   const handleClickReactButton = (e: MouseEvent<HTMLButtonElement>) => {
     const reactionType = e.currentTarget.id as ReactionType;
