@@ -389,3 +389,27 @@ export const useTrandyProductsContent = () => {
   );
   return data;
 };
+
+const INFINITE_FEED_QUERY_KEY = 'useGetInfiniteFeed';
+
+export const useAddScrap = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const mutate = useMutation(() => snsAPI.addScrap(reviewId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
+      queryClient.invalidateQueries(['review', reviewId]);
+    },
+  });
+  return mutate;
+};
+
+export const useDeleteScrap = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const mutate = useMutation(() => snsAPI.deleteScrap(reviewId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
+      queryClient.invalidateQueries(['review', reviewId]);
+    },
+  });
+  return mutate;
+};
