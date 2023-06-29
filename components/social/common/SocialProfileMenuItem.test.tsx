@@ -7,7 +7,7 @@ import theme from 'styles/theme';
 import UserIcon from 'public/icons/user.svg';
 import mockNextRouter from 'test/mockRouter';
 import SocialProfileMenuItem from 'components/social/common/SocialProfileMenuItem';
-import useUserProfile from 'hooks/queries/users';
+import { useUserProfile } from 'hooks/queries/users';
 
 const client = new QueryClient();
 const TEST_NICKNAME = 'test_nickname';

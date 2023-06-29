@@ -6,7 +6,7 @@ import { useState } from 'react';
 import * as S from './Header.styles';
 import UserMenu from './UserMenu';
 import { formattedProfileImageUrl } from 'utils/format';
-import useUserProfile from 'hooks/queries/users';
+import { useUserProfile } from 'hooks/queries/users';
 import { PAGE_LIST } from 'constants/routers';
 
 const NAV_MENUS = [

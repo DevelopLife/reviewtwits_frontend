@@ -2,7 +2,7 @@ import {
   useGetFollowingList,
   useIsFollowingDictionary,
 } from 'hooks/queries/sns';
-import useUserProfile from 'hooks/queries/users';
+import { useUserProfile } from 'hooks/queries/users';
 
 export const useGetIsFollowing = (nickname: string) => {
   const userData = useUserProfile();
