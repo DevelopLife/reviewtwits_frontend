@@ -5,7 +5,7 @@ import {
   ServiceIntroduce,
   EffectIntroduce,
   FunctionIntroduce,
-} from 'components/mainpage/@index';
+} from 'components/Mainpage/@index';
 
 import { useRef } from 'react';
 
