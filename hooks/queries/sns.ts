@@ -15,7 +15,12 @@ import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
-import { CommentResponseType, ReviewResponseType } from 'typings/reviews';
+import {
+  CommentResponseType,
+  ProductType,
+  ReactionType,
+  ReviewResponseType,
+} from 'typings/reviews';
 import { selectedUserState } from 'states/reviews';
 import { queryKey } from 'hooks/queries';
 
@@ -109,6 +114,22 @@ export const useGetUserReviews = (nickname: string, reviewId?: number) => {
   return useQuery(queryKey.userReviews(nickname), () =>
     snsAPI.getUserReviews(nickname, reviewId)
   );
+};
+
+export const usePostReview = (afterSuccessPost: () => void) => {
+  const mutate = useMutation((data: FormData) => snsAPI.createReview(data), {
+    onSuccess: () => {
+      afterSuccessPost();
+    },
+    onError: ({ response }) => {
+      switch (response?.status) {
+        case 400:
+          alert(response.data[0].message);
+          break;
+      }
+    },
+  });
+  return mutate;
 };
 
 const getNewSuggestArray = (array: FollowType[], nickname: string) => {
@@ -270,6 +291,14 @@ export const useFollowAndUnFollow = () => {
   };
 };
 
+export const useIsFollowingDictionary = () => {
+  const data = useQuery<FollowingDictionary>(FOLLOWING_DICTIONARY_KEY, {
+    networkMode: 'offlineFirst',
+  });
+
+  return data;
+};
+
 export const useGetSocialProfile = (nickname: string) => {
   const socialProfileQuery = useQuery(
     queryKey.socialUserProfile(),
@@ -350,4 +379,50 @@ export const useGetFollowSuggestion = () => {
       refetchOnWindowFocus: false,
     }
   );
+};
+
+export const useTrandyProductsContent = () => {
+  const data = useQuery<ProductType[]>(['trend'], () =>
+    snsAPI.getTrendyProducts()
+  );
+  return data;
+};
+
+const INFINITE_FEED_QUERY_KEY = 'useGetInfiniteFeed';
+
+export const useAddScrap = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const mutate = useMutation(() => snsAPI.addScrap(reviewId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
+      queryClient.invalidateQueries(['review', reviewId]);
+    },
+  });
+  return mutate;
+};
+
+export const useDeleteScrap = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const mutate = useMutation(() => snsAPI.deleteScrap(reviewId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([INFINITE_FEED_QUERY_KEY]);
+      queryClient.invalidateQueries(['review', reviewId]);
+    },
+  });
+  return mutate;
+};
+
+export const useToggleReaction = (reviewId: number) => {
+  const queryClient = useQueryClient();
+  const mutate = useMutation(
+    (reaction: ReactionType) => snsAPI.toggleReaction(reviewId, reaction),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['useGetInfiniteFeed']);
+        queryClient.invalidateQueries(['review', reviewId]);
+      },
+    }
+  );
+
+  return mutate;
 };

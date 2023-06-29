@@ -7,7 +7,7 @@ import SocialAnotherUserProfileCard from 'components/social/profile/SocialProfil
 import SocialAnotherUserFeedSection from 'components/social/profile/SocialFeedSection/SocialAnotherUserFeedSection';
 import SocialMyProfileCard from 'components/social/profile/SocialProfileCard/SocialMyProfileCard';
 import SocialMyFeedSection from 'components/social/profile/SocialFeedSection/SocialMyFeedSection';
-import useUserProfile from 'hooks/queries/users';
+import { useUserProfile } from 'hooks/queries/users';
 import useStoreagePathInSession from 'hooks/useStoreagePathInSession';
 
 const SocialUserFeedPage = () => {

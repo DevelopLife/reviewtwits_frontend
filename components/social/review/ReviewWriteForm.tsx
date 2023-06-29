@@ -1,9 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
-import { snsAPI } from 'api/sns';
 import useForm from 'hooks/useForm';
 import {
   validateURL,
@@ -22,6 +20,7 @@ import ReviewCreateButton from 'components/review/common/ReviewCreateButton';
 import ReviewTextArea from 'components/review/common/ReviewTextArea';
 import SearchBox from './SearchBox';
 import { PAGE_LIST } from 'constants/routers';
+import { usePostReview, usePostReviewComment } from 'hooks/queries/sns';
 
 const ReviewWriteForm = () => {
   const router = useRouter();
@@ -39,22 +38,28 @@ const ReviewWriteForm = () => {
     productName: '',
     newImageFiles: [],
   });
-  const { mutate: mutateCreate, isLoading } = useMutation(
-    (data: FormData) => snsAPI.createReview(data),
-    {
-      onSuccess: () => {
-        alert(SUCCESS_MESSAGE.CREATE);
-        router.push(PAGE_LIST.SOCIAL_HOME);
-      },
-      onError: ({ response }) => {
-        switch (response?.status) {
-          case 400:
-            alert(response.data[0].message);
-            break;
-        }
-      },
-    }
-  );
+  // const { mutate: mutateCreate, isLoading } = useMutation(
+  //   (data: FormData) => snsAPI.createReview(data),
+  //   {
+  //     onSuccess: () => {
+  //       alert(SUCCESS_MESSAGE.CREATE);
+  //       router.push(PAGE_LIST.SOCIAL_HOME);
+  //     },
+  //     onError: ({ response }) => {
+  //       switch (response?.status) {
+  //         case 400:
+  //           alert(response.data[0].message);
+  //           break;
+  //       }
+  //     },
+  //   }
+  // );
+
+  const afterSuccessPost = () => {
+    alert(SUCCESS_MESSAGE.CREATE);
+    router.push(PAGE_LIST.SOCIAL_HOME);
+  };
+  const { mutate: mutateCreate, isLoading } = usePostReview(afterSuccessPost);
 
   const setDataInToFormData = () => {
     const formData = new FormData();

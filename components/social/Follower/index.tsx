@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ChangeFollowListButton from './ChangeFollowListButton';
 import SocialList from './SocialList';
 import { useGetFollowerList, useGetFollowingList } from 'hooks/queries/sns';
-import useUserProfile from 'hooks/queries/users';
+import { useUserProfile } from 'hooks/queries/users';
 import { FOLLOW_BUTTON } from 'constants/social';
 import styled from '@emotion/styled';
 import { useQueryClient } from '@tanstack/react-query';

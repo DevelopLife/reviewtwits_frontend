@@ -7,15 +7,13 @@ import {
   useEffect,
   useCallback,
 } from 'react';
-import { useQuery } from '@tanstack/react-query';
 
-import { ProductInfoType, ProductSearchResultType } from 'typings/product';
+import { ProductSearchResultType } from 'typings/product';
 
 import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
 import RatingBox from 'components/review/common/RatingBox';
-import itemsAPI from 'api/items';
-import { queryKey } from 'hooks/queries';
+import { useGetProductInfo, useGetSearchResult } from 'hooks/queries/items';
 
 interface SearchBoxProps {
   productName?: string;
@@ -25,23 +23,12 @@ interface SearchBoxProps {
 const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
-  const { data: searchResult } = useQuery<ProductSearchResultType[]>(
-    queryKey.searchProductName(searchValue),
-    () => itemsAPI.searchProductName(searchValue),
-    {
-      enabled: !!searchValue,
-      refetchOnWindowFocus: false,
-    }
-  );
+
+  const { data: searchResult } = useGetSearchResult(searchValue);
+
   const { data: productInfo, isFetching: isProductInfoFetching } =
-    useQuery<ProductInfoType | null>(
-      queryKey.productInfo(productName),
-      () => (productName ? itemsAPI.getProductInfo(productName) : null),
-      {
-        enabled: !!productName,
-        refetchOnWindowFocus: false,
-      }
-    );
+    useGetProductInfo(productName);
+
   const searchRef = useRef<HTMLDivElement>(null);
 
   const highlightText = (text: string) => {
