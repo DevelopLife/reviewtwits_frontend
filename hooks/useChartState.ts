@@ -9,19 +9,35 @@ interface UsePrevAndNextChartProps {
 
 const useChartState = ({ chartName }: UsePrevAndNextChartProps) => {
   const [chartStates, setChartStates] = useRecoilState(chartState);
-  const { endDate, focusedElementIndex } = chartStates[chartName];
+  const { endDate, focusedTimeStamp, focusedElementIndex } =
+    chartStates[chartName];
 
   const changeFocusedElementIndex = (index: number) => {
     setChartStates((prevChartStates) => ({
       ...prevChartStates,
-      [chartName]: { endDate, focusedElementIndex: index },
+      [chartName]: { endDate, focusedTimeStamp, focusedElementIndex: index },
     }));
   };
 
-  const changeEndDate = (date: VisitTimeStamp) => {
+  const changeEndDate = (timeStamp: VisitTimeStamp) => {
     setChartStates((prevChartStates) => ({
       ...prevChartStates,
-      [chartName]: { endDate: date, focusedElementIndex },
+      [chartName]: {
+        endDate: timeStamp,
+        focusedTimeStamp,
+        focusedElementIndex,
+      },
+    }));
+  };
+
+  const changeFocusedTimeStamp = (timeStamp: VisitTimeStamp) => {
+    setChartStates((prevChartStates) => ({
+      ...prevChartStates,
+      [chartName]: {
+        endDate,
+        focusedTimeStamp: timeStamp,
+        focusedElementIndex,
+      },
     }));
   };
 
@@ -29,6 +45,7 @@ const useChartState = ({ chartName }: UsePrevAndNextChartProps) => {
     chartStates,
     changeIndex: changeFocusedElementIndex,
     changeDate: changeEndDate,
+    chageFocusedDate: changeFocusedTimeStamp,
   };
 };
 

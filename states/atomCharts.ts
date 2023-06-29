@@ -5,12 +5,14 @@ type ChartNames = 'visitorChart';
 export const chartStateDefault: Record<ChartNames, ChartState> = {
   visitorChart: {
     endDate: undefined,
+    focusedTimeStamp: undefined,
     focusedElementIndex: -1,
   },
 };
 
 type ChartState = {
   endDate: undefined | VisitTimeStamp;
+  focusedTimeStamp: undefined | VisitTimeStamp;
   focusedElementIndex: number;
 };
 

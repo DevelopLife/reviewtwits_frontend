@@ -47,7 +47,7 @@ const ViewsStatistics = ({ projectName }: ViewsStatisticsProps) => {
         <S.StatisticsTitle>일간 조회수</S.StatisticsTitle>
         <S.StatisticsHeader>
           <S.StatisticsSubTitle>
-            {isFocusedTimeStamp.visitorChart.endDate}
+            {isFocusedTimeStamp.visitorChart.focusedTimeStamp}
           </S.StatisticsSubTitle>
           <S.IntervalButtonWrap>
             {timePeroidButtonDatas.map(({ name, text, isFocus }) => (

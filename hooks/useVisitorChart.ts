@@ -18,7 +18,7 @@ export const useVisitorChart = ({
   projectName,
   timePeriod,
 }: VisitorChartProps) => {
-  const { chartStates, changeDate, changeIndex } = useChartState({
+  const { chartStates, chageFocusedDate, changeIndex } = useChartState({
     chartName: 'visitorChart',
   });
   // api 호출위한 부분
@@ -39,8 +39,8 @@ export const useVisitorChart = ({
 
   // index가 변경이 되면 data의 index로 접근해서 state를 변경하는 부분
   useEffect(() => {
-    focusedBarTimeStamp && changeDate(focusedBarTimeStamp);
-  }, [changeDate, focusedBarTimeStamp]);
+    focusedBarTimeStamp && chageFocusedDate(focusedBarTimeStamp);
+  }, [focusedBarTimeStamp]);
 
   const { buttonStates, onClickPrevChartButton, onClickNextChartButton } =
     useVisitorChartChage(transformedVisitInfo, timePeriod);
