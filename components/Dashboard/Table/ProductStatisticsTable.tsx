@@ -18,8 +18,7 @@ const mockData = Array.from({ length: 5 }, (_, index) => ({
 const ProductStatisticsTable = ({
   projectName,
 }: ProductStatisticsTableProps) => {
-  const { useProductStatistics, useRequestInflowInfos } =
-    useStatistics(projectName);
+  const { useProductStatistics } = useStatistics(projectName);
 
   const { data: productStatisticsData } = useProductStatistics();
 

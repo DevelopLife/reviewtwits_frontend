@@ -1,7 +1,8 @@
 import { atom } from 'recoil';
 import { VisitTimeStamp } from 'typings/statistics';
 
-export const chartStateDefault: { [key: string]: ChartState } = {
+type ChartNames = 'visitorChart';
+export const chartStateDefault: Record<ChartNames, ChartState> = {
   visitorChart: {
     endDate: undefined,
     focusedElementIndex: -1,
