@@ -6,10 +6,12 @@ import { ProductType } from 'typings/reviews';
 
 import Card from '../Card';
 import Product from './Product';
+import { queryKey } from 'hooks/queries';
 
 const TrendyProductsContent = () => {
-  const { data: products } = useQuery<ProductType[]>(['trend'], () =>
-    snsAPI.getTrendyProducts()
+  const { data: products } = useQuery<ProductType[]>(
+    queryKey.socialtTrendProducts(),
+    () => snsAPI.getTrendyProducts()
   );
 
   return (

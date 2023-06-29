@@ -15,6 +15,7 @@ import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
 import RatingBox from 'components/review/common/RatingBox';
 import itemsAPI from 'api/items';
+import { queryKey } from 'hooks/queries';
 
 interface SearchBoxProps {
   productName?: string;
@@ -25,7 +26,7 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
   const { data: searchResult } = useQuery<ProductSearchResultType[]>(
-    ['searchProductName', searchValue],
+    queryKey.searchProductName(searchValue),
     () => itemsAPI.searchProductName(searchValue),
     {
       enabled: !!searchValue,
@@ -34,7 +35,7 @@ const SearchBox = ({ productName, setValue }: SearchBoxProps) => {
   );
   const { data: productInfo, isFetching: isProductInfoFetching } =
     useQuery<ProductInfoType | null>(
-      ['productInfo', productName],
+      queryKey.productInfo(productName),
       () => (productName ? itemsAPI.getProductInfo(productName) : null),
       {
         enabled: !!productName,

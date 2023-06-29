@@ -8,6 +8,7 @@ import { Styles } from 'components/Project/Management/ProjectCardCommon';
 import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
 
 import { GetProjectsResponseData, projectsAPI } from 'api/projects';
+import { queryKey } from 'hooks/queries';
 
 interface ProjectManagementSectionViewProps {
   children?: ReactNode;
@@ -20,7 +21,7 @@ const CREATE_PROJECT_STYLES: Styles = {
 };
 
 export const ProjectManagementSection = () => {
-  const { data } = useQuery(['projectManagement'], projectsAPI.get, {
+  const { data } = useQuery(queryKey.prodjects(), projectsAPI.get, {
     retry: false,
   });
 

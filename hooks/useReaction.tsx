@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { snsAPI } from 'api/sns';
+import { queryKey } from 'hooks/queries';
 import { ReactionType } from 'typings/reviews';
 
 const useReaction = (reviewId: number) => {
@@ -9,8 +10,8 @@ const useReaction = (reviewId: number) => {
     (reaction: ReactionType) => snsAPI.toggleReaction(reviewId, reaction),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(['useGetInfiniteFeed']);
-        queryClient.invalidateQueries(['review', reviewId]);
+        queryClient.invalidateQueries(queryKey.socialInfiniteFeed());
+        queryClient.invalidateQueries(queryKey.review(reviewId));
       },
     }
   );

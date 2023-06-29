@@ -13,6 +13,7 @@ import { RegisterProjectParams } from 'typings/register';
 import { replaceUrlProtocool } from 'constants/regExp';
 import { useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
+import { queryKey } from 'hooks/queries';
 
 interface ReviewsProps {
   projectName: string;
@@ -35,7 +36,7 @@ const Reviews = ({ projectName, productURL, title, image }: ReviewsProps) => {
 
   const cachedData = cache.getQueryData<
     AxiosResponse<ShoppingMallReviewDetail[]>
-  >(['useGetShoppingMallReviewList', productURL, 'NEWEST']);
+  >(queryKey.useCachedGetShoppingMallReviewList(productURL));
 
   if (shoppingmallReviewList?.data) {
     return (
