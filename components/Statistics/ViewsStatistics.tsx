@@ -3,9 +3,9 @@ import { useRecoilValue } from 'recoil';
 
 import Shadow from './common/Shadow';
 import * as S from './ViewsStatistics.styles';
-import VisitorChart from 'components/chart/VisitorChart/VisitorChart';
 import type { TimePeriod } from 'typings/chart';
-import { isFocusedTimeStampAtom } from 'states/isFocusedTimeStamp';
+import VisitorChart from 'components/chart/VisitorChart/VisitorChart';
+import chartState from 'states/atomCharts';
 
 const TIME_PEROID_BUTTONS = [
   {
@@ -27,8 +27,7 @@ interface ViewsStatisticsProps {
 }
 
 const ViewsStatistics = ({ projectName }: ViewsStatisticsProps) => {
-  // TODO: 하루 간격 한달 범위
-  const isFocusedTimeStamp = useRecoilValue(isFocusedTimeStampAtom);
+  const isFocusedTimeStamp = useRecoilValue(chartState);
   const [timePeroid, setTimePeroid] = useState<TimePeriod>('daily');
 
   const onClickTriggerButton = (e: MouseEvent<HTMLButtonElement>) => {
@@ -47,7 +46,9 @@ const ViewsStatistics = ({ projectName }: ViewsStatisticsProps) => {
       <S.Container>
         <S.StatisticsTitle>일간 조회수</S.StatisticsTitle>
         <S.StatisticsHeader>
-          <S.StatisticsSubTitle>{isFocusedTimeStamp}</S.StatisticsSubTitle>
+          <S.StatisticsSubTitle>
+            {isFocusedTimeStamp.visitorChart.endDate}
+          </S.StatisticsSubTitle>
           <S.IntervalButtonWrap>
             {timePeroidButtonDatas.map(({ name, text, isFocus }) => (
               <S.IntervalButton

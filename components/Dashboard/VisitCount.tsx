@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+import styled from '@emotion/styled';
 
 import useStatistics from 'hooks/queries/statistics';
 import Shadow from 'components/Dashboard/common/Shadow';
+import ChartIcon from 'public/icons/chart.svg';
 import Button from '../common/Button';
 
 interface VisitCountProps {
@@ -48,8 +48,10 @@ const VisitCount = ({ projectName }: VisitCountProps) => {
             }}
           >
             <Button>
-              방문 통계
-              <Image width={30} height={30} src="" alt="mock" />
+              <S.RedirectButton>
+                방문 통계
+                <ChartIcon />
+              </S.RedirectButton>
             </Button>
           </Link>
         </S.Flex>
@@ -110,5 +112,11 @@ const S = {
     /* Secondary */
 
     color: #181818;
+  `,
+
+  RedirectButton: styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
 };
