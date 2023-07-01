@@ -1,5 +1,5 @@
 import Layout from 'components/common/Layout';
-import { UserProfileCard } from 'components/setting/Profile/@index';
+import { UserProfileCard } from 'components/Setting/Profile/@index';
 
 const UserProfilePage = () => {
   return (
