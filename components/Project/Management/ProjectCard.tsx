@@ -9,7 +9,7 @@ import {
 import { ProjectDto } from 'typings/project';
 import { GetProjectsResponseData } from 'api/projects';
 import Button from 'components/common/Button';
-import cssUtils from 'utils/css';
+import cssUtils from 'styles/css';
 
 interface ProjectCardProps {
   project: GetProjectsResponseData;

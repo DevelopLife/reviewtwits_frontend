@@ -2,9 +2,9 @@ import { useState, MouseEvent } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
-import useReaction from 'hooks/useReaction';
 import { ReactionType } from 'typings/reviews';
 import AddReactionIcon from 'public/icons/add_reaction.svg';
+import { useToggleReaction } from 'hooks/queries/sns';
 
 const emojiList = [
   'LOVE',
@@ -25,7 +25,7 @@ interface AddReactionBoxProps {
 
 const AddReactionBox = ({ reviewId }: AddReactionBoxProps) => {
   const [isReactionListOpen, setIsReactionListOpen] = useState(false);
-  const { doReact } = useReaction(reviewId);
+  const { mutate: doReact } = useToggleReaction(reviewId);
 
   const toggleListOpen = () => setIsReactionListOpen((prev) => !prev);
 

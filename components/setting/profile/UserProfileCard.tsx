@@ -9,12 +9,9 @@ import {
 } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useMutation } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 
 import useForm from 'hooks/useForm';
-import useUserProfile from 'hooks/queries/users';
-import { usersAPI } from 'api/users';
 import { UserProfileFormType } from 'typings/account';
 import { formattedImageUrl } from 'utils/format';
 import { SUCCESS_MESSAGE } from 'constants/account';
@@ -25,6 +22,7 @@ import Button from 'components/common/Button';
 import Input from 'components/common/Input';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 import { PAGE_LIST } from 'constants/routers';
+import { useSetUserProfile, useUserProfile } from 'hooks/queries/users';
 
 const UserProfileForm = () => {
   const router = useRouter();
@@ -35,21 +33,15 @@ const UserProfileForm = () => {
       nickname: '',
       intro: '',
     });
-  const { mutate } = useMutation(
-    (data: FormData) => usersAPI.setUserProfile(data),
-    {
-      onSuccess: (newname) => {
-        window.sessionStorage.clear();
-        alert(SUCCESS_MESSAGE.SETTING.PROFILE);
 
-        if (pathFrom === 'sign-up') router.push(PAGE_LIST.HOME);
-        router.push(`${PAGE_LIST.SOCIAL_PROFILE}/${newname.data.nickname}`);
-      },
-      onError: ({ response }) => {
-        alert(response?.data[0]?.message);
-      },
-    }
-  );
+  const afterSuccess = (newname: string) => {
+    window.sessionStorage.clear();
+    alert(SUCCESS_MESSAGE.SETTING.PROFILE);
+    if (pathFrom === 'sign-up') router.push(PAGE_LIST.HOME);
+    router.push(`${PAGE_LIST.SOCIAL_PROFILE}/${newname}`);
+  };
+
+  const { mutate } = useSetUserProfile(afterSuccess);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string>('');
@@ -83,7 +75,6 @@ const UserProfileForm = () => {
 
   const changeUserProfile = () => {
     const userProfileData = setUserDataIntoFormData();
-
     mutate(userProfileData);
   };
 

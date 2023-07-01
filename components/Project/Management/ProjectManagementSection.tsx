@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 
@@ -7,7 +6,8 @@ import { ProjectCard } from 'components/Project/Management/ProjectCard';
 import { Styles } from 'components/Project/Management/ProjectCardCommon';
 import { CreateProjectCard } from 'components/Project/Management/CreateProjectCard';
 
-import { GetProjectsResponseData, projectsAPI } from 'api/projects';
+import { GetProjectsResponseData } from 'api/projects';
+import { useGetProjectManagement } from 'hooks/queries/projects';
 
 interface ProjectManagementSectionViewProps {
   children?: ReactNode;
@@ -20,9 +20,7 @@ const CREATE_PROJECT_STYLES: Styles = {
 };
 
 export const ProjectManagementSection = () => {
-  const { data } = useQuery(['projectManagement'], projectsAPI.get, {
-    retry: false,
-  });
+  const data = useGetProjectManagement();
 
   return <ProjectManagementSectionView projects={data?.data} />;
 };
