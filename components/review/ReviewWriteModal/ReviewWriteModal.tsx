@@ -15,7 +15,7 @@ import {
   useEditShoppingMallReview,
   useGetShoppingMallReview,
 } from 'hooks/queries/shopping';
-import ServiceSection from 'components/review/ReviewWriteModal/ServiceSection/@index';
+import ServiceSection from 'components/Review/ReviewWriteModal/ServiceSection/@index';
 
 // TODO: DELETE
 

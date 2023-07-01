@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
 
-import RatingBox from 'components/review/common/RatingBox';
+import RatingBox from 'components/Review/common/RatingBox';
 
 const props = {
   setValue: () => {

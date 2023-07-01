@@ -1,4 +1,4 @@
-import SocialLayout from 'components/social/common/SocialLayout';
+import SocialLayout from 'components/Social/common/SocialLayout';
 
 const SNSExplorePgae = () => {
   return (

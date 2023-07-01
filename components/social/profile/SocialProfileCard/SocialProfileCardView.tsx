@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 
 import type { Colors } from 'styles/theme';
 import type { SocialProfile } from 'typings/social';
-import SocialFollowAndUnfollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
-import EditProfileButton from 'components/social/profile/EditProfileButton';
-import SocialProfileImage from 'components/social/profile/SocialProfileImage';
+import SocialFollowAndUnfollowButton from 'components/Social/profile/SocialFollowAndUnfollowButton';
+import EditProfileButton from 'components/Social/profile/EditProfileButton';
+import SocialProfileImage from 'components/Social/profile/SocialProfileImage';
 
 interface SocialProfileCardViewProps {
   isMyPage: boolean;

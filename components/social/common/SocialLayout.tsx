@@ -1,5 +1,5 @@
-import SnsSidebar from 'components/social/common/SocialSidebar';
-import SocialContentLayout from 'components/social/common/SocialContentLayout';
+import SnsSidebar from 'components/Social/common/SocialSidebar';
+import SocialContentLayout from 'components/Social/common/SocialContentLayout';
 import type { WrapProps } from 'typings/wrapperProps';
 import * as S from './SocialLayout.styles';
 

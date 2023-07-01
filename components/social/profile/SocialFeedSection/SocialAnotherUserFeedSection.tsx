@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
+import { SocialFeedCard } from 'components/Social/profile/SocialFeedCard';
 import SocialFeedSectionView, {
   CARD_WIDTH,
-} from 'components/social/profile/SocialFeedSection/SocialFeedSectionView';
+} from 'components/Social/profile/SocialFeedSection/SocialFeedSectionView';
 import { formattedImageUrl } from 'utils/format';
 import { useGetInfiniteSocialReviews } from 'hooks/queries/sns';
 

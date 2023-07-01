@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import ReviewWriteModal from 'components/review/ReviewWriteModal/ReviewWriteModal';
+import ReviewWriteModal from 'components/Review/ReviewWriteModal/ReviewWriteModal';
 
 export default {
   title: 'review/ReviewWriteModal/ReviewWriteModal',

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
 
-import SurveyBox from 'components/review/ReviewWriteModal/QualitySection/SurveyBox';
+import SurveyBox from 'components/Review/ReviewWriteModal/QualitySection/SurveyBox';
 
 export default {
   title: 'review/ReviewWriteModal/QualitySection/SurveyBox',

@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 
-import SocialFollowAndUnFollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
+import SocialFollowAndUnFollowButton from 'components/Social/profile/SocialFollowAndUnfollowButton';
 import TestGlobalProvider from 'components/test/TestGlobalProvider';
 import { FOLLOW } from 'constants/followAndUnFollow';
 

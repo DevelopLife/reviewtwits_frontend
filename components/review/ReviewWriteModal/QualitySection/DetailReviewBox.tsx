@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import * as S from './DetailReviewBox.styles';
-import ReviewTextArea from 'components/review/common/ReviewTextArea';
+import ReviewTextArea from 'components/Review/common/ReviewTextArea';
 
 interface DetailReviewBox {
   content: string;

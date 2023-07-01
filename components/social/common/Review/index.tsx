@@ -15,7 +15,7 @@ import AddReactionBox from './AddReactionBox';
 import ScrapButton from './ScrapButton';
 import CommentIcon from 'public/icons/comment.svg';
 
-import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
+import SocialUserNicknameLink from 'components/Social/common/SocialUserNicknameLink';
 import useRouteModalPage from 'hooks/useOpenModal';
 import { PAGE_LIST } from 'constants/routers';
 

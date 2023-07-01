@@ -1,7 +1,7 @@
 import { useGetSocialProfile } from 'hooks/queries/sns';
 import { useUserProfile } from 'hooks/queries/users';
 import { mockSocialProfile } from 'constants/mockSocialProfile';
-import SocialProfileCardView from 'components/social/profile/SocialProfileCard/SocialProfileCardView';
+import SocialProfileCardView from 'components/Social/profile/SocialProfileCard/SocialProfileCardView';
 
 const SocialMyProfileCard = () => {
   const isMyPage = true;

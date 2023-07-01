@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 
-import SocialLayout from 'components/social/common/SocialLayout';
-import SocialTitleSection from 'components/social/common/SocialTitleSection';
-import SocialProfileLayout from 'components/social/profile/SocialProfileLayout';
-import SocialAnotherUserProfileCard from 'components/social/profile/SocialProfileCard/SocialAnotherUserProfileCard';
-import SocialAnotherUserFeedSection from 'components/social/profile/SocialFeedSection/SocialAnotherUserFeedSection';
-import SocialMyProfileCard from 'components/social/profile/SocialProfileCard/SocialMyProfileCard';
-import SocialMyFeedSection from 'components/social/profile/SocialFeedSection/SocialMyFeedSection';
+import SocialLayout from 'components/Social/common/SocialLayout';
+import SocialTitleSection from 'components/Social/common/SocialTitleSection';
+import SocialProfileLayout from 'components/Social/profile/SocialProfileLayout';
+import SocialAnotherUserProfileCard from 'components/Social/profile/SocialProfileCard/SocialAnotherUserProfileCard';
+import SocialAnotherUserFeedSection from 'components/Social/profile/SocialFeedSection/SocialAnotherUserFeedSection';
+import SocialMyProfileCard from 'components/Social/profile/SocialProfileCard/SocialMyProfileCard';
+import SocialMyFeedSection from 'components/Social/profile/SocialFeedSection/SocialMyFeedSection';
 import { useUserProfile } from 'hooks/queries/users';
 import useStoreagePathInSession from 'hooks/useStoreagePathInSession';
 
