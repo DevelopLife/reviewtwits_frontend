@@ -1,7 +1,8 @@
+import styled from '@emotion/styled';
+
+import type { WrapProps } from 'typings/wrapperProps';
 import SnsSidebar from 'components/social/common/SocialSidebar';
 import SocialContentLayout from 'components/social/common/SocialContentLayout';
-import type { WrapProps } from 'typings/wrapperProps';
-import * as S from './SocialLayout.styles';
 
 const SnsLayout = ({ children }: WrapProps) => {
   return (
@@ -13,3 +14,8 @@ const SnsLayout = ({ children }: WrapProps) => {
 };
 
 export default SnsLayout;
+
+const S = {
+  SnsLayout: styled.div``,
+  Link: styled.a``,
+};

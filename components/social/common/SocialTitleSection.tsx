@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
+
 import { WrapProps } from 'typings/wrapperProps';
-import * as S from './SocialTitleSection.styles';
 
 interface SocialTitleSectionProps extends WrapProps {
   title?: string;
@@ -16,3 +16,20 @@ const SocialTitleSection = ({ title, children }: SocialTitleSectionProps) => {
 };
 
 export default SocialTitleSection;
+
+const S = {
+  SocialTitleSection: styled.div`
+    width: 100%;
+  `,
+  SocialContentTitle: styled.h1`
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-size: 36px;
+  `,
+
+  SocialContentFlex: styled.span`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  `,
+};

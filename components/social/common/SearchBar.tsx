@@ -1,8 +1,8 @@
 import type { FC, ChangeEventHandler, HTMLAttributes, SVGProps } from 'react';
 import { useState } from 'react';
+import styled from '@emotion/styled';
 
 import DetailIcon from 'public/icons/detail.svg';
-import * as S from './SearchBar.styles';
 
 const SearchBar = () => {
   const [value, setValue] = useState('');
@@ -56,3 +56,36 @@ const SearchBarView = ({
 };
 
 export default SearchBar;
+
+const S = {
+  SearchInputWrap: styled.span`
+    width: fit-content;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 40px;
+  `,
+  SearchInput: styled.input<{
+    padding: string;
+    width?: number;
+    height?: number;
+  }>`
+    padding: ${({ padding }) => padding};
+    width: ${({ width }) => width}px;
+    height: ${({ height }) => height}px;
+
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.12);
+  `,
+  AbsoluteIcon: styled.span<{ left?: number; right?: number }>`
+    position: absolute;
+    left: ${({ left }) => left}px;
+    right: ${({ right }) => right}px;
+
+    :hover {
+      cursor: pointer;
+    }
+  `,
+};
