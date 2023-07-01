@@ -1,6 +1,6 @@
 import Layout from 'components/common/Layout';
-import SocialMainLayout from 'components/Social/main/SocialMainLayout';
-import SocialMainImage from 'components/Social/main/SocialMainImage';
+import SocialMainLayout from 'components/Social/Main/SocialMainLayout';
+import SocialMainImage from 'components/Social/Main/SocialMainImage';
 import SignInCard from 'components/SignIn/SignInCard';
 
 const SocialMainPage = () => {

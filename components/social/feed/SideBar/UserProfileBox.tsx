@@ -5,7 +5,7 @@ import { useUserProfile } from 'hooks/queries/users';
 import { formattedProfileImageUrl } from 'utils/format';
 
 import styled from '@emotion/styled';
-import SocialUserNicknameLink from 'components/Social/common/SocialUserNicknameLink';
+import SocialUserNicknameLink from 'components/Social/Common/SocialUserNicknameLink';
 import Button from './common/Button';
 import { PAGE_LIST } from 'constants/routers';
 

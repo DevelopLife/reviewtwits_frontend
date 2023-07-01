@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-import SocialLayout from 'components/Social/common/SocialLayout';
-import ScrapList from 'components/Social/scrap/ScrapList';
-import SideBar from 'components/Social/feed/SideBar';
+import SocialLayout from 'components/Social/Common/SocialLayout';
+import ScrapList from 'components/Social/Scrap/ScrapList';
+import SideBar from 'components/Social/Feed/SideBar';
 
 const ScrapPage = () => {
   return (

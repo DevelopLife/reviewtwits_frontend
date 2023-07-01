@@ -3,7 +3,7 @@ import Image from 'next/image';
 import * as S from './SocialCard.styles';
 import { formattedProfileImageUrl } from 'utils/format';
 
-import SocialFollowAndUnfollowButton from 'components/Social/profile/SocialFollowAndUnfollowButton';
+import SocialFollowAndUnfollowButton from 'components/Social/Profile/SocialFollowAndUnfollowButton';
 import { useRouter } from 'next/router';
 
 interface SocialCardProps {

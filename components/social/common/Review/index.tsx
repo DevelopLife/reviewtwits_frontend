@@ -7,7 +7,7 @@ import { Colors } from 'styles/theme';
 import { ReviewResponseType } from 'typings/reviews';
 import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
 
-import Card from '../../feed/Card';
+import Card from '../../Feed/Card';
 import ReactionBox from './ReactionBox';
 import StarBox from './StarBox';
 import ImageList from './ImageList';
@@ -15,7 +15,7 @@ import AddReactionBox from './AddReactionBox';
 import ScrapButton from './ScrapButton';
 import CommentIcon from 'public/icons/comment.svg';
 
-import SocialUserNicknameLink from 'components/Social/common/SocialUserNicknameLink';
+import SocialUserNicknameLink from 'components/Social/Common/SocialUserNicknameLink';
 import useRouteModalPage from 'hooks/useOpenModal';
 import { PAGE_LIST } from 'constants/routers';
 

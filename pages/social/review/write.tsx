@@ -1,5 +1,5 @@
-import SnsLayout from 'components/Social/common/SocialLayout';
-import ReviewWriteForm from 'components/Social/review/ReviewWriteForm';
+import SnsLayout from 'components/Social/Common/SocialLayout';
+import ReviewWriteForm from 'components/Social/Review/ReviewWriteForm';
 
 const SocialReviewWritePage = () => {
   return (

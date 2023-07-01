@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import risingArray from 'public/images/rising_array.png';
 import grayStar from 'public/images/empty_star_img.png';
 import * as S from './ComprehensiveRates.styles';
-import StarBox from 'components/Social/common/Review/StarBox';
+import StarBox from 'components/Social/Common/Review/StarBox';
 import { useGetShoppingMallReviewInfo } from 'hooks/queries/reviews';
 import { useRegisterShoppingMallProduct } from 'hooks/queries/shopping';
 import { useRouter } from 'next/router';
