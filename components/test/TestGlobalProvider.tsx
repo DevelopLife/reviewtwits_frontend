@@ -1,6 +1,6 @@
 import type { DehydratedState } from '@tanstack/react-query';
 
-import GlobalProvider from 'components/common/GlobalProvider';
+import GlobalProvider from 'components/Common/GlobalProvider';
 import type { WrapProps } from 'typings/wrapperProps';
 
 const mockDehydratedState: DehydratedState = {

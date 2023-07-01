@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { emailsAPI } from 'api/emails';
-import Button from 'components/common/Button';
-import Card from 'components/common/Card';
-import Input from 'components/common/Input';
-import Layout from 'components/common/Layout';
+import Button from 'components/Common/Button';
+import Card from 'components/Common/Card';
+import Input from 'components/Common/Input';
+import Layout from 'components/Common/Layout';
 import { DEFAULT_FIND_ID_FORM, SIGN_UP_FORM_NAMES } from 'constants/account';
 import { PAGE_LIST } from 'constants/routers';
 import useForm from 'hooks/useForm';

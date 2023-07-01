@@ -1,4 +1,4 @@
-import { AuthrizationRouteProps } from 'components/common/AuthorizationRoute';
+import { AuthrizationRouteProps } from 'components/Common/AuthorizationRoute';
 import { PAGE_LIST } from 'constants/routers';
 import { useEffect } from 'react';
 import { checkPreviousHostnameEqualMyHostName } from 'utils/checkFrom';

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import CodeBlock from 'components/common/CodeBlock/CodeBlock';
+import CodeBlock from 'components/Common/CodeBlock/CodeBlock';
 import * as S from './CodeParagraph.styles';
 
 interface CodeParagraphProps {

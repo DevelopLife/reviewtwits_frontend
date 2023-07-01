@@ -1,4 +1,4 @@
-import Hover from 'components/common/Hover';
+import Hover from 'components/Common/Hover';
 import Link from 'next/link';
 
 import type { WrapProps } from 'typings/wrapperProps';
