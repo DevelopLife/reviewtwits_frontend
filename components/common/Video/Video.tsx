@@ -1,4 +1,4 @@
-import * as S from './Video.styles';
+import styled from '@emotion/styled';
 
 interface VideoProps {
   srcs: string[];
@@ -20,3 +20,11 @@ const Video = ({ srcs, guideMessage }: VideoProps) => {
 };
 
 export default Video;
+
+const S = {
+  Video: styled.video`
+    width: 100%;
+    padding: 0 10%;
+  `,
+  Source: styled.source``,
+};

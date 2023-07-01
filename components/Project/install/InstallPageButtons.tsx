@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import * as S from './InstallPageButtons.styles';
+import styled from '@emotion/styled';
 
 interface InstallPageButtonsProps {
   children: ReactNode;
@@ -10,3 +10,10 @@ const InstallPageButtons = ({ children }: InstallPageButtonsProps) => {
 };
 
 export default InstallPageButtons;
+
+const S = {
+  ButtonsWrap: styled.div`
+    display: flex;
+    justify-content: space-between;
+  `,
+};

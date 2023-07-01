@@ -1,6 +1,8 @@
 import { ChangeEvent } from 'react';
-import * as S from './DetailReviewBox.styles';
+import styled from '@emotion/styled';
+
 import ReviewTextArea from 'components/review/common/ReviewTextArea';
+import { S as ReviewWriteModalStyles } from 'components/Review/ReviewWriteModal/ReviewWriteModal';
 
 interface DetailReviewBox {
   content: string;
@@ -17,3 +19,19 @@ const DetailReviewBox = ({ ...rest }: DetailReviewBox) => {
 };
 
 export default DetailReviewBox;
+
+const S = {
+  SectionTitle: ReviewWriteModalStyles.SectionTitle,
+
+  ReviewFor: ReviewWriteModalStyles.ReviewFor,
+
+  Box: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    & > label {
+      margin-top: 12px;
+    }
+  `,
+};

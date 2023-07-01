@@ -1,13 +1,14 @@
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 import risingArray from 'public/images/rising_array.png';
 import grayStar from 'public/images/empty_star_img.png';
-import * as S from './ComprehensiveRates.styles';
+
 import StarBox from 'components/social/common/Review/StarBox';
 import { useGetShoppingMallReviewInfo } from 'hooks/queries/reviews';
 import { useRegisterShoppingMallProduct } from 'hooks/queries/shopping';
-import { useRouter } from 'next/router';
 import { RegisterProjectParams } from 'typings/register';
 import { replaceUrlProtocool } from 'constants/regExp';
 
@@ -152,3 +153,144 @@ const ComprehensiveRates = ({
 };
 
 export default ComprehensiveRates;
+
+const S = {
+  Strong: styled.strong`
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+  `,
+
+  H4: styled.h4`
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 43px;
+
+    color: #000000;
+  `,
+
+  Desc: styled.p`
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #828282;
+  `,
+
+  Container: styled.div`
+    width: 945px;
+    height: 150px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 69px;
+  `,
+
+  OverallReviewNumber: styled.div`
+    width: 235px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  `,
+
+  NumberInfos: styled.div`
+    height: 43px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      width: 120px;
+      height: 40px;
+      background: #e1f9e6;
+      border-radius: 30px;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      div {
+        width: 78px;
+        margin: auto;
+
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+      }
+    }
+  `,
+
+  OverallRating: styled.div`
+    width: 238px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  `,
+
+  StarInfos: styled.div`
+    height: 43px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  `,
+
+  Stars: styled.ul`
+    width: 175px;
+    height: 30px;
+    line-height: 30px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  `,
+
+  Star: styled.li`
+    fill: #f8bb2b;
+
+    svg {
+      fill: #f8bb2b;
+      width: 30px;
+      height: 30px;
+
+      path {
+        fill: #f8bb2b;
+        stroke: #f8bb2b;
+        background-color: #f8bb2b;
+      }
+    }
+  `,
+
+  OverallRatingDetail: styled.ul`
+    width: 192px;
+    height: 129px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+
+    li {
+      height: 17px;
+      display: flex;
+      img {
+        margin-right: 3px;
+      }
+    }
+  `,
+
+  PrograssBar: styled.div<{ prograssRange: number }>`
+    height: 10px;
+    width: ${(props) => 192 * props.prograssRange}px;
+
+    margin-left: 15px;
+
+    background: #d9d9d9;
+    border-radius: 90px;
+  `,
+};

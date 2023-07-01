@@ -1,10 +1,9 @@
-import React from 'react';
+import styled from '@emotion/styled';
+
 import GraphHeader from './GraphHeader';
 import GraphBody from './GraphBody';
 import GraphSide from './GraphSide';
 import Shadow from './common/Shadow';
-
-import * as S from './Graph.styles';
 
 const Graph = () => {
   return (
@@ -19,3 +18,13 @@ const Graph = () => {
 };
 
 export default Graph;
+
+const S = {
+  Container: styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 46px;
+
+    width: 1200px;
+  `,
+};
