@@ -152,23 +152,6 @@ const ReviewWriteModal = ({ productURL, title }: ReviewWriteModalProps) => {
 
 export default ReviewWriteModal;
 
-export const CommonS = {
-  Button: styled.button`
-    background: ${theme.colors.primary};
-    color: white;
-
-    outline: none;
-    border: none;
-    border-radius: 30px;
-
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  `,
-};
-
 export const S = {
   Section: styled.section`
     display: flex;
@@ -226,21 +209,5 @@ export const S = {
     display: flex;
     justify-content: flex-end;
     margin-top: 100px;
-  `,
-
-  CreateButton: styled(CommonS.Button)`
-    font-size: 18px;
-    font-weight: 600;
-    padding: 17px 37px;
-    border-radius: 15px;
-
-    &:disabled {
-      background: ${({ theme }) => theme.colors.gray_5};
-      cursor: default;
-
-      :hover {
-        opacity: 1;
-      }
-    }
   `,
 };

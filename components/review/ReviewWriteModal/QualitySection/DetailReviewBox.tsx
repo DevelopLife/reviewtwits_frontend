@@ -12,7 +12,9 @@ interface DetailReviewBox {
 const DetailReviewBox = ({ ...rest }: DetailReviewBox) => {
   return (
     <S.Box>
-      <S.SectionTitle>상세리뷰</S.SectionTitle>
+      <ReviewWriteModalStyles.SectionTitle>
+        상세리뷰
+      </ReviewWriteModalStyles.SectionTitle>
       <ReviewTextArea {...rest} />
     </S.Box>
   );
@@ -21,10 +23,6 @@ const DetailReviewBox = ({ ...rest }: DetailReviewBox) => {
 export default DetailReviewBox;
 
 const S = {
-  SectionTitle: ReviewWriteModalStyles.SectionTitle,
-
-  ReviewFor: ReviewWriteModalStyles.ReviewFor,
-
   Box: styled.div`
     display: flex;
     flex-direction: column;

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import useForm from 'hooks/useForm';
+import { usePostReview } from 'hooks/queries/sns';
 import {
   validateURL,
   validateReviewContent,
@@ -13,14 +14,13 @@ import {
   ERROR_MESSAGE,
   SUCCESS_MESSAGE,
 } from 'constants/reviews';
+import { PAGE_LIST } from 'constants/routers';
 import { ReviewType } from 'typings/reviews';
 
 import ImageUploadBox from 'components/Review/common/ImageUploadBox';
 import ReviewCreateButton from 'components/Review/common/ReviewCreateButton';
 import ReviewTextArea from 'components/Review/common/ReviewTextArea';
-import SearchBox from './SearchBox';
-import { PAGE_LIST } from 'constants/routers';
-import { usePostReview, usePostReviewComment } from 'hooks/queries/sns';
+import SearchBox from 'components/Social/Review/SearchBox';
 
 const ReviewWriteForm = () => {
   const router = useRouter();
@@ -38,22 +38,6 @@ const ReviewWriteForm = () => {
     productName: '',
     newImageFiles: [],
   });
-  // const { mutate: mutateCreate, isLoading } = useMutation(
-  //   (data: FormData) => snsAPI.createReview(data),
-  //   {
-  //     onSuccess: () => {
-  //       alert(SUCCESS_MESSAGE.CREATE);
-  //       router.push(PAGE_LIST.SOCIAL_HOME);
-  //     },
-  //     onError: ({ response }) => {
-  //       switch (response?.status) {
-  //         case 400:
-  //           alert(response.data[0].message);
-  //           break;
-  //       }
-  //     },
-  //   }
-  // );
 
   const afterSuccessPost = () => {
     alert(SUCCESS_MESSAGE.CREATE);

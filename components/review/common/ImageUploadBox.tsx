@@ -7,7 +7,6 @@ import { formattedImageUrl } from 'utils/format';
 import CameraIcon from 'public/icons/camera.svg';
 import CloseIcon from 'public/icons/close.svg';
 import useHorizontalScroll from 'hooks/useHorizontalScroll';
-import { CommonS as ReviewWriteModalCommonStyles } from 'components/Review/ReviewWriteModal/ReviewWriteModal';
 
 export interface ImageUploadBoxProps {
   buttonColor: Colors;
@@ -137,7 +136,7 @@ const S = {
     }
   `,
 
-  ImageUploadButton: styled(ReviewWriteModalCommonStyles.Button)<{
+  ImageUploadButton: styled.button<{
     color: Colors;
   }>`
     display: flex;
@@ -147,7 +146,9 @@ const S = {
     width: fit-content;
     font-size: 16px;
     padding: 7px 15px;
+    border-radius: 30px;
 
+    color: ${({ theme }) => theme.colors.white};
     background: ${({ theme, color }) => theme.colors[color]};
   `,
 

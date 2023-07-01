@@ -17,7 +17,7 @@ const SocialTitleSection = ({ title, children }: SocialTitleSectionProps) => {
 
 export default SocialTitleSection;
 
-const S = {
+export const S = {
   SocialTitleSection: styled.div`
     width: 100%;
   `,

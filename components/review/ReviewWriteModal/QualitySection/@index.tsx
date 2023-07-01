@@ -1,9 +1,7 @@
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 
-import * as S from '../ReviewWriteModal.styles';
-
-import QualityQuestionBox from './QualityQuestionBox';
-import { ReviewResponseType, ReviewType } from 'typings/reviews';
+import { S as ReviewWriteModalStyles } from '../ReviewWriteModal';
+import type { ReviewResponseType, ReviewType } from 'typings/reviews';
 import DetailReviewBox from './DetailReviewBox';
 import ImageUploadBox from 'components/Review/common/ImageUploadBox';
 import StarRating from 'components/Review/common/StarRating';
@@ -23,8 +21,7 @@ const QualitySection = ({
   handleChange,
 }: QualitySectionProps) => {
   return (
-    <S.Section>
-      {/* <QualityQuestionBox /> */}
+    <ReviewWriteModalStyles.Section>
       <ProductBox
         imageUrl={reviewData?.productUrl}
         title={reviewData?.productName}
@@ -40,7 +37,7 @@ const QualitySection = ({
         imageNameList={reviewData?.reviewImageUrlList}
         setValue={setValue}
       />
-    </S.Section>
+    </ReviewWriteModalStyles.Section>
   );
 };
 
