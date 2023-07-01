@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import useModal from 'hooks/useModal';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import atomModal from 'states/atomModal';
 import * as modals from './modals';
@@ -21,6 +21,17 @@ const ModalContainer = () => {
     modal.hide();
     router.back();
   };
+
+  const listenPopstateEvent = () => {
+    router.beforePopState(() => {
+      modal.hide();
+      return true;
+    });
+  };
+  useEffect(() => {
+    listenPopstateEvent();
+    return () => listenPopstateEvent();
+  }, []);
 
   return (
     <>
