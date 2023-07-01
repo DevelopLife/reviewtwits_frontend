@@ -17,5 +17,4 @@ export default SocialLayout;
 
 const S = {
   SocialLayout: styled.div``,
-  Link: styled.a``,
 };
