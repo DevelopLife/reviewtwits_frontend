@@ -24,6 +24,7 @@ import {
 } from 'typings/reviews';
 import { selectedUserState } from 'states/reviews';
 
+
 export const useGetFollowerList = (nickname: string) => {
   const followerListInfiniteQuery = useInfiniteScrollQuery({
     queryKey: queryKey.followerList(),
@@ -292,6 +293,7 @@ export const useFollowAndUnFollow = () => {
 };
 
 export const useIsFollowingDictionary = () => {
+
   const data = useQuery<FollowingDictionary>({
     queryKey: queryKey.followingDictionary(),
     networkMode: 'offlineFirst',
