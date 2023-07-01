@@ -8,9 +8,11 @@ import HeartEmpty from 'public/icons/like-heart-empty.svg';
 import thumbsUp from 'public/icons/thumbs_up.png';
 
 import { ShoppingMallReviewDetail } from 'typings/reviews';
+
 import { formattedCreateDateArr, formattedImageUrl } from 'utils/format';
-import StarBox from 'components/social/common/Review/StarBox';
-import Card from 'components/common/Card';
+import StarBox from 'components/Social/Common/Review/StarBox';
+import Card from 'components/Common/Card';
+
 import { shoppingAPI } from 'api/reviews';
 
 interface ReviewProps {

@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 
-import SocialFollowAndUnFollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
-import TestGlobalProvider from 'components/test/TestGlobalProvider';
+import SocialFollowAndUnFollowButton from 'components/Social/Profile/SocialFollowAndUnfollowButton';
+import TestGlobalProvider from 'components/Test/TestGlobalProvider';
 import { FOLLOW } from 'constants/followAndUnFollow';
 
 const mockNickname = 'test@test.com';

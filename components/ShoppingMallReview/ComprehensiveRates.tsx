@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 
 import risingArray from 'public/images/rising_array.png';
 import grayStar from 'public/images/empty_star_img.png';
+import StarBox from 'components/Social/Common/Review/StarBox';
 
-import StarBox from 'components/social/common/Review/StarBox';
 import { useGetShoppingMallReviewInfo } from 'hooks/queries/reviews';
 import { useRegisterShoppingMallProduct } from 'hooks/queries/shopping';
 import { RegisterProjectParams } from 'typings/register';

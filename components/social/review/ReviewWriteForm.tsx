@@ -15,9 +15,9 @@ import {
 } from 'constants/reviews';
 import { ReviewType } from 'typings/reviews';
 
-import ImageUploadBox from 'components/review/common/ImageUploadBox';
-import ReviewCreateButton from 'components/review/common/ReviewCreateButton';
-import ReviewTextArea from 'components/review/common/ReviewTextArea';
+import ImageUploadBox from 'components/Review/common/ImageUploadBox';
+import ReviewCreateButton from 'components/Review/common/ReviewCreateButton';
+import ReviewTextArea from 'components/Review/common/ReviewTextArea';
 import SearchBox from './SearchBox';
 import { PAGE_LIST } from 'constants/routers';
 import { usePostReview, usePostReviewComment } from 'hooks/queries/sns';

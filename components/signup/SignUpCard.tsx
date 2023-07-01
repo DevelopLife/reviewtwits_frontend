@@ -31,10 +31,10 @@ import { registerAPI } from 'api/oauth';
 import { getCookie, removeCookie } from 'utils/cookies';
 
 import theme from 'styles/theme';
-import Card from 'components/common/Card';
-import Form from 'components/common/Form';
-import Input from 'components/common/Input';
-import Button from 'components/common/Button';
+import Card from 'components/Common/Card';
+import Form from 'components/Common/Form';
+import Input from 'components/Common/Input';
+import Button from 'components/Common/Button';
 import { PAGE_LIST } from 'constants/routers';
 
 const SignUpForm = () => {

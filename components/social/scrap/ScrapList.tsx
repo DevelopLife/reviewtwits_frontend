@@ -1,5 +1,5 @@
 import { useGetInfiniteScrapList } from 'hooks/queries/sns';
-import ReviewList from '../common/ReviewList';
+import ReviewList from '../Common/ReviewList';
 
 const ScrapList = () => {
   const infiniteScrapListProps = useGetInfiniteScrapList();

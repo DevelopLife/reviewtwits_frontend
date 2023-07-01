@@ -9,13 +9,11 @@ import {
   useEditShoppingMallReview,
   useGetShoppingMallReview,
 } from 'hooks/queries/shopping';
-import { ReviewResponseType, ReviewType } from 'typings/reviews';
+import type { ReviewResponseType, ReviewType } from 'typings/reviews';
 import { validateReviewContent, validateReviewScore } from 'utils/validate';
 import { DEFAULT_REVIEW_WRITE_ERRORS, ERROR_MESSAGE } from 'constants/reviews';
-
-import ServiceSection from 'components/review/ReviewWriteModal/ServiceSection/@index';
 import theme from 'styles/theme';
-
+import ServiceSection from 'components/Review/ReviewWriteModal/ServiceSection/@index';
 import QualitySection from './QualitySection/@index';
 import ReviewCreateButton from '../common/ReviewCreateButton';
 

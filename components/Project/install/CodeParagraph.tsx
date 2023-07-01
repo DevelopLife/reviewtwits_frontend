@@ -1,8 +1,7 @@
 import { ReactNode } from 'react';
-
-import CodeBlock from 'components/common/CodeBlock/CodeBlock';
-
 import styled from '@emotion/styled';
+
+import CodeBlock from 'components/Common/CodeBlock/CodeBlock';
 
 interface CodeParagraphProps {
   text: ReactNode;

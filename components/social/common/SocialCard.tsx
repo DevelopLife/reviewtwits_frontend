@@ -2,9 +2,9 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
+import SocialFollowAndUnfollowButton from 'components/Social/Profile/SocialFollowAndUnfollowButton';
 import { FOLLOW_UNFOLLOW } from 'constants/social';
 import { formattedProfileImageUrl } from 'utils/format';
-import SocialFollowAndUnfollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
 
 interface SocialCardProps {
   imageUrl: string | null;

@@ -4,8 +4,8 @@ import {
   LeadTimeRate,
   ProductStatistics,
 } from 'components/Statistics/@index';
-import Margin from 'components/Statistics/common/Margin';
-import StatisticsPageLayout from 'components/Statistics/common/StatisticsPageLayout';
+import Margin from 'components/Statistics/Common/Margin';
+import StatisticsPageLayout from 'components/Statistics/Common/StatisticsPageLayout';
 import React from 'react';
 
 const ProjectStatisticsPage = () => {

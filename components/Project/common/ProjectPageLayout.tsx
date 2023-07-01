@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
-import Header from 'components/common/Header/Header';
+import Header from 'components/Common/Header/Header';
 
 interface ProjectPageLayoutProps {
   children: ReactNode;

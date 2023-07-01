@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { emailsAPI } from 'api/emails';
-import Button from 'components/common/Button';
-import Card from 'components/common/Card';
-import Input from 'components/common/Input';
+import Button from 'components/Common/Button';
+import Card from 'components/Common/Card';
+import Input from 'components/Common/Input';
 import {
   DEFAULT_FIND_PASSWORD_FORM,
   ERROR_MESSAGE,

@@ -292,7 +292,7 @@ export const useFollowAndUnFollow = () => {
 };
 
 export const useIsFollowingDictionary = () => {
-  const data = useQuery<FollowingDictionary>(FOLLOWING_DICTIONARY_KEY, {
+  const data = useQuery<FollowingDictionary>(queryKey.followingDictionary(), {
     networkMode: 'offlineFirst',
   });
 

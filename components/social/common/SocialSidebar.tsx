@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
-import SocialMenuItem from 'components/social/common/SocialMenuItem';
-import SocialMenus from 'components/social/common/SocialMenus';
-import SocialProfileMenuItem from 'components/social/common/SocialProfileMenuItem';
-import SidebarTitle from 'components/social/common/SidebarTitle';
-import SearchBar from 'components/social/common/SearchBar';
+import SocialMenuItem from 'components/Social/Common/SocialMenuItem';
+import SocialMenus from 'components/Social/Common/SocialMenus';
+import SocialProfileMenuItem from 'components/Social/Common/SocialProfileMenuItem';
+import SidebarTitle from 'components/Social/Common/SidebarTitle';
+import SearchBar from 'components/Social/Common/SearchBar';
 
 import HomeIcon from 'public/icons/home.svg';
 import ScrapIcon from 'public/icons/scrap.svg';

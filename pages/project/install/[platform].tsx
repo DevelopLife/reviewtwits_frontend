@@ -5,8 +5,8 @@ import {
   CodeParagraph,
   InstallPageButtons,
 } from 'components/Project/install/@index';
-import HighlightCDN from 'components/common/HighlightCDN';
-import Video from 'components/common/Video/Video';
+import HighlightCDN from 'components/Common/HighlightCDN';
+import Video from 'components/Common/Video/Video';
 import Margin from 'components/Dashboard/common/Margin';
 import CommonButton from 'components/Project/install/common/Button';
 
