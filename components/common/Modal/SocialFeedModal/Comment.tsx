@@ -9,7 +9,7 @@ import HeartEmpty from 'public/icons/like-heart-empty.svg';
 import { snsAPI } from 'api/sns';
 import { useState } from 'react';
 import { formattedLastTime } from 'utils/format';
-import useUserProfile from 'hooks/queries/users';
+import { useUserProfile } from 'hooks/queries/users';
 import useForm from 'hooks/useForm';
 import useModal from 'hooks/useModal';
 

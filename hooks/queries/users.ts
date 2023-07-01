@@ -1,16 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { usersAPI } from 'api/users';
 import { UserProfileResponseType } from 'typings/account';
 
 import { isLoginState } from 'states/isLogin';
 import { useRecoilValue } from 'recoil';
+import { queryKey } from 'hooks/queries';
 
-const USER_PROFILE_QUERY = 'userProfile';
-
-const useUserProfile = () => {
+export const useUserProfile = () => {
   const isLogin = useRecoilValue(isLoginState);
   const { data: userData } = useQuery<UserProfileResponseType>(
-    [USER_PROFILE_QUERY, isLogin],
+    queryKey.myProfile(isLogin),
     usersAPI.getUserProfile,
     {
       enabled: !!isLogin,
@@ -29,4 +28,17 @@ const useUserProfile = () => {
   };
 };
 
-export default useUserProfile;
+export const useSetUserProfile = (afterSuccess: (newname: string) => void) => {
+  const mutate = useMutation(
+    (data: FormData) => usersAPI.setUserProfile(data),
+    {
+      onSuccess: ({ data }) => {
+        afterSuccess(data.nickname);
+      },
+      onError: ({ response }) => {
+        alert(response?.data[0]?.message);
+      },
+    }
+  );
+  return mutate;
+};

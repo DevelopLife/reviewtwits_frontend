@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 
-import useScrap from 'hooks/useScrap';
-
 import BookmarkOutlineIcon from 'public/icons/bookmark_outline.svg';
 import BookmarkFillIcon from 'public/icons/bookmark_fill.svg';
+import { useAddScrap, useDeleteScrap } from 'hooks/queries/sns';
 
 interface ScrapButtonProps {
   isScrapped: boolean;
@@ -16,7 +15,8 @@ const ScrapButton = ({
   reviewId,
   position = 'absolute',
 }: ScrapButtonProps) => {
-  const { doScrap, cancelScrap } = useScrap(reviewId);
+  const { mutate: doScrap } = useAddScrap(reviewId);
+  const { mutate: cancelScrap } = useDeleteScrap(reviewId);
 
   const handleClickScrapButton = () => {
     isScrapped ? cancelScrap() : doScrap();

@@ -5,7 +5,7 @@ import SocialFeedSectionView, {
   CARD_WIDTH,
 } from 'components/social/profile/SocialFeedSection/SocialFeedSectionView';
 import { useGetInfiniteSocialReviews } from 'hooks/queries/sns';
-import useUserProfile from 'hooks/queries/users';
+import { useUserProfile } from 'hooks/queries/users';
 import { formattedImageUrl } from 'utils/format';
 
 const SocialMyFeedSection = () => {

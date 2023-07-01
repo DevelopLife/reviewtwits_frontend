@@ -1,7 +1,7 @@
 import Layout from 'components/common/Layout';
-import SocialMainLayout from 'components/social/main/SocialMainLayout';
-import SocialMainImage from 'components/social/main/SocialMainImage';
-import SignInCard from 'components/signIn/SignInCard';
+import SocialMainLayout from 'components/social/Main/SocialMainLayout';
+import SocialMainImage from 'components/social/Main/SocialMainImage';
+import SignInCard from 'components/SignIn/SignInCard';
 
 const SocialMainPage = () => {
   return (
