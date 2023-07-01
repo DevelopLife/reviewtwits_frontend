@@ -10,6 +10,8 @@ interface SocialFeedSectionViewProps extends WrapProps {
   columnWidth: number;
 }
 
+// TODO: 공용으로 사용되는 View 라서 현재단계에서 변경 불가
+
 const SocialFeedSectionView = ({
   targetRef,
   children,
