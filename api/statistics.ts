@@ -1,6 +1,5 @@
-import { AxiosResponse } from 'axios';
-
 import { publicAPI, requiredTokenApi } from 'api/instance';
+
 import type {
   DailyVisitGraphInfos,
   DeviceType,
@@ -9,6 +8,7 @@ import type {
   VisitGraphInfos,
   VisitTimeStamp,
 } from 'typings/statistics';
+import type { ResponseType } from 'api/projects';
 
 const STATISTICS_URL = '/statistics';
 const DASHBOARD_URL = '/dashboard';
@@ -27,31 +27,28 @@ export const statisticsAPI = {
 
     return await publicAPI.post(`${STATISTICS_URL}/visited-info`, body);
   },
-  dailyVisitGraphInfos: async (params: {
+  dailyVisitGraphInfos: (params: {
     projectName: string;
     range: string;
-  }): Promise<AxiosResponse<DailyVisitGraphInfos>> => {
-    return await requiredTokenApi.get(
-      `${STATISTICS_URL}/daily-visit-graph-infos`,
-      {
-        params,
-      }
-    );
-  },
-  recentVisitCounts: async (params: {
-    projectName: string;
-  }): Promise<AxiosResponse<RecentVisitCounts>> => {
-    return await requiredTokenApi.get(`${STATISTICS_URL}/recent-visit-counts`, {
+  }): ResponseType<DailyVisitGraphInfos> => {
+    return requiredTokenApi.get(`${STATISTICS_URL}/daily-visit-graph-infos`, {
       params,
     });
   },
-  visitGraphInfos: async (params: {
+  recentVisitCounts: (params: {
+    projectName: string;
+  }): ResponseType<RecentVisitCounts> => {
+    return requiredTokenApi.get(`${STATISTICS_URL}/recent-visit-counts`, {
+      params,
+    });
+  },
+  visitGraphInfos: (params: {
     projectName: string;
     range: string;
     interval: string;
     endDate?: VisitTimeStamp;
-  }): Promise<AxiosResponse<VisitGraphInfos>> => {
-    return await requiredTokenApi.get(`${STATISTICS_URL}/visit-graph-infos`, {
+  }): ResponseType<VisitGraphInfos> => {
+    return requiredTokenApi.get(`${STATISTICS_URL}/visit-graph-infos`, {
       params,
     });
   },
