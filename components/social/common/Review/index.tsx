@@ -17,7 +17,6 @@ import CommentIcon from 'public/icons/comment.svg';
 
 import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 import useRouteModalPage from 'hooks/useOpenModal';
-import { PAGE_LIST } from 'constants/routers';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -28,7 +27,6 @@ const Review = ({ data }: ReviewProps) => {
   const routeModalPage = useRouteModalPage({
     nickname: data?.userInfo.nickname,
     reviewId: data?.reviewId,
-    page: PAGE_LIST.SOCIAL_HOME,
   });
 
   const goProductPage = () => data && router.push(data.productUrl);
