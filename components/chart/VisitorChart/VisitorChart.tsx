@@ -5,6 +5,7 @@ import type {
   XAxisProps,
   YAxisProps,
   BarProps,
+  LineProps,
 } from 'recharts';
 import type {
   NameType,
@@ -69,7 +70,7 @@ const VisitorChart = ({
         tooltipProps={{
           content: <CustomVisitorTooltip />,
         }}
-        barPropsList={[
+        tickPropsList={[
           {
             dataKey: 'visitCount',
             shape: (props) => (
@@ -119,15 +120,17 @@ interface VisitorChartViewProps {
   yAxisList?: YAxisProps[];
   tooltipProps?: TooltipProps<ValueType, NameType>;
   legendProps?: LegendProps;
-  barPropsList: BarProps[];
+  tickPropsList: BarProps[] | LineProps[];
   buttons: { left: ReactNode; right: ReactNode } | null;
 }
 
 const VisitorChartView = (props: VisitorChartViewProps) => {
   if (props.type === 'bar') {
+    const barPropsList = props.tickPropsList as BarProps[];
+
     return (
       <S.VisitorChartContainer>
-        <CustomBarChart {...props} />
+        <CustomBarChart {...props} barPropsList={barPropsList} />
         <S.ChartButtonWrap>
           {props.buttons?.left && props.buttons?.left}
           {props.buttons?.right && props.buttons?.right}
@@ -136,9 +139,11 @@ const VisitorChartView = (props: VisitorChartViewProps) => {
     );
   }
   if (props.type === 'line') {
+    const linePropsList = props.tickPropsList as LineProps[];
+
     return (
       <S.VisitorChartContainer>
-        <CustomLineChart {...props} linePropsList={props.barPropsList} />
+        <CustomLineChart {...props} linePropsList={linePropsList} />
         <S.ChartButtonWrap>
           {props.buttons?.left && props.buttons.left}
           {props.buttons?.right && props.buttons.right}
