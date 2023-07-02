@@ -1,4 +1,4 @@
-import Card from 'components/common/Card';
+import Card from 'components/Common/Card';
 import SignInForm from './SignInForm';
 import FindBox from './FindBox';
 import SocialLoginBox from './SocialLoginBox';

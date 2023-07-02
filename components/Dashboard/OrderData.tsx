@@ -1,7 +1,7 @@
-import React from 'react';
+import styled from '@emotion/styled';
+
 import Button from './common/Button';
 import Shadow from './common/Shadow';
-import * as S from './OrderData.styles';
 
 const OrderData = () => {
   return (
@@ -69,3 +69,47 @@ const OrderData = () => {
 };
 
 export default OrderData;
+
+const S = {
+  Container: styled.div`
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 60px;
+    padding-left: 45px;
+    padding-right: 44px;
+  `,
+
+  OrderHeader: styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  `,
+
+  Title: styled.h1`
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 43px;
+
+    color: #000000;
+  `,
+
+  Table: styled.table`
+    width: 1348px;
+    height: 283px;
+
+    border: 1px solid black;
+  `,
+
+  TableHeader: styled.th``,
+
+  TableRow: styled.tr``,
+
+  TableData: styled.td``,
+
+  Margin: styled.div`
+    height: 40px;
+  `,
+};

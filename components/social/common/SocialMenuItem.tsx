@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
 
-import Hover from 'components/common/Hover';
+import Hover from 'components/Common/Hover';
+
 import type { WrapProps } from 'typings/wrapperProps';
 interface SocialMenuItemViewProps extends WrapProps {
   isCurrent: boolean;

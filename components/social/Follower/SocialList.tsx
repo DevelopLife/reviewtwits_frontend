@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import SocialCard from 'components/social/common/SocialCard';
+import SocialCard from 'components/Social/Common/SocialCard';
 import { RefObject } from 'react';
 
 import { FollowListType } from 'typings/sns';

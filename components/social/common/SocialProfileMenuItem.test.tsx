@@ -6,7 +6,7 @@ import { matchers } from '@emotion/jest';
 import theme from 'styles/theme';
 import UserIcon from 'public/icons/user.svg';
 import mockNextRouter from 'test/mockRouter';
-import SocialProfileMenuItem from 'components/social/common/SocialProfileMenuItem';
+import SocialProfileMenuItem from 'components/Social/Common/SocialProfileMenuItem';
 import { useUserProfile } from 'hooks/queries/users';
 
 const client = new QueryClient();

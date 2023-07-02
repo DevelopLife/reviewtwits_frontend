@@ -1,11 +1,11 @@
-import SnsLayout from 'components/social/common/SocialLayout';
-import ReviewWriteForm from 'components/social/Review/ReviewWriteForm';
+import SocialLayout from 'components/Social/Common/SocialLayout';
+import ReviewWriteForm from 'components/Social/Review/ReviewWriteForm';
 
 const SocialReviewWritePage = () => {
   return (
-    <SnsLayout>
+    <SocialLayout>
       <ReviewWriteForm />
-    </SnsLayout>
+    </SocialLayout>
   );
 };
 

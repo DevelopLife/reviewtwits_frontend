@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import ReviewWriteModal, {
   ReviewWriteModalProps,
-} from 'components/review/ReviewWriteModal/ReviewWriteModal';
+} from 'components/Review/ReviewWriteModal/ReviewWriteModal';
 
 const ReviewWritePage = () => {
   const router = useRouter();

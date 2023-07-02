@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import * as S from './EffectIntroduce.styles';
+import styled from '@emotion/styled';
 
 const EffectIntroduce = () => {
   return (
@@ -58,3 +58,80 @@ const EffectIntroduce = () => {
 };
 
 export default EffectIntroduce;
+
+const S = {
+  Container: styled.div`
+    width: ${({ theme }) => theme.devices.desktop}px;
+    height: 1266px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `,
+
+  Title: styled.h4`
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 60px;
+
+    margin-top: 273px;
+    margin-bottom: 133px;
+
+    color: #000000;
+  `,
+
+  CardContainer: styled.div`
+    width: 1551px;
+    height: 345px;
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 129px;
+  `,
+
+  Card: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 484px;
+  `,
+
+  CardImage: styled.div`
+    width: 112px;
+    height: 112px;
+  `,
+
+  CardTitle: styled.h5`
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+
+    margin-top: 55px;
+    margin-bottom: 35px;
+    color: #000000;
+  `,
+
+  CardDesc: styled.p`
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #000000;
+  `,
+
+  Button: styled.button`
+    width: 239px;
+    height: 66px;
+    background: #181818;
+    border-radius: 60px;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26px;
+  `,
+};

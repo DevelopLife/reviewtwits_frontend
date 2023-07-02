@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import type { Colors } from 'styles/theme';
-import Shadow from './common/Shadow';
+import Shadow from './Common/Shadow';
 
 const VisitorStatistics = () => {
   return (

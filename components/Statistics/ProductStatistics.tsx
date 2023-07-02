@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import Shadow from './common/Shadow';
+import Shadow from './Common/Shadow';
 
 const ProductStatistics = () => {
   return (

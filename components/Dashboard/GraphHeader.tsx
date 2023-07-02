@@ -1,7 +1,7 @@
 import Image from 'next/image';
+import styled from '@emotion/styled';
 
 import Button from './common/Button';
-import * as S from './GraphHeader.styles';
 
 const PageData = () => {
   return (
@@ -29,3 +29,58 @@ const PageData = () => {
 };
 
 export default PageData;
+
+const S = {
+  Container: styled.div`
+    width: 1200px;
+    height: 129px;
+
+    margin: auto;
+    padding-left: 35px;
+    padding-right: 35px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  `,
+
+  Datas: styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+
+    width: 350px;
+  `,
+
+  Data: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  `,
+
+  DataTitle: styled.p`
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    /* Black */
+
+    color: #181818;
+  `,
+
+  DataDesc: styled.p`
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+
+    /* Secondary */
+
+    color: #181818;
+  `,
+};

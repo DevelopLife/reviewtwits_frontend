@@ -7,13 +7,12 @@ import {
   useEffect,
   useCallback,
 } from 'react';
-
-import { ProductSearchResultType } from 'typings/product';
-
 import styled from '@emotion/styled';
-import SearchBar from './SearchBar';
-import RatingBox from 'components/review/common/RatingBox';
+
+import type { ProductSearchResultType } from 'typings/product';
+import RatingBox from 'components/Review/common/RatingBox';
 import { useGetProductInfo, useGetSearchResult } from 'hooks/queries/items';
+import SearchBar from './SearchBar';
 
 interface SearchBoxProps {
   productName?: string;
