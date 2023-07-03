@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
-import { WrapProps } from 'typings/wrapperProps';
+import type { WrapProps } from 'typings/wrapperProps';
 
 interface ProductBoxProps extends WrapProps {
   imageUrl: string | undefined;

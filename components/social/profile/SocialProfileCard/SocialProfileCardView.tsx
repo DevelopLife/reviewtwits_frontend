@@ -12,6 +12,8 @@ interface SocialProfileCardViewProps {
   profile: SocialProfile;
 }
 
+// TODO: 공용으로 사용되는 View 라서 현재단계에서 변경 불가
+
 const SocialProfileCardView = ({
   isMyPage,
   followButtonTextList,

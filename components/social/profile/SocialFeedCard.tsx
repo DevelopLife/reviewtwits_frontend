@@ -42,7 +42,6 @@ export const SocialFeedCard = ({
   const routeModalPage = useRouteModalPage({
     nickname,
     reviewId,
-    page: PAGE_LIST.SOCIAL_PROFILE,
   });
 
   const openModal = () => {

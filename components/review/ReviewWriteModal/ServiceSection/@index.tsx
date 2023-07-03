@@ -1,14 +1,11 @@
-import * as S from '../ReviewWriteModal.styles';
-
+import { S as ReviewWriteModalStyles } from '../ReviewWriteModal';
 import ServiceQuestionBox from './ServiceQuestionBox';
-// import SatisfactionBox from './SatisfactionBox';
 
 const ServiceSection = () => {
   return (
-    <S.Section>
+    <ReviewWriteModalStyles.Section>
       <ServiceQuestionBox />
-      {/* <SatisfactionBox /> */}
-    </S.Section>
+    </ReviewWriteModalStyles.Section>
   );
 };
 

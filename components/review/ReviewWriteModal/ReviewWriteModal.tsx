@@ -1,23 +1,23 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
+import styled from '@emotion/styled';
 
 import useForm from 'hooks/useForm';
-import { ReviewResponseType, ReviewType } from 'typings/reviews';
-import { validateReviewContent, validateReviewScore } from 'utils/validate';
-import { DEFAULT_REVIEW_WRITE_ERRORS, ERROR_MESSAGE } from 'constants/reviews';
-
-import * as S from './ReviewWriteModal.styles';
-import QualitySection from './QualitySection/@index';
-import ReviewCreateButton from '../common/ReviewCreateButton';
 import {
   useCreateShoppingMallReview,
   useEditShoppingMallReview,
   useGetShoppingMallReview,
 } from 'hooks/queries/shopping';
+import type { ReviewResponseType, ReviewType } from 'typings/reviews';
+import { validateReviewContent, validateReviewScore } from 'utils/validate';
+import { DEFAULT_REVIEW_WRITE_ERRORS, ERROR_MESSAGE } from 'constants/reviews';
+import theme from 'styles/theme';
 import ServiceSection from 'components/Review/ReviewWriteModal/ServiceSection/@index';
+import QualitySection from './QualitySection/@index';
+import ReviewCreateButton from '../common/ReviewCreateButton';
 
-// TODO: DELETE
+// // TODO: DELETE
 
 const mockReviewData: ReviewResponseType = {
   productUrl:
@@ -151,3 +151,63 @@ const ReviewWriteModal = ({ productURL, title }: ReviewWriteModalProps) => {
 };
 
 export default ReviewWriteModal;
+
+export const S = {
+  Section: styled.section`
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding: 30px 0;
+  `,
+
+  QuestionBox: styled.div`
+    display: flex;
+    gap: 12px;
+  `,
+
+  TextBox: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  `,
+
+  SectionTitle: styled.h3`
+    font-size: 22px;
+    font-weight: 700;
+  `,
+
+  Question: styled.p`
+    font-size: 14px;
+    color: ${theme.colors.gray_6};
+  `,
+
+  ReviewFor: styled.label`
+    color: black;
+    white-space: pre;
+    font-size: 16px;
+    font-weight: 500;
+  `,
+
+  Container: styled.div`
+    width: 1000px;
+    padding: 60px;
+  `,
+
+  Title: styled.h1`
+    font-weight: 500;
+    font-size: 36px;
+    margin: 10px 0;
+  `,
+
+  ReviewContent: styled.div`
+    padding: 0;
+  `,
+
+  Form: styled.form``,
+
+  ButtonWrap: styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 100px;
+  `,
+};

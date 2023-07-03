@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import styled from '@emotion/styled';
 
 import SocialMenuItem from 'components/Social/Common/SocialMenuItem';
 import SocialMenus from 'components/Social/Common/SocialMenus';
@@ -11,9 +12,7 @@ import ScrapIcon from 'public/icons/scrap.svg';
 import FolderIcon from 'public/icons/folder.svg';
 import FullHeartIcon from 'public/icons/full-heart.svg';
 import UserIcon from 'public/icons/user.svg';
-
 import theme from 'styles/theme';
-import * as S from './SocialSidebar.styles';
 import { PAGE_LIST } from 'constants/routers';
 
 const SERVICE_TITLE = 'ReviewTwits';
@@ -76,3 +75,19 @@ const SnsSidebar = () => {
 };
 
 export default SnsSidebar;
+
+const S = {
+  SidebarLayout: styled.aside`
+    padding: 60px 40px;
+    width: ${({ theme }) => theme.width.socialSidebar.desktop};
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.2);
+    background-color: ${({ theme }) => theme.colors.gray_0};
+  `,
+};

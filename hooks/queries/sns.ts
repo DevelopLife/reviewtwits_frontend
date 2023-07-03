@@ -1,3 +1,4 @@
+import { queryKey } from './index';
 import {
   QueryClient,
   useMutation,
@@ -22,7 +23,6 @@ import {
   ReviewResponseType,
 } from 'typings/reviews';
 import { selectedUserState } from 'states/reviews';
-import { queryKey } from 'hooks/queries';
 
 export const useGetFollowerList = (nickname: string) => {
   const followerListInfiniteQuery = useInfiniteScrollQuery({
@@ -292,7 +292,8 @@ export const useFollowAndUnFollow = () => {
 };
 
 export const useIsFollowingDictionary = () => {
-  const data = useQuery<FollowingDictionary>(queryKey.followingDictionary(), {
+  const data = useQuery<FollowingDictionary>({
+    queryKey: queryKey.followingDictionary(),
     networkMode: 'offlineFirst',
   });
 

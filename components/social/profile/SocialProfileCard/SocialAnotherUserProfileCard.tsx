@@ -28,8 +28,8 @@ const SocialAnotherUserProfileCard = () => {
   return (
     <SocialProfileCardView
       isMyPage={isMypage}
-      profile={mockSocialProfile}
       followButtonTextList={FOLLOW_BUTTON_TEXT_LIST}
+      profile={mockSocialProfile}
     />
   );
 };

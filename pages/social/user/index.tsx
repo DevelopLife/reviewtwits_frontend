@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { useUserProfile } from 'hooks/queries/users';
-import SocialLayout from 'components/Social/Common/SocialLayout';
-import { SocialTitleSection } from 'components/Social/Common/SocialTitleSection.styles';
+import SocialLayout from 'components/Social/common/SocialLayout';
+import { S as SocislTitleSectionStyles } from 'components/Social/Common/SocialTitleSection';
 import { PAGE_LIST } from 'constants/routers';
 
 const UserPage = () => {
@@ -18,7 +18,9 @@ const UserPage = () => {
 
   return (
     <SocialLayout>
-      <SocialTitleSection>{''}</SocialTitleSection>
+      <SocislTitleSectionStyles.SocialTitleSection>
+        {''}
+      </SocislTitleSectionStyles.SocialTitleSection>
     </SocialLayout>
   );
 };
