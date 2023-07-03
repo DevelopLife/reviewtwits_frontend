@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
+import { ProjectPageLayout } from 'components/Project/Common/ProjectPageLayout';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
 import ReactIcon from 'public/icons/react.svg';

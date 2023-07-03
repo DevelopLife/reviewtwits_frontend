@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import type { ReviewCreateButtonProps } from 'components/Review/common/ReviewCreateButton';
+import type { ReviewCreateButtonProps } from 'components/Review/Common/ReviewCreateButton';
 
-import ReviewCreateButton from 'components/Review/common/ReviewCreateButton';
+import ReviewCreateButton from 'components/Review/Common/ReviewCreateButton';
 
 const props: ReviewCreateButtonProps = {
   color: 'primary',

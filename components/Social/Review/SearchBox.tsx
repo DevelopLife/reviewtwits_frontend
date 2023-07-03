@@ -10,7 +10,7 @@ import {
 import styled from '@emotion/styled';
 
 import type { ProductSearchResultType } from 'typings/product';
-import RatingBox from 'components/Review/common/RatingBox';
+import RatingBox from 'components/Review/Common/RatingBox';
 import { useGetProductInfo, useGetSearchResult } from 'hooks/queries/items';
 import SearchBar from './SearchBar';
 

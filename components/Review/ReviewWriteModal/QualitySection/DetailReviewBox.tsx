@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 
-import ReviewTextArea from 'components/Review/common/ReviewTextArea';
+import ReviewTextArea from 'components/Review/Common/ReviewTextArea';
 import { S as ReviewWriteModalStyles } from 'components/Review/ReviewWriteModal/ReviewWriteModal';
 
 interface DetailReviewBox {

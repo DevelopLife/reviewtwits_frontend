@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import type { ImageUploadBoxProps } from 'components/Review/common/ImageUploadBox';
+import type { ImageUploadBoxProps } from 'components/Review/Common/ImageUploadBox';
 
-import ImageUploadBox from 'components/Review/common/ImageUploadBox';
+import ImageUploadBox from 'components/Review/Common/ImageUploadBox';
 
 const props: ImageUploadBoxProps = {
   buttonColor: 'blue_0',

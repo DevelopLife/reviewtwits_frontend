@@ -3,8 +3,8 @@ import type { ChangeEvent } from 'react';
 import { S as ReviewWriteModalStyles } from '../ReviewWriteModal';
 import type { ReviewResponseType, ReviewType } from 'typings/reviews';
 import DetailReviewBox from './DetailReviewBox';
-import ImageUploadBox from 'components/Review/common/ImageUploadBox';
-import StarRating from 'components/Review/common/StarRating';
+import ImageUploadBox from 'components/Review/Common/ImageUploadBox';
+import StarRating from 'components/Review/Common/StarRating';
 import ProductBox from 'components/Review/ReviewWriteModal/QualitySection/ProductBox';
 
 interface QualitySectionProps {

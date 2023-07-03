@@ -3,8 +3,8 @@ import {
   OrderData,
   Graph,
 } from 'components/Dashboard/@index';
-import DashboardPageLayout from 'components/Dashboard/common/DashboardPageLayout';
-import Margin from 'components/Dashboard/common/Margin';
+import DashboardPageLayout from 'components/Dashboard/Common/DashboardPageLayout';
+import Margin from 'components/Dashboard/Common/Margin';
 import React from 'react';
 
 const DashboardPage = () => {

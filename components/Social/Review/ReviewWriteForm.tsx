@@ -17,9 +17,9 @@ import {
 import { PAGE_LIST } from 'constants/routers';
 import { ReviewType } from 'typings/reviews';
 
-import ImageUploadBox from 'components/Review/common/ImageUploadBox';
-import ReviewCreateButton from 'components/Review/common/ReviewCreateButton';
-import ReviewTextArea from 'components/Review/common/ReviewTextArea';
+import ImageUploadBox from 'components/Review/Common/ImageUploadBox';
+import ReviewCreateButton from 'components/Review/Common/ReviewCreateButton';
+import ReviewTextArea from 'components/Review/Common/ReviewTextArea';
 import SearchBox from 'components/Social/Review/SearchBox';
 
 const ReviewWriteForm = () => {

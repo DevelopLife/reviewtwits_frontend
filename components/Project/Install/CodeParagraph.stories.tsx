@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import CodeParagraph from 'components/Project/install/CodeParagraph';
+import CodeParagraph from 'components/Project/Install/CodeParagraph';
 
 export default {
   title: 'project/install/CodeParagraph',

@@ -1,5 +1,5 @@
 import Layout from 'components/Common/Layout';
-import { SignUpForm } from 'components/SignUp/@index';
+import { SignUpForm } from 'components/Signup/@index';
 
 const SignUpPage = () => {
   return (

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-import Button from './common/Button';
-import Shadow from './common/Shadow';
+import Button from './Common/Button';
+import Shadow from './Common/Shadow';
 
 const OrderData = () => {
   return (

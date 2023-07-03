@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { ProjectPageButton } from 'components/Project/common/ProjectPageButton';
+import { ProjectPageButton } from 'components/Project/Common/ProjectPageButton';
 
 export default {
   title: 'project/common/ProjectPageButton',
