@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { useUserProfile } from 'hooks/queries/users';
-import SocialLayout from 'components/Social/common/SocialLayout';
+import SocialLayout from 'components/Social/Common/SocialLayout';
 import { S as SocislTitleSectionStyles } from 'components/Social/Common/SocialTitleSection';
 import { PAGE_LIST } from 'constants/routers';
 

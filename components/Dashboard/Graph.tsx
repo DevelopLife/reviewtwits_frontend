@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import GraphHeader from './GraphHeader';
 import GraphBody from './GraphBody';
 import GraphSide from './GraphSide';
-import Shadow from './common/Shadow';
+import Shadow from './Common/Shadow';
 
 const Graph = () => {
   return (

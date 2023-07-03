@@ -4,7 +4,7 @@ import { ProjectCreateForm } from 'components/Project/Create/ProjectCreateForm';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { BUTTON_TEXTS, PROJECT_TITLE } from 'constants/project';
 import { useCreateProject } from 'hooks/useCreateProject';
-import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
+import { ProjectPageLayout } from 'components/Project/Common/ProjectPageLayout';
 
 const ProjectCreatePage = () => {
   const { isDisabled } = useCreateProject();

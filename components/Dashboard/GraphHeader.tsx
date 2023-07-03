@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
-import Button from './common/Button';
+import Button from './Common/Button';
 
 const PageData = () => {
   return (

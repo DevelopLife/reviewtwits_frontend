@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
-import Shadow from './common/Shadow';
+import Shadow from './Common/Shadow';
 
 const ComprehensiveData = () => {
   return (
