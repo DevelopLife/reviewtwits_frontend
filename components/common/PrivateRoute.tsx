@@ -19,7 +19,7 @@ const PUBLIC_URLS = [
   PAGE_LIST.NOT_FOUND_404,
 ];
 
-const OPTIONAL_PUBLIC_URLS = [PAGE_LIST.HOME];
+const OPTIONAL_PUBLIC_URLS: string[] = [PAGE_LIST.HOME];
 
 const PrivateRoute = ({
   pageProps,

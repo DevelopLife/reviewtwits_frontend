@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { mockSocialProfile } from 'constants/mockSocialProfile';
-import SocialProfileCardView from 'components/social/profile/SocialProfileCard/SocialProfileCardView';
+import SocialProfileCardView from 'components/Social/Profile/SocialProfileCard/SocialProfileCardView';
 import { useGetSocialProfile } from 'hooks/queries/sns';
 
 const SocialAnotherUserProfileCard = () => {
@@ -28,8 +28,8 @@ const SocialAnotherUserProfileCard = () => {
   return (
     <SocialProfileCardView
       isMyPage={isMypage}
-      profile={mockSocialProfile}
       followButtonTextList={FOLLOW_BUTTON_TEXT_LIST}
+      profile={mockSocialProfile}
     />
   );
 };

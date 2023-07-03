@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import styled from '@emotion/styled';
+import Link from 'next/link';
+
 import {
   ComprehensiveRates,
   KeywordRates,
   ReviewHeader,
   Reviews,
 } from './@index';
-import * as S from './ShoppingMallReview.styles';
 
 interface ShoppingMallReviewProps {
   projectName: string;
@@ -60,3 +61,47 @@ const ShoppingMallReview = ({
 };
 
 export default ShoppingMallReview;
+
+const S = {
+  Layout: styled.div`
+    width: 1200px;
+  `,
+
+  ComprehensiveRatesLayout: styled.div`
+    margin-top: 40px;
+    margin-left: 127px;
+  `,
+  KeywordRatesLayout: styled.div`
+    margin-top: 40px;
+    margin-left: 127px;
+  `,
+
+  ReviewHeaderLayout: styled.div`
+    margin-top: 67px;
+    margin-left: 50px;
+  `,
+  ReviewsLayout: styled.div`
+    margin-top: 32px;
+    margin-bottom: 69px;
+
+    margin-left: 50px;
+  `,
+
+  LinkButton: styled(Link)`
+    position: sticky;
+    width: 137px;
+    height: 56px;
+    padding: 17px 37px;
+    bottom: 48px;
+    margin-left: 971px;
+    border-radius: 15px;
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.primary};
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  `,
+};

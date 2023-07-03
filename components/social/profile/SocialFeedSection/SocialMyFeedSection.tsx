@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-import { SocialFeedCard } from 'components/social/profile/SocialFeedCard';
+import { SocialFeedCard } from 'components/Social/Profile/SocialFeedCard';
 import SocialFeedSectionView, {
   CARD_WIDTH,
-} from 'components/social/profile/SocialFeedSection/SocialFeedSectionView';
+} from 'components/Social/Profile/SocialFeedSection/SocialFeedSectionView';
 import { useGetInfiniteSocialReviews } from 'hooks/queries/sns';
 import { useUserProfile } from 'hooks/queries/users';
 import { formattedImageUrl } from 'utils/format';

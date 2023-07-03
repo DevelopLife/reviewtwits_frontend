@@ -2,15 +2,17 @@ import styled from '@emotion/styled';
 
 import type { Colors } from 'styles/theme';
 import type { SocialProfile } from 'typings/social';
-import SocialFollowAndUnfollowButton from 'components/social/profile/SocialFollowAndUnfollowButton';
-import EditProfileButton from 'components/social/profile/EditProfileButton';
-import SocialProfileImage from 'components/social/profile/SocialProfileImage';
+import SocialFollowAndUnfollowButton from 'components/Social/Profile/SocialFollowAndUnfollowButton';
+import EditProfileButton from 'components/Social/Profile/EditProfileButton';
+import SocialProfileImage from 'components/Social/Profile/SocialProfileImage';
 
 interface SocialProfileCardViewProps {
   isMyPage: boolean;
   followButtonTextList?: [string, string];
   profile: SocialProfile;
 }
+
+// TODO: 공용으로 사용되는 View 라서 현재단계에서 변경 불가
 
 const SocialProfileCardView = ({
   isMyPage,

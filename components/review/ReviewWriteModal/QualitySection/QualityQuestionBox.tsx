@@ -1,14 +1,17 @@
-import * as S from '../ReviewWriteModal.styles';
+import { S as ReviewWriteModalStyles } from '../ReviewWriteModal';
 
 const QualityQuestionBox = () => {
   return (
-    <S.QuestionBox>
-      {/* <Image width={50} height={50} src={CartIcon} alt="" /> */}
-      <S.TextBox>
-        <S.SectionTitle>상품 품질 리뷰</S.SectionTitle>
-        <S.Question>이 상품에 대해 얼마나 만족하시나요?</S.Question>
-      </S.TextBox>
-    </S.QuestionBox>
+    <ReviewWriteModalStyles.QuestionBox>
+      <ReviewWriteModalStyles.TextBox>
+        <ReviewWriteModalStyles.SectionTitle>
+          상품 품질 리뷰
+        </ReviewWriteModalStyles.SectionTitle>
+        <ReviewWriteModalStyles.Question>
+          이 상품에 대해 얼마나 만족하시나요?
+        </ReviewWriteModalStyles.Question>
+      </ReviewWriteModalStyles.TextBox>
+    </ReviewWriteModalStyles.QuestionBox>
   );
 };
 

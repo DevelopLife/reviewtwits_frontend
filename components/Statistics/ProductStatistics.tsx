@@ -1,6 +1,6 @@
-import React from 'react';
-import Shadow from './common/Shadow';
-import * as S from './ProductStatistics.styles';
+import styled from '@emotion/styled';
+
+import Shadow from './Common/Shadow';
 
 const ProductStatistics = () => {
   return (
@@ -64,3 +64,68 @@ const ProductStatistics = () => {
 };
 
 export default ProductStatistics;
+
+const S = {
+  Container: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    width: 1360px;
+    height: auto;
+
+    padding-top: 52px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 31.85px;
+  `,
+
+  ProductStatisticsTitle: styled.h3`
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 33px;
+
+    /* Black */
+
+    color: #181818;
+  `,
+
+  Table: styled.table`
+    width: 1304px;
+    height: auto;
+
+    text-align: left;
+  `,
+
+  TableRow: styled.tr``,
+
+  TableHeads: styled.thead``,
+
+  TableHead: styled.th`
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    /* gray/gray_6 */
+
+    color: #363a3c;
+  `,
+
+  TableBodys: styled.tbody``,
+
+  TableBody: styled.td`
+    padding: 16px;
+
+    border-bottom: 1px solid #e9e9e9;
+  `,
+};

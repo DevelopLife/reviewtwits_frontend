@@ -1,15 +1,20 @@
-import SnsSidebar from 'components/social/common/SocialSidebar';
-import SocialContentLayout from 'components/social/common/SocialContentLayout';
-import type { WrapProps } from 'typings/wrapperProps';
-import * as S from './SocialLayout.styles';
+import styled from '@emotion/styled';
 
-const SnsLayout = ({ children }: WrapProps) => {
+import type { WrapProps } from 'typings/wrapperProps';
+import SnsSidebar from 'components/Social/Common/SocialSidebar';
+import SocialContentLayout from 'components/Social/Common/SocialContentLayout';
+
+const SocialLayout = ({ children }: WrapProps) => {
   return (
-    <S.SnsLayout>
+    <S.SocialLayout>
       <SnsSidebar />
       <SocialContentLayout>{children}</SocialContentLayout>
-    </S.SnsLayout>
+    </S.SocialLayout>
   );
 };
 
-export default SnsLayout;
+export default SocialLayout;
+
+const S = {
+  SocialLayout: styled.div``,
+};

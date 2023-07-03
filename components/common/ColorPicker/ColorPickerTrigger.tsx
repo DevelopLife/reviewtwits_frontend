@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ColorPicker } from 'components/common/ColorPicker/ColorPicker';
+import { ColorPicker } from 'components/Common/ColorPicker/ColorPicker';
 import { useBoolean } from 'hooks/useBoolean';
 import { useState } from 'react';
 import { DEFAULT_PROJECT_COLOR } from 'states/createProjectForm';

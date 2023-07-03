@@ -1,4 +1,4 @@
-import Layout from 'components/common/Layout';
+import Layout from 'components/Common/Layout';
 import FindIdContainer from 'components/FindId/FindIdContainer';
 
 const findIdPage = () => {

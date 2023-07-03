@@ -16,10 +16,10 @@ import { UserProfileFormType } from 'typings/account';
 import { formattedImageUrl } from 'utils/format';
 import { SUCCESS_MESSAGE } from 'constants/account';
 
-import Card from 'components/common/Card';
-import Form from 'components/common/Form';
-import Button from 'components/common/Button';
-import Input from 'components/common/Input';
+import Card from 'components/Common/Card';
+import Form from 'components/Common/Form';
+import Button from 'components/Common/Button';
+import Input from 'components/Common/Input';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 import { PAGE_LIST } from 'constants/routers';
 import { useSetUserProfile, useUserProfile } from 'hooks/queries/users';

@@ -1,5 +1,5 @@
 import { useGetInfiniteFeed } from 'hooks/queries/sns';
-import ReviewList from '../common/ReviewList';
+import ReviewList from '../Common/ReviewList';
 
 const MainContentSection = () => {
   const infiniteFeedProps = useGetInfiniteFeed();

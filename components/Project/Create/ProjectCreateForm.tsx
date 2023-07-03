@@ -5,7 +5,7 @@ import { CreateProjectRequestBody } from 'api/projects';
 import { useCreateProject } from 'hooks/useCreateProject';
 import { ProjectCreateSelect } from 'components/Project/Create/ProjectCreateSelect';
 
-import { ColorPickerTrigger } from 'components/common/ColorPicker/ColorPickerTrigger';
+import { ColorPickerTrigger } from 'components/Common/ColorPicker/ColorPickerTrigger';
 
 export const ProjectCreateForm = () => {
   const {
