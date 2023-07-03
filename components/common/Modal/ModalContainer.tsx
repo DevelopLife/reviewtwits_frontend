@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import useModal from 'hooks/useModal';
 import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import atomModal from 'states/atomModal';
-import * as modals from './modals';
+import * as modals from 'components/common/Modal/modals';
 import { useRouter } from 'next/router';
+import atomModal from 'states/AtomModal';
 
 const ModalContainer = () => {
   const modalState = useRecoilValue(atomModal);

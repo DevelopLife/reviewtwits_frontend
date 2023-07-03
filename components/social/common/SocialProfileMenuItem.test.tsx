@@ -8,6 +8,7 @@ import UserIcon from 'public/icons/user.svg';
 import mockNextRouter from 'test/mockRouter';
 import SocialProfileMenuItem from 'components/Social/Common/SocialProfileMenuItem';
 import { useUserProfile } from 'hooks/queries/users';
+import { PAGE_LIST } from 'constants/routers';
 
 const client = new QueryClient();
 const TEST_NICKNAME = 'test_nickname';
@@ -71,7 +72,7 @@ describe('SocialProfileMenuItem', () => {
       const linkElement = screen.getByText(ProfileMenu.test);
       expect(linkElement).toHaveAttribute(
         'href',
-        `/social/user/${TEST_NICKNAME}`
+        `${PAGE_LIST.SOCIAL_PROFILE}//${TEST_NICKNAME}`
       );
     });
   });

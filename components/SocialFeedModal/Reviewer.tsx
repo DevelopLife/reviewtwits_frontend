@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
 import StarBox from 'components/Social/Common/Review/StarBox';
-import SocialUserNicknameLink from 'components/Social/Common/SocialUserNicknameLink';
 import useModal from 'hooks/useModal';
+import SocialUserNicknameLink from 'components/social/common/SocialUserNicknameLink';
 
 interface ReviewerProps {
   nickname: string;

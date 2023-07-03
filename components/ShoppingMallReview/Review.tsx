@@ -8,12 +8,13 @@ import HeartEmpty from 'public/icons/like-heart-empty.svg';
 import thumbsUp from 'public/icons/thumbs_up.png';
 
 import { ShoppingMallReviewDetail } from 'typings/reviews';
+import Card from 'components/common/Card';
 
 import { formattedCreateDateArr, formattedImageUrl } from 'utils/format';
-import StarBox from 'components/Social/Common/Review/StarBox';
-import Card from 'components/Common/Card';
 
 import { shoppingAPI } from 'api/reviews';
+import { PAGE_LIST } from 'constants/routers';
+import StarBox from 'components/Social/Common/Review/StarBox';
 
 interface ReviewProps {
   reviewDetail: ShoppingMallReviewDetail;
@@ -54,7 +55,7 @@ const Review = ({ reviewDetail }: ReviewProps) => {
     reviewDetail;
 
   const handleUserClick = () => {
-    router.push(`/social/user/${nickname}`);
+    router.push(`${PAGE_LIST.SOCIAL_PROFILE}/${nickname}`);
   };
   return (
     <S.Container>

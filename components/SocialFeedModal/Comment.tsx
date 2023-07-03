@@ -12,6 +12,7 @@ import { formattedLastTime } from 'utils/format';
 import { useUserProfile } from 'hooks/queries/users';
 import useForm from 'hooks/useForm';
 import useModal from 'hooks/useModal';
+import { PAGE_LIST } from 'constants/routers';
 
 interface CommentProps {
   commentData: CommentResponseType;
@@ -26,12 +27,10 @@ const Comment = ({ commentData }: CommentProps) => {
     commentId,
     userInfo,
     content,
-    parentCommentId,
     commentLikeCount,
     createdDate,
     isCommentLiked,
   } = commentData;
-  const { nickname, reviewId } = router.query;
 
   const { values, handleChange, handleSubmit } = useForm({ content });
 
@@ -78,7 +77,7 @@ const Comment = ({ commentData }: CommentProps) => {
   };
 
   const onUserClick = () => {
-    router.push(`/social/user/${userInfo.nickname}`);
+    router.push(`${PAGE_LIST.SOCIAL_PROFILE}/${userInfo.nickname}`);
     modal.hide();
   };
   return (

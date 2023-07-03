@@ -7,16 +7,17 @@ import { Colors } from 'styles/theme';
 import { ReviewResponseType } from 'typings/reviews';
 import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
 
-import Card from '../../Feed/Card';
-import ReactionBox from './ReactionBox';
-import StarBox from './StarBox';
+import Card from '../../feed/Card';
 import ImageList from './ImageList';
-import AddReactionBox from './AddReactionBox';
-import ScrapButton from './ScrapButton';
 import CommentIcon from 'public/icons/comment.svg';
 
-import SocialUserNicknameLink from 'components/Social/Common/SocialUserNicknameLink';
 import useRouteModalPage from 'hooks/useOpenModal';
+import ScrapButton from 'components/social/common/Review/ScrapButton';
+import SocialUserNicknameLink from '../SocialUserNicknameLink';
+import AddReactionBox from './AddReactionBox';
+import ReactionBox from './ReactionBox';
+import StarBox from 'components/Social/Common/Review/StarBox';
+import MODAL_LIST from 'constants/modal';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -27,6 +28,7 @@ const Review = ({ data }: ReviewProps) => {
   const routeModalPage = useRouteModalPage({
     nickname: data?.userInfo.nickname,
     reviewId: data?.reviewId,
+    key: MODAL_LIST.SOCIAL_FEED_DETAIL,
   });
 
   const goProductPage = () => data && router.push(data.productUrl);
