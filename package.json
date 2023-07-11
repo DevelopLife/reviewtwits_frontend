@@ -53,6 +53,7 @@
     "@testing-library/react": "^14.0.0",
     "@types/google.accounts": "^0.0.6",
     "@types/react-highlight": "^0.12.5",
+    "@types/recharts": "^1.8.24",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "babel-loader": "^8.3.0",

@@ -100,7 +100,7 @@ export const ProjectCardView = ({
               <Button>
                 <Link
                   href={{
-                    pathname: '/statistics/project',
+                    pathname: '/project/statistics',
                     query: { projectName: name },
                   }}
                   style={{ color: 'black' }}

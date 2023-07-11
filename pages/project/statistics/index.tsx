@@ -1,28 +1,28 @@
 import {
-  VisitorStatistics,
+  LeadTimeInfoSection,
   ViewsStatistics,
-  LeadTimeRate,
-  ProductStatistics,
+  VisitorStatistics,
 } from 'components/Statistics/@index';
 import Margin from 'components/Statistics/common/Margin';
 import StatisticsPageLayout from 'components/Statistics/common/StatisticsPageLayout';
-import React from 'react';
+import { useRouter } from 'next/router';
 
 const ProjectStatisticsPage = () => {
+  const router = useRouter();
+  const { projectName } = router.query as { projectName: string };
+
   return (
     <StatisticsPageLayout>
       <Margin marginTop={60}>
-        <VisitorStatistics />
+        <VisitorStatistics projectName={projectName} />
       </Margin>
       <Margin marginTop={40}>
-        <ViewsStatistics />
+        <ViewsStatistics projectName={projectName} />
       </Margin>
       <Margin marginTop={48}>
-        <LeadTimeRate />
+        <LeadTimeInfoSection projectName={projectName} />
       </Margin>
-      <Margin marginTop={32}>
-        <ProductStatistics />
-      </Margin>
+      <Margin marginTop={32}>{/* <ProductStatistics /> */}</Margin>
       <Margin marginBottom={60} />
     </StatisticsPageLayout>
   );

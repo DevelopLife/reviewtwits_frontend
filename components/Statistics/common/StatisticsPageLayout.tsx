@@ -18,8 +18,6 @@ const S = {
 
     width: ${({ theme }) => theme.devices.desktop}px;
     height: auto;
-
-    border: 1px solid black;
   `,
 };
 
