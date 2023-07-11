@@ -1,6 +1,11 @@
-import LeadTimeRate from './LeadTimeRate';
+import LeadTimeInfoSection from './LeadTimeInfoSection';
 import ProductStatistics from './ProductStatistics';
 import ViewsStatistics from './ViewsStatistics';
 import VisitorStatistics from './VisitorStatistics';
 
-export { LeadTimeRate, ProductStatistics, ViewsStatistics, VisitorStatistics };
+export {
+  LeadTimeInfoSection,
+  ProductStatistics,
+  ViewsStatistics,
+  VisitorStatistics,
+};

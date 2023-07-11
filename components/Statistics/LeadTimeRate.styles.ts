@@ -29,8 +29,6 @@ const LeadTimeTitle = styled.h3`
 const GraphBox = styled.div`
   width: 1360px;
   height: 577.15px;
-
-  border: 1px solid black;
 `;
 
 export { Container, LeadTimeTitle, GraphBox };

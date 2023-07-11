@@ -1,29 +1,33 @@
-import { queryKey } from './index';
 import {
   QueryClient,
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { AxiosError, AxiosResponse } from 'axios';
 import { useRecoilValue } from 'recoil';
+import type { AxiosError } from 'axios';
 
-import { ResponseError } from 'typings/error';
-import { FollowListType, FollowType, FollowingDictionary } from 'typings/sns';
-import { SocialReview } from 'typings/social';
+import type { ResponseError } from 'typings/error';
+import type {
+  FollowListType,
+  FollowType,
+  FollowingDictionary,
+} from 'typings/sns';
+import type { SocialReview } from 'typings/social';
+import type {
+  ProductType,
+  ReactionType,
+  ReviewResponseType,
+} from 'typings/reviews';
+
+import { queryKey } from './index';
 import { alertErrorHandler } from 'utils/errorHandler';
 import { linkageInfiniteScrollData } from 'utils/linkageDataToArray';
 import { snsAPI } from 'api/sns';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
-import {
-  CommentResponseType,
-  ProductType,
-  ReactionType,
-  ReviewResponseType,
-} from 'typings/reviews';
-import { selectedUserState } from 'states/reviews';
 
+import { selectedUserState } from 'states/reviews';
 
 export const useGetFollowerList = (nickname: string) => {
   const followerListInfiniteQuery = useInfiniteScrollQuery({
@@ -293,7 +297,6 @@ export const useFollowAndUnFollow = () => {
 };
 
 export const useIsFollowingDictionary = () => {
-
   const data = useQuery<FollowingDictionary>({
     queryKey: queryKey.followingDictionary(),
     networkMode: 'offlineFirst',

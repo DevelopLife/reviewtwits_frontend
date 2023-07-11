@@ -21,10 +21,6 @@ export function redirectErrorHandler(err: AxiosError<ResponseError, any>) {
     window.location.href = REDIRECT_URL;
     return;
   }
-  if (status === 404) {
-    window.location.href = PAGE_LIST.NOT_FOUND_404;
-    return;
-  }
 
   throw err;
 }

@@ -16,7 +16,7 @@ export const projectsAPI = {
     requiredTokenApi.patch(`${PROJECTS_URL}/${projectId}`, requestBody),
 };
 
-type ResponseType<T> = Promise<AxiosResponse<T>>;
+export type ResponseType<T> = Promise<AxiosResponse<T>>;
 
 export type PricePlan = 'Free' | 'Plus' | 'Pro' | 'Business';
 export type UppercasePricePlan = `${Uppercase<PricePlan>}_PLAN`;
