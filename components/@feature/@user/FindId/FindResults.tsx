@@ -1,16 +1,10 @@
 import styled from '@emotion/styled';
-import Button from 'components/@ui/Button';
-// import { emailsAPI } from 'api/emails';
-// import Button from 'components/Common/Button';
-import Card from 'components/@ui/Card';
-// import Input from 'components/Common/Input';
-// import Layout from 'components/Common/Layout';
-// import { DEFAULT_FIND_ID_FORM, SIGN_UP_FORM_NAMES } from 'constants/account';
-import { PAGE_LIST } from 'constants/routers';
-// import useForm from 'hooks/useForm';
 import Link from 'next/link';
-// import React from 'react';
 import { useRecoilValue } from 'recoil';
+
+import Button from 'components/@ui/Button';
+import Card from 'components/@ui/Card';
+import { PAGE_LIST } from 'constants/routers';
 import { foundUserIds } from 'states/atomFindUserInfo';
 import { formattedCreateDate } from 'utils/format';
 
