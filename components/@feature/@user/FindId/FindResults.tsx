@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 
@@ -11,9 +12,6 @@ import { formattedCreateDate } from 'utils/format';
 const FindIdResults = () => {
   const foundIds = useRecoilValue(foundUserIds);
 
-  const handleFindpassword = () => {
-    console.log('비밀번호 찾기 페이지로 이동');
-  };
   return (
     <Card>
       <S.CardHeader>
@@ -46,7 +44,6 @@ const FindIdResults = () => {
             color="secondary"
             fontColor="white"
             borderType="none"
-            onClick={handleFindpassword}
           >
             비밀번호 찾기
           </Button>
