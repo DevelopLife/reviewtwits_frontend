@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import * as modals from '../components/Common/Modal/modals';
+import * as modals from 'components/@ui/Modal/modals';
 export interface AtomModalProps {
   key?: keyof typeof modals;
   isVisible: boolean;
