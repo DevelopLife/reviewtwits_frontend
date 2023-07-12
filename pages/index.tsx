@@ -1,11 +1,11 @@
-import Footer from 'components/Common/Footer/Footer';
-import Header from 'components/Common/Header/Header';
+import Footer from 'components/@feature/@common/Footer/Footer';
+import Header from 'components/@feature/@common/Header/Header';
 import {
   MainHome,
   ServiceIntroduce,
   EffectIntroduce,
   FunctionIntroduce,
-} from 'components/Mainpage/@index';
+} from 'components/@feature/@main/@index';
 
 import { useRef } from 'react';
 

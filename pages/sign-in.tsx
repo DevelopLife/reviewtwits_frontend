@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { naverOauthAPI } from 'api/oauth';
-import { SignInCard } from 'components/SignIn/@index';
+import { SignInCard } from 'components/@feature/@user/SignIn/@index';
 
 import Layout from 'components/Common/Layout';
 

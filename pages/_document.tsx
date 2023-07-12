@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
-import { KakaoSDKScript } from 'components/Common/Oauth/KakaoOauth';
-import { NaverSDKScript } from 'components/Common/Oauth/NaverOauth';
+import { KakaoSDKScript } from 'components/@feature/@user/Oauth/KakaoOauth';
+import { NaverSDKScript } from 'components/@feature/@user/Oauth/NaverOauth';
 
 export default function Document() {
   return (

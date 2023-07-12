@@ -1,4 +1,4 @@
-import { selected } from './../components/Project/Plans/PlanCard.stories';
+import { selected } from '../components/@feature/@shopping/Project/Plans/PlanCard.stories';
 import { atom } from 'recoil';
 
 interface AtomReviewSortButtonState {

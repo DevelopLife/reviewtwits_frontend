@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-import SocialLayout from 'components/Social/Common/SocialLayout';
-import MainContentSection from 'components/Social/Feed/MainContentSection';
-import UserFilterBar from 'components/Social/Feed/UserFilterBar';
-import SideBar from 'components/Social/Feed/SideBar';
+import SocialLayout from 'components/@feature/@social/Common/SocialLayout';
+import MainContentSection from 'components/@feature/@social/Feed/MainContentSection';
+import UserFilterBar from 'components/@feature/@social/Feed/UserFilterBar';
+import SideBar from 'components/@feature/@social/Feed/SideBar';
 import useStoreagePathInSession from 'hooks/useStoreagePathInSession';
 
 const SNSExplorePage = () => {

@@ -1,10 +1,10 @@
 import type { AppProps } from 'next/app';
 import type { DehydratedState } from '@tanstack/react-query';
 
-import ModalContainer from 'components/Common/Modal/ModalContainer';
-import GlobalProvider from 'components/Common/GlobalProvider';
-import PrivateRoute from 'components/Common/PrivateRoute';
-import ReportUserStatistics from 'components/Statistics/ReportUserStatistics';
+import ModalContainer from 'components/@ui/Modal/ModalContainer';
+import GlobalProvider from 'components/@feature/@common/GlobalProvider';
+import PrivateRoute from 'components/@feature/@common/PrivateRoute';
+import ReportUserStatistics from 'components/@feature/@shopping/Statistics/ReportUserStatistics';
 
 export type PageProps = {
   dehydratedState?: DehydratedState;

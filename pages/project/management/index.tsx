@@ -1,5 +1,5 @@
-import { ProjectPageLayout } from 'components/Project/Common/ProjectPageLayout';
-import { ProjectManagementSection } from 'components/Project/Management/ProjectManagementSection';
+import { ProjectPageLayout } from 'components/@feature/@shopping/Project/Common/ProjectPageLayout';
+import { ProjectManagementSection } from 'components/@feature/@shopping/Project/Management/ProjectManagementSection';
 
 const ProjectManagementPage = () => {
   return (

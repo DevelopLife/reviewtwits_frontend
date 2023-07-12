@@ -3,9 +3,9 @@ import {
   ViewsStatistics,
   LeadTimeRate,
   ProductStatistics,
-} from 'components/Statistics/@index';
-import Margin from 'components/Statistics/Common/Margin';
-import StatisticsPageLayout from 'components/Statistics/Common/StatisticsPageLayout';
+} from 'components/@feature/@shopping/Statistics/@index';
+import Margin from 'components/@feature/@shopping/Statistics/Common/Margin';
+import StatisticsPageLayout from 'components/@feature/@shopping/Statistics/Common/StatisticsPageLayout';
 import React from 'react';
 
 const ProjectStatisticsPage = () => {

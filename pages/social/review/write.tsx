@@ -1,5 +1,5 @@
-import SocialLayout from 'components/Social/Common/SocialLayout';
-import ReviewWriteForm from 'components/Social/Review/ReviewWriteForm';
+import SocialLayout from 'components/@feature/@social/Common/SocialLayout';
+import ReviewWriteForm from 'components/@feature/@social/Review/ReviewWriteForm';
 
 const SocialReviewWritePage = () => {
   return (

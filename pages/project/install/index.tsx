@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { ProjectPageLayout } from 'components/Project/Common/ProjectPageLayout';
-import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
+import { ProjectPageLayout } from 'components/@feature/@shopping/Project/Common/ProjectPageLayout';
+import { ProjectCreateLayout } from 'components/@feature/@shopping/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
 import ReactIcon from 'public/icons/react.svg';
 import type { Platforms } from 'typings/platforms';

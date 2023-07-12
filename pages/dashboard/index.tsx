@@ -2,9 +2,9 @@ import {
   ComprehensiveData,
   OrderData,
   Graph,
-} from 'components/Dashboard/@index';
-import DashboardPageLayout from 'components/Dashboard/Common/DashboardPageLayout';
-import Margin from 'components/Dashboard/Common/Margin';
+} from 'components/@feature/@shopping/Dashboard/@index';
+import DashboardPageLayout from 'components/@feature/@shopping/Dashboard/Common/DashboardPageLayout';
+import Margin from 'components/@feature/@shopping/Dashboard/Common/Margin';
 import React from 'react';
 
 const DashboardPage = () => {

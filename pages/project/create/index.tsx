@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 
-import { ProjectCreateForm } from 'components/Project/Create/ProjectCreateForm';
-import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
+import { ProjectCreateForm } from 'components/@feature/@shopping/Project/Create/ProjectCreateForm';
+import { ProjectCreateLayout } from 'components/@feature/@shopping/Project/Create/ProjectCreateLayout';
 import { BUTTON_TEXTS, PROJECT_TITLE } from 'constants/project';
 import { useCreateProject } from 'hooks/useCreateProject';
-import { ProjectPageLayout } from 'components/Project/Common/ProjectPageLayout';
+import { ProjectPageLayout } from 'components/@feature/@shopping/Project/Common/ProjectPageLayout';
 
 const ProjectCreatePage = () => {
   const { isDisabled } = useCreateProject();

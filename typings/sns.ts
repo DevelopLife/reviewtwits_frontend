@@ -1,3 +1,5 @@
+// TODO: ??
+
 export interface FollowType {
   userId: number;
   nickname: string;

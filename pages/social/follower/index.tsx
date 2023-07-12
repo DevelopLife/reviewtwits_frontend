@@ -1,6 +1,6 @@
-import SocialLayout from 'components/Social/Common/SocialLayout';
-import SocialTitleSection from 'components/Social/Common/SocialTitleSection';
-import FollowerSection from 'components/Social/Follower';
+import SocialLayout from 'components/@feature/@social/Common/SocialLayout';
+import SocialTitleSection from 'components/@feature/@social/Common/SocialTitleSection';
+import FollowerSection from 'components/@feature/@social/Follower';
 
 const SocialFollowPage = () => {
   return (
