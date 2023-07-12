@@ -8,8 +8,9 @@ import {
 } from 'components/@feature/@shopping/Project/Management/ProjectCardCommon';
 import { ProjectDto } from 'typings/project';
 import { GetProjectsResponseData } from 'api/projects';
-import Button from 'components/Common/Button';
+
 import cssUtils from 'styles/css';
+import Button from 'components/@ui/Button';
 
 interface ProjectCardProps {
   project: GetProjectsResponseData;

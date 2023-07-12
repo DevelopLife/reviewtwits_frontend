@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 
-/* eslint-disable react-hooks/rules-of-hooks */
-import ShoppingMallReview from 'components/ShoppingMallReview/ShoppingMallReview';
+import ShoppingMallReview from 'components/@feature/@shopping/ShoppingMallReview/ShoppingMallReview';
 
 const ShoppingMallReviewPage = () => {
   const router = useRouter();
+
+  // TODO: remove default state
   const {
     projectName = '1',
     productURL = 'http://www.example.com/123',

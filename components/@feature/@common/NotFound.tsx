@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import styled from '@emotion/styled';
-import Button from 'components/Common/Button';
+import Button from 'components/@ui/Button';
+// import Button from 'components/Common/Button';
 
 const NotFound = () => {
   return (

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import Button from 'components/Common/Button';
+import Button from 'components/@ui/Button';
+
 import Card from 'components/@ui/Card';
 import { ERROR_MESSAGE } from 'constants/account';
 import { PAGE_LIST } from 'constants/routers';

@@ -32,10 +32,11 @@ import { getCookie, removeCookie } from 'utils/cookies';
 
 import theme from 'styles/theme';
 import Card from 'components/@ui/Card';
-import Form from 'components/Common/Form';
-import Input from 'components/Common/Input';
-import Button from 'components/Common/Button';
+
 import { PAGE_LIST } from 'constants/routers';
+import Button from 'components/@ui/Button';
+import Form from 'components/@ui/Form';
+import Input from 'components/@ui/Input';
 
 const SignUpForm = () => {
   const [signUpType, setSignUpType] = useState<SignUpType>('COMMON');
