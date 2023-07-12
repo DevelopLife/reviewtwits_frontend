@@ -1,5 +1,5 @@
-import Layout from 'components/Common/Layout';
-import FindPasswordContainer from 'components/FindPassword/FindPasswordContainer';
+import FindPasswordContainer from 'components/@feature/@user/FindPassword/FindPasswordContainer';
+import Layout from 'components/@ui/Layout';
 import React from 'react';
 
 const findPasswordPage = () => {

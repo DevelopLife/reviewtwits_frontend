@@ -5,7 +5,6 @@ import {
   CodeParagraph,
   InstallPageButtons,
 } from 'components/@feature/@shopping/Project/Install/@index';
-import HighlightCDN from 'components/Common/HighlightCDN';
 import Video from 'components/@ui/Video';
 import Margin from 'components/@feature/@shopping/Dashboard/Common/Margin';
 import CommonButton from 'components/@feature/@shopping/Project/Install/Common/Button';
@@ -13,6 +12,7 @@ import CommonButton from 'components/@feature/@shopping/Project/Install/Common/B
 import INSTALL_GUIDES from 'constants/install_guides';
 import type { PlatformUppercases, Platforms } from 'typings/platforms';
 import { ProjectPageLayout } from 'components/@feature/@shopping/Project/Common/ProjectPageLayout';
+import HighlightCDN from 'components/@feature/@common/HighlightCDN';
 
 const InstallDetailPage = () => {
   const router = useRouter();
