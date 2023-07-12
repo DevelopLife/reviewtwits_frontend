@@ -17,10 +17,10 @@ import { usersAPI } from 'api/users';
 import { doSignIn } from 'utils/auth';
 import { isLoginState } from 'states/isLogin';
 
-import Form from 'components/Common/Form';
-import Input from 'components/Common/Input';
-import Button from 'components/Common/Button';
 import { PAGE_LIST } from 'constants/routers';
+import Button from 'components/@ui/Button';
+import Form from 'components/@ui/Form';
+import Input from 'components/@ui/Input';
 
 const SignInForm = () => {
   const { values, errors, setErrors, handleChange, handleSubmit } = useForm({

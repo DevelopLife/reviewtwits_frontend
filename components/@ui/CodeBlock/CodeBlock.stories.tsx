@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import HighlightCDN from 'components/@feature/@common/HighlightCDN';
 import CodeBlock from 'components/@ui/CodeBlock/CodeBlock';
-import HighlightCDN from 'components/Common/HighlightCDN';
 
 export default {
   title: 'components/common/CodeBlock',

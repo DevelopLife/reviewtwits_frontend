@@ -11,18 +11,17 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
+import Button from 'components/@ui/Button';
+import Card from 'components/@ui/Card';
+import Form from 'components/@ui/Form';
+import Input from 'components/@ui/Input';
+import { SUCCESS_MESSAGE } from 'constants/account';
+import { PAGE_LIST } from 'constants/routers';
+import { useUserProfile, useSetUserProfile } from 'hooks/queries/users';
 import useForm from 'hooks/useForm';
 import { UserProfileFormType } from 'typings/account';
 import { formattedImageUrl } from 'utils/format';
-import { SUCCESS_MESSAGE } from 'constants/account';
-
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
-import { PAGE_LIST } from 'constants/routers';
-import { useSetUserProfile, useUserProfile } from 'hooks/queries/users';
-import Card from 'components/@ui/Card';
-import Button from 'components/@ui/Button';
-import Form from 'components/@ui/Form';
-import Input from 'components/@ui/Input';
 
 const UserProfileForm = () => {
   const router = useRouter();
