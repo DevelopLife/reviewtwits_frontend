@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 
 import { naverOauthAPI } from 'api/oauth';
 import { SignInCard } from 'components/@feature/@user/SignIn/@index';
-
-import Layout from 'components/Common/Layout';
+import Layout from 'components/@ui/Layout';
 
 const SignInPage = () => {
   useEffect(() => {
