@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
+
+import Link from 'next/link';
+import { useRecoilValue } from 'recoil';
+
 import Button from 'components/@ui/Button';
 import Card from 'components/@ui/Card';
 import { PAGE_LIST } from 'constants/routers';
-import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
 import { foundUserIds } from 'states/atomFindUserInfo';
 import { formattedCreateDate } from 'utils/format';
 

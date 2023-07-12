@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
 import { emailsAPI } from 'api/emails';
 import Button from 'components/@ui/Button';
-// import Button from 'components/Common/Button';
 import Card from 'components/@ui/Card';
 import Input from 'components/@ui/Input';
-// import Input from 'components/Common/Input';
 import {
   DEFAULT_FIND_PASSWORD_FORM,
   ERROR_MESSAGE,
@@ -86,7 +84,7 @@ const FindPassword = ({ handleFindPassword }: FindPasswordProps) => {
           color="secondary"
           fontColor="white"
           borderType="none"
-          handleClick={onClickFindPassword}
+          onClick={onClickFindPassword}
         >
           비밀번호 찾기
         </Button>

@@ -8,7 +8,7 @@ import { FollowType } from 'typings/sns';
 import { formattedProfileImageUrl } from 'utils/format';
 
 import styled from '@emotion/styled';
-import Button from './common/Button';
+import Button from 'components/@ui/Button';
 
 const RecommendUserList = () => {
   const { data: userList } = useGetFollowSuggestion();

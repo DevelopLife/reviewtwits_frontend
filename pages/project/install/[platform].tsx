@@ -6,13 +6,13 @@ import {
   InstallPageButtons,
 } from 'components/@feature/@shopping/Project/Install/@index';
 import Video from 'components/@ui/Video';
-import Margin from 'components/@feature/@shopping/Dashboard/Common/Margin';
-import CommonButton from 'components/@feature/@shopping/Project/Install/Common/Button';
+import Button from 'components/@ui/Button';
 
-import INSTALL_GUIDES from 'constants/install_guides';
-import type { PlatformUppercases, Platforms } from 'typings/platforms';
+import Margin from 'components/@feature/@shopping/Dashboard/Common/Margin';
 import { ProjectPageLayout } from 'components/@feature/@shopping/Project/Common/ProjectPageLayout';
 import HighlightCDN from 'components/@feature/@common/HighlightCDN';
+import INSTALL_GUIDES from 'constants/install_guides';
+import type { PlatformUppercases, Platforms } from 'typings/platforms';
 
 const InstallDetailPage = () => {
   const router = useRouter();
@@ -39,28 +39,28 @@ const InstallDetailPage = () => {
           <CodeParagraph key={CODE} text={TEXT} code={CODE} />
         ))}
         <InstallPageButtons>
-          <CommonButton
-            styleAttributes={{
-              width: 171,
-              height: 55,
-              color: 'black',
-              backgroundColor: 'gray_3',
-            }}
+          <Button
+            // styleAttributes={{
+            //   width: 171,
+            //   height: 55,
+            //   color: 'black',
+            //   backgroundColor: 'gray_3',
+            // }}
             onClick={redirectPrevHistory}
           >
             뒤로가기
-          </CommonButton>
-          <CommonButton
-            styleAttributes={{
-              width: 171,
-              height: 55,
-              color: 'gray_0',
-              backgroundColor: 'secondary',
-            }}
+          </Button>
+          <Button
+            // styleAttributes={{
+            //   width: 171,
+            //   height: 55,
+            //   color: 'gray_0',
+            //   backgroundColor: 'secondary',
+            // }}
             onClick={() => true}
           >
             프로젝트 설정
-          </CommonButton>
+          </Button>
         </InstallPageButtons>
       </S.InstallDetailPageContainer>
     </ProjectPageLayout>

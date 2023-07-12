@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
+import { useSetRecoilState } from 'recoil';
+
 import { emailsAPI } from 'api/emails';
 import Button from 'components/@ui/Button';
-// import Button from 'components/Common/Button';
 import Card from 'components/@ui/Card';
 import Input from 'components/@ui/Input';
-// import Input from 'components/Common/Input';
-
 import {
   DEFAULT_FIND_ID_FORM,
   ERROR_MESSAGE,
@@ -13,9 +13,6 @@ import {
 } from 'constants/account';
 import { PAGE_LIST } from 'constants/routers';
 import useForm from 'hooks/useForm';
-import Link from 'next/link';
-import React from 'react';
-import { useSetRecoilState } from 'recoil';
 import { foundUserIds } from 'states/atomFindUserInfo';
 
 interface FindIdProps {
@@ -77,7 +74,7 @@ const FindId = ({ handleCardKey }: FindIdProps) => {
           color="secondary"
           fontColor="white"
           borderType="none"
-          handleClick={handleFindId}
+          onClick={handleFindId}
         >
           아이디 찾기
         </Button>

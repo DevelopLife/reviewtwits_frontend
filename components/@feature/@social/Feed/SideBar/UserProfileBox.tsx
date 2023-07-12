@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import styled from '@emotion/styled';
 
 import { useUserProfile } from 'hooks/queries/users';
 import { formattedProfileImageUrl } from 'utils/format';
-
-import styled from '@emotion/styled';
 import SocialUserNicknameLink from 'components/@feature/@social/Common/SocialUserNicknameLink';
-import Button from './common/Button';
 import { PAGE_LIST } from 'constants/routers';
+import Button from 'components/@ui/Button';
 
 const UserProfileBox = () => {
   const { nickname, profileImageUrl } = useUserProfile();

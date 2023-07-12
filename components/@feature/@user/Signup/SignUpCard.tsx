@@ -216,7 +216,7 @@ const SignUpFormView = ({
                   <Button
                     disabled={!isCodeIssuable}
                     color="black"
-                    handleClick={sendEmailVerifyCode}
+                    onClick={sendEmailVerifyCode}
                   >
                     인증번호 받기
                   </Button>
@@ -284,7 +284,7 @@ const SignUpFormView = ({
                   name={SIGN_UP_FORM_NAMES.GENDER}
                   value={GENDER.MALE}
                   isActive={values.gender === GENDER.MALE}
-                  handleClick={handleChange}
+                  onClick={handleChange}
                 >
                   {GENDER.MALE}
                 </Button>
@@ -292,7 +292,7 @@ const SignUpFormView = ({
                   name={SIGN_UP_FORM_NAMES.GENDER}
                   value={GENDER.FEMALE}
                   isActive={values.gender === GENDER.FEMALE}
-                  handleClick={handleChange}
+                  onClick={handleChange}
                 >
                   {GENDER.FEMALE}
                 </Button>
