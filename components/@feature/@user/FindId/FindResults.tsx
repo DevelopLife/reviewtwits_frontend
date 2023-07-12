@@ -1,15 +1,8 @@
 import styled from '@emotion/styled';
 import Button from 'components/@ui/Button';
-// import { emailsAPI } from 'api/emails';
-// import Button from 'components/Common/Button';
 import Card from 'components/@ui/Card';
-// import Input from 'components/Common/Input';
-// import Layout from 'components/Common/Layout';
-// import { DEFAULT_FIND_ID_FORM, SIGN_UP_FORM_NAMES } from 'constants/account';
 import { PAGE_LIST } from 'constants/routers';
-// import useForm from 'hooks/useForm';
 import Link from 'next/link';
-// import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { foundUserIds } from 'states/atomFindUserInfo';
 import { formattedCreateDate } from 'utils/format';
@@ -17,9 +10,6 @@ import { formattedCreateDate } from 'utils/format';
 const FindIdResults = () => {
   const foundIds = useRecoilValue(foundUserIds);
 
-  const handleFindpassword = () => {
-    console.log('비밀번호 찾기 페이지로 이동');
-  };
   return (
     <Card>
       <S.CardHeader>
@@ -52,7 +42,6 @@ const FindIdResults = () => {
             color="secondary"
             fontColor="white"
             borderType="none"
-            handleClick={handleFindpassword}
           >
             비밀번호 찾기
           </Button>
