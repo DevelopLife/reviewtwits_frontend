@@ -188,7 +188,7 @@ const UserProfileFormView = ({
             <Button large type="submit" color="primary">
               설정 완료
             </Button>
-            <Button large color="black" handleClick={setProfileLater}>
+            <Button large color="black" onClick={setProfileLater}>
               나중에 하기
             </Button>
           </S.ButtonBox>

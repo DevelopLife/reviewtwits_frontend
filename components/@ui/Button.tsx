@@ -16,23 +16,18 @@ interface ButtonProps {
   isActive?: boolean;
   disabled?: boolean;
   children: ReactNode;
-  handleClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({
   type = 'button',
   children,
   isActive,
-  handleClick,
+  onClick,
   ...rest
 }: ButtonProps) => {
   return (
-    <StyledButton
-      type={type}
-      isActive={isActive}
-      onClick={handleClick}
-      {...rest}
-    >
+    <StyledButton type={type} isActive={isActive} onClick={onClick} {...rest}>
       {children}
     </StyledButton>
   );

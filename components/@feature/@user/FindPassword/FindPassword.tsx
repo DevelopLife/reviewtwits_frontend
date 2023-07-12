@@ -84,7 +84,7 @@ const FindPassword = ({ handleFindPassword }: FindPasswordProps) => {
           color="secondary"
           fontColor="white"
           borderType="none"
-          handleClick={onClickFindPassword}
+          onClick={onClickFindPassword}
         >
           비밀번호 찾기
         </Button>

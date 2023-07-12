@@ -74,7 +74,7 @@ const FindId = ({ handleCardKey }: FindIdProps) => {
           color="secondary"
           fontColor="white"
           borderType="none"
-          handleClick={handleFindId}
+          onClick={handleFindId}
         >
           아이디 찾기
         </Button>

@@ -46,7 +46,7 @@ const FindIdResults = () => {
             color="secondary"
             fontColor="white"
             borderType="none"
-            handleClick={handleFindpassword}
+            onClick={handleFindpassword}
           >
             비밀번호 찾기
           </Button>
