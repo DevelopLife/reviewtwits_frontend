@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 
-import Card from '../Card';
 import Product from './Product';
 import { useTrandyProductsContent } from 'hooks/queries/sns';
+import { SocialCard } from 'components/@ui/Card';
 
 const TrendyProductsContent = () => {
   const { data: products } = useTrandyProductsContent();
 
   return (
-    <Card color="text_black_100">
+    <SocialCard color="black_100">
       <S.Content>
         <S.ContentTitle>오늘의 트렌드 상품</S.ContentTitle>
         <S.MainContent>
@@ -17,7 +17,7 @@ const TrendyProductsContent = () => {
           ))}
         </S.MainContent>
       </S.Content>
-    </Card>
+    </SocialCard>
   );
 };
 

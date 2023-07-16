@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 
-import Card from '../Card';
 import UserProfileBox from './UserProfileBox';
 import RecommendUserList from './RecommendUserList';
+import { SocialCard } from 'components/@ui/Card';
 
 const RecommendContent = () => {
   return (
-    <Card color="text_black_100">
+    <SocialCard color="black_100">
       <S.Content>
         <UserProfileBox />
         <S.MainContent>
@@ -17,7 +17,7 @@ const RecommendContent = () => {
           <RecommendUserList />
         </S.MainContent>
       </S.Content>
-    </Card>
+    </SocialCard>
   );
 };
 

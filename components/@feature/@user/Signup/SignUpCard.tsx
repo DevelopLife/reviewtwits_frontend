@@ -31,7 +31,7 @@ import { registerAPI } from 'api/oauth';
 import { getCookie, removeCookie } from 'utils/cookies';
 
 import theme from 'styles/theme';
-import Card from 'components/@ui/Card';
+import { Card } from 'components/@ui/Card';
 
 import { PAGE_LIST } from 'constants/routers';
 import Button from 'components/@ui/Button';

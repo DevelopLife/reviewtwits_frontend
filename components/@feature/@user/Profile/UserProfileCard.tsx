@@ -19,7 +19,7 @@ import { SUCCESS_MESSAGE } from 'constants/account';
 import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 import { PAGE_LIST } from 'constants/routers';
 import { useSetUserProfile, useUserProfile } from 'hooks/queries/users';
-import Card from 'components/@ui/Card';
+import { Card } from 'components/@ui/Card';
 import Button from 'components/@ui/Button';
 import Form from 'components/@ui/Form';
 import Input from 'components/@ui/Input';
