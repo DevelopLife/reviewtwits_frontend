@@ -7,7 +7,6 @@ import { Colors } from 'styles/theme';
 import { ReviewResponseType } from 'typings/reviews';
 import { formattedLastTime, formattedProfileImageUrl } from 'utils/format';
 
-import Card from '../../Feed/Card';
 import ReactionBox from './ReactionBox';
 import StarBox from './StarBox';
 import ImageList from './ImageList';
@@ -17,6 +16,7 @@ import CommentIcon from 'public/icons/comment.svg';
 
 import SocialUserNicknameLink from 'components/@feature/@social/Common/SocialUserNicknameLink';
 import useRouteModalPage from 'hooks/useOpenModal';
+import { SocialCard } from 'components/@ui/Card';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -72,7 +72,7 @@ const ReviewView = ({
 
   if (!data) return null;
   return (
-    <Card>
+    <SocialCard>
       <S.Content>
         <S.ScrapButtonWrap>
           <ScrapButton isScrapped={data.isScrapped} reviewId={data.reviewId} />
@@ -119,7 +119,7 @@ const ReviewView = ({
           </S.Button>
         </S.ButtonBox>
       </S.Content>
-    </Card>
+    </SocialCard>
   );
 };
 

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { emailsAPI } from 'api/emails';
 import Button from 'components/@ui/Button';
-import Card from 'components/@ui/Card';
+import { Card } from 'components/@ui/Card';
 import Input from 'components/@ui/Input';
 import {
   DEFAULT_FIND_PASSWORD_FORM,

@@ -55,6 +55,7 @@ const RecommendUserListView = ({
           </S.UserBox>
           <Button
             color="secondary"
+            borderType="none"
             onClick={() => toggleFollow(user.isFollowed, user.nickname)}
           >
             {user.isFollowed ? '언팔로우' : '팔로우'}

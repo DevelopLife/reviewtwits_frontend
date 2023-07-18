@@ -22,6 +22,7 @@ const colors = {
   gray_8: '#363a3c',
   gray_9: '#292a2b',
   black: '#3d3d3d',
+  black_100: '#181818',
   yellow: '#F8BB2B',
   white: '#ffffff',
   border_gray: '#e9e9e9',

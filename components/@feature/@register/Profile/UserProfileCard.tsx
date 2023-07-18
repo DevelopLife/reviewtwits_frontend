@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import Button from 'components/@ui/Button';
-import Card from 'components/@ui/Card';
+import { Card } from 'components/@ui/Card';
 import Form from 'components/@ui/Form';
 import Input from 'components/@ui/Input';
 import { SUCCESS_MESSAGE } from 'constants/account';

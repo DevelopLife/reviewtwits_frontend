@@ -11,7 +11,7 @@ import { ShoppingMallReviewDetail } from 'typings/reviews';
 
 import { formattedCreateDateArr, formattedImageUrl } from 'utils/format';
 import StarBox from 'components/@feature/@social/Common/Review/StarBox';
-import Card from 'components/@ui/Card';
+import { Card } from 'components/@ui/Card';
 
 import { shoppingAPI } from 'api/reviews';
 
