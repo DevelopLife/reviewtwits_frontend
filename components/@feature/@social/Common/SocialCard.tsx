@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import SocialFollowAndUnfollowButton from 'components/@feature/@social/Profile/SocialFollowAndUnfollowButton';
 import { FOLLOW_UNFOLLOW } from 'constants/social';
 import { formattedProfileImageUrl } from 'utils/format';
+import cssUtils from 'styles/css';
 
 interface SocialCardProps {
   imageUrl: string | null;
@@ -21,7 +22,7 @@ const SocialCard = ({ imageUrl, nickname, role }: SocialCardProps) => {
 
   return (
     <S.Container>
-      <S.userBox onClick={onUserClick}>
+      <S.UserBox onClick={onUserClick}>
         <S.ImageBox>
           <Image
             src={formattedProfileImageUrl(imageUrl)}
@@ -33,10 +34,11 @@ const SocialCard = ({ imageUrl, nickname, role }: SocialCardProps) => {
           <S.UserName>{nickname}</S.UserName>
           <S.UserRole>{role}</S.UserRole>
         </S.UserInfos>
-      </S.userBox>
+      </S.UserBox>
       <SocialFollowAndUnfollowButton
         nickname={nickname}
-        size={'small'}
+        size="small"
+        fontSize={13}
         TextList={[FOLLOW_UNFOLLOW.UNFOLLOW, FOLLOW_UNFOLLOW.FOLLOW]}
       />
     </S.Container>
@@ -50,10 +52,10 @@ const S = {
     /* Auto layout */
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 
     padding: 32px;
-    gap: 159px;
 
     width: 457px;
     height: 136px;
@@ -63,10 +65,11 @@ const S = {
     border-radius: 20px;
   `,
 
-  userBox: styled.div`
+  UserBox: styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-grow: 1;
     gap: 8px;
 
     width: 175px;
@@ -77,8 +80,8 @@ const S = {
 
   ImageBox: styled.div`
     position: relative;
-    width: 72px;
-    height: 72px;
+    min-width: 72px;
+    min-height: 72px;
 
     border-radius: 50%;
     overflow: hidden;
@@ -92,13 +95,14 @@ const S = {
   `,
 
   UserName: styled.h3`
+    width: 100%;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 700;
     font-size: 22px;
     line-height: 26px;
 
-    /* White */
+    ${cssUtils.cssTextEllipsis(1)};
 
     color: #ffffff;
   `,
