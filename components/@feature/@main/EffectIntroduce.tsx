@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
+import Link from 'next/link';
+
+import Button2 from 'components/@ui/Button2';
 
 const EffectIntroduce = () => {
   return (
@@ -52,7 +55,13 @@ const EffectIntroduce = () => {
           </S.CardDesc>
         </S.Card>
       </S.CardContainer>
-      <S.Button>GET STARTED</S.Button>
+      <S.NavigateButtonWrap>
+        <Link href="/project/management">
+          <Button2 accent="common" isFull layout fontSize={22}>
+            GET STARTED
+          </Button2>
+        </Link>
+      </S.NavigateButtonWrap>
     </S.Container>
   );
 };
@@ -124,14 +133,8 @@ const S = {
     color: #000000;
   `,
 
-  Button: styled.button`
+  NavigateButtonWrap: styled.div`
     width: 239px;
     height: 66px;
-    background: #181818;
-    border-radius: 60px;
-    color: #ffffff;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 26px;
   `,
 };
