@@ -1,11 +1,20 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 
+import Button2 from 'components/@ui/Button2';
+
 export type SelectedButton =
   | '서비스 등록'
   | '리뷰 시스템 등록'
   | '대쉬보드 리뷰관리'
   | '커스텀 리뷰';
+
+const SELECTED_BUTTON_TITLES: SelectedButton[] = [
+  '서비스 등록',
+  '리뷰 시스템 등록',
+  '대쉬보드 리뷰관리',
+  '커스텀 리뷰',
+];
 
 const FunctionIntroduce = () => {
   const [selectedButton, setSelectedButton] =
@@ -17,32 +26,20 @@ const FunctionIntroduce = () => {
   return (
     <S.Container>
       <S.Title>주요기능</S.Title>
-
       <S.Lists>
-        <S.Button
-          onClick={() => onButtonClick('서비스 등록')}
-          selected={selectedButton === '서비스 등록'}
-        >
-          서비스 등록
-        </S.Button>
-        <S.Button
-          onClick={() => onButtonClick('리뷰 시스템 등록')}
-          selected={selectedButton === '리뷰 시스템 등록'}
-        >
-          리뷰 시스템 등록
-        </S.Button>
-        <S.Button
-          onClick={() => onButtonClick('대쉬보드 리뷰관리')}
-          selected={selectedButton === '대쉬보드 리뷰관리'}
-        >
-          대쉬보드 리뷰관리
-        </S.Button>
-        <S.Button
-          onClick={() => onButtonClick('커스텀 리뷰')}
-          selected={selectedButton === '커스텀 리뷰'}
-        >
-          커스텀 리뷰
-        </S.Button>
+        {SELECTED_BUTTON_TITLES.map((title) => (
+          <Button2
+            key={title}
+            isFull
+            shape="rectangle"
+            backgroundColor={selectedButton === title ? 'primary' : 'white'}
+            color={selectedButton === title ? 'white' : 'black'}
+            fontSize={22}
+            onClick={() => onButtonClick(title)}
+          >
+            {title}
+          </Button2>
+        ))}
       </S.Lists>
       <S.Desc>리뷰 시스템으로 디지털 판매 혁신을 지원합니다</S.Desc>
       <S.FunctionImage>Img</S.FunctionImage>
@@ -81,32 +78,6 @@ const S = {
     display: flex;
     padding: 0;
     gap: 50px;
-  `,
-
-  Button: styled.button<{ selected: boolean }>`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 26px 70px;
-    gap: 10px;
-
-    background: #ffffff;
-    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
-
-    background-color: ${(props) => props.selected && '#FC4A55'};
-
-    flex: none;
-    order: 2;
-    flex-grow: 0;
-
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 26px;
-
-    color: #181818;
   `,
 
   Desc: styled.p`

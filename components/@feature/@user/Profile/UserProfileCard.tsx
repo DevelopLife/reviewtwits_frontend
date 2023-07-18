@@ -20,9 +20,10 @@ import DefaultUserProfileImg from 'public/images/default_user_profile_img.png';
 import { PAGE_LIST } from 'constants/routers';
 import { useSetUserProfile, useUserProfile } from 'hooks/queries/users';
 import Card from 'components/@ui/Card';
-import Button from 'components/@ui/Button';
+
 import Form from 'components/@ui/Form';
 import Input from 'components/@ui/Input';
+import Button2 from 'components/@ui/Button2';
 
 const UserProfileForm = () => {
   const router = useRouter();
@@ -185,12 +186,27 @@ const UserProfileFormView = ({
             />
           </S.FormItem>
           <S.ButtonBox>
-            <Button large type="submit" color="primary">
+            <Button2
+              accent="primary"
+              shape="circle"
+              fill
+              isFull
+              fontSize={18}
+              paddingSize="medium"
+            >
               설정 완료
-            </Button>
-            <Button large color="black" onClick={setProfileLater}>
+            </Button2>
+            <Button2
+              accent="common"
+              shape="circle"
+              fill
+              isFull
+              fontSize={18}
+              paddingSize="medium"
+              onClick={setProfileLater}
+            >
               나중에 하기
-            </Button>
+            </Button2>
           </S.ButtonBox>
         </S.FormContent>
       </Form>

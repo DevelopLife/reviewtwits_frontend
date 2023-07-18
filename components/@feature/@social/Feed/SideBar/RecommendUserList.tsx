@@ -9,6 +9,7 @@ import { formattedProfileImageUrl } from 'utils/format';
 
 import styled from '@emotion/styled';
 import Button from 'components/@ui/Button';
+import Button2 from 'components/@ui/Button2';
 
 const RecommendUserList = () => {
   const { data: userList } = useGetFollowSuggestion();
@@ -53,12 +54,16 @@ const RecommendUserListView = ({
               )}
             </S.UserInfoBox>
           </S.UserBox>
-          <Button
-            color="secondary"
+          <Button2
+            accent="secondary"
+            shape="circle"
+            paddingSize="small"
             onClick={() => toggleFollow(user.isFollowed, user.nickname)}
+            fill
+            isFull={false}
           >
             {user.isFollowed ? '언팔로우' : '팔로우'}
-          </Button>
+          </Button2>
         </S.User>
       ))}
     </S.List>

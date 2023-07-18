@@ -7,6 +7,7 @@ import { formattedProfileImageUrl } from 'utils/format';
 import SocialUserNicknameLink from 'components/@feature/@social/Common/SocialUserNicknameLink';
 import { PAGE_LIST } from 'constants/routers';
 import Button from 'components/@ui/Button';
+import Button2 from 'components/@ui/Button2';
 
 const UserProfileBox = () => {
   const { nickname, profileImageUrl } = useUserProfile();
@@ -41,7 +42,15 @@ const UserProfileBoxView = ({
       <S.UserInfoBox>
         <S.UserNickname>{nickname}</S.UserNickname>
         <Link href={PAGE_LIST.PROFILE_SETTING}>
-          <Button color="primary">수정하기</Button>
+          <Button2
+            accent="primary"
+            shape="circle"
+            paddingSize="small"
+            fill
+            isFull={false}
+          >
+            수정하기
+          </Button2>
         </Link>
       </S.UserInfoBox>
     </S.UserProfileBox>

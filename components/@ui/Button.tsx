@@ -10,6 +10,7 @@ interface ButtonProps {
   color?: Colors;
   fontColor?: Colors;
   borderType?: 'none' | 'solid';
+  position?: 'absolute' | 'static';
   large?: boolean;
   name?: string;
   value?: string;
@@ -39,6 +40,7 @@ interface ButtonStyleProps {
   borderType?: 'none' | 'solid';
   large?: boolean;
   isActive?: boolean;
+  position?: 'absolute' | 'static';
 }
 
 const StyledButton = styled.button<ButtonStyleProps>`
@@ -47,9 +49,9 @@ const StyledButton = styled.button<ButtonStyleProps>`
   padding: 8px 25px;
   font-size: 16px;
   background: ${({ color }) => (color ? theme.colors[color] : 'white')};
-  width: 100%;
+  /* width: 100%; */
 
-  ${({ color, borderType, fontColor }) => {
+  ${({ color, borderType, fontColor, position }) => {
     switch (color) {
       case 'primary':
         return css`
@@ -63,6 +65,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
         return css`
           color: ${fontColor ? fontColor : 'black'};
           border: ${borderType === 'none' ? borderType : '1px solid black'};
+          position: ${position ? position : 'static'};
         `;
     }
   }}

@@ -17,6 +17,8 @@ import CommentIcon from 'public/icons/comment.svg';
 
 import SocialUserNicknameLink from 'components/@feature/@social/Common/SocialUserNicknameLink';
 import useRouteModalPage from 'hooks/useOpenModal';
+import Button2 from 'components/@ui/Button2';
+import Button3 from 'components/@ui/Button3';
 
 interface ReviewProps {
   data?: ReviewResponseType;
@@ -111,12 +113,32 @@ const ReviewView = ({
           />
         )}
         <S.ButtonBox>
-          <S.Button color="primary" onClick={goProductPage}>
-            상품 구매
-          </S.Button>
-          <S.Button color="secondary" onClick={goProductInfoPage}>
-            상품 정보
-          </S.Button>
+          <S.ButtonWrap>
+            <Button2
+              paddingSize="medium"
+              accent="primary"
+              shape="rectangle"
+              fontSize={18}
+              isFull
+              fill
+              onClick={goProductInfoPage}
+            >
+              상품 구매
+            </Button2>
+          </S.ButtonWrap>
+          <S.ButtonWrap>
+            <Button2
+              paddingSize="medium"
+              accent="secondary"
+              shape="rectangle"
+              fontSize={18}
+              isFull
+              fill
+              onClick={goProductInfoPage}
+            >
+              상품 정보
+            </Button2>
+          </S.ButtonWrap>
         </S.ButtonBox>
       </S.Content>
     </Card>
@@ -212,13 +234,7 @@ const S = {
     margin-top: 40px;
   `,
 
-  Button: styled.button<{ color: Colors }>`
-    background: ${({ color, theme }) => theme.colors[color]};
-    font-size: 18px;
-    padding: 17px;
-    color: white;
-    border-radius: 15px;
-
+  ButtonWrap: styled.div`
     :first-of-type {
       width: 70%;
     }
@@ -227,4 +243,20 @@ const S = {
       width: 30%;
     }
   `,
+
+  // Button: styled.button<{ color: Colors }>`
+  //   background: ${({ color, theme }) => theme.colors[color]};
+  //   font-size: 18px;
+  //   padding: 17px;
+  //   color: white;
+  //   border-radius: 15px;
+
+  /* :first-of-type {
+      width: 20%;
+    }
+
+    :last-child {
+      width: 30%;
+    } */
+  // `,
 };

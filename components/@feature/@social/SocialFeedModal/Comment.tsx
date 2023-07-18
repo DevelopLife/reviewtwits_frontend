@@ -12,7 +12,8 @@ import { formattedLastTime } from 'utils/format';
 import { useUserProfile } from 'hooks/queries/users';
 import useForm from 'hooks/useForm';
 import useModal from 'hooks/useModal';
-import Button from 'components/@ui/Button';
+// import Button from 'components/@ui/Button';
+import Button2 from 'components/@ui/Button2';
 
 interface CommentProps {
   commentData: CommentResponseType;
@@ -104,8 +105,8 @@ const Comment = ({ commentData }: CommentProps) => {
           </S.LikeButton>
           {loggedUserAccountId === userInfo.accountId && (
             <S.DealButtonBox isHover={isHover}>
-              <Button onClick={handleRetouchComment}>수정</Button>
-              <Button onClick={deleteComment}>삭제</Button>
+              <Button2 onClick={handleRetouchComment}>수정</Button2>
+              <Button2 onClick={deleteComment}>삭제</Button2>
             </S.DealButtonBox>
           )}
         </S.User>
@@ -121,7 +122,7 @@ const Comment = ({ commentData }: CommentProps) => {
                 onChange={handleChange}
                 name="content"
               />
-              <Button>수정 완료</Button>
+              <Button2>수정 완료</Button2>
             </form>
           ) : (
             <S.Content>{commentContent}</S.Content>

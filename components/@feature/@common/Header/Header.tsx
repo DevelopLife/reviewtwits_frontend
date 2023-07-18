@@ -8,6 +8,7 @@ import { formattedProfileImageUrl } from 'utils/format';
 import { useUserProfile } from 'hooks/queries/users';
 import { PAGE_LIST } from 'constants/routers';
 import { APP_NAME } from 'constants/index';
+import Button2 from 'components/@ui/Button2';
 
 const NAV_MENUS = [
   { href: `${PAGE_LIST.PROJECT_MANAGEMENT}`, text: '프로젝트 생성' },
@@ -53,7 +54,18 @@ const Header = () => {
               </S.Profile>
               {isMenuOpen && <UserMenu closeMenu={closeMenu} />}
               <Link href={PAGE_LIST.SOCIAL_HOME}>
-                <S.SNSButton color="secondary">내 SNS</S.SNSButton>
+                <S.SNSButtonWrap>
+                  <Button2
+                    accent="secondary"
+                    shape="rectangle"
+                    fontSize={18}
+                    fill
+                    layout
+                    isFull
+                  >
+                    내 SNS
+                  </Button2>
+                </S.SNSButtonWrap>
               </Link>
             </>
           ) : (
@@ -183,13 +195,19 @@ const S = {
     color: #ffffff;
   `,
 
-  SNSButton: styled.button`
+  SNSButtonWrap: styled.div`
     width: 120px;
     height: 46px;
-
-    background: ${({ theme }) => theme.colors.secondary};
-    color: white;
     font-size: 18px;
-    border-radius: 12px;
   `,
+
+  // SNSButton: styled.button`
+  //   width: 120px;
+  //   height: 46px;
+
+  //   background: ${({ theme }) => theme.colors.secondary};
+  //   color: white;
+  //   font-size: 18px;
+  //   border-radius: 12px;
+  // `,
 };

@@ -7,8 +7,9 @@ import { useAddScrap, useDeleteScrap } from 'hooks/queries/sns';
 interface ScrapButtonProps {
   isScrapped: boolean;
   reviewId: number;
-  position?: 'absolute' | 'static';
+  position?: PositionType;
 }
+type PositionType = 'absolute' | 'static';
 
 const ScrapButton = ({
   isScrapped,
@@ -34,7 +35,7 @@ const ScrapButton = ({
 interface ScrapButtonViewProps {
   isScrapped: boolean;
   handleClickScrapButton: () => void;
-  position: 'absolute' | 'static';
+  position: PositionType;
 }
 
 const ScrapButtonView = ({
@@ -43,18 +44,21 @@ const ScrapButtonView = ({
   position,
 }: ScrapButtonViewProps) => {
   return (
-    <S.Button onClick={handleClickScrapButton} position={position}>
-      {isScrapped ? <BookmarkFillIcon /> : <BookmarkOutlineIcon />}
-    </S.Button>
+    <S.ButtonWrap position={position}>
+      <S.Button onClick={handleClickScrapButton}>
+        {isScrapped ? <BookmarkFillIcon /> : <BookmarkOutlineIcon />}
+      </S.Button>
+    </S.ButtonWrap>
   );
 };
 
 export default ScrapButton;
 
 const S = {
-  Button: styled.button<{ position: 'absolute' | 'static' }>`
+  ButtonWrap: styled.div<{ position: PositionType }>`
     position: ${({ position }) => position};
     top: 10px;
     right: 10px;
   `,
+  Button: styled.button``,
 };

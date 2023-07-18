@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
+import Button2 from 'components/@ui/Button2';
 
 const sliders = [
   {
@@ -108,9 +109,11 @@ const MainHome = () => {
                     {desc}
                   </S.AppDesc>
                 ))}
-                <S.Button>
-                  <p>Learn More</p>
-                </S.Button>
+                <S.LeanMoreButtonWrap>
+                  <Button2 isFull layout accent="common">
+                    <p>Learn More</p>
+                  </Button2>
+                </S.LeanMoreButtonWrap>
               </S.LeftArea>
               <S.RightArea>
                 <S.Image src="" />
@@ -171,7 +174,7 @@ const S = {
       font-weight: 500;
       font-size: 66px;
       line-height: 80px;
-      /* color: #ffffff; */
+
       color: ${(props) => props.infoColor};
     }
   `,
@@ -182,7 +185,6 @@ const S = {
     font-size: 22px;
     line-height: 36px;
 
-    /* color: #ededed; */
     color: ${(props) => props.descColor};
   `,
 
@@ -199,21 +201,11 @@ const S = {
     margin-right: 240px;
   `,
 
-  Button: styled.div`
+  LeanMoreButtonWrap: styled.div`
     width: 211px;
     height: 67px;
-    display: flex;
-    align-items: center;
 
     margin-top: 26px;
     margin-bottom: 214px;
-    border-radius: 60px;
-
-    background-color: #181818;
-    color: #ffffff;
-
-    p {
-      margin: auto;
-    }
   `,
 };

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import Link from 'next/link';
+import cssUtils from 'styles/css';
 
 import {
   ProjectCardCommon,
@@ -8,9 +9,7 @@ import {
 } from 'components/@feature/@shopping/Project/Management/ProjectCardCommon';
 import { ProjectDto } from 'typings/project';
 import { GetProjectsResponseData } from 'api/projects';
-
-import cssUtils from 'styles/css';
-import Button from 'components/@ui/Button';
+import Button2 from 'components/@ui/Button2';
 
 interface ProjectCardProps {
   project: GetProjectsResponseData;
@@ -79,36 +78,32 @@ export const ProjectCardView = ({
             </S.SubTitle>
             <S.Description>{description}</S.Description>
             <S.DetailButtons>
-              <Button>
+              <Button2 paddingSize="small" accent="common">
                 <Link
                   href={{
                     pathname: '/project/install',
                     query: { projectName: name },
                   }}
-                  style={{ color: 'black' }}
                 >
                   설치가이드
                 </Link>
-              </Button>
-              <Button>
+              </Button2>
+              <Button2 paddingSize="small" accent="common">
                 {
                   // Todo: replace modify
                 }
-                <Link href={'/project/create'} style={{ color: 'black' }}>
-                  수정
-                </Link>
-              </Button>
-              <Button>
+                <Link href={'/project/create'}>수정</Link>
+              </Button2>
+              <Button2 paddingSize="small" accent="common">
                 <Link
                   href={{
                     pathname: '/statistics/project',
                     query: { projectName: name },
                   }}
-                  style={{ color: 'black' }}
                 >
                   통계
                 </Link>
-              </Button>
+              </Button2>
             </S.DetailButtons>
           </S.ContentWrap>
         )}

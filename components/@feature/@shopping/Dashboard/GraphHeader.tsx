@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
-import Button from 'components/@ui/Button';
+import Button2 from 'components/@ui/Button2';
 
 const PageData = () => {
   return (
@@ -20,10 +20,10 @@ const PageData = () => {
           <S.DataDesc>571,146</S.DataDesc>
         </S.Data>
       </S.Datas>
-      <Button>
+      <Button2>
         방문 통계
         <Image width={30} height={30} src="" alt="mock" />
-      </Button>
+      </Button2>
     </S.Container>
   );
 };

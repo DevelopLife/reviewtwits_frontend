@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import Shadow from 'components/@feature/@shopping/Dashboard/Common/Shadow';
-import Button from 'components/@ui/Button';
+import Button2 from 'components/@ui/Button2';
 
 const OrderData = () => {
   return (
@@ -9,7 +9,7 @@ const OrderData = () => {
       <S.Container>
         <S.OrderHeader>
           <S.Title>Recent Orders</S.Title>
-          <Button>배송 통계</Button>
+          <Button2>배송 통계</Button2>
         </S.OrderHeader>
         <S.Margin />
         <S.Table>

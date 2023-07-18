@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
 import styled from '@emotion/styled';
-import Button from 'components/@ui/Button';
+
+// import Button from 'components/@ui/Button';
+import Button2 from 'components/@ui/Button2';
 
 const NotFound = () => {
   return (
@@ -19,9 +20,9 @@ const NotFound = () => {
           <h1>해당 페이지를 찾지 못했습니다</h1>
           <small>주소가 잘못되었거나 더 이상 제공되지 않는 페이지입니다</small>
           <Link href="/">
-            <Button color="primary" large>
+            <Button2 isFull paddingSize="medium" fontSize={18}>
               메인페이지로 이동
-            </Button>
+            </Button2>
           </Link>
         </S.Content>
       </S.Box>
