@@ -7,11 +7,12 @@ interface Button2Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   shape?: 'circle' | 'rectangle';
   isFull?: boolean;
   fill?: boolean;
-  paddingSize?: 'small' | 'medium';
+  paddingSize?: 'small' | 'medium' | 'large';
   backgroundColor?: Colors;
   color?: Colors;
   layout?: boolean;
   fontSize?: number;
+  fontWeight?: number;
 }
 
 const Button2 = ({
@@ -25,6 +26,7 @@ const Button2 = ({
   color,
   backgroundColor,
   fontSize,
+  fontWeight,
   style,
   type = 'button',
   ...rest
@@ -41,6 +43,7 @@ const Button2 = ({
       accent={accent}
       layout={layout}
       fontSize={fontSize}
+      fontWeight={fontWeight}
       backgroundColor={backgroundColor}
       {...rest}
     >
@@ -76,6 +79,7 @@ const S = {
     border-radius: ${({ shape }) => shape && shapes[shape]};
 
     font-size: ${({ fontSize }) => fontSize && `${fontSize}px`};
+    font-weight: ${({ fontWeight }) => fontWeight && fontWeight};
   `,
 };
 
@@ -87,4 +91,5 @@ const shapes = {
 const padding = {
   small: '4px 10px',
   medium: '17px',
+  large: '17px 37px',
 };

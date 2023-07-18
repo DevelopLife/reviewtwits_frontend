@@ -1,20 +1,25 @@
-import styled from '@emotion/styled';
+import { MouseEventHandler } from 'react';
+
+import Button2 from 'components/@ui/Button2';
 
 import { useFollowAndUnFollow } from 'hooks/queries/sns';
 import useGetIsFollowing from 'hooks/useGetIsFollowing';
-import { MouseEventHandler, ReactElement } from 'react';
 import type { WrapProps } from 'typings/wrapperProps';
 
 interface FollowAndUnFollowButtonProps {
   nickname: string;
-  size: 'small' | 'normal';
+  accent: 'primary' | 'secondary' | 'common';
+  size: 'small' | 'medium' | 'large';
+  shape?: 'circle' | 'rectangle';
+  fontSize?: number;
+  fontWeight?: number;
   TextList: [string, string];
 }
 
 const SocialFollowAndUnfollowButton = ({
   nickname,
-  size,
   TextList,
+  ...rest
 }: FollowAndUnFollowButtonProps) => {
   const { follow, unfollow } = useFollowAndUnFollow();
   const isFollowing = useGetIsFollowing(nickname);
@@ -23,7 +28,7 @@ const SocialFollowAndUnfollowButton = ({
   return (
     <SocialFollowButtonView
       onClick={isFollowing ? () => unfollow(nickname) : () => follow(nickname)}
-      size={size}
+      {...rest}
     >
       {isFollowing ? unfollowText : followText}
     </SocialFollowButtonView>
@@ -33,45 +38,22 @@ const SocialFollowAndUnfollowButton = ({
 export default SocialFollowAndUnfollowButton;
 
 interface SocialFollowButtonViewProps extends WrapProps {
-  size?: 'small' | 'normal';
+  accent: 'primary' | 'secondary' | 'common';
+  size: 'small' | 'medium' | 'large';
+  shape?: 'circle' | 'rectangle';
+  fontSize?: number;
+  fontWeight?: number;
   onClick: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 const SocialFollowButtonView = ({
-  size = 'normal',
-  onClick,
   children,
+  size,
+  ...rest
 }: SocialFollowButtonViewProps) => {
-  const FollowButtons: Record<
-    'small' | 'normal',
-    (props: Omit<SocialFollowButtonViewProps, 'size'>) => ReactElement
-  > = {
-    small: (props) => <S.SmallButton {...props} />,
-    normal: (props) => <S.NormalButton {...props} />,
-  };
-  return FollowButtons[size]({ onClick, children });
-};
-
-const S = {
-  NormalButton: styled.button`
-    padding: 17px 37px;
-    border-radius: 15px;
-
-    font-weight: 700;
-    font-size: 18px;
-    color: white;
-    background-color: ${({ theme }) => theme.colors.secondary};
-  `,
-  SmallButton: styled.button`
-    width: 59px;
-    height: 28px;
-
-    background-color: ${({ theme }) => theme.colors.secondary};
-    border-radius: 37px;
-
-    align-items: center;
-    text-align: center;
-
-    color: ${({ theme }) => theme.colors.white};
-  `,
+  return (
+    <Button2 paddingSize={size} {...rest}>
+      {children}
+    </Button2>
+  );
 };

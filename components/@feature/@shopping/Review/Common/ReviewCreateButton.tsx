@@ -1,41 +1,30 @@
 import { ReactNode } from 'react';
 
-import styled from '@emotion/styled';
-import { Colors } from 'styles/theme';
+import Button2 from 'components/@ui/Button2';
 
 export interface ReviewCreateButtonProps {
-  color: Colors;
+  // color: Colors;
   disabled: boolean;
   children: ReactNode;
 }
 
-const ReviewCreateButton = ({ children, ...rest }: ReviewCreateButtonProps) => {
+const ReviewCreateButton = ({
+  children,
+  disabled,
+  ...rest
+}: ReviewCreateButtonProps) => {
   return (
-    <S.Button type="submit" {...rest}>
+    <Button2
+      {...rest}
+      type="submit"
+      shape="rectangle"
+      backgroundColor={disabled ? 'gray_3' : undefined}
+      paddingSize="large"
+      fontSize={18}
+    >
       {children}
-    </S.Button>
+    </Button2>
   );
 };
 
 export default ReviewCreateButton;
-
-const S = {
-  Button: styled.button<{ color: Colors }>`
-    font-size: 18px;
-    font-weight: 600;
-    padding: 17px 37px;
-    border-radius: 15px;
-
-    color: white;
-    background: ${({ theme, color }) => theme.colors[color]};
-
-    &:disabled {
-      background: ${({ theme }) => theme.colors.gray_3};
-      cursor: default;
-
-      :hover {
-        opacity: 1;
-      }
-    }
-  `,
-};

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-import type { Colors } from 'styles/theme';
 import type { SocialProfile } from 'typings/social';
 import SocialFollowAndUnfollowButton from 'components/@feature/@social/Profile/SocialFollowAndUnfollowButton';
 import EditProfileButton from 'components/@feature/@social/Profile/EditProfileButton';
 import SocialProfileImage from 'components/@feature/@social/Profile/SocialProfileImage';
+import Button2 from 'components/@ui/Button2';
 
 interface SocialProfileCardViewProps {
   isMyPage: boolean;
@@ -63,12 +63,23 @@ const SocialProfileCardView = ({
                 {followButtonTextList?.length ? (
                   <SocialFollowAndUnfollowButton
                     nickname={nickname}
-                    size={'normal'}
                     TextList={followButtonTextList}
+                    size="large"
+                    accent="secondary"
+                    shape="rectangle"
+                    fontSize={18}
+                    fontWeight={700}
                   />
                 ) : null}
-
-                <S.Button color={'secondary'}>Message</S.Button>
+                <Button2
+                  accent="secondary"
+                  paddingSize="large"
+                  shape="rectangle"
+                  fontSize={18}
+                  fontWeight={700}
+                >
+                  Message
+                </Button2>
               </>
             )}
           </S.ButtonBox>
@@ -146,14 +157,5 @@ const S = {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-  `,
-  Button: styled.button<{ color: Colors }>`
-    padding: 17px 37px;
-    border-radius: 15px;
-
-    font-weight: 700;
-    font-size: 18px;
-    color: white;
-    background-color: ${({ theme, color }) => theme.colors[color]};
   `,
 };

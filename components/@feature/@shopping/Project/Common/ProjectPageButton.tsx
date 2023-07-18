@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
-import { HTMLAttributes, ReactNode } from 'react';
 
-interface ProjectPageButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
+import Button2 from 'components/@ui/Button2';
+import { WrapProps } from 'typings/wrapperProps';
+
+interface ProjectPageButtonProps extends WrapProps {
+  onClick: () => void;
 }
 
 export const ProjectPageButton = ({
@@ -10,27 +12,17 @@ export const ProjectPageButton = ({
   ...rest
 }: ProjectPageButtonProps) => {
   return (
-    <S.Button type="button" {...rest}>
-      {children}
-    </S.Button>
+    <S.ButtonWrap>
+      <Button2 {...rest} isFull layout shape="rectangle">
+        {children}
+      </Button2>
+    </S.ButtonWrap>
   );
 };
 
 const S = {
-  Button: styled.button`
+  ButtonWrap: styled.div`
     width: 172px;
     height: 56px;
-    border: none;
-    border-radius: 15px;
-
-    font-weight: 500;
-    font-size: 18px;
-    background-color: #fc4a55;
-    color: #ffffff;
-
-    :hover {
-      cursor: pointer;
-      opacity: 0.8;
-    }
   `,
 };

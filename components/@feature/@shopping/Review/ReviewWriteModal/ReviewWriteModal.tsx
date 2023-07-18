@@ -141,7 +141,7 @@ const ReviewWriteModal = ({ productURL, title }: ReviewWriteModalProps) => {
           />
         </S.ReviewContent>
         <S.ButtonWrap>
-          <ReviewCreateButton color="primary" disabled={!isSubmitable}>
+          <ReviewCreateButton disabled={!isSubmitable}>
             {isEditPage ? '수정 완료' : '작성 완료'}
           </ReviewCreateButton>
         </S.ButtonWrap>

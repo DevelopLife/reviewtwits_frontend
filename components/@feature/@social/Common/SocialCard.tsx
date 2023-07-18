@@ -37,6 +37,7 @@ const SocialCard = ({ imageUrl, nickname, role }: SocialCardProps) => {
       </S.UserBox>
       <SocialFollowAndUnfollowButton
         nickname={nickname}
+        accent="secondary"
         size="small"
         fontSize={13}
         TextList={[FOLLOW_UNFOLLOW.UNFOLLOW, FOLLOW_UNFOLLOW.FOLLOW]}
