@@ -37,7 +37,7 @@ const SignInForm = () => {
       doSignIn(signInResult.accessToken);
       setIsLogined(true);
 
-      window.location.href = document.referrer;
+      window.history.back();
     }
   };
 

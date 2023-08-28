@@ -64,7 +64,7 @@ export const REACT_INSTALL_GUIDES: InstallGuide[] = [
 
 export const HTML_INSTALL_GUIDES = [
   {
-    TEXT: `1. <meta> ${`og:image`}, ${`og:title`}, ${`projectname`}을 할당해주세요. 또한 <body> 내부에서는 역할에 맞는 id 값을 부여해주세요 `,
+    TEXT: `1. 사용자들에게 보여주고 싶은 상품의 image, title을  <meta> ${`og:image`}, ${`og:title`}, ${`projectname`}에 할당해주세요. `,
     CODE: `
       <!DOCTYPE html>
       <html lang="ko">
@@ -85,27 +85,63 @@ export const HTML_INSTALL_GUIDES = [
             content="${projectname}"
           />
         </head>
-
-        <body>
-          <!-- 리뷰 리스트 표시 부분 -->
-          <div id="review_twits_thread" style="width: 100%; height: 100px"></div>
-
-          <!-- 리뷰 작성 popup 창을 열고자 하고자 하는 버튼 -->
-          <button id="review_twits_write">리뷰작성</button>
-
-          <!-- reviewtwits js 파일을 요청 -->
-          <script src="https://developlife.github.io/reviewtwits-js/bundle.js"></script>
-        </body>
       </html>
     `,
   },
-  // {
-  //   TEXT: `2. HTML용 script tag를 부착합니다. 리뷰화면을 표시하고싶은 곳에는 id값으로 review_twits_thread를 할당해주고
-  //   리뷰 작성 팝업을 open하고 싶은 버튼에는 review_twits_write id값을 할당해주세요 `,
-  //   CODE: `
+  {
+    TEXT: `2. 리뷰 모아보기가 부착될 dom을 지정하기 위한 코드입니다. `,
+    CODE: `
+    <body>
+      <!-- 리뷰 리스트 표시 부분 -->
+      <div id="review_twits_thread" style="width: 100%; height: 100px"></div>
 
-  //   `,
-  // },
+      <!-- 리뷰 작성 popup 창을 열고자 하고자 하는 버튼 -->
+      <button id="review_twits_write">리뷰작성</button>   
+    </body>
+
+    `,
+  },
+  {
+    TEXT: `3. 배포된 js 파일을 요청하여 실질적으로 iframe을 생성하고 dom에 부착하기 위한 코드입니다.`,
+    CODE: `
+    <!-- reviewtwits js 파일을 요청 -->
+    <script src="https://developlife.github.io/reviewtwits-js/bundle.js"></script>
+    `,
+  },
+  {
+    TEXT: `4. 코드 전체입니다.`,
+    CODE: `
+    <html lang="ko">
+      <head>
+        <!-- your product thumbnail image -->
+        <meta
+          property="og:image"
+          content="your product image"
+        />
+        <!-- your product thumbnail title -->
+        <meta
+          property="og:title"
+          content="your product title"
+        />
+        <!-- your reviewtwits projectname -->
+        <meta 
+          name="projectname" 
+          content="${projectname}"
+        />
+      </head>
+      <body>
+      <!-- 리뷰 리스트 표시 부분 -->
+      <div id="review_twits_thread" style="width: 100%; height: 100px"></div>
+
+      <!-- 리뷰 작성 popup 창을 열고자 하고자 하는 버튼 -->
+      <button id="review_twits_write">리뷰작성</button>   
+
+      <!-- reviewtwits js 파일을 요청 -->
+      <script src="https://developlife.github.io/reviewtwits-js/bundle.js"></script>
+      </body>
+    </html>
+    `,
+  },
 ];
 
 const INSTALL_GUIDES: Record<PlatformUppercases, InstallGuide[]> = {

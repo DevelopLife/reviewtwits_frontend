@@ -6,6 +6,7 @@ import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { PROJECT_TITLE } from 'constants/project';
 import ReactIcon from 'public/icons/react.svg';
+import GlobeIcon from 'public/icons/globe.svg';
 import type { Platforms } from 'typings/platforms';
 
 const platforms: {
@@ -18,7 +19,7 @@ const platforms: {
   },
   {
     name: 'HTML',
-    Icon: ReactIcon,
+    Icon: GlobeIcon,
   },
 ];
 
@@ -38,7 +39,7 @@ const InstallPage = () => {
                 style={{ textDecoration: 'none', color: '#3D3D3D' }}
               >
                 <S.PlatformItem>
-                  <Icon />
+                  <Icon width={150} height={150} />
                   <S.PlatformName marginTop={28}>{name}</S.PlatformName>
                 </S.PlatformItem>
               </Link>
@@ -66,9 +67,6 @@ const S = {
     gap: 102px;
   `,
   PlatformItem: styled.div`
-    width: 132px;
-    height: 168px;
-
     text-align: center;
 
     :hover {
