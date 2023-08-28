@@ -4,15 +4,15 @@ import { useRouter } from 'next/router';
 import {
   CodeParagraph,
   InstallPageButtons,
-} from 'components/Project/install/@index';
-import HighlightCDN from 'components/common/HighlightCDN';
-import Video from 'components/common/Video/Video';
-import Margin from 'components/Dashboard/common/Margin';
-import CommonButton from 'components/Project/install/common/Button';
+} from 'components/Project/Install/@index';
+import HighlightCDN from 'components/Common/HighlightCDN';
+import Video from 'components/Common/Video/Video';
+import Margin from 'components/Dashboard/Common/Margin';
+import CommonButton from 'components/Project/Install/Common/Button';
 
 import INSTALL_GUIDES from 'constants/install_guides';
 import type { PlatformUppercases, Platforms } from 'typings/platforms';
-import { ProjectPageLayout } from 'components/Project/common/ProjectPageLayout';
+import { ProjectPageLayout } from 'components/Project/Common/ProjectPageLayout';
 import { CODE_PEN_URLS } from 'constants/install_guides/code_pen_url';
 
 const InstallDetailPage = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Shadow from './common/Shadow';
+import Shadow from './Common/Shadow';
 import * as S from './ProductStatistics.styles';
 
 const ProductStatistics = () => {

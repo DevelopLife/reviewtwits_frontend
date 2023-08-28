@@ -1,5 +1,5 @@
 import { Colors } from 'styles/theme';
-import Shadow from './common/Shadow';
+import Shadow from './Common/Shadow';
 import * as S from './VisitorStatistics.styles';
 import useStatistics from 'hooks/queries/statistics';
 

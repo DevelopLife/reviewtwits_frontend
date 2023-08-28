@@ -1,7 +1,7 @@
-import Shadow from './common/Shadow';
+import Shadow from './Common/Shadow';
 import * as S from './LeadTimeRate.styles';
 import useStatistics from 'hooks/queries/statistics';
-import CommonLineChart from 'components/chart/CommonLineChart';
+import CommonLineChart from 'components/Chart/CommonLineChart';
 interface ViewsStatisticsProps {
   projectName: string;
 }

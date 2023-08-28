@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import DashboardPageLayout from 'components/Dashboard/common/DashboardPageLayout';
-import Margin from 'components/Dashboard/common/Margin';
+import DashboardPageLayout from 'components/Dashboard/Common/DashboardPageLayout';
+import Margin from 'components/Dashboard/Common/Margin';
 import {
   ComprehensiveDataSection,
   ProductStatisticsSection,

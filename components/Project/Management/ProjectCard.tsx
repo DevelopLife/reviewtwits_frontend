@@ -8,7 +8,7 @@ import {
 } from 'components/Project/Management/ProjectCardCommon';
 import { ProjectDto } from 'typings/project';
 import { GetProjectsResponseData } from 'api/projects';
-import Button from 'components/common/Button';
+import Button from 'components/Common/Button';
 import cssUtils from 'styles/css';
 
 interface ProjectCardProps {

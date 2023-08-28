@@ -1,10 +1,10 @@
 import { useState, MouseEvent } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import Shadow from './common/Shadow';
+import Shadow from './Common/Shadow';
 import * as S from './ViewsStatistics.styles';
 import type { TimePeriod } from 'typings/chart';
-import VisitorChart from 'components/chart/VisitorChart/VisitorChart';
+import VisitorChart from 'components/Chart/VisitorChart/VisitorChart';
 import chartState from 'states/atomCharts';
 
 const TIME_PEROID_BUTTONS = [

@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 
-// import VisitorChart from 'components/chart/VisitorChart/VisitorChart';
+// import VisitorChart from 'components/Chart/VisitorChart/VisitorChart';
 import ComprehensiveDataSection from 'components/Dashboard/ComprehensiveDataSection';
 import ProductStatisticsSection from 'components/Dashboard/ProductStatisticsSection';
 import VisitSection from 'components/Dashboard/VisitSection';
-import DashboardPageLayout from 'components/Dashboard/common/DashboardPageLayout';
-import Margin from 'components/Dashboard/common/Margin';
+import DashboardPageLayout from 'components/Dashboard/Common/DashboardPageLayout';
+import Margin from 'components/Dashboard/Common/Margin';
 
 const ProjectDashboardPage = () => {
   const { query } = useRouter();

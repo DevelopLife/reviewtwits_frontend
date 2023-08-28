@@ -1,5 +1,5 @@
-import Footer from 'components/common/Footer/Footer';
-import Header from 'components/common/Header/Header';
+import Footer from 'components/Common/Footer/Footer';
+import Header from 'components/Common/Header/Header';
 import {
   MainHome,
   ServiceIntroduce,

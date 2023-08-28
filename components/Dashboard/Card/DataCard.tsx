@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import type { FC, SVGProps } from 'react';
 
-import Shadow from 'components/Dashboard/common/Shadow';
+import Shadow from 'components/Dashboard/Common/Shadow';
 
 interface DataCardProps {
   Icon: FC<SVGProps<SVGSVGElement>>;
