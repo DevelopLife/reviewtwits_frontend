@@ -25,6 +25,11 @@ const S = {
     height: 167px;
     border: 0;
 
+    :hover {
+      cursor: default;
+      opacity: 1;
+    }
+
     cursor: pointer;
     font-weight: 700;
     font-size: 20px;

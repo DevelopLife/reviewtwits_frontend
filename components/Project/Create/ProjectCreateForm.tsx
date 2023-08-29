@@ -5,7 +5,7 @@ import { CreateProjectRequestBody } from 'api/projects';
 import { useCreateProject } from 'hooks/useCreateProject';
 import { ProjectCreateSelect } from 'components/Project/Create/ProjectCreateSelect';
 
-import { ColorPickerTrigger } from 'components/Common/ColorPicker/ColorPickerTrigger';
+import { ColorPickerTrigger } from 'components/Common/Color/ColorPickerTrigger';
 
 export const ProjectCreateForm = () => {
   const {
@@ -94,7 +94,12 @@ export const ProjectCreateFormView = ({
           />
         </ProjectCreateItem>
         <ProjectCreateItem label="프로젝트 색깔">
-          <ColorPickerTrigger onChangeColor={onChangeColor} />
+          <ColorPickerTrigger
+            onChangeColor={onChangeColor}
+            colorPickerOptions={{
+              showPalatte: true,
+            }}
+          />
         </ProjectCreateItem>
       </S.CreateProjectForm>
     </S.CreateProjectFormContainer>

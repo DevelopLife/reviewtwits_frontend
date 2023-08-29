@@ -1,5 +1,5 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { ChangeEvent, useCallback, useEffect } from 'react';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 
 import { PricePlan, UppercasePricePlan } from 'api/projects';
 import { useBoolean } from 'hooks/useBoolean';
@@ -10,6 +10,9 @@ export const useCreateProject = () => {
   const [createProjectForm, setCreateProjectForm] = useRecoilState(
     createProjectFormState
   );
+
+  const resetCreateProjectForm = useResetRecoilState(createProjectFormState);
+
   const [projectPlan, setProjectPlan] = useRecoilState<UppercasePricePlan | ''>(
     projectPlanState
   );
@@ -65,6 +68,7 @@ export const useCreateProject = () => {
     changeCreateProjectFormBySelect,
     changeProjectPlan,
     changeProjectColor,
+    resetCreateProjectForm,
     isDisabled,
   };
 };

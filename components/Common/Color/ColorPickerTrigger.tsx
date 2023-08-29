@@ -1,26 +1,41 @@
 import styled from '@emotion/styled';
-import { ColorPicker } from 'components/Common/ColorPicker/ColorPicker';
+import { useEffect, useRef, useState } from 'react';
+
+import ColorPalette from 'components/Common/Color/ColorPalette';
 import { useBoolean } from 'hooks/useBoolean';
-import { useState } from 'react';
 import { DEFAULT_PROJECT_COLOR } from 'states/createProjectForm';
+import { PRESET_COLORS } from 'constants/presetColors';
+
+type ColorPickerOptions = {
+  showPalatte: boolean;
+};
 
 interface ColorPickerTriggerProps {
   onChangeColor: (color: string) => void;
+  colorPickerOptions?: ColorPickerOptions;
 }
 
 export const ColorPickerTrigger = ({
   onChangeColor,
+  colorPickerOptions,
 }: ColorPickerTriggerProps) => {
   const { isOpen, setToggle } = useBoolean(false);
   const [color, setColor] = useState(DEFAULT_PROJECT_COLOR);
 
-  const onMouseUp = () => onChangeColor(color);
+  useEffect(() => {
+    onChangeColor(color);
+  }, [color, onChangeColor]);
 
   return (
     <S.Picker>
       <S.Trigger color={color} onClick={setToggle} />
       {isOpen && (
-        <ColorPicker color={color} onClick={setColor} onMouseUp={onMouseUp} />
+        <ColorPalette
+          color={color}
+          onClick={setColor}
+          presetColors={PRESET_COLORS}
+          {...colorPickerOptions}
+        />
       )}
     </S.Picker>
   );
@@ -31,7 +46,6 @@ const S = {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-
     background-color: ${({ color }) => color};
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   `,
