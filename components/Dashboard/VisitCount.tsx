@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import useStatistics from 'hooks/queries/statistics';
-import Shadow from 'components/Dashboard/common/Shadow';
+import Shadow from 'components/Dashboard/Common/Shadow';
 import ChartIcon from 'public/icons/chart.svg';
-import Button from '../common/Button';
+import Button from '../Common/Button';
 
 interface VisitCountProps {
   projectName: string;

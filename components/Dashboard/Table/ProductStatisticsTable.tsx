@@ -1,4 +1,4 @@
-import Table from 'components/Dashboard/common/Table';
+import Table from 'components/Dashboard/Common/Table';
 import useStatistics from 'hooks/queries/statistics';
 
 interface ProductStatisticsTableProps {

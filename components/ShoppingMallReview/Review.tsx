@@ -13,8 +13,8 @@ import {
   formattedImageUrl,
   formattedLastTime,
 } from 'utils/format';
-import StarBox from 'components/social/common/Review/StarBox';
-import Card from 'components/common/Card';
+import StarBox from 'components/Social/Common/Review/StarBox';
+import Card from 'components/Common/Card';
 import { Router, useRouter } from 'next/router';
 import { useState } from 'react';
 import { shoppingAPI } from 'api/reviews';

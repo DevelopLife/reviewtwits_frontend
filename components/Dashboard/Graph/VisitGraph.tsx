@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-import Shadow from 'components/Dashboard/common/Shadow';
-import SimpleLineChart from 'components/common/Charts/SimpleLineChart';
-import SimpleBarChart from 'components/common/Charts/SimpleBarChart';
+import Shadow from 'components/Dashboard/Common/Shadow';
+// import SimpleLineChart from 'components/Common/Charts/SimpleLineChart';
+// import SimpleBarChart from 'components/Common/Charts/SimpleBarChart';
 import useStatistics from 'hooks/queries/statistics';
 import { BOX_SIZES } from 'constants/dashboard';
 import { transformData } from 'utils/charts';
@@ -40,13 +40,13 @@ const VisitGraph = ({ projectName, boxSize, graphType }: VisitGraphProps) => {
     return (
       <Shadow>
         <S.Container boxSize={boxSize}>
-          <SimpleBarChart
+          {/* <SimpleBarChart
             data={transformedData}
             focusedDate={new Date()}
             onClickBar={() => console.log('click')}
             onClickLeftButton={() => console.log('leftButton')}
             onClickRightButton={() => console.log('right Button')}
-          />
+          /> */}
         </S.Container>
       </Shadow>
     );
@@ -56,14 +56,14 @@ const VisitGraph = ({ projectName, boxSize, graphType }: VisitGraphProps) => {
     return (
       <Shadow>
         <S.Container boxSize={boxSize}>
-          {chartData?.length && transformedData?.length ? (
+          {/* {chartData?.length && transformedData?.length ? (
             <SimpleLineChart
               data={transformedData}
               dataKeys={['visitCount']}
               xKeys={['timeStamp']}
               strokeColors={['red']}
             />
-          ) : null}
+          ) : null} */}
         </S.Container>
       </Shadow>
     );

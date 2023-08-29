@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 
 // import VisitGraph from 'components/Dashboard/Graph/VisitGraph';
 import VisitCount from 'components/Dashboard/VisitCount';
-import Shadow from 'components/Dashboard/common/Shadow';
-import VisitorChart from 'components/chart/VisitorChart/VisitorChart';
+import Shadow from 'components/Dashboard/Common/Shadow';
+import VisitorChart from 'components/Chart/VisitorChart/VisitorChart';
 
 interface VisitSectionProps {
   projectName: string;

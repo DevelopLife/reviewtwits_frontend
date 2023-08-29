@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 
 import { ProjectCreateContent } from 'components/Project/Create/ProjectCreateContent';
 import { ProjectCreateTabItem } from 'components/Project/Create/ProjectCreateTapItem';
-import { ProjectPageButton } from 'components/Project/common/ProjectPageButton';
+import { ProjectPageButton } from 'components/Project/Common/ProjectPageButton';
 
 type ProjectPathnames = 'create' | 'plans' | 'install';
 

@@ -5,4 +5,4 @@ export default {
   component: ViewsStatistics,
 };
 
-export const Basic = () => <ViewsStatistics />;
+export const Basic = () => <ViewsStatistics projectName={''} />;

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import ProductStatisticsTable from 'components/Dashboard/Table/ProductStatisticsTable';
-import Shadow from 'components/Dashboard/common/Shadow';
+import Shadow from 'components/Dashboard/Common/Shadow';
 
 interface ProductStatisticsSectionProps {
   projectName: string;
