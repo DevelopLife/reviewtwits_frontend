@@ -1,7 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-
-import { projectsAPI } from 'api/projects';
 import { ProjectCreateLayout } from 'components/Project/Create/ProjectCreateLayout';
 import { ProjectPlans } from 'components/Project/Plans/ProjectPlans';
 import { ProjectPageLayout } from 'components/Project/Common/ProjectPageLayout';
@@ -10,13 +7,15 @@ import { BUTTON_TEXTS, PROJECT_TITLE } from 'constants/project';
 import { usePostProject } from 'hooks/queries/projects';
 
 const ProjectPlansPage = () => {
+  const { createProjectForm, projectPlan, resetCreateProjectForm } =
+    useCreateProject();
+
   const router = useRouter();
 
   const afterSuccess = (projectName: string) => {
+    resetCreateProjectForm();
     router.replace(`/project/install?projectName=${projectName}`);
   };
-
-  const { createProjectForm, projectPlan } = useCreateProject();
 
   const { mutateAsync } = usePostProject(
     createProjectForm,
