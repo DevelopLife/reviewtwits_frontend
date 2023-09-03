@@ -218,12 +218,6 @@ export const useFollowAndUnFollow = () => {
         [targetUserNickname]: {},
       },
     });
-
-    optimisticUpdateByReactQuery({
-      queryClient,
-      queryKey: queryKey.followerSuggestion(),
-      newData: getNewSuggestArray(originFollowSuggestion, targetUserNickname),
-    });
   };
 
   const onUnfollowOptimisticUpdate = (targetUserNickname: string) => {
@@ -235,6 +229,19 @@ export const useFollowAndUnFollow = () => {
       queryKey: queryKey.followingDictionary(),
       newData: restIsFollowingDictionary,
     });
+  };
+
+  const onFollowSuggestOptimisticUpdate = (targetUserNickname: string) => {
+    optimisticUpdateByReactQuery({
+      queryClient,
+      queryKey: queryKey.followerSuggestion(),
+      newData: getNewSuggestArray(originFollowSuggestion, targetUserNickname),
+    });
+  };
+
+  const onUnfollowSuggestOptimisticUpdate = (targetUserNickname: string) => {
+    const { [targetUserNickname]: removedValue, ...restIsFollowingDictionary } =
+      originFollowingDictionary;
 
     optimisticUpdateByReactQuery({
       queryClient,
@@ -290,9 +297,37 @@ export const useFollowAndUnFollow = () => {
     }
   );
 
+  const { mutate: followSuggest } = useMutation(
+    (targetUserNickname: string) => snsAPI.follow({ targetUserNickname }),
+    {
+      onMutate: (targetUserNickname) => {
+        onFollowSuggestOptimisticUpdate(targetUserNickname);
+      },
+      onError: (err: AxiosError<ResponseError>) => {
+        resetOriginFollowingDictionary();
+        alertErrorHandler(err);
+      },
+    }
+  );
+
+  const { mutate: unfollowSuggest } = useMutation(
+    (targetUserNickname: string) => snsAPI.unfollow({ targetUserNickname }),
+    {
+      onMutate: (targetUserNickname) => {
+        onUnfollowSuggestOptimisticUpdate(targetUserNickname);
+      },
+      onError: (err: AxiosError<ResponseError>) => {
+        resetOriginFollowingDictionary();
+        alertErrorHandler(err);
+      },
+    }
+  );
+
   return {
     follow,
     unfollow,
+    followSuggest,
+    unfollowSuggest,
   };
 };
 
