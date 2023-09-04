@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { WrapProps } from 'typings/wrapperProps';
 import * as S from './SocialTitleSection.styles';
 

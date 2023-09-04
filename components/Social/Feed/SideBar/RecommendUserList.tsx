@@ -12,7 +12,8 @@ import Button from './Common/Button';
 
 const RecommendUserList = () => {
   const { data: userList } = useGetFollowSuggestion();
-  const { follow, unfollow } = useFollowAndUnFollow();
+  const { followSuggest: follow, unfollowSuggest: unfollow } =
+    useFollowAndUnFollow();
 
   const toggleFollow = (isFollowed: boolean, nickname: string) => {
     isFollowed ? unfollow(nickname) : follow(nickname);

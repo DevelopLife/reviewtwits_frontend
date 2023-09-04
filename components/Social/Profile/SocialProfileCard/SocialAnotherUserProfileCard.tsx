@@ -15,6 +15,14 @@ const SocialAnotherUserProfileCard = () => {
   const isMypage = false;
   const FOLLOW_BUTTON_TEXT_LIST: [string, string] = ['UnFollow', 'Follow'];
 
+  if (status === 'loading') {
+    return <>사용자를 찾는 중입니다...</>;
+  }
+
+  if (status === 'error' && socialAnotherUserProfile === undefined) {
+    router.push('/404');
+  }
+
   if (status === 'success' && socialAnotherUserProfile?.userId) {
     return (
       <SocialProfileCardView
